@@ -2011,7 +2011,7 @@ and
                     </cell>
                 </row>
                 <row id="2257">
-                    <property name="height">8mm</property>
+                    <property name="height">10mm</property>
                     <cell id="2258">
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
@@ -6747,6 +6747,7 @@ and
                         <property name="borderTopWidth">thin</property>
                         <property name="textAlign">center</property>
                         <data id="3071">
+                            <property name="textAlign">left</property>
                             <property name="dataSet">Oral Polio</property>
                             <list-property name="boundDataColumns">
                                 <structure>
@@ -9872,7 +9873,7 @@ and
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="2940">
-                            <text-property name="text">Vit A Used 100000iu:</text-property>
+                            <text-property name="text">Vit A Used 100000 iu:</text-property>
                         </label>
                     </cell>
                     <cell id="2650">
@@ -10092,7 +10093,7 @@ and
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="2941">
-                            <text-property name="text">Vit A Used 100000iu:</text-property>
+                            <text-property name="text">Vit A Used 200000 iu:</text-property>
                         </label>
                     </cell>
                     <cell id="2666">
