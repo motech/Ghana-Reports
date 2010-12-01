@@ -1934,12 +1934,13 @@ and
                         </label>
                     </cell>
                     <cell id="2239">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
                         <text-data id="3004">
                             <expression name="valueExpr">params["Month"].displayText+ "/" + params["Year"]</expression>
                             <property name="contentType">html</property>
                         </text-data>
                     </cell>
-                    <cell id="2240"/>
                 </row>
                 <row id="2241">
                     <property name="height">5mm</property>
@@ -9794,7 +9795,7 @@ and
                         </label>
                     </cell>
                     <cell id="2644">
-                        <property name="colSpan">2</property>
+                        <property name="colSpan">3</property>
                         <property name="rowSpan">1</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
@@ -9813,7 +9814,9 @@ and
                             <text-property name="text">Vit A 6-11 months:</text-property>
                         </label>
                     </cell>
-                    <cell id="2646">
+                    <cell id="2647">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">1</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -9853,7 +9856,7 @@ and
                             <property name="resultSetColumn">Column Binding</property>
                         </data>
                     </cell>
-                    <cell id="2647">
+                    <cell id="3077">
                         <property name="colSpan">2</property>
                         <property name="rowSpan">1</property>
                         <property name="borderBottomColor">#000000</property>
@@ -9872,7 +9875,9 @@ and
                             <text-property name="text">Vit A Used 100000iu:</text-property>
                         </label>
                     </cell>
-                    <cell id="2649">
+                    <cell id="2650">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">1</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -9886,7 +9891,7 @@ and
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                     </cell>
-                    <cell id="2650">
+                    <cell id="3075">
                         <property name="colSpan">2</property>
                         <property name="rowSpan">1</property>
                         <property name="borderBottomColor">#000000</property>
@@ -9904,20 +9909,6 @@ and
                         <label id="2942">
                             <text-property name="text">  AEFI Reported:</text-property>
                         </label>
-                    </cell>
-                    <cell id="2652">
-                        <property name="borderBottomColor">#000000</property>
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">thin</property>
-                        <property name="borderLeftColor">#000000</property>
-                        <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">thin</property>
-                        <property name="borderRightColor">#000000</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">thin</property>
-                        <property name="borderTopColor">#000000</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">thin</property>
                     </cell>
                     <cell id="2653"/>
                     <cell id="2654">
@@ -10024,7 +10015,7 @@ and
                         </data>
                     </cell>
                     <cell id="2660">
-                        <property name="colSpan">2</property>
+                        <property name="colSpan">3</property>
                         <property name="rowSpan">1</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
@@ -10039,11 +10030,13 @@ and
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="2937">
-                            <property name="textAlign">left</property>
+                            <property name="textAlign">center</property>
                             <text-property name="text">Vit A 12-59 months:</text-property>
                         </label>
                     </cell>
-                    <cell id="2662">
+                    <cell id="2663">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">1</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -10083,7 +10076,7 @@ and
                             <property name="resultSetColumn">Column Binding</property>
                         </data>
                     </cell>
-                    <cell id="2663">
+                    <cell id="3078">
                         <property name="colSpan">2</property>
                         <property name="rowSpan">1</property>
                         <property name="borderBottomColor">#000000</property>
@@ -10102,7 +10095,9 @@ and
                             <text-property name="text">Vit A Used 100000iu:</text-property>
                         </label>
                     </cell>
-                    <cell id="2665">
+                    <cell id="2666">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">1</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -10116,7 +10111,7 @@ and
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                     </cell>
-                    <cell id="2666">
+                    <cell id="3076">
                         <property name="colSpan">2</property>
                         <property name="rowSpan">1</property>
                         <property name="borderBottomColor">#000000</property>
@@ -10134,20 +10129,6 @@ and
                         <label id="2943">
                             <text-property name="text">     AEFI Investigated:</text-property>
                         </label>
-                    </cell>
-                    <cell id="2668">
-                        <property name="borderBottomColor">#000000</property>
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">thin</property>
-                        <property name="borderLeftColor">#000000</property>
-                        <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">thin</property>
-                        <property name="borderRightColor">#000000</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">thin</property>
-                        <property name="borderTopColor">#000000</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">thin</property>
                     </cell>
                     <cell id="2669"/>
                     <cell id="2670">
@@ -10254,7 +10235,7 @@ and
                         </data>
                     </cell>
                     <cell id="2676">
-                        <property name="colSpan">2</property>
+                        <property name="colSpan">3</property>
                         <property name="rowSpan">1</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
@@ -10273,19 +10254,7 @@ and
                             <text-property name="text">Vit A Post Partum:</text-property>
                         </label>
                     </cell>
-                    <cell id="2678">
-                        <property name="borderBottomColor">#000000</property>
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">thin</property>
-                        <property name="borderLeftColor">#000000</property>
-                        <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">thin</property>
-                        <property name="borderRightColor">#000000</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">thin</property>
-                        <property name="borderTopColor">#000000</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">thin</property>
+                    <cell id="2679">
                         <data id="3050">
                             <property name="dataSet">Vitamin A Post Partum</property>
                             <list-property name="boundDataColumns">
@@ -10308,7 +10277,6 @@ and
                             <property name="resultSetColumn">Column Binding</property>
                         </data>
                     </cell>
-                    <cell id="2679"/>
                     <cell id="2680"/>
                     <cell id="2681"/>
                     <cell id="2682"/>
@@ -10407,26 +10375,14 @@ and
                         </data>
                     </cell>
                     <cell id="2692">
-                        <property name="colSpan">2</property>
+                        <property name="colSpan">3</property>
                         <property name="rowSpan">1</property>
                         <label id="2939">
                             <property name="textAlign">center</property>
                             <text-property name="text">Deworming 2-5yrs</text-property>
                         </label>
                     </cell>
-                    <cell id="2694">
-                        <property name="borderBottomColor">#000000</property>
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">thin</property>
-                        <property name="borderLeftColor">#000000</property>
-                        <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">thin</property>
-                        <property name="borderRightColor">#000000</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">thin</property>
-                        <property name="borderTopColor">#000000</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">thin</property>
+                    <cell id="2695">
                         <data id="3051">
                             <property name="dataSet">Deworming</property>
                             <list-property name="boundDataColumns">
@@ -10449,7 +10405,6 @@ and
                             <property name="resultSetColumn">Column Binding</property>
                         </data>
                     </cell>
-                    <cell id="2695"/>
                     <cell id="2696"/>
                     <cell id="2697"/>
                     <cell id="2698"/>
