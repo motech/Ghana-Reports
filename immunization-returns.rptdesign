@@ -2011,7 +2011,7 @@ and
                     </cell>
                 </row>
                 <row id="2257">
-                    <property name="height">5mm</property>
+                    <property name="height">8mm</property>
                     <cell id="2258">
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
