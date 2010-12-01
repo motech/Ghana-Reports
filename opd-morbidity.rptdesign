@@ -1,0 +1,2617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <property name="author">Brent Atkinson</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
+    <text-property name="title">MoTeCH OPD Morbidity Report</text-property>
+    <list-property name="userProperties">
+        <structure>
+            <property name="name">OPD Cube.Data Set.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">OPD Cube.Data Set.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">OPD Cube.Data Set.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">OPD Cube.Data Set.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">OPD Cube.OPD Data Set.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">OPD Cube.OPD Data Set.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+    </list-property>
+    <property name="OPD Cube.Data Set.x">66</property>
+    <property name="OPD Cube.Data Set.y">62</property>
+    <property name="OPD Cube.Data Set.width">150</property>
+    <property name="OPD Cube.Data Set.height">200</property>
+    <property name="OPD Cube.OPD Data Set.x">135</property>
+    <property name="OPD Cube.OPD Data Set.y">80</property>
+    <property name="units">in</property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">11</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">11</property>
+        </structure>
+    </list-property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="Year" id="182">
+            <text-property name="promptText">Year?</text-property>
+            <property name="valueType">static</property>
+            <property name="sortBy">label</property>
+            <property name="sortDirection">desc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">2010</property>
+                    <property name="label">2010</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Month" id="183">
+            <text-property name="promptText">Month?</text-property>
+            <property name="valueType">static</property>
+            <property name="sortBy">value</property>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">1</property>
+                    <property name="label">January</property>
+                </structure>
+                <structure>
+                    <property name="value">2</property>
+                    <property name="label">February</property>
+                </structure>
+                <structure>
+                    <property name="value">3</property>
+                    <property name="label">March</property>
+                </structure>
+                <structure>
+                    <property name="value">4</property>
+                    <property name="label">April</property>
+                </structure>
+                <structure>
+                    <property name="value">5</property>
+                    <property name="label">May</property>
+                </structure>
+                <structure>
+                    <property name="value">6</property>
+                    <property name="label">June</property>
+                </structure>
+                <structure>
+                    <property name="value">7</property>
+                    <property name="label">July</property>
+                </structure>
+                <structure>
+                    <property name="value">8</property>
+                    <property name="label">August</property>
+                </structure>
+                <structure>
+                    <property name="value">9</property>
+                    <property name="label">September</property>
+                </structure>
+                <structure>
+                    <property name="value">10</property>
+                    <property name="label">October</property>
+                </structure>
+                <structure>
+                    <property name="value">11</property>
+                    <property name="label">November</property>
+                </structure>
+                <structure>
+                    <property name="value">12</property>
+                    <property name="label">December</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Facility" id="212">
+            <text-property name="promptText">Facility?</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="dataSetName">Facilities</property>
+            <expression name="valueExpr">dataSetRow["location_id"]</expression>
+            <expression name="labelExpr">dataSetRow["name"]</expression>
+            <expression name="sortByColumn">dataSetRow["name"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="10">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
+            <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
+            <property name="odaUser">openmrsuser</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
+        </oda-data-source>
+        <script-data-source name="Scripted Data" id="225"/>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Data Set" id="11">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">reattendance</property>
+                    <expression name="expression">if (row["newcase"] == 1)
+	0;
+else
+	1;</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">id</property>
+                    <text-property name="displayName">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">date</property>
+                    <text-property name="displayName">date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">location_id</property>
+                    <text-property name="displayName">location_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sex</property>
+                    <text-property name="displayName">sex</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">birthdate</property>
+                    <text-property name="displayName">birthdate</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">age</property>
+                    <text-property name="displayName">age</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">diagnosis</property>
+                    <text-property name="displayName">diagnosis</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">referred</property>
+                    <text-property name="displayName">referred</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">newcase</property>
+                    <text-property name="displayName">newcase</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">diag_num</property>
+                    <text-property name="displayName">diag_num</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">location_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">sex</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">birthdate</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">age</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">diagnosis</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">referred</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">newcase</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">diag_num</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">reattendance</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">date</property>
+                    <property name="nativeName">date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">location_id</property>
+                    <property name="nativeName">location_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">sex</property>
+                    <property name="nativeName">sex</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">birthdate</property>
+                    <property name="nativeName">birthdate</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">age</property>
+                    <property name="nativeName">age</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">diagnosis</property>
+                    <property name="nativeName">diagnosis</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">referred</property>
+                    <property name="nativeName">referred</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">newcase</property>
+                    <property name="nativeName">newcase</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">diag_num</property>
+                    <property name="nativeName">diag_num</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+CONCAT('General',CAST(ge1.id AS CHAR)) as id,
+ge1.date,
+loc1.location_id,
+ge1.sex as sex,
+ge1.birthdate,
+coalesce(YEAR(ge1.date) - YEAR(ge1.birthdate) - IF(DATE_FORMAT(ge1.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+ge1.diagnosis as diagnosis,
+ge1.referred as referred,
+ge1.newcase as newcase,
+1 as diag_num
+from motechmodule_generaloutpatientencounter ge1
+join motechmodule_facility fa1 on fa1.facility_id = ge1.facility_id
+join location loc1 on loc1.location_id = fa1.location_id
+union all
+select 
+CONCAT('General',CAST(ge2.id AS CHAR)) as id,
+ge2.date,
+loc2.location_id,
+ge2.sex as sex,
+ge2.birthdate,
+coalesce(YEAR(ge2.date) - YEAR(ge2.birthdate) - IF(DATE_FORMAT(ge2.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+ge2.secondary_diagnosis as diagnosis,
+ge2.referred as referred,
+ge2.newcase as newcase,
+2 as diag_num
+from motechmodule_generaloutpatientencounter ge2
+join motechmodule_facility fa2 on fa2.facility_id = ge2.facility_id
+join location loc2 on loc2.location_id = fa2.location_id
+where ge2.secondary_diagnosis is not null
+union all
+select
+  CONCAT('MotherChild',CAST(enc.encounter_id AS CHAR)) as id,
+  enc.encounter_datetime as date,
+  enc.location_id,
+  IF(STRCMP(pers.gender,'M'),IF(STRCMP(pers.gender,'F'),'UNKNOWN','FEMALE'),'MALE') as sex,
+  pers.birthdate,
+  coalesce(YEAR(enc.encounter_datetime) - YEAR(pers.birthdate) - IF(DATE_FORMAT(pers.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+  obs1.value_numeric as diagnosis,
+  obs2.value_numeric as referred,
+  obs3.value_numeric as newcase ,
+  IF(STRCMP(cn1.name,'PRIMARY DIAGNOSIS'),IF(STRCMP(cn1.name,'SECONDARY DIAGNOSIS'),0,2),1) as diag_num
+from encounter enc
+join encounter_type enctyp on enc.encounter_type = enctyp.encounter_type_id and enctyp.name = 'OUTPATIENTVISIT'
+join person pers on enc.patient_id = pers.person_id and pers.voided = 0
+left outer join (obs obs1 join concept_name cn1 on obs1.concept_id = cn1.concept_id
+and (cn1.name = 'PRIMARY DIAGNOSIS' or cn1.name = 'SECONDARY DIAGNOSIS') and obs1.voided = 0)
+on enc.encounter_id = obs1.encounter_id
+left outer join (obs obs2 join concept_name cn2 on obs2.concept_id = cn2.concept_id
+and cn2.name = 'NEW CASE'  and obs2.voided = 0) on enc.encounter_id = obs2.encounter_id
+left outer join (obs obs3 join concept_name cn3 on obs3.concept_id = cn3.concept_id 
+and cn3.name = 'REFERRED' and obs3.voided = 0) on enc.encounter_id = obs3.encounter_id
+where enc.voided = 0]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>motechmodule_generalencounter_id</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>20</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>motechmodule_generalencounter_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>motechmodule_generalencounter_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>date</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>date</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>date</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>facility_id</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>facility_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>facility_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>serial_number</design:name>
+            <design:position>4</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>serial_number</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>serial_number</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>sex</design:name>
+            <design:position>5</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>6</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sex</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sex</design:label>
+            <design:formattingHints>
+              <design:displaySize>6</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>birthdate</design:name>
+            <design:position>6</design:position>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>birthdate</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>birthdate</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>insured</design:name>
+            <design:position>7</design:position>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>insured</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>insured</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>newcase</design:name>
+            <design:position>8</design:position>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>newcase</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>newcase</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>diagnosis</design:name>
+            <design:position>9</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>diagnosis</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>diagnosis</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>secondary_diagnosis</design:name>
+            <design:position>10</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>secondary_diagnosis</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>secondary_diagnosis</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>referral</design:name>
+            <design:position>11</design:position>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>referral</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>referral</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Facilities" id="211">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">location_id</property>
+                    <text-property name="displayName">location_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <text-property name="displayName">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">region</property>
+                    <text-property name="displayName">region</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">county_district</property>
+                    <text-property name="displayName">district</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">location_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">region</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">county_district</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">location_id</property>
+                    <property name="nativeName">location_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">region</property>
+                    <property name="nativeName">region</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">county_district</property>
+                    <property name="nativeName">county_district</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+fac.location_id, 
+loc.name, 
+loc.region, 
+loc.county_district as district
+from motechmodule_facility fac
+join location loc on fac.location_id = loc.location_id]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>facility_id</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>facility_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>facility_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>name</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>region</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>50</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>region</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>region</design:label>
+            <design:formattingHints>
+              <design:displaySize>50</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>county_district</design:name>
+            <design:position>4</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>50</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>county_district</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>county_district</design:label>
+            <design:formattingHints>
+              <design:displaySize>50</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Locations" id="218">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">location_id</property>
+                    <text-property name="displayName">location_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <text-property name="displayName">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">region</property>
+                    <text-property name="displayName">region</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">county_district</property>
+                    <text-property name="displayName">district</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr">row["location_id"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Facility"].value</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">location_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">region</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">county_district</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">location_id</property>
+                    <property name="nativeName">location_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">region</property>
+                    <property name="nativeName">region</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">county_district</property>
+                    <property name="nativeName">county_district</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+location_id,
+name, 
+region,
+county_district as district
+from location]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>name</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>region</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>50</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>region</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>region</design:label>
+            <design:formattingHints>
+              <design:displaySize>50</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>county_district</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>50</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>district</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>district</design:label>
+            <design:formattingHints>
+              <design:displaySize>50</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <script-data-set name="Diseases" id="226">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">0</property>
+                    <property name="name">code</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">disease_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">code</property>
+                    <text-property name="displayName">Code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">disease_name</property>
+                    <text-property name="displayName">Disease Name</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">code</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">disease_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Scripted Data</property>
+            <method name="open"><![CDATA[currentrow = 0;
+diseasesArray = new Array();
+diseasesArray.push([1,"AFP (Polio)"]);
+diseasesArray.push([2,"CSM"]);
+diseasesArray.push([3,"Neonatal Tetanus"]);
+diseasesArray.push([4,"Pertussis"]);
+diseasesArray.push([5,"Diphteria"]);
+diseasesArray.push([6,"Measles"]);
+diseasesArray.push([7,"Yellow Fever"]);
+diseasesArray.push([8,"Tetanus"]);
+diseasesArray.push([9,"Tuberculosis"]);
+diseasesArray.push([10,"Simple Malaria Lab Confirmed"]);
+diseasesArray.push([11,"Simple Malaria Non-Lab Confirmed"]);
+diseasesArray.push([12,"Severe Malaria Non-Lab Confirmed"]);
+diseasesArray.push([13,"Severe Malaria Lab Confirmed"]);
+diseasesArray.push([14,"Typhoid/Enteric Fever (Typhoid)"]);
+diseasesArray.push([15,"Cholera"]);
+diseasesArray.push([16,"Diarrhoea Diseases"]);
+diseasesArray.push([17,"Infectious Hepatitis"]);
+diseasesArray.push([18,"Other Meningitis"]);
+diseasesArray.push([19,"Schistosomiasis (Bilharzia)"]);
+diseasesArray.push([20,"Guinea Worm"]);
+diseasesArray.push([21,"Onchocerciasis"]);
+diseasesArray.push([22,"Buruli Ulcer"]);
+diseasesArray.push([23,"Leprosy"]);
+diseasesArray.push([24,"Yaws"]);
+diseasesArray.push([25,"HIV/AIDS"]);
+diseasesArray.push([26,"Mumps"]);
+diseasesArray.push([27,"Septicaemia"]);
+diseasesArray.push([28,"Chicken Pox"]);
+diseasesArray.push([29,"Intestinal Worms"]);
+diseasesArray.push([30,"Malnutrition"]);
+diseasesArray.push([31,"Anaemia"]);
+diseasesArray.push([32,"Anaemia in Pregnancy"]);
+diseasesArray.push([33,"Other Nutritional Diseases"]);
+diseasesArray.push([34,"Hypertension"]);
+diseasesArray.push([35,"Other Cardiac Diseases"]);
+diseasesArray.push([36,"Diabetes Mellitus"]);
+diseasesArray.push([37,"Kidney Related Diseases"]);
+diseasesArray.push([38,"Liver Diseases"]);
+diseasesArray.push([39,"Rheumatism &amp; Joint Pains"]);
+diseasesArray.push([40,"Asthma"]);
+diseasesArray.push([41,"Sickle Cell Disease"]);
+diseasesArray.push([42,"Acute Psychosis"]);
+diseasesArray.push([43,"Substance Abuse"]);
+diseasesArray.push([44,"Epilepsy"]);
+diseasesArray.push([45,"Neurosis"]);
+diseasesArray.push([46,"Acute Eye Infection"]);
+diseasesArray.push([47,"Cataract"]);
+diseasesArray.push([48,"Trachoma"]);
+diseasesArray.push([49,"Acute Ear Infection"]);
+diseasesArray.push([50,"Dental Caries"]);
+diseasesArray.push([51,"Other Oral Conditions"]);
+diseasesArray.push([52,"Gynaecological Conditions"]);
+diseasesArray.push([53,"Pregnancy &amp; Related Complications"]);
+diseasesArray.push([54,"Other Diseases of the Female Reproductive System"]);
+diseasesArray.push([55,"Other Diseases of the Male Reproductive System"]);
+diseasesArray.push([56,"Gonorrhoea"]);
+diseasesArray.push([57,"Genital Ulcer Disease"]);
+diseasesArray.push([58,"Vaginal Discharge"]);
+diseasesArray.push([59,"Urethral Discharge"]);
+diseasesArray.push([60,"Acute Urinary Tract Infection"]);
+diseasesArray.push([61,"Pneumonia"]);
+diseasesArray.push([62,"Other ARI (Acute Respiratory Infection)"]);
+diseasesArray.push([63,"Malaria in Pregnancy Lab Confirmed"]);
+diseasesArray.push([64,"Malaria in Pregnancy Non-Lab Confirmed"]);
+diseasesArray.push([65,"Skin Diseases &amp; Ulcers"]);
+diseasesArray.push([66,"Snake Bite"]);
+diseasesArray.push([67,"Other Animal Bites"]);
+diseasesArray.push([68,"Road Traffic Accidents"]);
+diseasesArray.push([69,"Home Accidents and Injuries"]);
+diseasesArray.push([70,"Occupational Injuries"]);
+diseasesArray.push([71,"Domestic Violence"]);
+diseasesArray.push([72,"Home Poisonings"]);
+diseasesArray.push([73,"Occupational Poisonings"]);
+diseasesArray.push([74,"Sexual Abuse"]);
+diseasesArray.push([75,"PUO (not Malaria)"]);
+diseasesArray.push([76,"All Other Diseases"]);]]></method>
+            <method name="fetch"><![CDATA[if( currentrow >= diseasesArray.length ) {
+	return false;
+}
+
+row["code"] = diseasesArray[currentrow][0];
+row["disease_name"] = diseasesArray[currentrow][1];
+
+currentrow = currentrow + 1;
+return true;]]></method>
+            <method name="close"><![CDATA[diseasesArray = null;]]></method>
+        </script-data-set>
+        <joint-data-set name="Data set Disease Join" id="514">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">c_sex</property>
+                    <expression name="expression">if(row["sex"]==null)'N';else row["sex"];</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">c_age</property>
+                    <expression name="expression">if(row["age"]==null)0;else row["age"];</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_diagnosis</property>
+                    <expression name="expression">if(row["diagnosis"]==null)0;else row["diagnosis"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_referred</property>
+                    <expression name="expression">if(row["referred"]==null)0;else row["referred"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_newcase</property>
+                    <expression name="expression">if(row["newcase"]==null)0;else row["newcase"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Data Set::sex</property>
+                    <property name="alias">sex</property>
+                    <text-property name="displayName">Data Set::sex</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::diag_num</property>
+                    <property name="alias">diag_num</property>
+                    <text-property name="displayName">Data Set::diag_num</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::diagnosis</property>
+                    <property name="alias">diagnosis</property>
+                    <text-property name="displayName">Data Set::diagnosis</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Diseases::code</property>
+                    <property name="alias">code</property>
+                    <text-property name="displayName">Diseases::code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::date</property>
+                    <property name="alias">date</property>
+                    <text-property name="displayName">Data Set::date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::location_id</property>
+                    <property name="alias">location_id</property>
+                    <text-property name="displayName">Data Set::location_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::id</property>
+                    <property name="alias">id</property>
+                    <text-property name="displayName">Data Set::id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::newcase</property>
+                    <property name="alias">newcase</property>
+                    <text-property name="displayName">Data Set::newcase</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Diseases::disease_name</property>
+                    <property name="alias">disease_name</property>
+                    <text-property name="displayName">Diseases::disease_name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::age</property>
+                    <property name="alias">age</property>
+                    <text-property name="displayName">Data Set::age</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::birthdate</property>
+                    <property name="alias">birthdate</property>
+                    <text-property name="displayName">Data Set::birthdate</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::reattendance</property>
+                    <property name="alias">reattendance</property>
+                    <text-property name="displayName">Data Set::reattendance</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::referred</property>
+                    <property name="alias">referred</property>
+                    <text-property name="displayName">Data Set::referred</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">location_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">sex</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">birthdate</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">age</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">diagnosis</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">referred</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">newcase</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">diag_num</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">reattendance</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">code</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">disease_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">c_sex</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">c_age</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">c_diagnosis</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">c_referred</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">c_newcase</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="dataSets">
+                <value>Data Set</value>
+                <value>Diseases</value>
+            </simple-property-list>
+            <list-property name="joinConditions">
+                <structure>
+                    <property name="joinType">right-out</property>
+                    <property name="joinOperator">eq</property>
+                    <property name="leftDataSet">Data Set</property>
+                    <property name="rightDataSet">Diseases</property>
+                    <expression name="leftExpression">dataSetRow["diagnosis"]</expression>
+                    <expression name="rightExpression">dataSetRow["code"]</expression>
+                </structure>
+            </list-property>
+        </joint-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">"Verdana"</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="NewStyle" id="476">
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">us-legal</property>
+            <property name="orientation">landscape</property>
+            <property name="topMargin">0.25in</property>
+            <property name="leftMargin">0.25in</property>
+            <property name="bottomMargin">0.25in</property>
+            <property name="rightMargin">0.25in</property>
+            <page-header>
+                <text id="90">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<CENTER>
+<FONT size="6" color="blue" >
+MoTeCH - OPD Morbidity Report
+</FONT>
+</CENTER>]]></text-property>
+                </text>
+            </page-header>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="184">
+            <property name="width">100%</property>
+            <property name="dataSet">Locations</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">location_id</property>
+                    <expression name="expression">dataSetRow["location_id"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">name</property>
+                    <expression name="expression">dataSetRow["name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">region</property>
+                    <expression name="expression">dataSetRow["region"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">county_district</property>
+                    <expression name="expression">dataSetRow["county_district"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">District</property>
+                    <expression name="expression">dataSetRow["county_district"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Region</property>
+                    <expression name="expression">dataSetRow["region"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="185">
+                <property name="width">0.7291666666666666in</property>
+            </column>
+            <column id="186"/>
+            <column id="187">
+                <property name="width">0.625in</property>
+            </column>
+            <column id="188"/>
+            <column id="189">
+                <property name="width">1.3125in</property>
+            </column>
+            <column id="190"/>
+            <column id="191">
+                <property name="width">0.7708333333333334in</property>
+            </column>
+            <column id="192"/>
+            <column id="193">
+                <property name="width">0.78125in</property>
+            </column>
+            <column id="194"/>
+            <row id="195">
+                <cell id="196">
+                    <label id="206">
+                        <property name="fontWeight">bolder</property>
+                        <text-property name="text">Month:</text-property>
+                    </label>
+                </cell>
+                <cell id="197">
+                    <data id="214">
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Month</property>
+                                <expression name="expression">params["Month"].displayText</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Month</property>
+                    </data>
+                </cell>
+                <cell id="198">
+                    <label id="207">
+                        <property name="fontWeight">bolder</property>
+                        <text-property name="text">Year:</text-property>
+                    </label>
+                </cell>
+                <cell id="199">
+                    <data id="213">
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Year</property>
+                                <expression name="expression">params["Year"].displayText</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Year</property>
+                    </data>
+                </cell>
+                <cell id="200">
+                    <label id="208">
+                        <property name="fontWeight">bolder</property>
+                        <text-property name="text">Facility Name:</text-property>
+                    </label>
+                </cell>
+                <cell id="201">
+                    <data id="215">
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Facility</property>
+                                <expression name="expression">params["Facility"].displayText</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Facility</property>
+                    </data>
+                </cell>
+                <cell id="202">
+                    <label id="209">
+                        <property name="fontWeight">bolder</property>
+                        <text-property name="text">District:</text-property>
+                    </label>
+                </cell>
+                <cell id="203">
+                    <data id="221">
+                        <property name="resultSetColumn">District</property>
+                    </data>
+                </cell>
+                <cell id="204">
+                    <label id="210">
+                        <property name="fontWeight">bolder</property>
+                        <text-property name="text">Region:</text-property>
+                    </label>
+                </cell>
+                <cell id="205">
+                    <data id="222">
+                        <property name="resultSetColumn">Region</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <table id="557">
+            <property name="dataSet">Data set Disease Join</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">id</property>
+                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">date</property>
+                    <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <expression name="expression" type="javascript">dataSetRow["location_id"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sex</property>
+                    <expression name="expression" type="javascript">dataSetRow["sex"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">birthdate</property>
+                    <expression name="expression" type="javascript">dataSetRow["birthdate"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">age</property>
+                    <expression name="expression" type="javascript">dataSetRow["age"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">diagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["diagnosis"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">referred</property>
+                    <expression name="expression" type="javascript">dataSetRow["referred"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">newcase</property>
+                    <expression name="expression" type="javascript">dataSetRow["newcase"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">diag_num</property>
+                    <expression name="expression" type="javascript">dataSetRow["diag_num"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">reattendance</property>
+                    <expression name="expression" type="javascript">dataSetRow["reattendance"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">code</property>
+                    <expression name="expression" type="javascript">dataSetRow["code"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">disease_name</property>
+                    <expression name="expression" type="javascript">dataSetRow["disease_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">c_sex</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_sex"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">c_age</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_age"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_diagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_diagnosis"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_referred</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_referred"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_newcase</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_newcase"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["disease_name"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 0 &amp;&amp; dataSetRow["c_age"] &lt; 1 &amp;&amp; dataSetRow["diagnosis"] > 0</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_1_4</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 1 &amp;&amp; dataSetRow["c_age"] &lt;= 4 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_less_than_1</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["diagnosis"] > 0 &amp;&amp; dataSetRow["c_age"] >= 0 &amp;&amp; dataSetRow["c_age"] &lt; 1 &amp;&amp; dataSetRow["sex"] == "MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_5_9</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 5 &amp;&amp; dataSetRow["c_age"] &lt;= 9 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_10_14</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 10 &amp;&amp; dataSetRow["c_age"] &lt;= 14 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_15_17</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 15 &amp;&amp; dataSetRow["c_age"] &lt;= 17 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_18_19</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 18 &amp;&amp; dataSetRow["c_age"] &lt;= 19 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_20_34</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 20 &amp;&amp; dataSetRow["c_age"] &lt;= 34 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_35_49</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 35 &amp;&amp; dataSetRow["c_age"] &lt;= 49 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_50_59</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 50 &amp;&amp; dataSetRow["c_age"] &lt;= 59 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_60_69</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 60 &amp;&amp; dataSetRow["c_age"] &lt;= 69 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_70_plus</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 70 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">m_total</property>
+                    <expression name="expression" type="javascript">row["m_less_than_1"]+row["m_1_4"]+row["m_5_9"]+row["m_10_14"]+row["m_15_17"]+row["m_18_19"]+row["m_20_34"]+row["m_35_49"]+row["m_50_59"]+row["m_60_69"]+row["m_70_plus"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">f_less_than_1</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["diagnosis"] > 0 &amp;&amp; dataSetRow["age"] >= 0 &amp;&amp; dataSetRow["age"] &lt; 1 &amp;&amp; dataSetRow["sex"] == "FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">f_1_4</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 1 &amp;&amp; dataSetRow["c_age"] &lt;= 4 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">f_5_9</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 5 &amp;&amp; dataSetRow["c_age"] &lt;= 9 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">f_10_14</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 10 &amp;&amp; dataSetRow["c_age"] &lt;= 14 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">f_15_17</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 15 &amp;&amp; dataSetRow["c_age"] &lt;= 17 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">f_18_19</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 18 &amp;&amp; dataSetRow["c_age"] &lt;= 19 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">f_20_34</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 20 &amp;&amp; dataSetRow["c_age"] &lt;= 34 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">f_35_49</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 35 &amp;&amp; dataSetRow["c_age"] &lt;= 49 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">f_50_59</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 50 &amp;&amp; dataSetRow["c_age"] &lt;= 59 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">f_60_69</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Data Grouped by Disease</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 60 &amp;&amp; dataSetRow["c_age"] &lt;= 69 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">f_70_plus</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_age"] >= 70 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">f_total</property>
+                    <expression name="expression" type="javascript">row["f_less_than_1"]+row["f_1_4"]+row["f_5_9"]+row["f_10_14"]+row["f_15_17"]+row["f_18_19"]+row["f_20_34"]+row["f_35_49"]+row["f_50_59"]+row["f_60_69"]+row["f_70_plus"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">grand_total</property>
+                    <expression name="expression" type="javascript">row["f_total"]+row["m_total"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <column id="774"/>
+            <column id="775"/>
+            <column id="776"/>
+            <column id="777"/>
+            <column id="778"/>
+            <column id="779"/>
+            <column id="780"/>
+            <column id="781"/>
+            <column id="782"/>
+            <column id="783"/>
+            <column id="784"/>
+            <column id="785"/>
+            <column id="786"/>
+            <column id="787"/>
+            <column id="788"/>
+            <column id="789"/>
+            <column id="790"/>
+            <column id="791"/>
+            <column id="792"/>
+            <column id="793"/>
+            <column id="794"/>
+            <column id="795"/>
+            <column id="796"/>
+            <column id="797"/>
+            <column id="798"/>
+            <column id="799"/>
+            <header>
+                <row id="558">
+                    <cell id="559">
+                        <property name="style">NewStyle</property>
+                        <label id="861">
+                            <text-property name="text">Disease</text-property>
+                        </label>
+                    </cell>
+                    <cell id="560">
+                        <property name="style">NewStyle</property>
+                        <label id="860">
+                            <text-property name="text">&lt;1</text-property>
+                        </label>
+                    </cell>
+                    <cell id="561">
+                        <property name="style">NewStyle</property>
+                        <label id="862">
+                            <text-property name="text">1-4</text-property>
+                        </label>
+                    </cell>
+                    <cell id="562">
+                        <property name="style">NewStyle</property>
+                        <label id="863">
+                            <text-property name="text">5-9</text-property>
+                        </label>
+                    </cell>
+                    <cell id="563">
+                        <property name="style">NewStyle</property>
+                        <label id="864">
+                            <text-property name="text">10-14</text-property>
+                        </label>
+                    </cell>
+                    <cell id="564">
+                        <property name="style">NewStyle</property>
+                        <label id="865">
+                            <text-property name="text">15-17</text-property>
+                        </label>
+                    </cell>
+                    <cell id="565">
+                        <property name="style">NewStyle</property>
+                        <label id="866">
+                            <text-property name="text">18-19</text-property>
+                        </label>
+                    </cell>
+                    <cell id="566">
+                        <property name="style">NewStyle</property>
+                        <label id="867">
+                            <text-property name="text">20-34</text-property>
+                        </label>
+                    </cell>
+                    <cell id="567">
+                        <property name="style">NewStyle</property>
+                        <label id="868">
+                            <text-property name="text">35-49</text-property>
+                        </label>
+                    </cell>
+                    <cell id="568">
+                        <property name="style">NewStyle</property>
+                        <label id="869">
+                            <text-property name="text">50-59</text-property>
+                        </label>
+                    </cell>
+                    <cell id="569">
+                        <property name="style">NewStyle</property>
+                        <label id="870">
+                            <text-property name="text">60-69</text-property>
+                        </label>
+                    </cell>
+                    <cell id="570">
+                        <property name="style">NewStyle</property>
+                        <label id="871">
+                            <text-property name="text">70+</text-property>
+                        </label>
+                    </cell>
+                    <cell id="571">
+                        <property name="style">NewStyle</property>
+                        <label id="885">
+                            <text-property name="text">Total</text-property>
+                        </label>
+                    </cell>
+                    <cell id="572">
+                        <property name="style">NewStyle</property>
+                        <label id="888">
+                            <text-property name="text">&lt;1</text-property>
+                        </label>
+                    </cell>
+                    <cell id="573">
+                        <property name="style">NewStyle</property>
+                        <label id="889">
+                            <text-property name="text">1-4</text-property>
+                        </label>
+                    </cell>
+                    <cell id="574">
+                        <property name="style">NewStyle</property>
+                        <label id="890">
+                            <text-property name="text">5-9</text-property>
+                        </label>
+                    </cell>
+                    <cell id="575">
+                        <property name="style">NewStyle</property>
+                        <label id="891">
+                            <text-property name="text">10-14</text-property>
+                        </label>
+                    </cell>
+                    <cell id="576">
+                        <property name="style">NewStyle</property>
+                        <label id="892">
+                            <text-property name="text">15-17</text-property>
+                        </label>
+                    </cell>
+                    <cell id="577">
+                        <property name="style">NewStyle</property>
+                        <label id="893">
+                            <text-property name="text">18-19</text-property>
+                        </label>
+                    </cell>
+                    <cell id="578">
+                        <property name="style">NewStyle</property>
+                        <label id="894">
+                            <text-property name="text">20-34</text-property>
+                        </label>
+                    </cell>
+                    <cell id="579">
+                        <property name="style">NewStyle</property>
+                        <label id="895">
+                            <text-property name="text">35-49</text-property>
+                        </label>
+                    </cell>
+                    <cell id="580">
+                        <property name="style">NewStyle</property>
+                        <label id="896">
+                            <text-property name="text">50-59</text-property>
+                        </label>
+                    </cell>
+                    <cell id="581">
+                        <property name="style">NewStyle</property>
+                        <label id="897">
+                            <text-property name="text">60-69</text-property>
+                        </label>
+                    </cell>
+                    <cell id="582">
+                        <property name="style">NewStyle</property>
+                        <label id="898">
+                            <text-property name="text">70+</text-property>
+                        </label>
+                    </cell>
+                    <cell id="583">
+                        <property name="style">NewStyle</property>
+                        <label id="899">
+                            <text-property name="text">Total</text-property>
+                        </label>
+                    </cell>
+                    <cell id="584">
+                        <property name="style">NewStyle</property>
+                    </cell>
+                </row>
+            </header>
+            <group id="803">
+                <property name="groupName">Data Grouped by Disease</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr" type="javascript">row["disease_name"]</expression>
+                <structure name="toc">
+                    <property name="TOCStyle">NewStyle</property>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+            </group>
+            <detail>
+                <row id="585">
+                    <cell id="586">
+                        <property name="style">NewStyle</property>
+                        <data id="887">
+                            <property name="width">40mm</property>
+                            <property name="resultSetColumn">disease_name</property>
+                        </data>
+                    </cell>
+                    <cell id="587">
+                        <property name="style">NewStyle</property>
+                        <data id="875">
+                            <property name="resultSetColumn">m_less_than_1</property>
+                        </data>
+                    </cell>
+                    <cell id="588">
+                        <property name="style">NewStyle</property>
+                        <data id="874">
+                            <property name="resultSetColumn">m_1_4</property>
+                        </data>
+                    </cell>
+                    <cell id="589">
+                        <property name="style">NewStyle</property>
+                        <data id="876">
+                            <property name="resultSetColumn">m_5_9</property>
+                        </data>
+                    </cell>
+                    <cell id="590">
+                        <property name="style">NewStyle</property>
+                        <data id="877">
+                            <property name="resultSetColumn">m_10_14</property>
+                        </data>
+                    </cell>
+                    <cell id="591">
+                        <property name="style">NewStyle</property>
+                        <data id="878">
+                            <property name="resultSetColumn">m_15_17</property>
+                        </data>
+                    </cell>
+                    <cell id="592">
+                        <property name="style">NewStyle</property>
+                        <data id="879">
+                            <property name="resultSetColumn">m_18_19</property>
+                        </data>
+                    </cell>
+                    <cell id="593">
+                        <property name="style">NewStyle</property>
+                        <data id="880">
+                            <property name="resultSetColumn">m_20_34</property>
+                        </data>
+                    </cell>
+                    <cell id="594">
+                        <property name="style">NewStyle</property>
+                        <data id="881">
+                            <property name="resultSetColumn">m_35_49</property>
+                        </data>
+                    </cell>
+                    <cell id="595">
+                        <property name="style">NewStyle</property>
+                        <data id="882">
+                            <property name="resultSetColumn">m_50_59</property>
+                        </data>
+                    </cell>
+                    <cell id="596">
+                        <property name="style">NewStyle</property>
+                        <data id="883">
+                            <property name="resultSetColumn">m_60_69</property>
+                        </data>
+                    </cell>
+                    <cell id="597">
+                        <property name="style">NewStyle</property>
+                        <data id="884">
+                            <property name="resultSetColumn">m_70_plus</property>
+                        </data>
+                    </cell>
+                    <cell id="598">
+                        <property name="style">NewStyle</property>
+                        <data id="886">
+                            <property name="resultSetColumn">m_total</property>
+                        </data>
+                    </cell>
+                    <cell id="599">
+                        <property name="style">NewStyle</property>
+                        <data id="900">
+                            <property name="resultSetColumn">f_less_than_1</property>
+                        </data>
+                    </cell>
+                    <cell id="600">
+                        <property name="style">NewStyle</property>
+                        <data id="901">
+                            <property name="resultSetColumn">f_1_4</property>
+                        </data>
+                    </cell>
+                    <cell id="601">
+                        <property name="style">NewStyle</property>
+                        <data id="902">
+                            <property name="resultSetColumn">f_5_9</property>
+                        </data>
+                    </cell>
+                    <cell id="602">
+                        <property name="style">NewStyle</property>
+                        <data id="903">
+                            <property name="resultSetColumn">f_10_14</property>
+                        </data>
+                    </cell>
+                    <cell id="603">
+                        <property name="style">NewStyle</property>
+                        <data id="904">
+                            <property name="resultSetColumn">f_15_17</property>
+                        </data>
+                    </cell>
+                    <cell id="604">
+                        <property name="style">NewStyle</property>
+                        <data id="905">
+                            <property name="resultSetColumn">f_18_19</property>
+                        </data>
+                    </cell>
+                    <cell id="605">
+                        <property name="style">NewStyle</property>
+                        <data id="906">
+                            <property name="resultSetColumn">f_20_34</property>
+                        </data>
+                    </cell>
+                    <cell id="606">
+                        <property name="style">NewStyle</property>
+                        <data id="907">
+                            <property name="resultSetColumn">f_35_49</property>
+                        </data>
+                    </cell>
+                    <cell id="607">
+                        <property name="style">NewStyle</property>
+                        <data id="908">
+                            <property name="resultSetColumn">f_50_59</property>
+                        </data>
+                    </cell>
+                    <cell id="608">
+                        <property name="style">NewStyle</property>
+                        <data id="909">
+                            <property name="resultSetColumn">f_60_69</property>
+                        </data>
+                    </cell>
+                    <cell id="609">
+                        <property name="style">NewStyle</property>
+                        <data id="910">
+                            <property name="resultSetColumn">f_70_plus</property>
+                        </data>
+                    </cell>
+                    <cell id="610">
+                        <property name="style">NewStyle</property>
+                        <data id="911">
+                            <property name="resultSetColumn">f_total</property>
+                        </data>
+                    </cell>
+                    <cell id="611">
+                        <property name="style">NewStyle</property>
+                        <data id="912">
+                            <property name="resultSetColumn">grand_total</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <table id="1092">
+            <property name="dataSet">Data set Disease Join</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">id</property>
+                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">date</property>
+                    <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <expression name="expression" type="javascript">dataSetRow["location_id"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sex</property>
+                    <expression name="expression" type="javascript">dataSetRow["sex"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">birthdate</property>
+                    <expression name="expression" type="javascript">dataSetRow["birthdate"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">age</property>
+                    <expression name="expression" type="javascript">dataSetRow["age"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">diagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["diagnosis"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">referred</property>
+                    <expression name="expression" type="javascript">dataSetRow["referred"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">newcase</property>
+                    <expression name="expression" type="javascript">dataSetRow["newcase"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">diag_num</property>
+                    <expression name="expression" type="javascript">dataSetRow["diag_num"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">reattendance</property>
+                    <expression name="expression" type="javascript">dataSetRow["reattendance"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">code</property>
+                    <expression name="expression" type="javascript">dataSetRow["code"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">disease_name</property>
+                    <expression name="expression" type="javascript">dataSetRow["disease_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">c_sex</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_sex"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">c_age</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_age"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_diagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_diagnosis"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_referred</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_referred"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_newcase</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_newcase"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">m_less_than_1</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["c_age"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["c_age"] >= 0 &amp;&amp; dataSetRow["c_age"] &lt; 1</expression>
+                </structure>
+            </list-property>
+            <column id="1174"/>
+            <column id="1175"/>
+            <column id="1176"/>
+            <column id="1177"/>
+            <column id="1178"/>
+            <column id="1179"/>
+            <column id="1180"/>
+            <column id="1181"/>
+            <column id="1182"/>
+            <column id="1183"/>
+            <column id="1184"/>
+            <column id="1185"/>
+            <column id="1186"/>
+            <column id="1187"/>
+            <column id="1188"/>
+            <column id="1189"/>
+            <column id="1190"/>
+            <column id="1191"/>
+            <column id="1192"/>
+            <column id="1193"/>
+            <column id="1194"/>
+            <column id="1195"/>
+            <column id="1196"/>
+            <column id="1197"/>
+            <column id="1198"/>
+            <column id="1199"/>
+            <header>
+                <row id="1093">
+                    <cell id="1094"/>
+                    <cell id="1095"/>
+                    <cell id="1096"/>
+                    <cell id="1097"/>
+                    <cell id="1098"/>
+                    <cell id="1099"/>
+                    <cell id="1100"/>
+                    <cell id="1101"/>
+                    <cell id="1102"/>
+                    <cell id="1103"/>
+                    <cell id="1104"/>
+                    <cell id="1105"/>
+                    <cell id="1106"/>
+                    <cell id="1107"/>
+                    <cell id="1108"/>
+                    <cell id="1109"/>
+                    <cell id="1110"/>
+                    <cell id="1111"/>
+                    <cell id="1112"/>
+                    <cell id="1113"/>
+                    <cell id="1114"/>
+                    <cell id="1115"/>
+                    <cell id="1116"/>
+                    <cell id="1117"/>
+                    <cell id="1118"/>
+                    <cell id="1119"/>
+                </row>
+            </header>
+            <group id="1257">
+                <property name="groupName">NewTableGroup1</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr" type="javascript">row["disease_name"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["disease_name"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="1258">
+                        <cell id="1259">
+                            <data id="1312">
+                                <property name="resultSetColumn">disease_name</property>
+                            </data>
+                        </cell>
+                        <cell id="1260"/>
+                        <cell id="1261"/>
+                        <cell id="1262"/>
+                        <cell id="1263"/>
+                        <cell id="1264"/>
+                        <cell id="1265"/>
+                        <cell id="1266"/>
+                        <cell id="1267"/>
+                        <cell id="1268"/>
+                        <cell id="1269"/>
+                        <cell id="1270"/>
+                        <cell id="1271"/>
+                        <cell id="1272"/>
+                        <cell id="1273"/>
+                        <cell id="1274"/>
+                        <cell id="1275"/>
+                        <cell id="1276"/>
+                        <cell id="1277"/>
+                        <cell id="1278"/>
+                        <cell id="1279"/>
+                        <cell id="1280"/>
+                        <cell id="1281"/>
+                        <cell id="1282"/>
+                        <cell id="1283"/>
+                        <cell id="1284"/>
+                    </row>
+                </header>
+                <footer>
+                    <row id="1285">
+                        <cell id="1286"/>
+                        <cell id="1287"/>
+                        <cell id="1288"/>
+                        <cell id="1289"/>
+                        <cell id="1290"/>
+                        <cell id="1291"/>
+                        <cell id="1292"/>
+                        <cell id="1293"/>
+                        <cell id="1294"/>
+                        <cell id="1295"/>
+                        <cell id="1296"/>
+                        <cell id="1297"/>
+                        <cell id="1298"/>
+                        <cell id="1299"/>
+                        <cell id="1300"/>
+                        <cell id="1301"/>
+                        <cell id="1302"/>
+                        <cell id="1303"/>
+                        <cell id="1304"/>
+                        <cell id="1305"/>
+                        <cell id="1306"/>
+                        <cell id="1307"/>
+                        <cell id="1308"/>
+                        <cell id="1309"/>
+                        <cell id="1310"/>
+                        <cell id="1311"/>
+                    </row>
+                </footer>
+            </group>
+            <detail>
+                <row id="1313">
+                    <cell id="1314"/>
+                    <cell id="1315">
+                        <data id="1340">
+                            <property name="resultSetColumn">m_less_than_1</property>
+                        </data>
+                    </cell>
+                    <cell id="1316"/>
+                    <cell id="1317"/>
+                    <cell id="1318"/>
+                    <cell id="1319"/>
+                    <cell id="1320"/>
+                    <cell id="1321"/>
+                    <cell id="1322"/>
+                    <cell id="1323"/>
+                    <cell id="1324"/>
+                    <cell id="1325"/>
+                    <cell id="1326"/>
+                    <cell id="1327"/>
+                    <cell id="1328"/>
+                    <cell id="1329"/>
+                    <cell id="1330"/>
+                    <cell id="1331"/>
+                    <cell id="1332"/>
+                    <cell id="1333"/>
+                    <cell id="1334"/>
+                    <cell id="1335"/>
+                    <cell id="1336"/>
+                    <cell id="1337"/>
+                    <cell id="1338"/>
+                    <cell id="1339"/>
+                </row>
+            </detail>
+            <footer>
+                <row id="1147">
+                    <cell id="1148"/>
+                    <cell id="1149"/>
+                    <cell id="1150"/>
+                    <cell id="1151"/>
+                    <cell id="1152"/>
+                    <cell id="1153"/>
+                    <cell id="1154"/>
+                    <cell id="1155"/>
+                    <cell id="1156"/>
+                    <cell id="1157"/>
+                    <cell id="1158"/>
+                    <cell id="1159"/>
+                    <cell id="1160"/>
+                    <cell id="1161"/>
+                    <cell id="1162"/>
+                    <cell id="1163"/>
+                    <cell id="1164"/>
+                    <cell id="1165"/>
+                    <cell id="1166"/>
+                    <cell id="1167"/>
+                    <cell id="1168"/>
+                    <cell id="1169"/>
+                    <cell id="1170"/>
+                    <cell id="1171"/>
+                    <cell id="1172"/>
+                    <cell id="1173"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>
