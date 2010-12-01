@@ -10127,7 +10127,8 @@ and
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="2943">
-                            <text-property name="text">     AEFI Investigated:</text-property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">  AEFI Investigated:</text-property>
                         </label>
                     </cell>
                     <cell id="2669"/>
