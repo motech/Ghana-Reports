@@ -16,14 +16,6 @@
             <property name="id">766</property>
         </structure>
         <structure>
-            <property name="name">queryText</property>
-            <property name="id">974</property>
-        </structure>
-        <structure>
-            <property name="name">queryTimeOut</property>
-            <property name="id">974</property>
-        </structure>
-        <structure>
             <property name="name">rowFetchSize</property>
             <property name="id">974</property>
         </structure>
@@ -449,9 +441,9 @@ and
     location location,
     concept_name concept_name
 where 
-    enc.encounter_type=15
+    enc.encounter_type=5
 and
-    obs.encounter_id=obs.encounter_id
+    obs.encounter_id=enc.encounter_id
 and
     obs.concept_id = concept_name.concept_id
 and
@@ -2615,12 +2607,12 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
 	'AGE GROUP OF MATERNAL DEATHS (YEARS)',
-    SUM(if(ages.age between 10 and 14,1,0)) as 10_to_14_years,
-    SUM(if(ages.age between 15 and 19,1,0)) as 15_to_19_years,
-    SUM(if(ages.age between 20 and 24,1,0)) as 20_to_24_years,
-    SUM(if(ages.age between 25 and 29,1,0)) as 25_to_29_years,
-    SUM(if(ages.age between 30 and 34,1,0)) as 30_to_35_years,
-    SUM(if(ages.age > 35,1,0)) as greater_than_35_years
+    coalesce(SUM(if(ages.age between 10 and 14,1,0)),0) as 10_to_14_years,
+    coalesce(SUM(if(ages.age between 15 and 19,1,0)),0) as 15_to_19_years,
+    coalesce(SUM(if(ages.age between 20 and 24,1,0)),0) as 20_to_24_years,
+    coalesce(SUM(if(ages.age between 25 and 29,1,0)),0) as 25_to_29_years,
+    coalesce(SUM(if(ages.age between 30 and 34,1,0)),0) as 30_to_35_years,
+    coalesce(SUM(if(ages.age > 35,1,0)),0) as greater_than_35_years
 from
 (select
     distinct
@@ -2766,12 +2758,12 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
 	'AGE GROUP OF MOTHER AT DELIVERY (YEARS)',
-    SUM(if(ages.age between 10 and 14,1,0)) as 10_to_14_years,
-    SUM(if(ages.age between 15 and 19,1,0)) as 15_to_19_years,
-    SUM(if(ages.age between 20 and 24,1,0)) as 20_to_24_years,
-    SUM(if(ages.age between 25 and 29,1,0)) as 25_to_29_years,
-    SUM(if(ages.age between 30 and 34,1,0)) as 30_to_35_years,
-    SUM(if(ages.age > 35,1,0)) as greater_than_35_years
+    coalesce(SUM(if(ages.age between 10 and 14,1,0)),0) as 10_to_14_years,
+    coalesce(SUM(if(ages.age between 15 and 19,1,0)),0) as 15_to_19_years,
+    coalesce(SUM(if(ages.age between 20 and 24,1,0)),0) as 20_to_24_years,
+    coalesce(SUM(if(ages.age between 25 and 29,1,0)),0) as 25_to_29_years,
+    coalesce(SUM(if(ages.age between 30 and 34,1,0)),0) as 30_to_35_years,
+    coalesce(SUM(if(ages.age > 35,1,0)),0) as greater_than_35_years
 from
 (select
     distinct
@@ -3197,12 +3189,12 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
 	'Registrants',
-    SUM(if(ages.age between 10 and 14,1,0)) as 10_to_14_years,
-    SUM(if(ages.age between 15 and 19,1,0)) as 15_to_19_years,
-    SUM(if(ages.age between 20 and 24,1,0)) as 20_to_24_years,
-    SUM(if(ages.age between 25 and 29,1,0)) as 25_to_29_years,
-    SUM(if(ages.age between 30 and 35,1,0)) as 30_to_35_years,
-    SUM(if(ages.age > 35,1,0)) as greater_than_35_years
+    coalesce(SUM(if(ages.age between 10 and 14,1,0)),0) as 10_to_14_years,
+    coalesce(SUM(if(ages.age between 15 and 19,1,0)),0) as 15_to_19_years,
+    coalesce(SUM(if(ages.age between 20 and 24,1,0)),0) as 20_to_24_years,
+    coalesce(SUM(if(ages.age between 25 and 29,1,0)),0) as 25_to_29_years,
+    coalesce(SUM(if(ages.age between 30 and 35,1,0)),0) as 30_to_35_years,
+    coalesce(SUM(if(ages.age > 35,1,0)),0) as greater_than_35_years
 from
 (select
     distinct
@@ -4019,12 +4011,12 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
 	'AGE GROUP OF MOTHER AT DELIVERY (YEARS)',
-    SUM(if(ages.age between 10 and 14,1,0)) as 10_to_14_years,
-    SUM(if(ages.age between 15 and 19,1,0)) as 15_to_19_years,
-    SUM(if(ages.age between 20 and 24,1,0)) as 20_to_24_years,
-    SUM(if(ages.age between 25 and 29,1,0)) as 25_to_29_years,
-    SUM(if(ages.age between 30 and 34,1,0)) as 30_to_35_years,
-    SUM(if(ages.age > 35,1,0)) as greater_than_35_years
+    coalesce(SUM(if(ages.age between 10 and 14,1,0)),0) as 10_to_14_years,
+    coalesce(SUM(if(ages.age between 15 and 19,1,0)),0) as 15_to_19_years,
+    coalesce(SUM(if(ages.age between 20 and 24,1,0)),0) as 20_to_24_years,
+    coalesce(SUM(if(ages.age between 25 and 29,1,0)),0) as 25_to_29_years,
+    coalesce(SUM(if(ages.age between 30 and 34,1,0)),0) as 30_to_35_years,
+    coalesce(SUM(if(ages.age > 35,1,0)),0) as greater_than_35_years
 from
 (select
     distinct
