@@ -443,7 +443,7 @@ and
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select count(*) total from 
+            <xml-property name="queryText"><![CDATA[select count(*) as total from 
     obs obs, 
     encounter enc, 
     location location,
@@ -652,12 +652,12 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
 	'Age of mother at registration',
-    SUM(if(ages.age between 10 and 14,1,0)) as 10_to_14_years,
-    SUM(if(ages.age between 15 and 19,1,0)) as 15_to_19_years,
-    SUM(if(ages.age between 20 and 24,1,0)) as 20_to_24_years,
-    SUM(if(ages.age between 25 and 29,1,0)) as 25_to_29_years,
-    SUM(if(ages.age between 30 and 34,1,0)) as 30_to_34_years,
-    SUM(if(ages.age > 34,1,0)) as greater_than_34_years
+    coalesce(SUM(if(ages.age between 10 and 14,1,0)),0) as 10_to_14_years,
+    coalesce(SUM(if(ages.age between 15 and 19,1,0)),0) as 15_to_19_years,
+    coalesce(SUM(if(ages.age between 20 and 24,1,0)),0) as 20_to_24_years,
+    coalesce(SUM(if(ages.age between 25 and 29,1,0)),0) as 25_to_29_years,
+    coalesce(SUM(if(ages.age between 30 and 34,1,0)),0) as 30_to_34_years,
+    coalesce(SUM(if(ages.age > 34,1,0)),0) as greater_than_34_years
 from
 (select
     distinct
