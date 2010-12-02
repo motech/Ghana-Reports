@@ -301,6 +301,29 @@ else if (row["age"] >=70)&#13;
                     <text-property name="displayName">insured</text-property>
                 </structure>
             </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">BirtDateTime.year(row["date"])</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Year"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">BirtDateTime.month(row["date"],1)</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Month"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["facility_id"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Facility"].value</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1379,29 +1402,6 @@ else 0;</expression>
                     <text-property name="displayName">Data Set::subdistrict</text-property>
                 </structure>
             </list-property>
-            <list-property name="filter">
-                <structure>
-                    <property name="operator">eq</property>
-                    <expression name="expr" type="javascript">BirtDateTime.year(row["Data Set::date"])</expression>
-                    <simple-property-list name="value1">
-                        <value>params["Year"].value</value>
-                    </simple-property-list>
-                </structure>
-                <structure>
-                    <property name="operator">eq</property>
-                    <expression name="expr" type="javascript">BirtDateTime.month(row["date"],1)</expression>
-                    <simple-property-list name="value1">
-                        <value>params["Month"].value</value>
-                    </simple-property-list>
-                </structure>
-                <structure>
-                    <property name="operator">eq</property>
-                    <expression name="expr" type="javascript">row["facility_id"]</expression>
-                    <simple-property-list name="value1">
-                        <value>params["Facility"].value</value>
-                    </simple-property-list>
-                </structure>
-            </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1817,7 +1817,7 @@ MoTeCH Statement of Out-Patients
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">Subdistrict</property>
-                                <expression name="expression" type="javascript">dataSetRow["subdistrict"]</expression>
+                                <expression name="expression" type="javascript">params["Subdistrict"].displayText</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
@@ -1861,7 +1861,7 @@ MoTeCH Statement of Out-Patients
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">District</property>
-                                <expression name="expression" type="javascript">dataSetRow["district"]</expression>
+                                <expression name="expression" type="javascript">params["District"].displayText</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
@@ -1905,7 +1905,7 @@ MoTeCH Statement of Out-Patients
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">Regions</property>
-                                <expression name="expression" type="javascript">dataSetRow["region"]</expression>
+                                <expression name="expression" type="javascript">params["Region"].displayText</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
@@ -1950,7 +1950,7 @@ MoTeCH Statement of Out-Patients
                             <structure>
                                 <property name="name">Facilities</property>
                                 <text-property name="displayName">Facility</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["facility"]</expression>
+                                <expression name="expression" type="javascript">params["Facility"].displayText</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
