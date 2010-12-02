@@ -1628,12 +1628,12 @@ MoTeCH Monthly Child Health Returns
                 </structure>
                 <structure>
                     <property name="name">month</property>
-                    <expression name="expression" type="javascript">params["Month"].value</expression>
+                    <expression name="expression" type="javascript">params["Month"].displayText</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="name">facility</property>
-                    <expression name="expression" type="javascript">params["Facility"].value</expression>
+                    <expression name="expression" type="javascript">params["Facility"].displayText</expression>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>

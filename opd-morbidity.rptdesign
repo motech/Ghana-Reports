@@ -42,16 +42,6 @@
     <property name="OPD Cube.OPD Data Set.x">135</property>
     <property name="OPD Cube.OPD Data Set.y">80</property>
     <property name="units">in</property>
-    <list-property name="propertyBindings">
-        <structure>
-            <property name="name">queryText</property>
-            <property name="id">11</property>
-        </structure>
-        <structure>
-            <property name="name">queryTimeOut</property>
-            <property name="id">11</property>
-        </structure>
-    </list-property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="layoutPreference">auto layout</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -146,8 +136,8 @@
             <text-property name="promptText">Facility?</text-property>
             <property name="valueType">dynamic</property>
             <property name="dataSetName">Facilities</property>
-            <expression name="valueExpr">dataSetRow["location_id"]</expression>
-            <expression name="labelExpr">dataSetRow["name"]</expression>
+            <expression name="valueExpr" type="javascript">dataSetRow["location_id"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
             <expression name="sortByColumn">dataSetRow["name"]</expression>
             <property name="sortDirection">asc</property>
             <property name="dataType">integer</property>
@@ -182,16 +172,6 @@
     </data-sources>
     <data-sets>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Data Set" id="11">
-            <list-property name="computedColumns">
-                <structure>
-                    <property name="name">reattendance</property>
-                    <expression name="expression">if (row["newcase"] == 1)
-	0;
-else
-	1;</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">id</property>
@@ -232,6 +212,29 @@ else
                 <structure>
                     <property name="columnName">diag_num</property>
                     <text-property name="displayName">diag_num</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["location_id"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Facility"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">BirtDateTime.year(row["date"])</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Year"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">BirtDateTime.month(row["date"],1)</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Month"].value</value>
+                    </simple-property-list>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -285,11 +288,6 @@ else
                         <property name="position">10</property>
                         <property name="name">diag_num</property>
                         <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">11</property>
-                        <property name="name">reattendance</property>
-                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
@@ -1110,45 +1108,26 @@ return true;]]></method>
                 </structure>
                 <structure>
                     <property name="name">c_referred</property>
-                    <expression name="expression">if(row["referred"]==null)0;else row["referred"]</expression>
+                    <expression name="expression">if(row["referred"]==null)-1;else row["referred"]</expression>
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="name">c_newcase</property>
-                    <expression name="expression">if(row["newcase"]==null)0;else row["newcase"]</expression>
+                    <expression name="expression">if(row["newcase"]==null)-1;else row["newcase"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">reattendance</property>
+                    <expression name="expression">if(row["c_newcase"] == 0)1;&#13;
+else 0;</expression>
                     <property name="dataType">integer</property>
                 </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">Data Set::sex</property>
-                    <property name="alias">sex</property>
-                    <text-property name="displayName">Data Set::sex</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::diag_num</property>
-                    <property name="alias">diag_num</property>
-                    <text-property name="displayName">Data Set::diag_num</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::diagnosis</property>
-                    <property name="alias">diagnosis</property>
-                    <text-property name="displayName">Data Set::diagnosis</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Diseases::code</property>
-                    <property name="alias">code</property>
-                    <text-property name="displayName">Diseases::code</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::date</property>
-                    <property name="alias">date</property>
-                    <text-property name="displayName">Data Set::date</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::location_id</property>
-                    <property name="alias">location_id</property>
-                    <text-property name="displayName">Data Set::location_id</text-property>
+                    <property name="columnName">Data Set::newcase</property>
+                    <property name="alias">newcase</property>
+                    <text-property name="displayName">Data Set::newcase</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Data Set::id</property>
@@ -1156,9 +1135,14 @@ return true;]]></method>
                     <text-property name="displayName">Data Set::id</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">Data Set::newcase</property>
-                    <property name="alias">newcase</property>
-                    <text-property name="displayName">Data Set::newcase</text-property>
+                    <property name="columnName">Data Set::diag_num</property>
+                    <property name="alias">diag_num</property>
+                    <text-property name="displayName">Data Set::diag_num</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::sex</property>
+                    <property name="alias">sex</property>
+                    <text-property name="displayName">Data Set::sex</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Diseases::disease_name</property>
@@ -1171,19 +1155,34 @@ return true;]]></method>
                     <text-property name="displayName">Data Set::age</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">Data Set::diagnosis</property>
+                    <property name="alias">diagnosis</property>
+                    <text-property name="displayName">Data Set::diagnosis</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">Data Set::birthdate</property>
                     <property name="alias">birthdate</property>
                     <text-property name="displayName">Data Set::birthdate</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">Data Set::reattendance</property>
-                    <property name="alias">reattendance</property>
-                    <text-property name="displayName">Data Set::reattendance</text-property>
+                    <property name="columnName">Diseases::code</property>
+                    <property name="alias">code</property>
+                    <text-property name="displayName">Diseases::code</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Data Set::referred</property>
                     <property name="alias">referred</property>
                     <text-property name="displayName">Data Set::referred</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::date</property>
+                    <property name="alias">date</property>
+                    <text-property name="displayName">Data Set::date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::location_id</property>
+                    <property name="alias">location_id</property>
+                    <text-property name="displayName">Data Set::location_id</text-property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -1240,42 +1239,42 @@ return true;]]></method>
                     </structure>
                     <structure>
                         <property name="position">11</property>
-                        <property name="name">reattendance</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">12</property>
                         <property name="name">code</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">12</property>
                         <property name="name">disease_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">13</property>
                         <property name="name">c_sex</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
+                        <property name="position">14</property>
                         <property name="name">c_age</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">16</property>
+                        <property name="position">15</property>
                         <property name="name">c_diagnosis</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">17</property>
+                        <property name="position">16</property>
                         <property name="name">c_referred</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">18</property>
+                        <property name="position">17</property>
                         <property name="name">c_newcase</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">reattendance</property>
                         <property name="dataType">integer</property>
                     </structure>
                 </list-property>
@@ -1329,7 +1328,7 @@ return true;]]></method>
             <property name="borderTopStyle">solid</property>
             <property name="borderTopWidth">1pt</property>
         </style>
-        <style name="NewStyle" id="476">
+        <style name="Thin_Black_Border" id="476">
             <property name="borderBottomStyle">solid</property>
             <property name="borderBottomWidth">thin</property>
             <property name="borderLeftStyle">solid</property>
@@ -1339,10 +1338,26 @@ return true;]]></method>
             <property name="borderTopStyle">solid</property>
             <property name="borderTopWidth">thin</property>
         </style>
+        <style name="Thick_Black_border" id="1783">
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderTopStyle">solid</property>
+        </style>
+        <style name="Dotted_Border" id="1784">
+            <property name="borderBottomStyle">dotted</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftStyle">dotted</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightStyle">dotted</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopStyle">dotted</property>
+            <property name="borderTopWidth">thin</property>
+        </style>
     </styles>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
-            <property name="type">us-legal</property>
+            <property name="type">a4</property>
             <property name="orientation">landscape</property>
             <property name="topMargin">0.25in</property>
             <property name="leftMargin">0.25in</property>
@@ -1502,6 +1517,18 @@ MoTeCH - OPD Morbidity Report
             </row>
         </grid>
         <table id="1092">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
             <property name="dataSet">Data set Disease Join</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -1945,8 +1972,258 @@ MoTeCH - OPD Morbidity Report
                     <expression name="expression" type="javascript">row["f_disease_total"]+row["m_disease_total"]</expression>
                     <property name="dataType">integer</property>
                 </structure>
+                <structure>
+                    <property name="name">sum_m_5_9</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["m_5_9"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_m_10_14</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["m_10_14"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <text-property name="displayName">sum_m_15_17</text-property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["m_15_17"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_m_18_19</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["m_18_19"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_m_20_34</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["m_20_34"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_m_35_49</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["m_35_49"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_m_50_59</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["m_50_59"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_m_60_69</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["m_60_69"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_m_70_plus</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["m_70_plus"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">m_total</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["m_disease_total"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_f_less_than_1</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_less_than_1"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_f_1_4</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_1_4"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_f_5_9</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_5_9"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_f_10_14</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_10_14"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_f_15_17</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_15_17"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_f_18_19</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_18_19"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_f_20_34</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_20_34"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_f_35_49</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_35_49"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_f_50_59</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_50_59"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_f_60_69</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_60_69"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">sum_f_70_plus</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_70_plus"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">f_total</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["f_disease_total"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">total</property>
+                    <expression name="expression" type="javascript">row["f_total"]+row["m_total"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
             </list-property>
-            <column id="1174"/>
+            <column id="1174">
+                <property name="width">53mm</property>
+            </column>
             <column id="1175"/>
             <column id="1176"/>
             <column id="1177"/>
@@ -1957,7 +2234,9 @@ MoTeCH - OPD Morbidity Report
             <column id="1182"/>
             <column id="1183"/>
             <column id="1184"/>
-            <column id="1185"/>
+            <column id="1185">
+                <property name="style">Thin_Black_Border</property>
+            </column>
             <column id="1186"/>
             <column id="1187"/>
             <column id="1188"/>
@@ -1971,13 +2250,15 @@ MoTeCH - OPD Morbidity Report
             <column id="1196"/>
             <column id="1197"/>
             <column id="1198"/>
-            <column id="1199"/>
+            <column id="1199">
+                <property name="style">Thin_Black_Border</property>
+            </column>
             <header>
                 <row id="1397">
                     <cell id="1398">
                         <property name="colSpan">1</property>
                         <property name="rowSpan">2</property>
-                        <property name="style">NewStyle</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="textAlign">center</property>
                         <property name="verticalAlign">bottom</property>
                         <label id="1363">
@@ -1987,7 +2268,19 @@ MoTeCH - OPD Morbidity Report
                     <cell id="1399">
                         <property name="colSpan">12</property>
                         <property name="rowSpan">1</property>
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1424">
                             <property name="textAlign">center</property>
                             <text-property name="text">MALE</text-property>
@@ -1996,7 +2289,19 @@ MoTeCH - OPD Morbidity Report
                     <cell id="1411">
                         <property name="colSpan">12</property>
                         <property name="rowSpan">1</property>
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1425">
                             <property name="textAlign">center</property>
                             <text-property name="text">FEMALE</text-property>
@@ -2005,7 +2310,19 @@ MoTeCH - OPD Morbidity Report
                     <cell id="1423">
                         <property name="colSpan">1</property>
                         <property name="rowSpan">2</property>
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <property name="verticalAlign">middle</property>
                         <label id="1426">
                             <property name="fontWeight">bold</property>
@@ -2015,85 +2332,158 @@ MoTeCH - OPD Morbidity Report
                     </cell>
                 </row>
                 <row id="1093">
+                    <property name="style">Thin_Black_Border</property>
                     <cell id="1095">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1352">
                             <property name="textAlign">center</property>
                             <text-property name="text">&lt;1</text-property>
                         </label>
                     </cell>
                     <cell id="1096">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1353">
                             <property name="textAlign">center</property>
                             <text-property name="text">1-4</text-property>
                         </label>
                     </cell>
                     <cell id="1097">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <property name="textAlign">center</property>
                         <label id="1354">
                             <text-property name="text">5-9</text-property>
                         </label>
                     </cell>
                     <cell id="1098">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1355">
                             <property name="textAlign">center</property>
                             <text-property name="text">10-14</text-property>
                         </label>
                     </cell>
                     <cell id="1099">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1356">
                             <property name="textAlign">center</property>
                             <text-property name="text">15-17</text-property>
                         </label>
                     </cell>
                     <cell id="1100">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1357">
                             <property name="textAlign">center</property>
                             <text-property name="text">18-19</text-property>
                         </label>
                     </cell>
                     <cell id="1101">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1358">
                             <property name="textAlign">center</property>
                             <text-property name="text">20-34</text-property>
                         </label>
                     </cell>
                     <cell id="1102">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1359">
                             <property name="textAlign">center</property>
                             <text-property name="text">35-49</text-property>
                         </label>
                     </cell>
                     <cell id="1103">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1360">
                             <property name="textAlign">center</property>
                             <text-property name="text">50-59</text-property>
                         </label>
                     </cell>
                     <cell id="1104">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1361">
                             <property name="textAlign">center</property>
                             <text-property name="text">60-69</text-property>
                         </label>
                     </cell>
                     <cell id="1105">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1362">
                             <property name="textAlign">center</property>
                             <text-property name="text">70+</text-property>
                         </label>
                     </cell>
                     <cell id="1106">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1374">
                             <property name="fontWeight">bold</property>
                             <property name="textAlign">center</property>
@@ -2101,84 +2491,156 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1107">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1366">
                             <property name="textAlign">center</property>
                             <text-property name="text">&lt;1</text-property>
                         </label>
                     </cell>
                     <cell id="1108">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1368">
                             <property name="textAlign">center</property>
                             <text-property name="text">1-4</text-property>
                         </label>
                     </cell>
                     <cell id="1109">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1382">
                             <property name="textAlign">center</property>
                             <text-property name="text">5-9</text-property>
                         </label>
                     </cell>
                     <cell id="1110">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1383">
                             <property name="textAlign">center</property>
                             <text-property name="text">10-14</text-property>
                         </label>
                     </cell>
                     <cell id="1111">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1384">
                             <property name="textAlign">center</property>
                             <text-property name="text">15-17</text-property>
                         </label>
                     </cell>
                     <cell id="1112">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1385">
                             <property name="textAlign">center</property>
                             <text-property name="text">18-19</text-property>
                         </label>
                     </cell>
                     <cell id="1113">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1386">
                             <property name="textAlign">center</property>
                             <text-property name="text">20-34</text-property>
                         </label>
                     </cell>
                     <cell id="1114">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1387">
                             <property name="textAlign">center</property>
                             <text-property name="text">35-49</text-property>
                         </label>
                     </cell>
                     <cell id="1115">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1388">
                             <property name="textAlign">center</property>
                             <text-property name="text">50-59</text-property>
                         </label>
                     </cell>
                     <cell id="1116">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1389">
                             <property name="textAlign">center</property>
                             <text-property name="text">60-69</text-property>
                         </label>
                     </cell>
                     <cell id="1117">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1390">
                             <property name="textAlign">center</property>
                             <text-property name="text">70+</text-property>
                         </label>
                     </cell>
                     <cell id="1118">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1391">
                             <property name="fontWeight">bold</property>
                             <property name="textAlign">center</property>
@@ -2203,157 +2665,184 @@ MoTeCH - OPD Morbidity Report
                 <header>
                     <row id="1258">
                         <cell id="1259">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
                             <data id="1312">
                                 <property name="resultSetColumn">disease_name</property>
                             </data>
                         </cell>
                         <cell id="1260">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1340">
                                 <property name="resultSetColumn">m_less_than_1</property>
                             </data>
                         </cell>
                         <cell id="1261">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1341">
                                 <property name="resultSetColumn">m_1_4</property>
                             </data>
                         </cell>
                         <cell id="1262">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1342">
                                 <property name="resultSetColumn">m_5_9</property>
                             </data>
                         </cell>
                         <cell id="1263">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1343">
                                 <property name="resultSetColumn">m_10_14</property>
                             </data>
                         </cell>
                         <cell id="1264">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1344">
                                 <property name="resultSetColumn">m_15_17</property>
                             </data>
                         </cell>
                         <cell id="1265">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1345">
                                 <property name="resultSetColumn">m_18_19</property>
                             </data>
                         </cell>
                         <cell id="1266">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1346">
                                 <property name="resultSetColumn">m_20_34</property>
                             </data>
                         </cell>
                         <cell id="1267">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1348">
                                 <property name="resultSetColumn">m_35_49</property>
                             </data>
                         </cell>
                         <cell id="1268">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1349">
                                 <property name="resultSetColumn">m_50_59</property>
                             </data>
                         </cell>
                         <cell id="1269">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1350">
                                 <property name="resultSetColumn">m_60_69</property>
                             </data>
                         </cell>
                         <cell id="1270">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1351">
                                 <property name="resultSetColumn">m_70_plus</property>
                             </data>
                         </cell>
                         <cell id="1271">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
                             <data id="1392">
                                 <property name="resultSetColumn">m_disease_total</property>
                             </data>
                         </cell>
                         <cell id="1272">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1365">
                                 <property name="resultSetColumn">f_less_than_1</property>
                             </data>
                         </cell>
                         <cell id="1273">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1367">
                                 <property name="resultSetColumn">f_1_4</property>
                             </data>
                         </cell>
                         <cell id="1274">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1370">
                                 <property name="resultSetColumn">f_5_9</property>
                             </data>
                         </cell>
                         <cell id="1275">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1371">
                                 <property name="resultSetColumn">f_10_14</property>
                             </data>
                         </cell>
                         <cell id="1276">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1375">
                                 <property name="resultSetColumn">f_15_17</property>
                             </data>
                         </cell>
                         <cell id="1277">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1376">
                                 <property name="resultSetColumn">f_18_19</property>
                             </data>
                         </cell>
                         <cell id="1278">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1377">
                                 <property name="resultSetColumn">f_20_34</property>
                             </data>
                         </cell>
                         <cell id="1279">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1378">
                                 <property name="resultSetColumn">f_35_49</property>
                             </data>
                         </cell>
                         <cell id="1280">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1379">
                                 <property name="resultSetColumn">f_50_59</property>
                             </data>
                         </cell>
                         <cell id="1281">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1380">
                                 <property name="resultSetColumn">f_60_69</property>
                             </data>
                         </cell>
                         <cell id="1282">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
                             <data id="1381">
                                 <property name="resultSetColumn">f_70_plus</property>
                             </data>
                         </cell>
                         <cell id="1283">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
                             <data id="1394">
                                 <property name="resultSetColumn">f_disease_total</property>
                             </data>
                         </cell>
                         <cell id="1284">
-                            <property name="style">NewStyle</property>
+                            <property name="style">Dotted_Border</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
                             <data id="1396">
                                 <property name="resultSetColumn">disease_total</property>
                             </data>
@@ -2363,89 +2852,1677 @@ MoTeCH - OPD Morbidity Report
             </group>
             <footer>
                 <row id="1147">
+                    <property name="style">Thin_Black_Border</property>
                     <cell id="1148">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1645">
+                            <text-property name="text">TOTAL</text-property>
+                        </label>
                     </cell>
                     <cell id="1149">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <data id="1372">
                             <property name="resultSetColumn">sum_less_than_1</property>
                         </data>
                     </cell>
                     <cell id="1150">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <data id="1373">
                             <property name="resultSetColumn">sum_m_1_4</property>
                         </data>
                     </cell>
                     <cell id="1151">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1620">
+                            <property name="resultSetColumn">sum_m_5_9</property>
+                        </data>
                     </cell>
                     <cell id="1152">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1621">
+                            <property name="resultSetColumn">sum_m_10_14</property>
+                        </data>
                     </cell>
                     <cell id="1153">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1622">
+                            <property name="resultSetColumn">Aggregation</property>
+                        </data>
                     </cell>
                     <cell id="1154">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1623">
+                            <property name="resultSetColumn">sum_m_18_19</property>
+                        </data>
                     </cell>
                     <cell id="1155">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1624">
+                            <property name="resultSetColumn">sum_m_20_34</property>
+                        </data>
                     </cell>
                     <cell id="1156">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1625">
+                            <property name="resultSetColumn">sum_m_35_49</property>
+                        </data>
                     </cell>
                     <cell id="1157">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1626">
+                            <property name="resultSetColumn">sum_m_50_59</property>
+                        </data>
                     </cell>
                     <cell id="1158">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1627">
+                            <property name="resultSetColumn">sum_m_60_69</property>
+                        </data>
                     </cell>
                     <cell id="1159">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1628">
+                            <property name="resultSetColumn">sum_m_70_plus</property>
+                        </data>
                     </cell>
                     <cell id="1160">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1629">
+                            <property name="resultSetColumn">m_total</property>
+                        </data>
                     </cell>
                     <cell id="1161">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1630">
+                            <property name="resultSetColumn">sum_f_less_than_1</property>
+                        </data>
                     </cell>
                     <cell id="1162">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1631">
+                            <property name="resultSetColumn">sum_f_1_4</property>
+                        </data>
                     </cell>
                     <cell id="1163">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1632">
+                            <property name="resultSetColumn">sum_f_5_9</property>
+                        </data>
                     </cell>
                     <cell id="1164">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1633">
+                            <property name="resultSetColumn">sum_f_10_14</property>
+                        </data>
                     </cell>
                     <cell id="1165">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1634">
+                            <property name="resultSetColumn">sum_f_15_17</property>
+                        </data>
                     </cell>
                     <cell id="1166">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1635">
+                            <property name="resultSetColumn">sum_f_18_19</property>
+                        </data>
                     </cell>
                     <cell id="1167">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1636">
+                            <property name="resultSetColumn">sum_f_20_34</property>
+                        </data>
                     </cell>
                     <cell id="1168">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1637">
+                            <property name="resultSetColumn">sum_f_35_49</property>
+                        </data>
                     </cell>
                     <cell id="1169">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1638">
+                            <property name="resultSetColumn">sum_f_50_59</property>
+                        </data>
                     </cell>
                     <cell id="1170">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1639">
+                            <property name="resultSetColumn">sum_f_60_69</property>
+                        </data>
                     </cell>
                     <cell id="1171">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1640">
+                            <property name="resultSetColumn">sum_f_70_plus</property>
+                        </data>
                     </cell>
                     <cell id="1172">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1642">
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="resultSetColumn">f_total</property>
+                        </data>
                     </cell>
                     <cell id="1173">
-                        <property name="style">NewStyle</property>
+                        <property name="style">Dotted_Border</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1643">
+                            <property name="resultSetColumn">total</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <table id="1427">
+            <property name="dataSet">Data set Disease Join</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">id</property>
+                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">date</property>
+                    <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <expression name="expression" type="javascript">dataSetRow["location_id"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sex</property>
+                    <expression name="expression" type="javascript">dataSetRow["sex"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">birthdate</property>
+                    <expression name="expression" type="javascript">dataSetRow["birthdate"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">age</property>
+                    <expression name="expression" type="javascript">dataSetRow["age"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">diagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["diagnosis"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">referred</property>
+                    <expression name="expression" type="javascript">dataSetRow["referred"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">newcase</property>
+                    <expression name="expression" type="javascript">dataSetRow["newcase"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">diag_num</property>
+                    <expression name="expression" type="javascript">dataSetRow["diag_num"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">reattendance</property>
+                    <expression name="expression" type="javascript">dataSetRow["reattendance"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">code</property>
+                    <expression name="expression" type="javascript">dataSetRow["code"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">disease_name</property>
+                    <expression name="expression" type="javascript">dataSetRow["disease_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">c_sex</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_sex"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">c_age</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_age"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_diagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_diagnosis"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_referred</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_referred"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_newcase</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_newcase"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_1_4</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] >0 &amp;&amp; dataSetRow["c_age"] >= 1 &amp;&amp; dataSetRow["c_age"] &lt;= 4 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_5_9</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] >0 &amp;&amp;dataSetRow["c_age"] >= 5 &amp;&amp; dataSetRow["c_age"] &lt;= 9 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_10_14</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] >0 &amp;&amp; (dataSetRow["c_age"] >= 10 &amp;&amp; dataSetRow["c_age"] &lt;= 14 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_15_17</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] >0 &amp;&amp; (dataSetRow["c_age"] >= 15 &amp;&amp; dataSetRow["c_age"] &lt;= 17 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_18_19</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] >0 &amp;&amp; (dataSetRow["c_age"] >= 18 &amp;&amp; dataSetRow["c_age"] &lt;= 19 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_20_34</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] >0 &amp;&amp; (dataSetRow["c_age"] >= 20 &amp;&amp; dataSetRow["c_age"] &lt;= 34 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_35_49</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] >0 &amp;&amp; (dataSetRow["c_age"] >= 35 &amp;&amp; dataSetRow["c_age"] &lt;= 49 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_50_59</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] >0 &amp;&amp; (dataSetRow["c_age"] >= 50 &amp;&amp; dataSetRow["c_age"] &lt;= 59 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_60_69</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] >0 &amp;&amp; (dataSetRow["c_age"] >= 60 &amp;&amp; dataSetRow["c_age"] &lt;= 69 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_70_plus</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] >0 &amp;&amp; (dataSetRow["c_age"] >= 70 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_less_than_1</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["reattendance"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] > 0 &amp;&amp; (dataSetRow["diagnosis"] > 0 &amp;&amp; dataSetRow["c_age"] >= 0 &amp;&amp; dataSetRow["c_age"] &lt; 1 &amp;&amp; dataSetRow["sex"] == "FEMALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_less_than_1</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"] >0 &amp;&amp; dataSetRow["diagnosis"] > 0 &amp;&amp; dataSetRow["c_age"] >= 0 &amp;&amp; dataSetRow["c_age"] &lt; 1 &amp;&amp; dataSetRow["sex"] == "MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_1_4</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"]>0 &amp;&amp; dataSetRow["c_age"] >= 1 &amp;&amp; dataSetRow["c_age"] &lt;= 4 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_5_9</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"]>0 &amp;&amp; dataSetRow["c_age"] >= 5 &amp;&amp; dataSetRow["c_age"] &lt;= 9 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_10_14</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"]>0 &amp;&amp; dataSetRow["c_age"] >= 10 &amp;&amp; dataSetRow["c_age"] &lt;= 14 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_15_17</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"]>0 &amp;&amp; dataSetRow["c_age"] >= 15 &amp;&amp; dataSetRow["c_age"] &lt;= 17 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_18_19</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"]>0 &amp;&amp; dataSetRow["c_age"] >= 18 &amp;&amp; dataSetRow["c_age"] &lt;= 19 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_20_34</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"]>0 &amp;&amp; dataSetRow["c_age"] >= 20 &amp;&amp; dataSetRow["c_age"] &lt;= 34 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_35_49</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"]>0 &amp;&amp; dataSetRow["c_age"] >= 35 &amp;&amp; dataSetRow["c_age"] &lt;= 49 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_50_59</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"]>0 &amp;&amp; dataSetRow["c_age"] >= 50 &amp;&amp; dataSetRow["c_age"] &lt;= 59 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_60_69</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"]>0 &amp;&amp; dataSetRow["c_age"] >= 60 &amp;&amp; dataSetRow["c_age"] &lt;= 69 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_70_plus</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["reattendance"]>0 &amp;&amp; dataSetRow["c_age"] >= 70 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">reat_m_total</property>
+                    <expression name="expression" type="javascript">row["reat_m_less_than_1"]+row["reat_m_1_4"]+row["reat_m_5_9"]+row["reat_m_10_14"]+row["reat_m_15_17"]+row["reat_m_18_19"]+row["reat_m_20_34"]+row["reat_m_35_49"]+row["reat_m_50_59"]+row["reat_m_60_69"]+row["reat_m_70_plus"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">reat_f_total</property>
+                    <expression name="expression" type="javascript">row["reat_f_less_than_1"]+row["reat_f_1_4"]+row["reat_f_5_9"]+row["reat_f_10_14"]+row["reat_f_15_17"]+row["reat_f_18_19"]+row["reat_f_20_34"]+row["reat_f_35_49"]+row["reat_f_50_59"]+row["reat_f_60_69"]+row["reat_f_70_plus"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">reat_total</property>
+                    <expression name="expression" type="javascript">row["reat_m_total"]+row["reat_f_total"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_less_than_1</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"] >0 &amp;&amp; dataSetRow["diagnosis"] > 0 &amp;&amp; dataSetRow["c_age"] >= 0 &amp;&amp; dataSetRow["c_age"] &lt; 1 &amp;&amp; dataSetRow["sex"] == "MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_1_4</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; dataSetRow["c_age"] >= 1 &amp;&amp; dataSetRow["c_age"] &lt;= 4 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_70_plus</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; dataSetRow["c_age"] >= 70 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_60_69</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; dataSetRow["c_age"] >= 60 &amp;&amp; dataSetRow["c_age"] &lt;= 69 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_50_59</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; dataSetRow["c_age"] >= 50 &amp;&amp; dataSetRow["c_age"] &lt;= 59 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_35_49</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; dataSetRow["c_age"] >= 35 &amp;&amp; dataSetRow["c_age"] &lt;= 49 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_20_34</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; dataSetRow["c_age"] >= 20 &amp;&amp; dataSetRow["c_age"] &lt;= 34 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_18_19</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; dataSetRow["c_age"] >= 18 &amp;&amp; dataSetRow["c_age"] &lt;= 19 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_15_17</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; dataSetRow["c_age"] >= 15 &amp;&amp; dataSetRow["c_age"] &lt;= 17 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_10_14</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; dataSetRow["c_age"] >= 10 &amp;&amp; dataSetRow["c_age"] &lt;= 14 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_5_9</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; dataSetRow["c_age"] >= 5 &amp;&amp; dataSetRow["c_age"] &lt;= 9 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_1_4</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; dataSetRow["c_age"] >= 1 &amp;&amp; dataSetRow["c_age"] &lt;= 4 &amp;&amp; dataSetRow["c_sex"]=="FEMALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_less_than_1</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["reattendance"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; (dataSetRow["diagnosis"] > 0 &amp;&amp; dataSetRow["c_age"] >= 0 &amp;&amp; dataSetRow["c_age"] &lt; 1 &amp;&amp; dataSetRow["sex"] == "FEMALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_70_plus</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; (dataSetRow["c_age"] >= 70 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_60_69</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; (dataSetRow["c_age"] >= 60 &amp;&amp; dataSetRow["c_age"] &lt;= 69 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_50_59</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; (dataSetRow["c_age"] >= 50 &amp;&amp; dataSetRow["c_age"] &lt;= 59 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_35_49</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; (dataSetRow["c_age"] >= 35 &amp;&amp; dataSetRow["c_age"] &lt;= 49 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_20_34</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; (dataSetRow["c_age"] >= 20 &amp;&amp; dataSetRow["c_age"] &lt;= 34 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_18_19</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; (dataSetRow["c_age"] >= 18 &amp;&amp; dataSetRow["c_age"] &lt;= 19 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_15_17</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; (dataSetRow["c_age"] >= 15 &amp;&amp; dataSetRow["c_age"] &lt;= 17 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_10_14</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp; (dataSetRow["c_age"] >= 10 &amp;&amp; dataSetRow["c_age"] &lt;= 14 &amp;&amp; dataSetRow["c_sex"]=="MALE")</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_5_9</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_referred"]>0 &amp;&amp;dataSetRow["c_age"] >= 5 &amp;&amp; dataSetRow["c_age"] &lt;= 9 &amp;&amp; dataSetRow["c_sex"]=="MALE"</expression>
+                </structure>
+                <structure>
+                    <property name="name">ref_m_total</property>
+                    <expression name="expression" type="javascript">row["ref_m_less_than_1"]+row["ref_m_1_4"]+row["ref_m_5_9"]+row["ref_m_10_14"]+row["ref_m_15_17"]+row["ref_m_18_19"]+row["ref_m_20_34"]+row["ref_m_35_49"]+row["ref_m_50_59"]+row["ref_m_60_69"]+row["ref_m_70_plus"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">ref_f_total</property>
+                    <expression name="expression" type="javascript">row["ref_f_less_than_1"]+row["ref_f_1_4"]+row["ref_f_5_9"]+row["ref_f_10_14"]+row["ref_f_15_17"]+row["ref_f_18_19"]+row["ref_f_20_34"]+row["ref_f_35_49"]+row["ref_f_50_59"]+row["ref_f_60_69"]+row["ref_f_70_plus"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">ref_total</property>
+                    <expression name="expression" type="javascript">row["ref_m_total"]+row["ref_f_total"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">ref_sum_less_than_1</property>
+                    <expression name="expression" type="javascript">row["ref_m_less_than_1"]+row["ref_f_less_than_1"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">ref_sum_1_4</property>
+                    <expression name="expression" type="javascript">row["ref_m_1_4"]+row["ref_f_1_4"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_less_than_1</property>
+                    <expression name="expression" type="javascript">row["ref_m_less_than_1"]+row["reat_m_less_than_1"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_1_4</property>
+                    <expression name="expression" type="javascript">row["ref_m_1_4"]+row["reat_m_1_4"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_5_9</property>
+                    <expression name="expression" type="javascript">row["ref_m_5_9"]+row["reat_m_5_9"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_10_14</property>
+                    <expression name="expression" type="javascript">row["ref_m_10_14"]+row["reat_m_10_14"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_15_17</property>
+                    <expression name="expression" type="javascript">row["ref_m_15_17"]+row["reat_m_15_17"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_18_19</property>
+                    <expression name="expression" type="javascript">row["ref_m_18_19"]+row["reat_m_18_19"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_20_34</property>
+                    <expression name="expression" type="javascript">row["ref_m_20_34"]+row["reat_m_20_34"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_35_49</property>
+                    <expression name="expression" type="javascript">row["ref_m_35_49"]+row["reat_m_35_49"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_50_59</property>
+                    <expression name="expression" type="javascript">row["ref_m_50_59"]+row["reat_m_50_59"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_60_69</property>
+                    <expression name="expression" type="javascript">row["ref_m_60_69"]+row["reat_m_60_69"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_70_plus</property>
+                    <expression name="expression" type="javascript">row["reat_m_70_plus"]+row["ref_m_70_plus"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_less_than_1</property>
+                    <expression name="expression" type="javascript">row["ref_f_less_than_1"]+row["reat_f_less_than_1"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_1_4</property>
+                    <expression name="expression" type="javascript">row["ref_f_1_4"]+row["reat_f_1_4"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_5_9</property>
+                    <expression name="expression" type="javascript">row["ref_f_5_9"]+row["reat_f_5_9"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_10_14</property>
+                    <expression name="expression" type="javascript">row["ref_f_10_14"]+row["reat_f_10_14"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_15_17</property>
+                    <expression name="expression" type="javascript">row["ref_f_15_17"]+row["reat_f_15_17"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_18_19</property>
+                    <expression name="expression" type="javascript">row["ref_f_18_19"]+row["reat_f_18_19"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_20_34</property>
+                    <expression name="expression" type="javascript">row["ref_f_20_34"]+row["reat_f_20_34"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_35_49</property>
+                    <expression name="expression" type="javascript">row["ref_f_35_49"]+row["reat_f_35_49"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_50_59</property>
+                    <expression name="expression" type="javascript">row["ref_f_50_59"]+row["reat_f_50_59"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_60_69</property>
+                    <expression name="expression" type="javascript">row["ref_f_60_69"]+row["reat_f_60_69"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_70_plus</property>
+                    <expression name="expression" type="javascript">row["reat_f_70_plus"]+row["ref_f_70_plus"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_m_total</property>
+                    <expression name="expression" type="javascript">row["ref_m_total"]+row["reat_m_total"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_f_total</property>
+                    <expression name="expression" type="javascript">row["ref_f_total"]+row["reat_f_total"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">r_total</property>
+                    <expression name="expression" type="javascript">row["r_m_total"]+row["r_f_total"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <column id="1509">
+                <property name="width">53mm</property>
+            </column>
+            <column id="1510"/>
+            <column id="1511"/>
+            <column id="1512"/>
+            <column id="1513"/>
+            <column id="1514"/>
+            <column id="1515"/>
+            <column id="1516"/>
+            <column id="1517"/>
+            <column id="1518"/>
+            <column id="1519"/>
+            <column id="1520"/>
+            <column id="1521">
+                <property name="style">Thick_Black_border</property>
+            </column>
+            <column id="1522"/>
+            <column id="1523"/>
+            <column id="1524"/>
+            <column id="1525"/>
+            <column id="1526"/>
+            <column id="1527"/>
+            <column id="1528"/>
+            <column id="1529"/>
+            <column id="1530"/>
+            <column id="1531"/>
+            <column id="1532"/>
+            <column id="1533"/>
+            <column id="1534"/>
+            <header>
+                <row id="1813">
+                    <cell id="1814">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1815">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1816">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1817">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1818">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1819">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1820">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1821">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1822">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1823">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1824">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1825">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1826">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1827">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1828">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1829">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1830">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1831">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1832">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1833">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1834">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1835">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1836">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1837">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1838">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                    <cell id="1839">
+                        <property name="style">Thin_Black_Border</property>
+                    </cell>
+                </row>
+                <row id="1428">
+                    <cell id="1429">
+                        <property name="style">Thin_Black_Border</property>
+                        <label id="1535">
+                            <text-property name="text">Re-Attendance</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1430">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1605">
+                            <property name="resultSetColumn">reat_m_less_than_1</property>
+                        </data>
+                    </cell>
+                    <cell id="1431">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1539">
+                            <property name="resultSetColumn">reat_m_1_4</property>
+                        </data>
+                    </cell>
+                    <cell id="1432">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1540">
+                            <property name="resultSetColumn">reat_m_5_9</property>
+                        </data>
+                    </cell>
+                    <cell id="1433">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1595">
+                            <property name="resultSetColumn">reat_m_10_14</property>
+                        </data>
+                    </cell>
+                    <cell id="1434">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1596">
+                            <property name="resultSetColumn">reat_m_15_17</property>
+                        </data>
+                    </cell>
+                    <cell id="1435">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1597">
+                            <property name="resultSetColumn">reat_m_18_19</property>
+                        </data>
+                    </cell>
+                    <cell id="1436">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1598">
+                            <property name="resultSetColumn">reat_m_20_34</property>
+                        </data>
+                    </cell>
+                    <cell id="1437">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1599">
+                            <property name="resultSetColumn">reat_m_35_49</property>
+                        </data>
+                    </cell>
+                    <cell id="1438">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1600">
+                            <property name="resultSetColumn">reat_m_50_59</property>
+                        </data>
+                    </cell>
+                    <cell id="1439">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1601">
+                            <property name="resultSetColumn">reat_m_60_69</property>
+                        </data>
+                    </cell>
+                    <cell id="1440">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1602">
+                            <property name="resultSetColumn">reat_m_70_plus</property>
+                        </data>
+                    </cell>
+                    <cell id="1441">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1616">
+                            <property name="resultSetColumn">reat_m_total</property>
+                        </data>
+                    </cell>
+                    <cell id="1442">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1603">
+                            <property name="resultSetColumn">reat_f_less_than_1</property>
+                        </data>
+                    </cell>
+                    <cell id="1443">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1606">
+                            <property name="resultSetColumn">reat_f_1_4</property>
+                        </data>
+                    </cell>
+                    <cell id="1444">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1607">
+                            <property name="resultSetColumn">reat_f_5_9</property>
+                        </data>
+                    </cell>
+                    <cell id="1445">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1608">
+                            <property name="resultSetColumn">reat_f_10_14</property>
+                        </data>
+                    </cell>
+                    <cell id="1446">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1609">
+                            <property name="resultSetColumn">reat_f_15_17</property>
+                        </data>
+                    </cell>
+                    <cell id="1447">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1610">
+                            <property name="resultSetColumn">reat_f_18_19</property>
+                        </data>
+                    </cell>
+                    <cell id="1448">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1611">
+                            <property name="resultSetColumn">reat_f_20_34</property>
+                        </data>
+                    </cell>
+                    <cell id="1449">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1612">
+                            <property name="resultSetColumn">reat_f_35_49</property>
+                        </data>
+                    </cell>
+                    <cell id="1450">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1613">
+                            <property name="resultSetColumn">reat_f_50_59</property>
+                        </data>
+                    </cell>
+                    <cell id="1451">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1614">
+                            <property name="resultSetColumn">reat_f_60_69</property>
+                        </data>
+                    </cell>
+                    <cell id="1452">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1615">
+                            <property name="resultSetColumn">reat_f_70_plus</property>
+                        </data>
+                    </cell>
+                    <cell id="1453">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1618">
+                            <property name="resultSetColumn">reat_f_total</property>
+                        </data>
+                    </cell>
+                    <cell id="1454">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1619">
+                            <property name="resultSetColumn">reat_total</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="1568">
+                    <cell id="1569">
+                        <property name="style">Thin_Black_Border</property>
+                        <label id="1644">
+                            <text-property name="text">Referrals Out</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1570">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1646">
+                            <property name="resultSetColumn">ref_m_less_than_1</property>
+                        </data>
+                    </cell>
+                    <cell id="1571">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1647">
+                            <property name="resultSetColumn">ref_m_1_4</property>
+                        </data>
+                    </cell>
+                    <cell id="1572">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1648">
+                            <property name="resultSetColumn">ref_m_5_9</property>
+                        </data>
+                    </cell>
+                    <cell id="1573">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1649">
+                            <property name="resultSetColumn">ref_m_10_14</property>
+                        </data>
+                    </cell>
+                    <cell id="1574">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1650">
+                            <property name="resultSetColumn">ref_m_15_17</property>
+                        </data>
+                    </cell>
+                    <cell id="1575">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1651">
+                            <property name="resultSetColumn">ref_m_18_19</property>
+                        </data>
+                    </cell>
+                    <cell id="1576">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1652">
+                            <property name="resultSetColumn">ref_m_20_34</property>
+                        </data>
+                    </cell>
+                    <cell id="1577">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1653">
+                            <property name="resultSetColumn">ref_m_35_49</property>
+                        </data>
+                    </cell>
+                    <cell id="1578">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1654">
+                            <property name="resultSetColumn">ref_m_50_59</property>
+                        </data>
+                    </cell>
+                    <cell id="1579">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1655">
+                            <property name="resultSetColumn">ref_m_60_69</property>
+                        </data>
+                    </cell>
+                    <cell id="1580">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1656">
+                            <property name="resultSetColumn">ref_m_70_plus</property>
+                        </data>
+                    </cell>
+                    <cell id="1581">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1669">
+                            <property name="resultSetColumn">ref_m_total</property>
+                        </data>
+                    </cell>
+                    <cell id="1582">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1657">
+                            <property name="resultSetColumn">ref_f_less_than_1</property>
+                        </data>
+                    </cell>
+                    <cell id="1583">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1658">
+                            <property name="resultSetColumn">ref_f_1_4</property>
+                        </data>
+                    </cell>
+                    <cell id="1584">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1659">
+                            <property name="resultSetColumn">ref_f_5_9</property>
+                        </data>
+                    </cell>
+                    <cell id="1585">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1660">
+                            <property name="resultSetColumn">ref_f_10_14</property>
+                        </data>
+                    </cell>
+                    <cell id="1586">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1661">
+                            <property name="resultSetColumn">ref_f_15_17</property>
+                        </data>
+                    </cell>
+                    <cell id="1587">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1662">
+                            <property name="resultSetColumn">ref_f_18_19</property>
+                        </data>
+                    </cell>
+                    <cell id="1588">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1663">
+                            <property name="resultSetColumn">ref_f_20_34</property>
+                        </data>
+                    </cell>
+                    <cell id="1589">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1664">
+                            <property name="resultSetColumn">ref_f_35_49</property>
+                        </data>
+                    </cell>
+                    <cell id="1590">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1665">
+                            <property name="resultSetColumn">ref_f_50_59</property>
+                        </data>
+                    </cell>
+                    <cell id="1591">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1666">
+                            <property name="resultSetColumn">ref_f_60_69</property>
+                        </data>
+                    </cell>
+                    <cell id="1592">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1667">
+                            <property name="resultSetColumn">ref_f_70_plus</property>
+                        </data>
+                    </cell>
+                    <cell id="1593">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1670">
+                            <property name="resultSetColumn">ref_f_total</property>
+                        </data>
+                    </cell>
+                    <cell id="1594">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1671">
+                            <property name="resultSetColumn">ref_total</property>
+                        </data>
+                    </cell>
+                </row>
+            </header>
+            <footer>
+                <row id="1482">
+                    <property name="style">Thick_Black_border</property>
+                    <cell id="1483">
+                        <property name="style">Thin_Black_Border</property>
+                        <label id="1756">
+                            <text-property name="text">TOTAL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1484">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1757">
+                            <property name="resultSetColumn">r_m_less_than_1</property>
+                        </data>
+                    </cell>
+                    <cell id="1485">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1758">
+                            <property name="resultSetColumn">r_m_1_4</property>
+                        </data>
+                    </cell>
+                    <cell id="1486">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1759">
+                            <property name="resultSetColumn">r_m_5_9</property>
+                        </data>
+                    </cell>
+                    <cell id="1487">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1760">
+                            <property name="resultSetColumn">r_m_10_14</property>
+                        </data>
+                    </cell>
+                    <cell id="1488">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1761">
+                            <property name="resultSetColumn">r_m_15_17</property>
+                        </data>
+                    </cell>
+                    <cell id="1489">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1762">
+                            <property name="resultSetColumn">r_m_18_19</property>
+                        </data>
+                    </cell>
+                    <cell id="1490">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1763">
+                            <property name="resultSetColumn">r_m_20_34</property>
+                        </data>
+                    </cell>
+                    <cell id="1491">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1765">
+                            <property name="resultSetColumn">r_m_35_49</property>
+                        </data>
+                    </cell>
+                    <cell id="1492">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1766">
+                            <property name="resultSetColumn">r_m_50_59</property>
+                        </data>
+                    </cell>
+                    <cell id="1493">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1767">
+                            <property name="resultSetColumn">r_m_60_69</property>
+                        </data>
+                    </cell>
+                    <cell id="1494">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1768">
+                            <property name="resultSetColumn">r_m_70_plus</property>
+                        </data>
+                    </cell>
+                    <cell id="1495">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1780">
+                            <property name="resultSetColumn">r_m_total</property>
+                        </data>
+                    </cell>
+                    <cell id="1496">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1769">
+                            <property name="resultSetColumn">r_f_less_than_1</property>
+                        </data>
+                    </cell>
+                    <cell id="1497">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1770">
+                            <property name="resultSetColumn">r_f_1_4</property>
+                        </data>
+                    </cell>
+                    <cell id="1498">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1771">
+                            <property name="resultSetColumn">r_f_5_9</property>
+                        </data>
+                    </cell>
+                    <cell id="1499">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1772">
+                            <property name="resultSetColumn">r_f_10_14</property>
+                        </data>
+                    </cell>
+                    <cell id="1500">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1773">
+                            <property name="resultSetColumn">r_f_15_17</property>
+                        </data>
+                    </cell>
+                    <cell id="1501">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1774">
+                            <property name="resultSetColumn">r_f_18_19</property>
+                        </data>
+                    </cell>
+                    <cell id="1502">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1775">
+                            <property name="resultSetColumn">r_f_20_34</property>
+                        </data>
+                    </cell>
+                    <cell id="1503">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1776">
+                            <property name="resultSetColumn">r_f_35_49</property>
+                        </data>
+                    </cell>
+                    <cell id="1504">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1777">
+                            <property name="resultSetColumn">r_f_50_59</property>
+                        </data>
+                    </cell>
+                    <cell id="1505">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1778">
+                            <property name="resultSetColumn">r_f_60_69</property>
+                        </data>
+                    </cell>
+                    <cell id="1506">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1779">
+                            <property name="resultSetColumn">r_f_70_plus</property>
+                        </data>
+                    </cell>
+                    <cell id="1507">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1781">
+                            <property name="resultSetColumn">r_f_total</property>
+                        </data>
+                    </cell>
+                    <cell id="1508">
+                        <property name="style">Thin_Black_Border</property>
+                        <data id="1782">
+                            <property name="resultSetColumn">r_total</property>
+                        </data>
                     </cell>
                 </row>
             </footer>
