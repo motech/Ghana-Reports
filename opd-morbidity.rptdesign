@@ -2832,16 +2832,16 @@ MoTeCH - OPD Morbidity Report
                         <cell id="1284">
                             <property name="style">Dotted_Border</property>
                             <property name="borderBottomColor">#000000</property>
-                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomStyle">dotted</property>
                             <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">#000000</property>
-                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftStyle">dotted</property>
                             <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">#000000</property>
-                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightStyle">dotted</property>
                             <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">#000000</property>
-                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopStyle">dotted</property>
                             <property name="borderTopWidth">thin</property>
                             <data id="1396">
                                 <property name="resultSetColumn">disease_total</property>
@@ -3179,13 +3179,22 @@ MoTeCH - OPD Morbidity Report
                     </cell>
                     <cell id="1173">
                         <property name="style">Dotted_Border</property>
-                        <property name="borderLeftColor">#000000</property>
-                        <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">thin</property>
-                        <property name="borderRightColor">#000000</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">thin</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
                         <data id="1643">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="resultSetColumn">total</property>
                         </data>
                     </cell>
@@ -3193,6 +3202,18 @@ MoTeCH - OPD Morbidity Report
             </footer>
         </table>
         <table id="1427">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
             <property name="dataSet">Data set Disease Join</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -3968,239 +3989,257 @@ MoTeCH - OPD Morbidity Report
             <column id="1533"/>
             <column id="1534"/>
             <header>
-                <row id="1813">
-                    <cell id="1814">
+                <row id="1840">
+                    <cell id="1841">
                         <property name="style">Thin_Black_Border</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                     </cell>
-                    <cell id="1815">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1842">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1816">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1843">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1817">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1844">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1818">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1845">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1819">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1846">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1820">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1847">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1821">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1848">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1822">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1849">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1823">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1850">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1824">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1851">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1825">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1852">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1826">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1853">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1827">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1854">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1828">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1855">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1829">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1856">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1830">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1857">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1831">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1858">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1832">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1859">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1833">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1860">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1834">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1861">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1835">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1862">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1836">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1863">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1837">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1864">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1838">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1865">
+                        <property name="style">Dotted_Border</property>
                     </cell>
-                    <cell id="1839">
-                        <property name="style">Thin_Black_Border</property>
+                    <cell id="1866">
+                        <property name="style">Dotted_Border</property>
                     </cell>
                 </row>
                 <row id="1428">
                     <cell id="1429">
                         <property name="style">Thin_Black_Border</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="1535">
                             <text-property name="text">Re-Attendance</text-property>
                         </label>
                     </cell>
                     <cell id="1430">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1605">
                             <property name="resultSetColumn">reat_m_less_than_1</property>
                         </data>
                     </cell>
                     <cell id="1431">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1539">
                             <property name="resultSetColumn">reat_m_1_4</property>
                         </data>
                     </cell>
                     <cell id="1432">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1540">
                             <property name="resultSetColumn">reat_m_5_9</property>
                         </data>
                     </cell>
                     <cell id="1433">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1595">
                             <property name="resultSetColumn">reat_m_10_14</property>
                         </data>
                     </cell>
                     <cell id="1434">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1596">
                             <property name="resultSetColumn">reat_m_15_17</property>
                         </data>
                     </cell>
                     <cell id="1435">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1597">
                             <property name="resultSetColumn">reat_m_18_19</property>
                         </data>
                     </cell>
                     <cell id="1436">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1598">
                             <property name="resultSetColumn">reat_m_20_34</property>
                         </data>
                     </cell>
                     <cell id="1437">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1599">
                             <property name="resultSetColumn">reat_m_35_49</property>
                         </data>
                     </cell>
                     <cell id="1438">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1600">
                             <property name="resultSetColumn">reat_m_50_59</property>
                         </data>
                     </cell>
                     <cell id="1439">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1601">
                             <property name="resultSetColumn">reat_m_60_69</property>
                         </data>
                     </cell>
                     <cell id="1440">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1602">
                             <property name="resultSetColumn">reat_m_70_plus</property>
                         </data>
                     </cell>
                     <cell id="1441">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1616">
                             <property name="resultSetColumn">reat_m_total</property>
                         </data>
                     </cell>
                     <cell id="1442">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1603">
                             <property name="resultSetColumn">reat_f_less_than_1</property>
                         </data>
                     </cell>
                     <cell id="1443">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1606">
                             <property name="resultSetColumn">reat_f_1_4</property>
                         </data>
                     </cell>
                     <cell id="1444">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1607">
                             <property name="resultSetColumn">reat_f_5_9</property>
                         </data>
                     </cell>
                     <cell id="1445">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1608">
                             <property name="resultSetColumn">reat_f_10_14</property>
                         </data>
                     </cell>
                     <cell id="1446">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1609">
                             <property name="resultSetColumn">reat_f_15_17</property>
                         </data>
                     </cell>
                     <cell id="1447">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1610">
                             <property name="resultSetColumn">reat_f_18_19</property>
                         </data>
                     </cell>
                     <cell id="1448">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1611">
                             <property name="resultSetColumn">reat_f_20_34</property>
                         </data>
                     </cell>
                     <cell id="1449">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1612">
                             <property name="resultSetColumn">reat_f_35_49</property>
                         </data>
                     </cell>
                     <cell id="1450">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1613">
                             <property name="resultSetColumn">reat_f_50_59</property>
                         </data>
                     </cell>
                     <cell id="1451">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1614">
                             <property name="resultSetColumn">reat_f_60_69</property>
                         </data>
                     </cell>
                     <cell id="1452">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1615">
                             <property name="resultSetColumn">reat_f_70_plus</property>
                         </data>
                     </cell>
                     <cell id="1453">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1618">
                             <property name="resultSetColumn">reat_f_total</property>
                         </data>
                     </cell>
                     <cell id="1454">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1619">
                             <property name="resultSetColumn">reat_total</property>
                         </data>
@@ -4214,151 +4253,151 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1570">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1646">
                             <property name="resultSetColumn">ref_m_less_than_1</property>
                         </data>
                     </cell>
                     <cell id="1571">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1647">
                             <property name="resultSetColumn">ref_m_1_4</property>
                         </data>
                     </cell>
                     <cell id="1572">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1648">
                             <property name="resultSetColumn">ref_m_5_9</property>
                         </data>
                     </cell>
                     <cell id="1573">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1649">
                             <property name="resultSetColumn">ref_m_10_14</property>
                         </data>
                     </cell>
                     <cell id="1574">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1650">
                             <property name="resultSetColumn">ref_m_15_17</property>
                         </data>
                     </cell>
                     <cell id="1575">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1651">
                             <property name="resultSetColumn">ref_m_18_19</property>
                         </data>
                     </cell>
                     <cell id="1576">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1652">
                             <property name="resultSetColumn">ref_m_20_34</property>
                         </data>
                     </cell>
                     <cell id="1577">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1653">
                             <property name="resultSetColumn">ref_m_35_49</property>
                         </data>
                     </cell>
                     <cell id="1578">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1654">
                             <property name="resultSetColumn">ref_m_50_59</property>
                         </data>
                     </cell>
                     <cell id="1579">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1655">
                             <property name="resultSetColumn">ref_m_60_69</property>
                         </data>
                     </cell>
                     <cell id="1580">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1656">
                             <property name="resultSetColumn">ref_m_70_plus</property>
                         </data>
                     </cell>
                     <cell id="1581">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1669">
                             <property name="resultSetColumn">ref_m_total</property>
                         </data>
                     </cell>
                     <cell id="1582">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1657">
                             <property name="resultSetColumn">ref_f_less_than_1</property>
                         </data>
                     </cell>
                     <cell id="1583">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1658">
                             <property name="resultSetColumn">ref_f_1_4</property>
                         </data>
                     </cell>
                     <cell id="1584">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1659">
                             <property name="resultSetColumn">ref_f_5_9</property>
                         </data>
                     </cell>
                     <cell id="1585">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1660">
                             <property name="resultSetColumn">ref_f_10_14</property>
                         </data>
                     </cell>
                     <cell id="1586">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1661">
                             <property name="resultSetColumn">ref_f_15_17</property>
                         </data>
                     </cell>
                     <cell id="1587">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1662">
                             <property name="resultSetColumn">ref_f_18_19</property>
                         </data>
                     </cell>
                     <cell id="1588">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1663">
                             <property name="resultSetColumn">ref_f_20_34</property>
                         </data>
                     </cell>
                     <cell id="1589">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1664">
                             <property name="resultSetColumn">ref_f_35_49</property>
                         </data>
                     </cell>
                     <cell id="1590">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1665">
                             <property name="resultSetColumn">ref_f_50_59</property>
                         </data>
                     </cell>
                     <cell id="1591">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1666">
                             <property name="resultSetColumn">ref_f_60_69</property>
                         </data>
                     </cell>
                     <cell id="1592">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1667">
                             <property name="resultSetColumn">ref_f_70_plus</property>
                         </data>
                     </cell>
                     <cell id="1593">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1670">
                             <property name="resultSetColumn">ref_f_total</property>
                         </data>
                     </cell>
                     <cell id="1594">
-                        <property name="style">Thin_Black_Border</property>
+                        <property name="style">Dotted_Border</property>
                         <data id="1671">
                             <property name="resultSetColumn">ref_total</property>
                         </data>
