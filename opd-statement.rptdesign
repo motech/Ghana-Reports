@@ -29,7 +29,7 @@
     <property name="OPD Cube.Data Set.y">62</property>
     <property name="OPD Cube.Data Set.width">150</property>
     <property name="OPD Cube.Data Set.height">200</property>
-    <property name="units">in</property>
+    <property name="units">mm</property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">queryText</property>
@@ -1743,12 +1743,12 @@ else
     </styles>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
-            <property name="type">us-legal</property>
+            <property name="type">a4</property>
             <property name="orientation">landscape</property>
             <property name="topMargin">0.25in</property>
             <property name="leftMargin">0.25in</property>
             <property name="bottomMargin">0.25in</property>
-            <property name="rightMargin">0.25in</property>
+            <property name="rightMargin">106.09791666666666mm</property>
             <page-header>
                 <text id="90">
                     <property name="contentType">html</property>
@@ -2323,22 +2323,44 @@ MoTeCH Statement of Out-Patients
                     </list-property>
                 </structure>
             </list-property>
-            <column id="838"/>
-            <column id="839"/>
-            <column id="840"/>
-            <column id="841"/>
-            <column id="842"/>
-            <column id="843"/>
-            <column id="844"/>
-            <column id="845"/>
-            <column id="846"/>
-            <column id="847"/>
-            <column id="848"/>
+            <column id="838">
+                <property name="width">10mm</property>
+            </column>
+            <column id="839">
+                <property name="width">8mm</property>
+            </column>
+            <column id="840">
+                <property name="width">8mm</property>
+            </column>
+            <column id="841">
+                <property name="width">8mm</property>
+            </column>
+            <column id="842">
+                <property name="width">8mm</property>
+            </column>
+            <column id="843">
+                <property name="width">8mm</property>
+            </column>
+            <column id="844">
+                <property name="width">8mm</property>
+            </column>
+            <column id="845">
+                <property name="width">8mm</property>
+            </column>
+            <column id="846">
+                <property name="width">8mm</property>
+            </column>
+            <column id="847">
+                <property name="width">8mm</property>
+            </column>
+            <column id="848">
+                <property name="width">8mm</property>
+            </column>
             <header>
                 <row id="887">
                     <cell id="888"/>
                     <cell id="889">
-                        <property name="colSpan">4</property>
+                        <property name="colSpan">1</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="916">
@@ -2347,8 +2369,17 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">INSURED PATIENTS</text-property>
                         </label>
                     </cell>
+                    <cell id="1017">
+                        <property name="style">NewStyle</property>
+                    </cell>
+                    <cell id="1018">
+                        <property name="style">NewStyle</property>
+                    </cell>
+                    <cell id="1019">
+                        <property name="style">NewStyle</property>
+                    </cell>
                     <cell id="893">
-                        <property name="colSpan">4</property>
+                        <property name="colSpan">1</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="917">
@@ -2357,8 +2388,17 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">NON-INSURED PATIENTS</text-property>
                         </label>
                     </cell>
+                    <cell id="1022">
+                        <property name="style">NewStyle</property>
+                    </cell>
+                    <cell id="1023">
+                        <property name="style">NewStyle</property>
+                    </cell>
+                    <cell id="1024">
+                        <property name="style">NewStyle</property>
+                    </cell>
                     <cell id="897">
-                        <property name="colSpan">2</property>
+                        <property name="colSpan">1</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="918">
@@ -2367,11 +2407,14 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">TOTAL</text-property>
                         </label>
                     </cell>
+                    <cell id="1027">
+                        <property name="style">NewStyle</property>
+                    </cell>
                 </row>
                 <row id="875">
                     <cell id="876"/>
                     <cell id="877">
-                        <property name="colSpan">2</property>
+                        <property name="colSpan">1</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="911">
@@ -2379,8 +2422,11 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">New</text-property>
                         </label>
                     </cell>
+                    <cell id="1020">
+                        <property name="style">NewStyle</property>
+                    </cell>
                     <cell id="879">
-                        <property name="colSpan">2</property>
+                        <property name="colSpan">1</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="912">
@@ -2388,8 +2434,11 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">Old</text-property>
                         </label>
                     </cell>
+                    <cell id="1021">
+                        <property name="style">NewStyle</property>
+                    </cell>
                     <cell id="881">
-                        <property name="colSpan">2</property>
+                        <property name="colSpan">1</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="913">
@@ -2397,8 +2446,11 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">New</text-property>
                         </label>
                     </cell>
+                    <cell id="1025">
+                        <property name="style">NewStyle</property>
+                    </cell>
                     <cell id="883">
-                        <property name="colSpan">2</property>
+                        <property name="colSpan">1</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="914">
@@ -2406,14 +2458,20 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">Old</text-property>
                         </label>
                     </cell>
+                    <cell id="1026">
+                        <property name="style">NewStyle</property>
+                    </cell>
                     <cell id="885">
-                        <property name="colSpan">2</property>
+                        <property name="colSpan">1</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="915">
                             <property name="textAlign">center</property>
                             <text-property name="text">Total</text-property>
                         </label>
+                    </cell>
+                    <cell id="1028">
+                        <property name="style">NewStyle</property>
                     </cell>
                 </row>
                 <row id="802">
@@ -2649,6 +2707,7 @@ MoTeCH Statement of Out-Patients
             </footer>
         </table>
         <table id="947">
+            <property name="width">7.78125in</property>
             <property name="dataSet">Joint Data Set</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -2748,27 +2807,27 @@ MoTeCH Statement of Out-Patients
                 </structure>
                 <structure>
                     <property name="name">malaria_male_less_than_5</property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
                             <expression name="value" type="javascript">row["malaria"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["age"] >=0 &amp;&amp; dataSetRow["age"] &lt; 5 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["age"] >=0 &amp;&amp; dataSetRow["age"] &lt; 5 &amp;&amp;  dataSetRow["malaria"] > 0 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
                 </structure>
                 <structure>
                     <property name="name">malaria_female_less_than_5</property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
                             <expression name="value" type="javascript">row["malaria"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["age"] >=0 &amp;&amp; dataSetRow["age"] &lt; 5  &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["age"] >=0 &amp;&amp; dataSetRow["age"] &lt; 5 &amp;&amp; dataSetRow["malaria"] > 0 &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
                 </structure>
                 <structure>
                     <property name="name">malaria_men_5_and_above</property>
@@ -2784,42 +2843,43 @@ MoTeCH Statement of Out-Patients
                 </structure>
                 <structure>
                     <property name="name">malaria_female_5_and_above</property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
                             <expression name="value" type="javascript">row["malaria"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["age"] >=5  &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["age"] >=5   &amp;&amp;  dataSetRow["malaria"] > 0 &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
                 </structure>
                 <structure>
                     <property name="name">malaria_male_5_and_above</property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
                             <expression name="value" type="javascript">row["malaria"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">row["malaria"] >= 5 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
+                    <expression name="filterExpr" type="javascript">row["age"] >= 5 &amp;&amp; dataSetRow["malaria"] > 0 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
                 </structure>
             </list-property>
-            <column id="964"/>
-            <column id="965"/>
-            <column id="966"/>
+            <column id="964">
+                <property name="width">4.4375in</property>
+            </column>
+            <column id="965">
+                <property name="width">1.6875in</property>
+            </column>
+            <column id="966">
+                <property name="width">1.65625in</property>
+            </column>
             <header>
                 <row id="948">
                     <cell id="949"/>
                     <cell id="950"/>
                     <cell id="951"/>
-                </row>
-                <row id="971">
-                    <cell id="972"/>
-                    <cell id="973"/>
-                    <cell id="974"/>
                 </row>
                 <row id="967">
                     <cell id="968">
@@ -2895,42 +2955,12 @@ MoTeCH Statement of Out-Patients
                 </row>
             </footer>
         </table>
-        <grid id="996">
-            <column id="997"/>
-            <row id="998">
-                <cell id="999"/>
-            </row>
-            <row id="1000">
-                <cell id="1001"/>
-            </row>
-            <row id="1002">
-                <cell id="1003"/>
-            </row>
-            <row id="1004">
-                <cell id="1005">
-                    <data id="1015"/>
-                </cell>
-            </row>
-            <row id="1006">
-                <cell id="1007">
-                    <data id="1014"/>
-                </cell>
-            </row>
-            <row id="1008">
-                <cell id="1009">
-                    <label id="1013">
-                        <text-property name="text">                                                                                                                                       .........................................</text-property>
-                    </label>
-                </cell>
-            </row>
-            <row id="1010">
-                <cell id="1011">
-                    <label id="1012">
-                        <property name="textAlign">left</property>
-                        <text-property name="text">                                                                                                                                           Medical Officer-in-Charge</text-property>
-                    </label>
-                </cell>
-            </row>
-        </grid>
+        <label id="1031"/>
+        <label id="1029">
+            <text-property name="text">                                                                                    .....................................................</text-property>
+        </label>
+        <label id="1030">
+            <text-property name="text">                                                                                           Medical Officer-in-Charge</text-property>
+        </label>
     </body>
 </report>
