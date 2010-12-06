@@ -1344,14 +1344,14 @@ else 0;</expression>
             <property name="borderRightStyle">solid</property>
             <property name="borderTopStyle">solid</property>
         </style>
-        <style name="Dotted_Border" id="1784">
-            <property name="borderBottomStyle">dotted</property>
+        <style name="Thick_Vertical_Border" id="1868">
+            <property name="borderBottomStyle">solid</property>
             <property name="borderBottomWidth">thin</property>
-            <property name="borderLeftStyle">dotted</property>
-            <property name="borderLeftWidth">thin</property>
-            <property name="borderRightStyle">dotted</property>
-            <property name="borderRightWidth">thin</property>
-            <property name="borderTopStyle">dotted</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thick</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thick</property>
+            <property name="borderTopStyle">solid</property>
             <property name="borderTopWidth">thin</property>
         </style>
     </styles>
@@ -1968,11 +1968,6 @@ MoTeCH - OPD Morbidity Report
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
-                    <property name="name">disease_total</property>
-                    <expression name="expression" type="javascript">row["f_disease_total"]+row["m_disease_total"]</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
                     <property name="name">sum_m_5_9</property>
                     <property name="dataType">float</property>
                     <property name="aggregateFunction">SUM</property>
@@ -2220,6 +2215,11 @@ MoTeCH - OPD Morbidity Report
                     <expression name="expression" type="javascript">row["f_total"]+row["m_total"]</expression>
                     <property name="dataType">integer</property>
                 </structure>
+                <structure>
+                    <property name="name">disease_total</property>
+                    <expression name="expression" type="javascript">row["f_disease_total"]+row["m_disease_total"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
             </list-property>
             <column id="1174">
                 <property name="width">53mm</property>
@@ -2268,7 +2268,7 @@ MoTeCH - OPD Morbidity Report
                     <cell id="1399">
                         <property name="colSpan">12</property>
                         <property name="rowSpan">1</property>
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2289,7 +2289,7 @@ MoTeCH - OPD Morbidity Report
                     <cell id="1411">
                         <property name="colSpan">12</property>
                         <property name="rowSpan">1</property>
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2310,7 +2310,7 @@ MoTeCH - OPD Morbidity Report
                     <cell id="1423">
                         <property name="colSpan">1</property>
                         <property name="rowSpan">2</property>
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thick_Vertical_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2334,7 +2334,7 @@ MoTeCH - OPD Morbidity Report
                 <row id="1093">
                     <property name="style">Thin_Black_Border</property>
                     <cell id="1095">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2347,7 +2347,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1096">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2360,7 +2360,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1097">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2373,7 +2373,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1098">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2386,7 +2386,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1099">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2399,7 +2399,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1100">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2412,7 +2412,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1101">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2425,7 +2425,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1102">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2438,7 +2438,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1103">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2451,7 +2451,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1104">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2464,7 +2464,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1105">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2477,7 +2477,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1106">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thick_Vertical_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2491,7 +2491,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1107">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2504,7 +2504,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1108">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2517,7 +2517,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1109">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2530,7 +2530,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1110">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2543,7 +2543,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1111">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2556,7 +2556,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1112">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2569,7 +2569,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1113">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2582,7 +2582,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1114">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2595,7 +2595,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1115">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2608,7 +2608,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1116">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2621,7 +2621,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1117">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2634,7 +2634,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1118">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thick_Vertical_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2665,7 +2665,7 @@ MoTeCH - OPD Morbidity Report
                 <header>
                     <row id="1258">
                         <cell id="1259">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <property name="borderRightColor">#000000</property>
                             <property name="borderRightStyle">solid</property>
                             <property name="borderRightWidth">thin</property>
@@ -2674,73 +2674,73 @@ MoTeCH - OPD Morbidity Report
                             </data>
                         </cell>
                         <cell id="1260">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1340">
                                 <property name="resultSetColumn">m_less_than_1</property>
                             </data>
                         </cell>
                         <cell id="1261">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1341">
                                 <property name="resultSetColumn">m_1_4</property>
                             </data>
                         </cell>
                         <cell id="1262">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1342">
                                 <property name="resultSetColumn">m_5_9</property>
                             </data>
                         </cell>
                         <cell id="1263">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1343">
                                 <property name="resultSetColumn">m_10_14</property>
                             </data>
                         </cell>
                         <cell id="1264">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1344">
                                 <property name="resultSetColumn">m_15_17</property>
                             </data>
                         </cell>
                         <cell id="1265">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1345">
                                 <property name="resultSetColumn">m_18_19</property>
                             </data>
                         </cell>
                         <cell id="1266">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1346">
                                 <property name="resultSetColumn">m_20_34</property>
                             </data>
                         </cell>
                         <cell id="1267">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1348">
                                 <property name="resultSetColumn">m_35_49</property>
                             </data>
                         </cell>
                         <cell id="1268">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1349">
                                 <property name="resultSetColumn">m_50_59</property>
                             </data>
                         </cell>
                         <cell id="1269">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1350">
                                 <property name="resultSetColumn">m_60_69</property>
                             </data>
                         </cell>
                         <cell id="1270">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1351">
                                 <property name="resultSetColumn">m_70_plus</property>
                             </data>
                         </cell>
                         <cell id="1271">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thick_Vertical_Border</property>
                             <property name="borderLeftColor">#000000</property>
                             <property name="borderLeftStyle">solid</property>
                             <property name="borderLeftWidth">thin</property>
@@ -2752,73 +2752,73 @@ MoTeCH - OPD Morbidity Report
                             </data>
                         </cell>
                         <cell id="1272">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1365">
                                 <property name="resultSetColumn">f_less_than_1</property>
                             </data>
                         </cell>
                         <cell id="1273">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1367">
                                 <property name="resultSetColumn">f_1_4</property>
                             </data>
                         </cell>
                         <cell id="1274">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1370">
                                 <property name="resultSetColumn">f_5_9</property>
                             </data>
                         </cell>
                         <cell id="1275">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1371">
                                 <property name="resultSetColumn">f_10_14</property>
                             </data>
                         </cell>
                         <cell id="1276">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1375">
                                 <property name="resultSetColumn">f_15_17</property>
                             </data>
                         </cell>
                         <cell id="1277">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1376">
                                 <property name="resultSetColumn">f_18_19</property>
                             </data>
                         </cell>
                         <cell id="1278">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1377">
                                 <property name="resultSetColumn">f_20_34</property>
                             </data>
                         </cell>
                         <cell id="1279">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1378">
                                 <property name="resultSetColumn">f_35_49</property>
                             </data>
                         </cell>
                         <cell id="1280">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1379">
                                 <property name="resultSetColumn">f_50_59</property>
                             </data>
                         </cell>
                         <cell id="1281">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1380">
                                 <property name="resultSetColumn">f_60_69</property>
                             </data>
                         </cell>
                         <cell id="1282">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thin_Black_Border</property>
                             <data id="1381">
                                 <property name="resultSetColumn">f_70_plus</property>
                             </data>
                         </cell>
                         <cell id="1283">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thick_Vertical_Border</property>
                             <property name="borderLeftColor">#000000</property>
                             <property name="borderLeftStyle">solid</property>
                             <property name="borderLeftWidth">thin</property>
@@ -2830,20 +2830,20 @@ MoTeCH - OPD Morbidity Report
                             </data>
                         </cell>
                         <cell id="1284">
-                            <property name="style">Dotted_Border</property>
+                            <property name="style">Thick_Vertical_Border</property>
                             <property name="borderBottomColor">#000000</property>
-                            <property name="borderBottomStyle">dotted</property>
+                            <property name="borderBottomStyle">solid</property>
                             <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">#000000</property>
-                            <property name="borderLeftStyle">dotted</property>
+                            <property name="borderLeftStyle">solid</property>
                             <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">#000000</property>
-                            <property name="borderRightStyle">dotted</property>
+                            <property name="borderRightStyle">solid</property>
                             <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">#000000</property>
-                            <property name="borderTopStyle">dotted</property>
+                            <property name="borderTopStyle">solid</property>
                             <property name="borderTopWidth">thin</property>
-                            <data id="1396">
+                            <data id="1867">
                                 <property name="resultSetColumn">disease_total</property>
                             </data>
                         </cell>
@@ -2854,7 +2854,7 @@ MoTeCH - OPD Morbidity Report
                 <row id="1147">
                     <property name="style">Thin_Black_Border</property>
                     <cell id="1148">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2872,7 +2872,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1149">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2884,7 +2884,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1150">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2896,7 +2896,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1151">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2908,7 +2908,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1152">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2920,7 +2920,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1153">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2932,7 +2932,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1154">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2944,7 +2944,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1155">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2956,7 +2956,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1156">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2968,7 +2968,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1157">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2980,7 +2980,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1158">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2992,7 +2992,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1159">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3004,7 +3004,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1160">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thick_Vertical_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3022,7 +3022,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1161">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3034,7 +3034,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1162">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3046,7 +3046,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1163">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3058,7 +3058,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1164">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3070,7 +3070,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1165">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3082,7 +3082,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1166">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3094,7 +3094,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1167">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3106,7 +3106,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1168">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3118,7 +3118,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1169">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3130,7 +3130,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1170">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3142,7 +3142,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1171">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3154,7 +3154,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1172">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -3178,7 +3178,7 @@ MoTeCH - OPD Morbidity Report
                         </data>
                     </cell>
                     <cell id="1173">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thick_Vertical_Border</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -4003,79 +4003,80 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopWidth">thin</property>
                     </cell>
                     <cell id="1842">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1843">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1844">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1845">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1846">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1847">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="canShrink">false</property>
                     </cell>
                     <cell id="1848">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1849">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1850">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1851">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1852">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1853">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1854">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1855">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1856">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1857">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1858">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1859">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1860">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1861">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1862">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1863">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1864">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1865">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                     <cell id="1866">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                     </cell>
                 </row>
                 <row id="1428">
@@ -4095,151 +4096,151 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1430">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1605">
                             <property name="resultSetColumn">reat_m_less_than_1</property>
                         </data>
                     </cell>
                     <cell id="1431">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1539">
                             <property name="resultSetColumn">reat_m_1_4</property>
                         </data>
                     </cell>
                     <cell id="1432">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1540">
                             <property name="resultSetColumn">reat_m_5_9</property>
                         </data>
                     </cell>
                     <cell id="1433">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1595">
                             <property name="resultSetColumn">reat_m_10_14</property>
                         </data>
                     </cell>
                     <cell id="1434">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1596">
                             <property name="resultSetColumn">reat_m_15_17</property>
                         </data>
                     </cell>
                     <cell id="1435">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1597">
                             <property name="resultSetColumn">reat_m_18_19</property>
                         </data>
                     </cell>
                     <cell id="1436">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1598">
                             <property name="resultSetColumn">reat_m_20_34</property>
                         </data>
                     </cell>
                     <cell id="1437">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1599">
                             <property name="resultSetColumn">reat_m_35_49</property>
                         </data>
                     </cell>
                     <cell id="1438">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1600">
                             <property name="resultSetColumn">reat_m_50_59</property>
                         </data>
                     </cell>
                     <cell id="1439">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1601">
                             <property name="resultSetColumn">reat_m_60_69</property>
                         </data>
                     </cell>
                     <cell id="1440">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1602">
                             <property name="resultSetColumn">reat_m_70_plus</property>
                         </data>
                     </cell>
                     <cell id="1441">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1616">
                             <property name="resultSetColumn">reat_m_total</property>
                         </data>
                     </cell>
                     <cell id="1442">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1603">
                             <property name="resultSetColumn">reat_f_less_than_1</property>
                         </data>
                     </cell>
                     <cell id="1443">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1606">
                             <property name="resultSetColumn">reat_f_1_4</property>
                         </data>
                     </cell>
                     <cell id="1444">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1607">
                             <property name="resultSetColumn">reat_f_5_9</property>
                         </data>
                     </cell>
                     <cell id="1445">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1608">
                             <property name="resultSetColumn">reat_f_10_14</property>
                         </data>
                     </cell>
                     <cell id="1446">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1609">
                             <property name="resultSetColumn">reat_f_15_17</property>
                         </data>
                     </cell>
                     <cell id="1447">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1610">
                             <property name="resultSetColumn">reat_f_18_19</property>
                         </data>
                     </cell>
                     <cell id="1448">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1611">
                             <property name="resultSetColumn">reat_f_20_34</property>
                         </data>
                     </cell>
                     <cell id="1449">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1612">
                             <property name="resultSetColumn">reat_f_35_49</property>
                         </data>
                     </cell>
                     <cell id="1450">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1613">
                             <property name="resultSetColumn">reat_f_50_59</property>
                         </data>
                     </cell>
                     <cell id="1451">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1614">
                             <property name="resultSetColumn">reat_f_60_69</property>
                         </data>
                     </cell>
                     <cell id="1452">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1615">
                             <property name="resultSetColumn">reat_f_70_plus</property>
                         </data>
                     </cell>
                     <cell id="1453">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1618">
                             <property name="resultSetColumn">reat_f_total</property>
                         </data>
                     </cell>
                     <cell id="1454">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1619">
                             <property name="resultSetColumn">reat_total</property>
                         </data>
@@ -4253,151 +4254,151 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1570">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1646">
                             <property name="resultSetColumn">ref_m_less_than_1</property>
                         </data>
                     </cell>
                     <cell id="1571">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1647">
                             <property name="resultSetColumn">ref_m_1_4</property>
                         </data>
                     </cell>
                     <cell id="1572">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1648">
                             <property name="resultSetColumn">ref_m_5_9</property>
                         </data>
                     </cell>
                     <cell id="1573">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1649">
                             <property name="resultSetColumn">ref_m_10_14</property>
                         </data>
                     </cell>
                     <cell id="1574">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1650">
                             <property name="resultSetColumn">ref_m_15_17</property>
                         </data>
                     </cell>
                     <cell id="1575">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1651">
                             <property name="resultSetColumn">ref_m_18_19</property>
                         </data>
                     </cell>
                     <cell id="1576">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1652">
                             <property name="resultSetColumn">ref_m_20_34</property>
                         </data>
                     </cell>
                     <cell id="1577">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1653">
                             <property name="resultSetColumn">ref_m_35_49</property>
                         </data>
                     </cell>
                     <cell id="1578">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1654">
                             <property name="resultSetColumn">ref_m_50_59</property>
                         </data>
                     </cell>
                     <cell id="1579">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1655">
                             <property name="resultSetColumn">ref_m_60_69</property>
                         </data>
                     </cell>
                     <cell id="1580">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1656">
                             <property name="resultSetColumn">ref_m_70_plus</property>
                         </data>
                     </cell>
                     <cell id="1581">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1669">
                             <property name="resultSetColumn">ref_m_total</property>
                         </data>
                     </cell>
                     <cell id="1582">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1657">
                             <property name="resultSetColumn">ref_f_less_than_1</property>
                         </data>
                     </cell>
                     <cell id="1583">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1658">
                             <property name="resultSetColumn">ref_f_1_4</property>
                         </data>
                     </cell>
                     <cell id="1584">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1659">
                             <property name="resultSetColumn">ref_f_5_9</property>
                         </data>
                     </cell>
                     <cell id="1585">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1660">
                             <property name="resultSetColumn">ref_f_10_14</property>
                         </data>
                     </cell>
                     <cell id="1586">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1661">
                             <property name="resultSetColumn">ref_f_15_17</property>
                         </data>
                     </cell>
                     <cell id="1587">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1662">
                             <property name="resultSetColumn">ref_f_18_19</property>
                         </data>
                     </cell>
                     <cell id="1588">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1663">
                             <property name="resultSetColumn">ref_f_20_34</property>
                         </data>
                     </cell>
                     <cell id="1589">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1664">
                             <property name="resultSetColumn">ref_f_35_49</property>
                         </data>
                     </cell>
                     <cell id="1590">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1665">
                             <property name="resultSetColumn">ref_f_50_59</property>
                         </data>
                     </cell>
                     <cell id="1591">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1666">
                             <property name="resultSetColumn">ref_f_60_69</property>
                         </data>
                     </cell>
                     <cell id="1592">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1667">
                             <property name="resultSetColumn">ref_f_70_plus</property>
                         </data>
                     </cell>
                     <cell id="1593">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1670">
                             <property name="resultSetColumn">ref_f_total</property>
                         </data>
                     </cell>
                     <cell id="1594">
-                        <property name="style">Dotted_Border</property>
+                        <property name="style">Thin_Black_Border</property>
                         <data id="1671">
                             <property name="resultSetColumn">ref_total</property>
                         </data>
