@@ -1006,7 +1006,7 @@ diseasesArray.push([1,"AFP (Polio)"]);
 diseasesArray.push([2,"CSM"]);
 diseasesArray.push([3,"Neonatal Tetanus"]);
 diseasesArray.push([4,"Pertussis"]);
-diseasesArray.push([5,"Diphteria"]);
+diseasesArray.push([5,"Diptheria"]);
 diseasesArray.push([6,"Measles"]);
 diseasesArray.push([7,"Yellow Fever"]);
 diseasesArray.push([8,"Tetanus"]);
@@ -1383,7 +1383,8 @@ MoTeCH - OPD Morbidity Report
     </page-setup>
     <body>
         <grid id="184">
-            <property name="width">100%</property>
+            <property name="fontFamily">"Tahoma"</property>
+            <property name="width">18.447916666666668in</property>
             <property name="dataSet">Locations</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -1417,27 +1418,47 @@ MoTeCH - OPD Morbidity Report
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
+            <column id="1892">
+                <property name="width">2.2395833333333335in</property>
+            </column>
             <column id="185">
-                <property name="width">0.7291666666666666in</property>
+                <property name="width">16mm</property>
             </column>
-            <column id="186"/>
+            <column id="186">
+                <property name="width">16mm</property>
+            </column>
             <column id="187">
-                <property name="width">0.625in</property>
+                <property name="width">16mm</property>
             </column>
-            <column id="188"/>
+            <column id="188">
+                <property name="width">16mm</property>
+            </column>
             <column id="189">
-                <property name="width">1.3125in</property>
+                <property name="width">16mm</property>
             </column>
-            <column id="190"/>
+            <column id="190">
+                <property name="width">32mm</property>
+            </column>
             <column id="191">
-                <property name="width">0.7708333333333334in</property>
+                <property name="width">32mm</property>
             </column>
-            <column id="192"/>
+            <column id="192">
+                <property name="width">32mm</property>
+            </column>
             <column id="193">
-                <property name="width">0.78125in</property>
+                <property name="width">32mm</property>
             </column>
-            <column id="194"/>
+            <column id="194">
+                <property name="width">32mm</property>
+            </column>
             <row id="195">
+                <cell id="1891">
+                    <property name="width">53mm</property>
+                    <label id="1893">
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">OPD Morbidity</text-property>
+                    </label>
+                </cell>
                 <cell id="196">
                     <label id="206">
                         <property name="fontWeight">bolder</property>
@@ -1517,6 +1538,7 @@ MoTeCH - OPD Morbidity Report
             </row>
         </grid>
         <table id="1092">
+            <property name="fontFamily">"Tahoma"</property>
             <property name="borderBottomColor">#000000</property>
             <property name="borderBottomStyle">solid</property>
             <property name="borderBottomWidth">thin</property>
@@ -2224,33 +2246,81 @@ MoTeCH - OPD Morbidity Report
             <column id="1174">
                 <property name="width">53mm</property>
             </column>
-            <column id="1175"/>
-            <column id="1176"/>
-            <column id="1177"/>
-            <column id="1178"/>
-            <column id="1179"/>
-            <column id="1180"/>
-            <column id="1181"/>
-            <column id="1182"/>
-            <column id="1183"/>
-            <column id="1184"/>
+            <column id="1175">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1176">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1177">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1178">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1179">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1180">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1181">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1182">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1183">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1184">
+                <property name="width">16mm</property>
+            </column>
             <column id="1185">
+                <property name="width">16mm</property>
                 <property name="style">Thin_Black_Border</property>
             </column>
-            <column id="1186"/>
-            <column id="1187"/>
-            <column id="1188"/>
-            <column id="1189"/>
-            <column id="1190"/>
-            <column id="1191"/>
-            <column id="1192"/>
-            <column id="1193"/>
-            <column id="1194"/>
-            <column id="1195"/>
-            <column id="1196"/>
-            <column id="1197"/>
-            <column id="1198"/>
+            <column id="1186">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1187">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1188">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1189">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1190">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1191">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1192">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1193">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1194">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1195">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1196">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1197">
+                <property name="width">16mm</property>
+            </column>
+            <column id="1198">
+                <property name="width">16mm</property>
+            </column>
             <column id="1199">
+                <property name="width">16mm</property>
                 <property name="style">Thin_Black_Border</property>
             </column>
             <header>
@@ -2266,7 +2336,7 @@ MoTeCH - OPD Morbidity Report
                         </label>
                     </cell>
                     <cell id="1399">
-                        <property name="colSpan">12</property>
+                        <property name="colSpan">1</property>
                         <property name="rowSpan">1</property>
                         <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
@@ -2286,8 +2356,173 @@ MoTeCH - OPD Morbidity Report
                             <text-property name="text">MALE</text-property>
                         </label>
                     </cell>
+                    <cell id="1869">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1870">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1871">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1872">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1873">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1874">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1875">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1876">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1877">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1878">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1879">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
                     <cell id="1411">
-                        <property name="colSpan">12</property>
+                        <property name="colSpan">1</property>
                         <property name="rowSpan">1</property>
                         <property name="style">Thin_Black_Border</property>
                         <property name="borderBottomColor">#000000</property>
@@ -2306,6 +2541,171 @@ MoTeCH - OPD Morbidity Report
                             <property name="textAlign">center</property>
                             <text-property name="text">FEMALE</text-property>
                         </label>
+                    </cell>
+                    <cell id="1880">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1881">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1882">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1883">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1884">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1885">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1886">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1887">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1888">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1889">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="1890">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                     </cell>
                     <cell id="1423">
                         <property name="colSpan">1</property>
@@ -2381,7 +2781,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1355">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">10-14</text-property>
                         </label>
                     </cell>
@@ -2394,7 +2794,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1356">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">15-17</text-property>
                         </label>
                     </cell>
@@ -2407,7 +2807,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1357">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">18-19</text-property>
                         </label>
                     </cell>
@@ -2420,7 +2820,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1358">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">20-34</text-property>
                         </label>
                     </cell>
@@ -2433,7 +2833,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1359">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">35-49</text-property>
                         </label>
                     </cell>
@@ -2446,7 +2846,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1360">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">50-59</text-property>
                         </label>
                     </cell>
@@ -2459,7 +2859,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1361">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">60-69</text-property>
                         </label>
                     </cell>
@@ -2538,7 +2938,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1383">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">10-14</text-property>
                         </label>
                     </cell>
@@ -2551,7 +2951,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1384">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">15-17</text-property>
                         </label>
                     </cell>
@@ -2564,7 +2964,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1385">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">18-19</text-property>
                         </label>
                     </cell>
@@ -2577,7 +2977,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1386">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">20-34</text-property>
                         </label>
                     </cell>
@@ -2590,7 +2990,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1387">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">35-49</text-property>
                         </label>
                     </cell>
@@ -2603,7 +3003,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1388">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">50-59</text-property>
                         </label>
                     </cell>
@@ -2616,7 +3016,7 @@ MoTeCH - OPD Morbidity Report
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1389">
-                            <property name="textAlign">center</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">60-69</text-property>
                         </label>
                     </cell>
@@ -3202,6 +3602,7 @@ MoTeCH - OPD Morbidity Report
             </footer>
         </table>
         <table id="1427">
+            <property name="fontFamily">"Tahoma"</property>
             <property name="borderBottomColor">#000000</property>
             <property name="borderBottomStyle">solid</property>
             <property name="borderBottomWidth">thin</property>
