@@ -1125,14 +1125,14 @@ else 0;</expression>
             </list-property>
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">Data Set::newcase</property>
-                    <property name="alias">newcase</property>
-                    <text-property name="displayName">Data Set::newcase</text-property>
+                    <property name="columnName">Data Set::region</property>
+                    <property name="alias">region</property>
+                    <text-property name="displayName">Data Set::region</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">Data Set::id</property>
-                    <property name="alias">id</property>
-                    <text-property name="displayName">Data Set::id</text-property>
+                    <property name="columnName">Data Set::sex</property>
+                    <property name="alias">sex</property>
+                    <text-property name="displayName">Data Set::sex</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Data Set::diag_num</property>
@@ -1140,9 +1140,34 @@ else 0;</expression>
                     <text-property name="displayName">Data Set::diag_num</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">Data Set::sex</property>
-                    <property name="alias">sex</property>
-                    <text-property name="displayName">Data Set::sex</text-property>
+                    <property name="columnName">Data Set::diagnosis</property>
+                    <property name="alias">diagnosis</property>
+                    <text-property name="displayName">Data Set::diagnosis</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Diseases::code</property>
+                    <property name="alias">code</property>
+                    <text-property name="displayName">Diseases::code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::date</property>
+                    <property name="alias">date</property>
+                    <text-property name="displayName">Data Set::date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::location_id</property>
+                    <property name="alias">location_id</property>
+                    <text-property name="displayName">Data Set::location_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::id</property>
+                    <property name="alias">id</property>
+                    <text-property name="displayName">Data Set::id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::newcase</property>
+                    <property name="alias">newcase</property>
+                    <text-property name="displayName">Data Set::newcase</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Diseases::disease_name</property>
@@ -1155,34 +1180,19 @@ else 0;</expression>
                     <text-property name="displayName">Data Set::age</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">Data Set::diagnosis</property>
-                    <property name="alias">diagnosis</property>
-                    <text-property name="displayName">Data Set::diagnosis</text-property>
-                </structure>
-                <structure>
                     <property name="columnName">Data Set::birthdate</property>
                     <property name="alias">birthdate</property>
                     <text-property name="displayName">Data Set::birthdate</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">Diseases::code</property>
-                    <property name="alias">code</property>
-                    <text-property name="displayName">Diseases::code</text-property>
+                    <property name="columnName">Data Set::district</property>
+                    <property name="alias">district</property>
+                    <text-property name="displayName">Data Set::district</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Data Set::referred</property>
                     <property name="alias">referred</property>
                     <text-property name="displayName">Data Set::referred</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::date</property>
-                    <property name="alias">date</property>
-                    <text-property name="displayName">Data Set::date</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::location_id</property>
-                    <property name="alias">location_id</property>
-                    <text-property name="displayName">Data Set::location_id</text-property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -1204,76 +1214,86 @@ else 0;</expression>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">sex</property>
+                        <property name="name">region</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
+                        <property name="name">district</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">sex</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
                         <property name="name">birthdate</property>
                         <property name="dataType">date</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">8</property>
                         <property name="name">age</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">9</property>
                         <property name="name">diagnosis</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">10</property>
                         <property name="name">referred</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">9</property>
+                        <property name="position">11</property>
                         <property name="name">newcase</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">10</property>
+                        <property name="position">12</property>
                         <property name="name">diag_num</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">13</property>
                         <property name="name">code</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">14</property>
                         <property name="name">disease_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">15</property>
                         <property name="name">c_sex</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">16</property>
                         <property name="name">c_age</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
+                        <property name="position">17</property>
                         <property name="name">c_diagnosis</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">16</property>
+                        <property name="position">18</property>
                         <property name="name">c_referred</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">17</property>
+                        <property name="position">19</property>
                         <property name="name">c_newcase</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">18</property>
+                        <property name="position">20</property>
                         <property name="name">reattendance</property>
                         <property name="dataType">integer</property>
                     </structure>
@@ -2087,6 +2107,21 @@ else 0;</expression>
                     <expression name="expression" type="javascript">row["f_disease_total"]+row["m_disease_total"]</expression>
                     <property name="dataType">integer</property>
                 </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <expression name="expression" type="javascript">params["Year"].value</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <expression name="expression" type="javascript">params["Month"].displayText</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">facility</property>
+                    <expression name="expression" type="javascript">params["Facility"].displayText</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <column id="1174">
                 <property name="width">52.28mm</property>
@@ -2169,6 +2204,275 @@ else 0;</expression>
                 <property name="style">Thin_Black_Border</property>
             </column>
             <header>
+                <row id="1891">
+                    <cell id="1892">
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="textAlign">center</property>
+                        <property name="verticalAlign">bottom</property>
+                        <label id="1918">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">OPD Morbidity</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1893">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1924">
+                            <text-property name="text">Month:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1895">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1928">
+                            <property name="resultSetColumn">month</property>
+                        </data>
+                    </cell>
+                    <cell id="1897">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1925">
+                            <text-property name="text">Year:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1899">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1927">
+                            <property name="resultSetColumn">year</property>
+                        </data>
+                    </cell>
+                    <cell id="1901">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1926">
+                            <text-property name="text">Facility:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1903">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="textAlign">left</property>
+                        <data id="1929">
+                            <property name="resultSetColumn">facility</property>
+                        </data>
+                    </cell>
+                    <cell id="1906">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1922">
+                            <text-property name="text">District:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1908">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1934">
+                            <property name="dataSet">Locations</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">location_id</property>
+                                    <expression name="expression" type="javascript">dataSetRow["location_id"]</expression>
+                                    <property name="dataType">integer</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">name</property>
+                                    <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">region</property>
+                                    <expression name="expression" type="javascript">dataSetRow["region"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">county_district</property>
+                                    <expression name="expression" type="javascript">dataSetRow["county_district"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">Column Binding</property>
+                                    <expression name="expression" type="javascript">dataSetRow["county_district"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
+                    <cell id="1912">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1923">
+                            <text-property name="text">Region:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1914">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="style">Thin_Black_Border</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1935">
+                            <property name="dataSet">Locations</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">location_id</property>
+                                    <expression name="expression" type="javascript">dataSetRow["location_id"]</expression>
+                                    <property name="dataType">integer</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">name</property>
+                                    <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">region</property>
+                                    <expression name="expression" type="javascript">dataSetRow["region"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">county_district</property>
+                                    <expression name="expression" type="javascript">dataSetRow["county_district"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">Column Binding</property>
+                                    <expression name="expression" type="javascript">dataSetRow["region"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
+                </row>
                 <row id="1397">
                     <cell id="1398">
                         <property name="colSpan">1</property>
