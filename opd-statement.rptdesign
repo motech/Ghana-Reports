@@ -30,86 +30,29 @@
     <property name="OPD Cube.Data Set.width">150</property>
     <property name="OPD Cube.Data Set.height">200</property>
     <property name="units">mm</property>
-    <list-property name="propertyBindings">
-        <structure>
-            <property name="name">queryText</property>
-            <property name="id">190</property>
-        </structure>
-        <structure>
-            <property name="name">queryTimeOut</property>
-            <property name="id">190</property>
-        </structure>
-    </list-property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="layoutPreference">auto layout</property>
     <property name="bidiLayoutOrientation">ltr</property>
     <parameters>
-        <cascading-parameter-group name="Facility-Filter" id="795">
-            <property name="dataSet">Regions</property>
-            <property name="dataSetMode">multiple</property>
-            <parameters>
-                <scalar-parameter name="Region" id="796">
-                    <property name="valueType">dynamic</property>
-                    <property name="isRequired">true</property>
-                    <property name="dataSetName">Regions</property>
-                    <expression name="valueExpr">row["region"]</expression>
-                    <expression name="labelExpr">row["region"]</expression>
-                    <expression name="sortByColumn">dataSetRow["region"]</expression>
-                    <property name="sortDirection">asc</property>
-                    <property name="dataType">string</property>
-                    <property name="paramType">simple</property>
-                    <property name="controlType">list-box</property>
-                    <property name="mustMatch">false</property>
-                    <property name="fixedOrder">false</property>
-                    <structure name="format"/>
-                </scalar-parameter>
-                <scalar-parameter name="District" id="797">
-                    <property name="valueType">dynamic</property>
-                    <property name="isRequired">true</property>
-                    <property name="dataSetName">Districts</property>
-                    <expression name="valueExpr">row["county_district"]</expression>
-                    <expression name="labelExpr">row["county_district"]</expression>
-                    <expression name="sortByColumn">dataSetRow["county_district"]</expression>
-                    <property name="sortDirection">asc</property>
-                    <property name="dataType">string</property>
-                    <property name="paramType">simple</property>
-                    <property name="controlType">list-box</property>
-                    <property name="mustMatch">false</property>
-                    <property name="fixedOrder">false</property>
-                    <structure name="format"/>
-                </scalar-parameter>
-                <scalar-parameter name="Subdistrict" id="798">
-                    <property name="valueType">dynamic</property>
-                    <property name="isRequired">true</property>
-                    <property name="dataSetName">Subdistricts</property>
-                    <expression name="valueExpr">row["state_province"]</expression>
-                    <expression name="labelExpr">row["state_province"]</expression>
-                    <expression name="sortByColumn">dataSetRow["state_province"]</expression>
-                    <property name="sortDirection">asc</property>
-                    <property name="dataType">string</property>
-                    <property name="paramType">simple</property>
-                    <property name="controlType">list-box</property>
-                    <property name="mustMatch">false</property>
-                    <property name="fixedOrder">false</property>
-                    <structure name="format"/>
-                </scalar-parameter>
-                <scalar-parameter name="Facility" id="799">
-                    <property name="valueType">dynamic</property>
-                    <property name="isRequired">true</property>
-                    <property name="dataSetName">Facilities</property>
-                    <expression name="valueExpr">row["facility_id"]</expression>
-                    <expression name="labelExpr">row["name"]</expression>
-                    <expression name="sortByColumn">dataSetRow["name"]</expression>
-                    <property name="sortDirection">asc</property>
-                    <property name="dataType">integer</property>
-                    <property name="paramType">simple</property>
-                    <property name="controlType">list-box</property>
-                    <property name="mustMatch">false</property>
-                    <property name="fixedOrder">false</property>
-                    <structure name="format"/>
-                </scalar-parameter>
-            </parameters>
-        </cascading-parameter-group>
+        <scalar-parameter name="Facility" id="1032">
+            <text-property name="helpText">Facility</text-property>
+            <text-property name="promptText">Facility</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="dataSetName">Facilities</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["facility_id"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="sortByColumn">dataSetRow["name"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
         <scalar-parameter name="Month" id="532">
             <text-property name="promptText">Month?</text-property>
             <property name="valueType">static</property>
@@ -953,233 +896,19 @@ where users.voided = 0 and person_name.voided = 0;]]></xml-property>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Regions" id="187">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Facilities" id="800">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">region</property>
-                    <text-property name="displayName">region</text-property>
+                    <property name="columnName">facility_id</property>
+                    <text-property name="displayName">facility_id</text-property>
                 </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">region</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
                 <structure>
-                    <property name="position">1</property>
-                    <property name="name">region</property>
-                    <property name="nativeName">region</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
+                    <property name="columnName">location_id</property>
+                    <text-property name="displayName">location_id</text-property>
                 </structure>
-            </list-property>
-            <xml-property name="queryText"><![CDATA[select distinct(location.region)
-from location]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
-  <Version>1.0</Version>
-  <design:ResultSets derivedMetaData="true">
-    <design:resultSetDefinitions>
-      <design:resultSetColumns>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:name>region</design:name>
-            <design:position>1</design:position>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>50</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>region</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>region</design:label>
-            <design:formattingHints>
-              <design:displaySize>50</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:name>county_district</design:name>
-            <design:position>2</design:position>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>50</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>county_district</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>county_district</design:label>
-            <design:formattingHints>
-              <design:displaySize>50</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:name>state_province</design:name>
-            <design:position>3</design:position>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>50</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>state_province</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>state_province</design:label>
-            <design:formattingHints>
-              <design:displaySize>50</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-      </design:resultSetColumns>
-    </design:resultSetDefinitions>
-  </design:ResultSets>
-</model:DesignValues>]]></xml-property>
-        </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Subdistricts" id="189">
-            <list-property name="parameters">
                 <structure>
-                    <property name="name">district</property>
-                    <property name="paramName">District</property>
-                    <property name="dataType">string</property>
-                    <property name="position">1</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">state_province</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">state_province</property>
-                    <property name="nativeName">state_province</property>
-                    <property name="dataType">string</property>
-                </structure>
-            </list-property>
-            <xml-property name="queryText"><![CDATA[select distinct(location.state_province)
-from location where location.county_district = ?]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
-  <Version>1.0</Version>
-  <design:ResultSets derivedMetaData="true">
-    <design:resultSetDefinitions>
-      <design:resultSetColumns>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:name>state_province</design:name>
-            <design:position>1</design:position>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>50</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>state_province</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>state_province</design:label>
-            <design:formattingHints>
-              <design:displaySize>50</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-      </design:resultSetColumns>
-    </design:resultSetDefinitions>
-  </design:ResultSets>
-</model:DesignValues>]]></xml-property>
-        </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Districts" id="190">
-            <list-property name="parameters">
-                <structure>
-                    <property name="name">region</property>
-                    <property name="paramName">Region</property>
-                    <property name="dataType">string</property>
-                    <property name="position">1</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">county_district</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">county_district</property>
-                    <property name="nativeName">county_district</property>
-                    <property name="dataType">string</property>
-                </structure>
-            </list-property>
-            <xml-property name="queryText"><![CDATA[select distinct(location.county_district)
-from location where location.region = ?]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
-  <Version>1.0</Version>
-  <design:ResultSets derivedMetaData="true">
-    <design:resultSetDefinitions>
-      <design:resultSetColumns>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:name>county_district</design:name>
-            <design:position>1</design:position>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>50</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>county_district</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>county_district</design:label>
-            <design:formattingHints>
-              <design:displaySize>50</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-      </design:resultSetColumns>
-    </design:resultSetDefinitions>
-  </design:ResultSets>
-</model:DesignValues>]]></xml-property>
-        </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Facilities" id="800">
-            <list-property name="parameters">
-                <structure>
-                    <property name="name">subdistrict</property>
-                    <property name="paramName">Subdistrict</property>
-                    <property name="dataType">string</property>
-                    <property name="position">1</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
+                    <property name="columnName">name</property>
+                    <text-property name="displayName">name</text-property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -1208,18 +937,21 @@ from location where location.region = ?]]></xml-property>
                     <property name="name">facility_id</property>
                     <property name="nativeName">facility_id</property>
                     <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">location_id</property>
                     <property name="nativeName">location_id</property>
                     <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">name</property>
                     <property name="nativeName">name</property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
@@ -1229,7 +961,7 @@ loc.name
 from motechmodule_facility fac
 join location loc 
 on fac.location_id = loc.location_id
-and loc.state_province = ?]]></xml-property>
+]]></xml-property>
         </oda-data-set>
         <script-data-set name="AgeGroup" id="921">
             <list-property name="resultSetHints">
@@ -1516,6 +1248,102 @@ else 0;</expression>
                 </structure>
             </list-property>
         </joint-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Location" id="1036">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">facility</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">facility_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">location_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">region</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">county_district</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">state_province</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">facility_id</property>
+                    <property name="nativeName">facility_id</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">location_id</property>
+                    <property name="nativeName">location_id</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">region</property>
+                    <property name="nativeName">region</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">county_district</property>
+                    <property name="nativeName">county_district</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">state_province</property>
+                    <property name="nativeName">state_province</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+fac.facility_id,
+fac.location_id, 
+loc.name,
+loc.region,
+loc.county_district,
+loc.state_province 
+from motechmodule_facility fac
+join location loc 
+on fac.location_id = loc.location_id
+and fac.facility_id = ?]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <cubes>
         <tabular-cube name="OPD Cube" id="24">
@@ -1812,16 +1640,17 @@ MoTeCH Statement of Out-Patients
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="193">
-                        <property name="dataSet">Data Set</property>
+                    <data id="1039">
+                        <property name="dataSet">Location</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">Subdistrict</property>
-                                <expression name="expression" type="javascript">params["Subdistrict"].displayText</expression>
+                                <property name="name">state_province</property>
+                                <text-property name="displayName">state_province</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["state_province"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">Subdistrict</property>
+                        <property name="resultSetColumn">state_province</property>
                     </data>
                 </cell>
             </row>
@@ -1856,16 +1685,17 @@ MoTeCH Statement of Out-Patients
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="194">
-                        <property name="dataSet">Data Set</property>
+                    <data id="1038">
+                        <property name="dataSet">Location</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">District</property>
-                                <expression name="expression" type="javascript">params["District"].displayText</expression>
+                                <property name="name">county_district</property>
+                                <text-property name="displayName">county_district</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["county_district"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">District</property>
+                        <property name="resultSetColumn">county_district</property>
                     </data>
                 </cell>
             </row>
@@ -1900,16 +1730,17 @@ MoTeCH Statement of Out-Patients
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="195">
-                        <property name="dataSet">Data Set</property>
+                    <data id="1037">
+                        <property name="dataSet">Location</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">Regions</property>
-                                <expression name="expression" type="javascript">params["Region"].displayText</expression>
+                                <property name="name">region</property>
+                                <text-property name="displayName">region</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["region"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">Regions</property>
+                        <property name="resultSetColumn">region</property>
                     </data>
                 </cell>
             </row>
