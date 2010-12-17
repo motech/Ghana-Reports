@@ -2191,7 +2191,7 @@ MoTeCH Statement of Out-Patients
                 <row id="887">
                     <cell id="888"/>
                     <cell id="889">
-                        <property name="colSpan">1</property>
+                        <property name="colSpan">4</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="916">
@@ -2200,17 +2200,8 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">INSURED PATIENTS</text-property>
                         </label>
                     </cell>
-                    <cell id="1017">
-                        <property name="style">NewStyle</property>
-                    </cell>
-                    <cell id="1018">
-                        <property name="style">NewStyle</property>
-                    </cell>
-                    <cell id="1019">
-                        <property name="style">NewStyle</property>
-                    </cell>
                     <cell id="893">
-                        <property name="colSpan">1</property>
+                        <property name="colSpan">4</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="917">
@@ -2219,33 +2210,15 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">NON-INSURED PATIENTS</text-property>
                         </label>
                     </cell>
-                    <cell id="1022">
-                        <property name="style">NewStyle</property>
-                    </cell>
-                    <cell id="1023">
-                        <property name="style">NewStyle</property>
-                    </cell>
-                    <cell id="1024">
-                        <property name="style">NewStyle</property>
-                    </cell>
                     <cell id="897">
-                        <property name="colSpan">1</property>
+                        <property name="colSpan">2</property>
                         <property name="rowSpan">1</property>
-                        <property name="style">NewStyle</property>
-                        <label id="918">
-                            <property name="fontWeight">bold</property>
-                            <property name="textAlign">center</property>
-                            <text-property name="text">TOTAL</text-property>
-                        </label>
-                    </cell>
-                    <cell id="1027">
-                        <property name="style">NewStyle</property>
                     </cell>
                 </row>
                 <row id="875">
                     <cell id="876"/>
                     <cell id="877">
-                        <property name="colSpan">1</property>
+                        <property name="colSpan">2</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="911">
@@ -2253,11 +2226,8 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">New</text-property>
                         </label>
                     </cell>
-                    <cell id="1020">
-                        <property name="style">NewStyle</property>
-                    </cell>
                     <cell id="879">
-                        <property name="colSpan">1</property>
+                        <property name="colSpan">2</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="912">
@@ -2265,11 +2235,8 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">Old</text-property>
                         </label>
                     </cell>
-                    <cell id="1021">
-                        <property name="style">NewStyle</property>
-                    </cell>
                     <cell id="881">
-                        <property name="colSpan">1</property>
+                        <property name="colSpan">2</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="913">
@@ -2277,11 +2244,8 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">New</text-property>
                         </label>
                     </cell>
-                    <cell id="1025">
-                        <property name="style">NewStyle</property>
-                    </cell>
                     <cell id="883">
-                        <property name="colSpan">1</property>
+                        <property name="colSpan">2</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="914">
@@ -2289,20 +2253,14 @@ MoTeCH Statement of Out-Patients
                             <text-property name="text">Old</text-property>
                         </label>
                     </cell>
-                    <cell id="1026">
-                        <property name="style">NewStyle</property>
-                    </cell>
                     <cell id="885">
-                        <property name="colSpan">1</property>
+                        <property name="colSpan">2</property>
                         <property name="rowSpan">1</property>
                         <property name="style">NewStyle</property>
                         <label id="915">
                             <property name="textAlign">center</property>
                             <text-property name="text">Total</text-property>
                         </label>
-                    </cell>
-                    <cell id="1028">
-                        <property name="style">NewStyle</property>
                     </cell>
                 </row>
                 <row id="802">
