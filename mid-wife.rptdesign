@@ -105,6 +105,18 @@
                     <property name="value">2011</property>
                     <property name="label">2011</property>
                 </structure>
+                <structure>
+                    <property name="value">2012</property>
+                    <property name="label">2012</property>
+                </structure>
+                <structure>
+                    <property name="value">2013</property>
+                    <property name="label">2013</property>
+                </structure>
+                <structure>
+                    <property name="value">2014</property>
+                    <property name="label">2014</property>
+                </structure>
             </list-property>
             <property name="paramType">simple</property>
             <property name="controlType">list-box</property>
@@ -3875,9 +3887,9 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
     'Termination Type',
-    SUM(if(obs.value_numeric =1,1,0)) as elective,
+    SUM(if(obs.value_numeric = 1,1,0)) as elective,
     SUM(if(obs.value_numeric = 2,1,0)) as spontaneous,
-    SUM(if(obs.value_numeric between 3 and 4 ,1,0)) as induced
+    SUM(if(obs.value_numeric = 3,1,0)) as induced
 FROM 
     obs obs,
     encounter encounter,
