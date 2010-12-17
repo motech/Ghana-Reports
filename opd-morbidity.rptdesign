@@ -46,19 +46,16 @@
     <property name="layoutPreference">auto layout</property>
     <property name="bidiLayoutOrientation">ltr</property>
     <parameters>
-        <scalar-parameter name="Year" id="182">
-            <text-property name="promptText">Year?</text-property>
-            <property name="valueType">static</property>
-            <property name="sortBy">label</property>
-            <property name="sortDirection">desc</property>
+        <scalar-parameter name="Facility" id="212">
+            <text-property name="promptText">Facility?</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="dataSetName">Facilities</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["location_id"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="sortByColumn">dataSetRow["name"]</expression>
+            <property name="sortDirection">asc</property>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
-            <list-property name="selectionList">
-                <structure>
-                    <property name="value">2010</property>
-                    <property name="label">2010</property>
-                </structure>
-            </list-property>
             <property name="paramType">simple</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
@@ -132,16 +129,19 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
-        <scalar-parameter name="Facility" id="212">
-            <text-property name="promptText">Facility?</text-property>
-            <property name="valueType">dynamic</property>
-            <property name="dataSetName">Facilities</property>
-            <expression name="valueExpr" type="javascript">dataSetRow["location_id"]</expression>
-            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
-            <expression name="sortByColumn">dataSetRow["name"]</expression>
-            <property name="sortDirection">asc</property>
+        <scalar-parameter name="Year" id="182">
+            <text-property name="promptText">Year?</text-property>
+            <property name="valueType">static</property>
+            <property name="sortBy">label</property>
+            <property name="sortDirection">desc</property>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">2010</property>
+                    <property name="label">2010</property>
+                </structure>
+            </list-property>
             <property name="paramType">simple</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
