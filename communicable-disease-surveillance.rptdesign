@@ -1072,6 +1072,18 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                                 <expression name="expression" type="javascript">params["Month"].displayText</expression>
                                 <property name="dataType">string</property>
                             </structure>
+                            <structure>
+                                <property name="name">urinaryschistosomiasis</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["id"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">dataSetRow["diagnosis"] == 19</expression>
+                            </structure>
                         </list-property>
                         <column id="792">
                             <property name="width">69.37mm</property>
@@ -4219,6 +4231,9 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">thin</property>
+                                    <data id="1028">
+                                        <property name="resultSetColumn">urinaryschistosomiasis</property>
+                                    </data>
                                 </cell>
                                 <cell id="507">
                                     <property name="backgroundColor">#000000</property>
