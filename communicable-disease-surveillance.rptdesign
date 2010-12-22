@@ -970,7 +970,7 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                     <property name="name">portion_malaria_less_than_5</property>
                     <expression name="expression" type="javascript">Finance.percent(&#13;
 (row["uncomplicated_malaria_less_than_5"] + row["uncomplicated_malaria_5_years_and_abv"] + row["uncomplicated_malaria_less_than_5_lab_confirmed"]+ row["uncomplicated_malaria_5_above_lab_confirmed"]),&#13;
-(row["uncomplicated_malaria_less_than_5"]+  row["uncomplicated_malaria_5_years_and_abv"])&#13;
+(row["uncomplicated_malaria_less_than_5"]+  row["uncomplicated_malaria_less_than_5_lab_confirmed"])&#13;
 )</expression>
                     <property name="dataType">float</property>
                 </structure>
@@ -1093,6 +1093,21 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">dataSetRow["diagnosis"] == 17</expression>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <expression name="expression" type="javascript">params["Year"].value</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <expression name="expression" type="javascript">params["Month"].displayText</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">facility</property>
+                    <expression name="expression" type="javascript">params["Facility"].displayText</expression>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
             <column id="1030">
@@ -1429,6 +1444,9 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                 </cell>
                 <cell id="1106">
                     <property name="style">Thin_Border</property>
+                    <data id="1968">
+                        <property name="resultSetColumn">year</property>
+                    </data>
                 </cell>
                 <cell id="1108">
                     <property name="style">Thin_Border</property>
@@ -1441,6 +1459,9 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                     <property name="borderRightColor">#000000</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
+                    <data id="1969">
+                        <property name="resultSetColumn">month</property>
+                    </data>
                 </cell>
                 <cell id="1110"/>
                 <cell id="1111">
@@ -1512,7 +1533,11 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                                     <text-property name="text">Facility:</text-property>
                                 </label>
                             </cell>
-                            <cell id="1768"/>
+                            <cell id="1768">
+                                <data id="1970">
+                                    <property name="resultSetColumn">facility</property>
+                                </data>
+                            </cell>
                             <cell id="1769">
                                 <label id="1774">
                                     <text-property name="text">District:</text-property>
@@ -1523,6 +1548,22 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                 </cell>
                 <cell id="1121">
                     <property name="style">Thin_Border</property>
+                    <data id="1971">
+                        <property name="dataSet">Locations</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">location_id</property>
+                                <expression name="expression" type="javascript">dataSetRow["location_id"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">district</property>
+                                <expression name="expression" type="javascript">dataSetRow["county_district"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">district</property>
+                    </data>
                 </cell>
                 <cell id="1123">
                     <property name="style">Thin_Border</property>
@@ -1535,6 +1576,22 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                     <property name="borderRightColor">#000000</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
+                    <data id="1972">
+                        <property name="dataSet">Locations</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">location_id</property>
+                                <expression name="expression" type="javascript">dataSetRow["location_id"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">region</property>
+                                <expression name="expression" type="javascript">dataSetRow["region"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">region</property>
+                    </data>
                 </cell>
                 <cell id="1125"/>
                 <cell id="1126">
