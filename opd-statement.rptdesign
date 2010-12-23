@@ -236,8 +236,8 @@ else if (row["age"] >=70)&#13;
                     <text-property name="displayName">diagnosis</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">newcase</property>
-                    <text-property name="displayName">newcase</text-property>
+                    <property name="columnName">newpatient</property>
+                    <text-property name="displayName">newpatient</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">insured</property>
@@ -326,7 +326,7 @@ else if (row["age"] >=70)&#13;
                     </structure>
                     <structure>
                         <property name="position">12</property>
-                        <property name="name">newcase</property>
+                        <property name="name">newpatient</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
@@ -427,8 +427,8 @@ else if (row["age"] >=70)&#13;
                 </structure>
                 <structure>
                     <property name="position">12</property>
-                    <property name="name">newcase</property>
-                    <property name="nativeName">newcase</property>
+                    <property name="name">newpatient</property>
+                    <property name="nativeName">newpatient</property>
                     <property name="dataType">float</property>
                     <property name="nativeDataType">8</property>
                 </structure>
@@ -452,7 +452,7 @@ loc1.name as facility,
 ge1.sex,
 ge1.birthdate,
 ge1.diagnosis,
-ge1.newcase,
+ge1.newpatient,
 ge1.insured
 from motechmodule_generaloutpatientencounter ge1
 join motechmodule_facility fa1 on fa1.facility_id = ge1.facility_id
@@ -508,8 +508,6 @@ left outer join (obs obs3 join concept_name cn3
 on obs3.concept_id = cn3.concept_id and cn3.name = 'INSURED' and obs3.voided = 0)
 on enc.encounter_id = obs3.encounter_id
 where enc.voided = 0;
-
-
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -652,18 +650,18 @@ where enc.voided = 0;
         </design:resultColumnDefinitions>
         <design:resultColumnDefinitions>
           <design:attributes>
-            <design:name>newcase</design:name>
+            <design:name>newpatient</design:name>
             <design:position>8</design:position>
             <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
             <design:precision>1</design:precision>
             <design:scale>0</design:scale>
             <design:nullability>NotNullable</design:nullability>
             <design:uiHints>
-              <design:displayName>newcase</design:displayName>
+              <design:displayName>newpatient</design:displayName>
             </design:uiHints>
           </design:attributes>
           <design:usageHints>
-            <design:label>newcase</design:label>
+            <design:label>newpatient</design:label>
             <design:formattingHints>
               <design:displaySize>1</design:displaySize>
             </design:formattingHints>
@@ -805,10 +803,21 @@ where enc.voided = 0;
                     <property name="nativeDataType">12</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select users.user_id,users.system_id,person_name.given_name,person_name.family_name
-from users inner join person_name
-on users.user_id = person_name.person_id
-where users.voided = 0 and person_name.voided = 0;]]></xml-property>
+            <xml-property name="queryText"><![CDATA[select
+	users.user_id,
+	users.system_id,
+	person_name.given_name,
+	person_name.family_name
+from
+	users
+inner join
+	person_name
+on
+	users.user_id = person_name.person_id
+where
+	users.voided = 0
+and
+	person_name.voided = 0;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -1094,9 +1103,9 @@ else 0;</expression>
                     <text-property name="displayName">Data Set::id</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">Data Set::newcase</property>
-                    <property name="alias">newcase</property>
-                    <text-property name="displayName">Data Set::newcase</text-property>
+                    <property name="columnName">Data Set::newpatient</property>
+                    <property name="alias">newpatient</property>
+                    <text-property name="displayName">Data Set::newpatient</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Data Set::insured</property>
@@ -1193,7 +1202,7 @@ else 0;</expression>
                     </structure>
                     <structure>
                         <property name="position">12</property>
-                        <property name="name">newcase</property>
+                        <property name="name">newpatient</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
@@ -1333,16 +1342,20 @@ else 0;</expression>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
-fac.facility_id,
-fac.location_id, 
-loc.name,
-loc.region,
-loc.county_district,
-loc.state_province 
-from motechmodule_facility fac
-join location loc 
-on fac.location_id = loc.location_id
-and fac.facility_id = ?]]></xml-property>
+	fac.facility_id,
+	fac.location_id, 
+	loc.name,
+	loc.region,
+	loc.county_district,
+	loc.state_province 
+from
+	motechmodule_facility fac
+join
+	location loc 
+on
+	fac.location_id = loc.location_id
+and
+	fac.facility_id = ?]]></xml-property>
         </oda-data-set>
     </data-sets>
     <cubes>
@@ -1362,11 +1375,11 @@ and fac.facility_id = ?]]></xml-property>
 else
 	'Non-Insured Patients';</expression>
                                 </tabular-level>
-                                <tabular-level name="newcase" id="552">
+                                <tabular-level name="newpatient" id="552">
                                     <property name="dataType">float</property>
                                     <property name="levelType">dynamic</property>
-                                    <property name="columnName">newcase</property>
-                                    <expression name="displayColumnName">if (dataSetRow["newcase"] == 1.0)
+                                    <property name="columnName">newpatient</property>
+                                    <expression name="displayColumnName">if (dataSetRow["newpatient"] == 1.0)
 	'New';
 else
 	'Old';</expression>
@@ -1886,8 +1899,8 @@ MoTeCH Statement of Out-Patients
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
-                    <property name="name">newcase</property>
-                    <expression name="expression" type="javascript">dataSetRow["newcase"]</expression>
+                    <property name="name">newpatient</property>
+                    <expression name="expression" type="javascript">dataSetRow["newpatient"]</expression>
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
@@ -1932,7 +1945,7 @@ MoTeCH Statement of Out-Patients
                             <property name="name">Expression</property>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newcase"] == 1 &amp;&amp; dataSetRow["insured"] ==1 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newpatient"] == 1 &amp;&amp; dataSetRow["insured"] ==1 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
                 </structure>
                 <structure>
                     <property name="name">female_new_insured</property>
@@ -1946,7 +1959,7 @@ MoTeCH Statement of Out-Patients
                             <property name="name">Expression</property>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newcase"] == 1 &amp;&amp; dataSetRow["insured"] ==1 &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newpatient"] == 1 &amp;&amp; dataSetRow["insured"] ==1 &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
                 </structure>
                 <structure>
                     <property name="name">male_old_insured</property>
@@ -1960,7 +1973,7 @@ MoTeCH Statement of Out-Patients
                             <property name="name">Expression</property>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newcase"] == 0 &amp;&amp; dataSetRow["insured"] ==1 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newpatient"] == 0 &amp;&amp; dataSetRow["insured"] ==1 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
                 </structure>
                 <structure>
                     <property name="name">female_old_insured</property>
@@ -1974,7 +1987,7 @@ MoTeCH Statement of Out-Patients
                             <property name="name">Expression</property>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newcase"] == 0 &amp;&amp; dataSetRow["insured"] ==1 &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newpatient"] == 0 &amp;&amp; dataSetRow["insured"] ==1 &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
                 </structure>
                 <structure>
                     <property name="name">male_new_non_insured</property>
@@ -1988,7 +2001,7 @@ MoTeCH Statement of Out-Patients
                             <property name="name">Expression</property>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newcase"] == 1 &amp;&amp; dataSetRow["insured"] ==0 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newpatient"] == 1 &amp;&amp; dataSetRow["insured"] ==0 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
                 </structure>
                 <structure>
                     <property name="name">female_new_non_insured</property>
@@ -2002,7 +2015,7 @@ MoTeCH Statement of Out-Patients
                             <property name="name">Expression</property>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newcase"] == 1 &amp;&amp; dataSetRow["insured"] ==0 &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newpatient"] == 1 &amp;&amp; dataSetRow["insured"] ==0 &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
                 </structure>
                 <structure>
                     <property name="name">male_old_non_insured</property>
@@ -2016,7 +2029,7 @@ MoTeCH Statement of Out-Patients
                             <property name="name">Expression</property>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newcase"] == 0 &amp;&amp; dataSetRow["insured"] ==0 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newpatient"] == 0 &amp;&amp; dataSetRow["insured"] ==0 &amp;&amp; dataSetRow["sex"]=="MALE"</expression>
                 </structure>
                 <structure>
                     <property name="name">female_old_non_insured</property>
@@ -2030,7 +2043,7 @@ MoTeCH Statement of Out-Patients
                             <property name="name">Expression</property>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newcase"] == 0 &amp;&amp; dataSetRow["insured"] ==0 &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["c_diagnosis"] > 0 &amp;&amp; dataSetRow["newpatient"] == 0 &amp;&amp; dataSetRow["insured"] ==0 &amp;&amp; dataSetRow["sex"]=="FEMALE"</expression>
                 </structure>
                 <structure>
                     <property name="name">male_total</property>
@@ -2555,8 +2568,8 @@ MoTeCH Statement of Out-Patients
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
-                    <property name="name">newcase</property>
-                    <expression name="expression" type="javascript">dataSetRow["newcase"]</expression>
+                    <property name="name">newpatient</property>
+                    <expression name="expression" type="javascript">dataSetRow["newpatient"]</expression>
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
