@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
     <property name="units">in</property>
     <list-property name="propertyBindings">
         <structure>
@@ -162,8 +162,8 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
-            <property name="odaUser">openmrsuser</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
+            <property name="odaUser">root</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">b3Blbm1ycw==</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -752,7 +752,7 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
     'height',
-    SUM(if(obs.value_numeric < 150,1,0)) as lesser_than_150cms
+    coalesce(SUM(if(obs.value_numeric < 150,1,0)),0) as lesser_than_150cms
     FROM obs obs, 
     person_attribute attr,
     encounter encounter,
@@ -866,10 +866,10 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
     'parity',
-    SUM(if(obs.value_numeric =0,1,0)) as zero,
-    SUM(if(obs.value_numeric between 1 and 2,1,0)) as 1_to_2,
-    SUM(if(obs.value_numeric between 3 and 4,1,0)) as 3_to_4,
-    SUM(if(obs.value_numeric > 5,1,0)) as greater_than_5
+    coalesce(SUM(if(obs.value_numeric =0,1,0)),0) as zero,
+    coalesce(SUM(if(obs.value_numeric between 1 and 2,1,0)),0) as 1_to_2,
+    coalesce(SUM(if(obs.value_numeric between 3 and 4,1,0)),0) as 3_to_4,
+    coalesce(SUM(if(obs.value_numeric > 5,1,0)),0) as greater_than_5
     FROM 
     	obs obs,
     	encounter encounter,
@@ -970,9 +970,9 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select
     'Duration of Pregnancy',
-    sum(if(weeks between 0 and 12,1,0)) as third_trimester,
-    sum(if(weeks between 12 and 24,1,0)) as second_trimester,
-    sum(if(weeks between 24 and 36,1,0)) as first_trimester
+    coalesce(sum(if(weeks between 0 and 12,1,0)),0) as third_trimester,
+    coalesce(sum(if(weeks between 12 and 24,1,0)),0) as second_trimester,
+    coalesce(sum(if(weeks between 24 and 36,1,0)),0) as first_trimester
 from 
 (select
     distinct
@@ -1082,8 +1082,8 @@ and
             <xml-property name="queryText"><![CDATA[select 
 	'Hemoglobin',
 	count(*) as checked_at_registration,
-    sum(if(obs.value_numeric < 11,1,0)) as less_than_11,
-    sum(if(obs.value_numeric < 7,1,0)) as less_than_7
+    coalesce(sum(if(obs.value_numeric < 11,1,0)),0) as less_than_11,
+    coalesce(sum(if(obs.value_numeric < 7,1,0)),0) as less_than_7
 from
     (
 	select
@@ -1185,8 +1185,8 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select  
 		'ITN',
-        SUM(if(obs.value_numeric = 1 and visit.visit_number=1,1,0)) as 1stVisit, 
-        SUM(if(obs.value_numeric = 1 and visit.visit_number=2,1,0)) as 2ndVisit
+        coalesce(SUM(if(obs.value_numeric = 1 and visit.visit_number=1,1,0)),0) as 1stVisit, 
+        coalesce(SUM(if(obs.value_numeric = 1 and visit.visit_number=2,1,0)),0) as 2ndVisit
     from obs obs, 
     (select 
         obs.encounter_id,
@@ -1297,9 +1297,9 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select distinct 
     name.name, 
-    SUM(if(obs.value_numeric =1,1,0)) as IPT1,
-    SUM(if(obs.value_numeric =2,1,0)) as IPT2,
-    SUM(if(obs.value_numeric =3,1,0)) as IPT3   
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as IPT1,
+    coalesce(SUM(if(obs.value_numeric =2,1,0)),0) as IPT2,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as IPT3   
 from 
     obs obs, 
     concept_name name,
@@ -1381,7 +1381,7 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     name.name, 
-    SUM(if(obs.value_coded = 1229,1,0)) as REACTIVE
+    coalesce(SUM(if(obs.value_coded = 1229,1,0)),0) as REACTIVE
 from 
     obs obs, 
     concept_name name,
@@ -1485,9 +1485,9 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     'PMTCT',
-    SUM(if(name.name='HIV PRE-TEST COUNSELING' and obs.value_numeric =1,1,0)) as Counselled,
-    SUM(if(name.name='PMTCT' and obs.value_numeric =1,1,0)) as Positive,
-    SUM(if(name.name='PMTCT TREATMENT' and obs.value_numeric =1,1,0)) as Tested
+    coalesce(SUM(if(name.name='HIV PRE-TEST COUNSELING' and obs.value_numeric =1,1,0)),0) as Counselled,
+    coalesce(SUM(if(name.name='PMTCT' and obs.value_numeric =1,1,0)),0) as Positive,
+    coalesce(SUM(if(name.name='PMTCT TREATMENT' and obs.value_numeric =1,1,0)),0) as Tested
 from obs obs, concept_name name, encounter encounter,location location
 where obs.concept_id=name.concept_id 
 and
@@ -1598,9 +1598,9 @@ and name.name in ('HIV PRE-TEST COUNSELING', 'PMTCT TREATMENT', 'PMTCT')
             </list-property>
             <xml-property name="queryText"><![CDATA[select
 	'Outcome of Delivery (Children)', 
-    sum(if(obs.value_numeric =1,1,0)) as Singleton,
-    sum(if(obs.value_numeric =2,2,0)) as Twins,
-    sum(if(obs.value_numeric =3,3,0)) as Triplets
+    coalesce(sum(if(obs.value_numeric =1,1,0)),0) as Singleton,
+    coalesce(sum(if(obs.value_numeric =2,2,0)),0) as Twins,
+    coalesce(sum(if(obs.value_numeric =3,3,0)),0) as Triplets
 from
     obs obs,
     encounter encounter,
@@ -1719,9 +1719,9 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select
 	'Outcome of Delivery (Mother)', 
-    sum(if(obs.value_numeric =1,1,0)) as Singleton,
-    sum(if(obs.value_numeric =2,1,0)) as Twins,
-    sum(if(obs.value_numeric =3,1,0)) as Triplets
+    coalesce(sum(if(obs.value_numeric =1,1,0)),0) as Singleton,
+    coalesce(sum(if(obs.value_numeric =2,1,0)),0) as Twins,
+    coalesce(sum(if(obs.value_numeric =3,1,0)),0) as Triplets
 from
     obs obs,
     encounter encounter,
@@ -2008,8 +2008,8 @@ and
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
-    sum(if(gender = 'M', 1,0)) as Male,
-    sum(if(gender = 'F', 1,0)) as Female
+    coalesce(sum(if(gender = 'M', 1,0)),0) as Male,
+    coalesce(sum(if(gender = 'F', 1,0)),0) as Female
 from 
     (
     select gender from person where person_id in(
@@ -2054,16 +2054,6 @@ and
                             <expression name="value">row["Fresh_Still_Birth"] + row["Macerated_Still_Birth"]</expression>
                         </structure>
                     </list-property>
-                </structure>
-            </list-property>
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">Fresh_Still_Birth</property>
-                    <property name="alias">Fresh_Still_Birth</property>
-                </structure>
-                <structure>
-                    <property name="columnName">Macerated_Still_Birth</property>
-                    <property name="alias">Macerated_Still_Birth</property>
                 </structure>
             </list-property>
             <list-property name="parameters">
@@ -2128,8 +2118,8 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[
 select
-    sum(if(obs.value_text='FSB',1,0)) as Fresh_Still_Birth,
-    sum(if(obs.value_text='MSB',1,0)) as Macerated_Still_Birth
+    coalesce(sum(if(obs.value_text='FSB',1,0)),0) as Fresh_Still_Birth,
+    coalesce(sum(if(obs.value_text='MSB',1,0)),0) as Macerated_Still_Birth
 from
     obs obs,
     encounter encounter,
@@ -2196,7 +2186,7 @@ and
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select sum(if(obs.value_numeric < 2.5,1,0)) as Number
+            <xml-property name="queryText"><![CDATA[select coalesce(sum(if(obs.value_numeric < 2.5,1,0)),0) as Number
         from 
             obs, 
             concept_name,
@@ -2285,7 +2275,7 @@ and
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select sum(if(obs.value_numeric < 2.5,1,0)) as Number
+            <xml-property name="queryText"><![CDATA[select coalesce(sum(if(obs.value_numeric < 2.5,1,0)),0) as Number
         from 
             obs, 
             concept_name,
@@ -2375,7 +2365,7 @@ and
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select sum(if(obs.value_numeric < 2.5,1,0)) as Number
+            <xml-property name="queryText"><![CDATA[select coalesce(sum(if(obs.value_numeric < 2.5,1,0)),0) as Number
         from 
             obs, 
             concept_name,
@@ -2463,7 +2453,7 @@ and
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select sum(if(obs.value_numeric >= 2.5,1,0)) as Number
+            <xml-property name="queryText"><![CDATA[select coalesce(sum(if(obs.value_numeric >= 2.5,1,0)),0) as Number
         from 
             obs, 
             concept_name,
@@ -3058,15 +3048,15 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select
 	'Delivery or post partum complication', 
-    sum(if(obs.value_numeric =1,1,0)) as Eclampsia,
-    sum(if(obs.value_numeric =2,1,0)) as Puerperal_Infection,
-    sum(if(obs.value_numeric =3,1,0)) as PPH,
-    sum(if(obs.value_numeric =4,1,0)) as Ruptured_Uterus,
-    sum(if(obs.value_numeric =5,1,0)) as Cardiac_Arrest,
-    sum(if(obs.value_numeric =6,1,0)) as VVF,
-    sum(if(obs.value_numeric =7,1,0)) as Drop_Foot,
-    sum(if(obs.value_numeric =8,1,0)) as Puerperal_Psychosis,
-    sum(if(obs.value_numeric =9,1,0)) as other
+    coalesce(sum(if(obs.value_numeric =1,1,0)),0) as Eclampsia,
+    coalesce(sum(if(obs.value_numeric =2,1,0)),0) as Puerperal_Infection,
+    coalesce(sum(if(obs.value_numeric =3,1,0)),0) as PPH,
+    coalesce(sum(if(obs.value_numeric =4,1,0)),0) as Ruptured_Uterus,
+    coalesce(sum(if(obs.value_numeric =5,1,0)),0) as Cardiac_Arrest,
+    coalesce(sum(if(obs.value_numeric =6,1,0)),0) as VVF,
+    coalesce(sum(if(obs.value_numeric =7,1,0)),0) as Drop_Foot,
+    coalesce(sum(if(obs.value_numeric =8,1,0)),0) as Puerperal_Psychosis,
+    coalesce(sum(if(obs.value_numeric =9,1,0)),0) as other
 from
     obs obs,
     encounter encounter,
@@ -3301,7 +3291,7 @@ from
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
     'Deaths from abotion',
-    SUM(if(obs.value_numeric =1,1,0)) as total
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as total
     FROM 
     	obs obs,
     	encounter encounter,
@@ -3418,10 +3408,10 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     name.name, 
-    SUM(if(encounter_type.name= 'ANCVISIT' and obs.value_numeric = 1,1,0)) As ANCVISIT,
-    SUM(if(encounter_type.name= 'PREGDELVISIT' and obs.value_numeric = 1,1,0)) As PREGDELVISIT,
-    SUM(if(encounter_type.name= 'PNCMOTHERVISIT' and obs.value_numeric = 1,1,0)) As PNCVISIT,
-    SUM(if(encounter_type.name= 'CWCVISIT' and obs.value_numeric = 1,1,0)) As CWCVISIT
+    coalesce(SUM(if(encounter_type.name= 'ANCVISIT' and obs.value_numeric = 1,1,0)),0) As ANCVISIT,
+    coalesce(SUM(if(encounter_type.name= 'PREGDELVISIT' and obs.value_numeric = 1,1,0)),0) As PREGDELVISIT,
+    coalesce(SUM(if(encounter_type.name= 'PNCMOTHERVISIT' and obs.value_numeric = 1,1,0)),0) As PNCVISIT,
+    coalesce(SUM(if(encounter_type.name= 'CWCVISIT' and obs.value_numeric = 1,1,0)),0) As CWCVISIT
 from 
     obs obs, concept_name name, encounter, encounter_type, location location
 where 
@@ -3501,7 +3491,7 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
    'PAC-FP Accepting',
-    SUM(if(obs.value_numeric =1,1,0)) as total
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as total
     FROM 
     	obs obs,
     	encounter encounter,
@@ -3602,9 +3592,9 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
     'Termination Complication',
-    SUM(if(obs.value_numeric = 1,1,0)) as bleeding,
-    SUM(if(obs.value_numeric = 2 ,1,0)) as Sepsis,
- 	SUM(if(obs.value_numeric = 3 ,1,0)) as Perforations
+    coalesce(SUM(if(obs.value_numeric = 1,1,0)),0) as bleeding,
+    coalesce(SUM(if(obs.value_numeric = 2 ,1,0)),0) as Sepsis,
+ 	coalesce(SUM(if(obs.value_numeric = 3 ,1,0)),0) as Perforations
     FROM 
     	obs obs,
     	encounter encounter,
@@ -3683,7 +3673,7 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
     'PAC-FP Counselled',
-    SUM(if(obs.value_numeric =1,1,0)) as total
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as total
     FROM 
     	obs obs,
     	encounter encounter,
@@ -3784,9 +3774,9 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
     'Termination Procedure',
-    SUM(if(obs.value_numeric = 1,1,0)) as d,
-    SUM(if(obs.value_numeric = 2 ,1,0)) as MVA,
-	SUM(if(obs.value_numeric = 3 ,1,0)) as Other    
+    coalesce(SUM(if(obs.value_numeric = 1,1,0)),0) as d,
+    coalesce(SUM(if(obs.value_numeric = 2 ,1,0)),0) as MVA,
+	coalesce(SUM(if(obs.value_numeric = 3 ,1,0)),0) as Other    
     FROM 
     	obs obs,
     	encounter encounter,
@@ -3887,9 +3877,9 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
     'Termination Type',
-    SUM(if(obs.value_numeric = 1,1,0)) as elective,
-    SUM(if(obs.value_numeric = 2,1,0)) as spontaneous,
-    SUM(if(obs.value_numeric = 3,1,0)) as induced
+    coalesce(SUM(if(obs.value_numeric = 1,1,0)),0) as elective,
+    coalesce(SUM(if(obs.value_numeric = 2,1,0)),0) as spontaneous,
+    coalesce(SUM(if(obs.value_numeric = 3,1,0)),0) as induced
 FROM 
     obs obs,
     encounter encounter,
@@ -4139,8 +4129,8 @@ from
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     'Weight',
-    sum(if(obs.value_numeric < 2.5,1,0)) as lesser_than_2_and_a_half_kgs,
-    sum(if(obs.value_numeric > 2.5,1,0)) as greater_than_2_and_a_half_kgs
+    coalesce(sum(if(obs.value_numeric < 2.5,1,0)),0) as lesser_than_2_and_a_half_kgs,
+    coalesce(sum(if(obs.value_numeric > 2.5,1,0)),0) as greater_than_2_and_a_half_kgs
 from 
     obs, 
     encounter, 
@@ -4301,14 +4291,14 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     'DELIVERED AT',
-    SUM(if(obs.value_numeric =1,1,0)) as GovtHCOrHP,
-    SUM(if(obs.value_numeric =2,1,0)) as TeachingHospital,
-    SUM(if(obs.value_numeric =3,1,0)) as GovtHospital,
-    SUM(if(obs.value_numeric =3,1,0)) as PrivateHospital,
-    SUM(if(obs.value_numeric =3,1,0)) as CHAG,
-    SUM(if(obs.value_numeric =3,1,0)) as QuasiGovtInstitute,
-    SUM(if(obs.value_numeric =3,1,0)) as Mines,
-    SUM(if(obs.value_numeric =3,1,0)) as Home
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as GovtHCOrHP,
+    coalesce(SUM(if(obs.value_numeric =2,1,0)),0) as TeachingHospital,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as GovtHospital,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as PrivateHospital,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as CHAG,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as QuasiGovtInstitute,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as Mines,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as Home
 from obs obs, concept_name name, encounter encounter,location location
 where obs.concept_id=name.concept_id 
 and name.name = 'DELIVERY LOCATION'
@@ -4459,14 +4449,14 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     'DELIVERED BY',
-    SUM(if(obs.value_numeric =1,1,0)) as Doctor,
-    SUM(if(obs.value_numeric =2,1,0)) as MedicalAssistant,
-    SUM(if(obs.value_numeric =3,1,0)) as Midwife_Private,
-    SUM(if(obs.value_numeric =3,1,0)) as Midwife_Govt,
-    SUM(if(obs.value_numeric =3,1,0)) as CHOorCHN,
-    SUM(if(obs.value_numeric =3,1,0)) as TrainedTBA,
-    SUM(if(obs.value_numeric =3,1,0)) as UntrainedTBA,
-    SUM(if(obs.value_numeric =3,1,0)) as FriendOrRelative
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as Doctor,
+    coalesce(SUM(if(obs.value_numeric =2,1,0)),0) as MedicalAssistant,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as Midwife_Private,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as Midwife_Govt,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as CHOorCHN,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as TrainedTBA,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as UntrainedTBA,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as FriendOrRelative
 from obs obs, concept_name name, encounter encounter,location location
 where obs.concept_id=name.concept_id 
 and name.name = 'DELIVERED BY'
@@ -4805,7 +4795,7 @@ as patients
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     'Referrals',
-    sum(if(obs.value_numeric= 1,1,0)) as total
+    coalesce(sum(if(obs.value_numeric= 1,1,0)),0) as total
  from 
     obs, 
     encounter, 
@@ -4886,7 +4876,7 @@ and location.name=?]]></xml-property>
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     'Referrals',
-    sum(if(obs.value_numeric= 1,1,0)) as total
+    coalesce(sum(if(obs.value_numeric= 1,1,0)),0) as total
  from 
     obs, 
     encounter, 
