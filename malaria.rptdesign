@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
     <property name="units">mm</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -131,7 +131,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://10.4.4.74/openmrs</property>
+            <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
             <property name="odaUser">root</property>
             <encrypted-property name="odaPassword" encryptionID="base64">b3Blbm1ycw==</encrypted-property>
         </oda-data-source>
@@ -246,22 +246,18 @@ where
 	name = ?
 	]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AllOPDCasesChildrenUnder5" id="997">
-            <list-property name="parameters">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OPDCasesForGeneralPatients" id="999">
+            <list-property name="columnHints">
                 <structure>
-                    <property name="name">param_1</property>
-                    <property name="paramName">Year</property>
-                    <property name="dataType">decimal</property>
-                    <property name="position">1</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
+                    <property name="columnName">total_opd_gp</property>
+                    <text-property name="displayName">total_opd_gp</text-property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">children under five</property>
+                        <property name="name">total_opd_gp</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -270,17 +266,685 @@ where
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">children under five</property>
-                    <property name="nativeName">children under five</property>
+                    <property name="name">total_opd_gp</property>
+                    <property name="nativeName">total_opd_gp</property>
                     <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select count(*)as "children under five"
+            <xml-property name="queryText"><![CDATA[select count(*) as total_opd_gp
 from 
+	motechmodule_generaloutpatientencounter;]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>count(*)</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>21</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>count(*)</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>count(*)</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="clinical&amp;confirmed5yrsabove" id="1001">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">clinical_and_confirmed_above5yrs</property>
+                    <text-property name="displayName">clinical_and_confirmed_above5yrs</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">clinical_and_confirmed_above5yrs</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">openmrs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">clinical_and_confirmed_above5yrs</property>
+                    <property name="nativeName">clinical_and_confirmed_above5yrs</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	count(*) as clinical_and_confirmed_above5yrs
+from
 	motechmodule_generaloutpatientencounter
 where
-	? - YEAR(birthdate) < 5
-	]]></xml-property>
+	diagnosis = 10
+or
+	secondary_diagnosis = 10
+or
+	diagnosis = 11
+or
+	secondary_diagnosis = 11;]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>count(*)</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>21</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>count(*)</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>count(*)</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ConfirmedMalaria5YrsAndAbove" id="1003">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">conformed_malaria_above_5yrs</property>
+                    <text-property name="displayName">conformed_malaria_above_5yrs</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">conformed_malaria_above_5yrs</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">openmrs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">conformed_malaria_above_5yrs</property>
+                    <property name="nativeName">conformed_malaria_above_5yrs</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+	count(*) as conformed_malaria_above_5yrs
+from
+	motechmodule_generaloutpatientencounter
+where
+	diagnosis = 10
+or
+	secondary_diagnosis = 10;]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>conformed_malaria_above_5yrs</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>21</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>conformed_malaria_above_5yrs</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>conformed_malaria_above_5yrs</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AllOpdCasesChildrenUnder5" id="1005">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">count(enc.encounter_id)</property>
+                    <text-property name="displayName">count(enc.encounter_id)</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">count(enc.encounter_id)</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">openmrs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">count(enc.encounter_id)</property>
+                    <property name="nativeName">count(enc.encounter_id)</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	count(enc.encounter_id)
+from
+	encounter enc
+JOIN
+	person person
+on
+	enc.patient_id = person.person_id 
+and
+	person.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+and
+	enc.encounter_type = 9;]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>count(enc.encounter_id)</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>21</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>count(enc.encounter_id)</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>count(enc.encounter_id)</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AllOpdCasesPregnantWomen" id="1007">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">count(enc.encounter_id)</property>
+                    <text-property name="displayName">count(enc.encounter_id)</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">count(enc.encounter_id)</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">openmrs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">count(enc.encounter_id)</property>
+                    <property name="nativeName">count(enc.encounter_id)</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	count(enc.encounter_id)
+from
+	encounter enc
+JOIN
+	person person
+on
+	enc.patient_id = person.person_id 
+and
+	person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+and
+	enc.encounter_type = 9;]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>encounter_id</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>encounter_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>encounter_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>person_id</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>person_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>person_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>birthdate</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>birthdate</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>birthdate</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OpdCaseChildrenUnder5BothClinicalAndConfirmed" id="1009">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">count(*)</property>
+                    <text-property name="displayName">count(*)</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">count(*)</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">openmrs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">count(*)</property>
+                    <property name="nativeName">count(*)</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	count(*)
+from
+	obs
+where
+	(concept_id = 6117
+	or
+	concept_id = 6118)
+and
+	(value_numeric = 10
+	or
+	value_numeric = 11)
+and
+	encounter_id
+in
+	(select enc.encounter_id
+	from
+		encounter enc
+	JOIN
+		person person
+	on
+		enc.patient_id = person.person_id 
+	and
+		person.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+	and
+	enc.encounter_type=9);]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>count(*)</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>21</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>count(*)</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>count(*)</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>
+]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OpdCasesChildrenUnder5ConfirmedMalariaCases" id="1011">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">count(*)</property>
+                    <text-property name="displayName">count(*)</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">count(*)</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">openmrs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">count(*)</property>
+                    <property name="nativeName">count(*)</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	count(*)
+from
+	obs
+where
+	(concept_id = 6117
+	or
+	concept_id = 6118)
+and
+	value_numeric = 10
+and
+	encounter_id
+in
+	(select enc.encounter_id
+	from
+		encounter enc
+	JOIN
+		person person
+	on
+		enc.patient_id = person.person_id 
+	and
+		person.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+	and
+	enc.encounter_type=9);]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>count(*)</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>21</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>count(*)</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>count(*)</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OpdCasePregnantWomanBothClinicalAndConfirmed" id="1013">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">count(*)</property>
+                    <text-property name="displayName">count(*)</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">count(*)</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">openmrs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">count(*)</property>
+                    <property name="nativeName">count(*)</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	count(*)
+from
+	obs
+where
+	(concept_id = 6117
+	or
+	concept_id = 6118)
+and
+	(value_numeric = 10
+	or
+	value_numeric = 11)
+and
+	encounter_id
+in
+	(select enc.encounter_id
+	from
+		encounter enc
+	JOIN
+		person person
+	on
+		enc.patient_id = person.person_id 
+	and
+		person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+	and
+	enc.encounter_type=9);]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>count(*)</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>21</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>count(*)</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>count(*)</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OpdCasesPregnantWomenConfirmedMalariaCases" id="1015">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">count(*)</property>
+                    <text-property name="displayName">count(*)</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">count(*)</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">openmrs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">count(*)</property>
+                    <property name="nativeName">count(*)</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	count(*)
+from
+	obs
+where
+	(concept_id = 6117
+	or
+	concept_id = 6118)
+and
+	value_numeric = 10
+and
+	encounter_id
+in
+	(select enc.encounter_id
+	from
+		encounter enc
+	JOIN
+		person person
+	on
+		enc.patient_id = person.person_id 
+	and
+		person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+	and
+	enc.encounter_type=9);]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>count(*)</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>21</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>count(*)</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>count(*)</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>
+]]></xml-property>
         </oda-data-set>
     </data-sets>
     <styles>
@@ -1139,17 +1803,17 @@ where
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
-                    <data id="998">
-                        <property name="dataSet">AllOPDCasesChildrenUnder5</property>
+                    <data id="1006">
+                        <property name="dataSet">AllOpdCasesChildrenUnder5</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">children under five</property>
-                                <text-property name="displayName">children under five</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["children under five"]</expression>
+                                <property name="name">count(enc.encounter_id)</property>
+                                <text-property name="displayName">count(enc.encounter_id)</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["count(enc.encounter_id)"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">children under five</property>
+                        <property name="resultSetColumn">count(enc.encounter_id)</property>
                     </data>
                 </cell>
                 <cell id="452">
@@ -1165,6 +1829,18 @@ where
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
+                    <data id="1010">
+                        <property name="dataSet">OpdCaseChildrenUnder5BothClinicalAndConfirmed</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">count(*)</property>
+                                <text-property name="displayName">count(*)</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["count(*)"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">count(*)</property>
+                    </data>
                 </cell>
                 <cell id="453">
                     <property name="borderBottomColor">#000000</property>
@@ -1179,6 +1855,18 @@ where
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
+                    <data id="1012">
+                        <property name="dataSet">OpdCasesChildrenUnder5ConfirmedMalariaCases</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">count(*)</property>
+                                <text-property name="displayName">count(*)</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["count(*)"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">count(*)</property>
+                    </data>
                 </cell>
                 <cell id="454">
                     <property name="borderBottomColor">#000000</property>
@@ -1193,6 +1881,18 @@ where
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
+                    <data id="1000">
+                        <property name="dataSet">OPDCasesForGeneralPatients</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">total_opd_gp</property>
+                                <text-property name="displayName">total_opd_gp</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["total_opd_gp"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">total_opd_gp</property>
+                    </data>
                 </cell>
                 <cell id="455">
                     <property name="borderBottomColor">#000000</property>
@@ -1207,6 +1907,18 @@ where
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
+                    <data id="1002">
+                        <property name="dataSet">clinical&amp;confirmed5yrsabove</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">clinical_and_confirmed_above5yrs</property>
+                                <text-property name="displayName">clinical_and_confirmed_above5yrs</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["clinical_and_confirmed_above5yrs"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">clinical_and_confirmed_above5yrs</property>
+                    </data>
                 </cell>
                 <cell id="456">
                     <property name="borderBottomColor">#000000</property>
@@ -1221,6 +1933,18 @@ where
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
+                    <data id="1004">
+                        <property name="dataSet">ConfirmedMalaria5YrsAndAbove</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">conformed_malaria_above_5yrs</property>
+                                <text-property name="displayName">conformed_malaria_above_5yrs</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["conformed_malaria_above_5yrs"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">conformed_malaria_above_5yrs</property>
+                    </data>
                 </cell>
                 <cell id="457">
                     <property name="borderBottomColor">#000000</property>
@@ -1235,6 +1959,18 @@ where
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
+                    <data id="1008">
+                        <property name="dataSet">AllOpdCasesPregnantWomen</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">count(enc.encounter_id)</property>
+                                <text-property name="displayName">count(enc.encounter_id)</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["count(enc.encounter_id)"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">count(enc.encounter_id)</property>
+                    </data>
                 </cell>
                 <cell id="458">
                     <property name="borderBottomColor">#000000</property>
@@ -1249,6 +1985,18 @@ where
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
+                    <data id="1014">
+                        <property name="dataSet">OpdCasePregnantWomanBothClinicalAndConfirmed</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">count(*)</property>
+                                <text-property name="displayName">count(*)</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["count(*)"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">count(*)</property>
+                    </data>
                 </cell>
                 <cell id="459">
                     <property name="borderBottomColor">#000000</property>
@@ -1263,6 +2011,18 @@ where
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
+                    <data id="1016">
+                        <property name="dataSet">OpdCasesPregnantWomenConfirmedMalariaCases</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">count(*)</property>
+                                <text-property name="displayName">count(*)</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["count(*)"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">count(*)</property>
+                    </data>
                 </cell>
             </row>
         </grid>
