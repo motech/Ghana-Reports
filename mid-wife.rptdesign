@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
     <property name="units">in</property>
     <list-property name="propertyBindings">
         <structure>
@@ -162,8 +162,8 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
-            <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">b3Blbm1ycw==</encrypted-property>
+            <property name="odaUser">openmrs</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -891,6 +891,33 @@ and
 	location.name=?]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Duration of Pregnancy" id="365">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">week_diff</property>
+                    <expression name="expression">if(row["expected_delivery_date"] != null)&#13;
+BirtDateTime.diffWeek(row["expected_delivery_date"],row["observation_date"]);&#13;
+else 0;</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">third_trimester</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <expression name="filterExpr">row["week_diff"] > 24 &amp;&amp; row["week_diff"] &lt;= 36</expression>
+                </structure>
+                <structure>
+                    <property name="name">second_trimester</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <expression name="filterExpr">row["week_diff"] > 12 &amp;&amp; row["week_diff"] &lt;= 24</expression>
+                </structure>
+                <structure>
+                    <property name="name">first_trimester</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <expression name="filterExpr">row["week_diff"] >= 0  &amp;&amp; row["week_diff"] &lt;= 12</expression>
+                </structure>
+            </list-property>
             <list-property name="parameters">
                 <structure>
                     <property name="name">param_1</property>
@@ -926,18 +953,33 @@ and
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">third_trimester</property>
-                        <property name="dataType">decimal</property>
+                        <property name="name">expected_delivery_date</property>
+                        <property name="dataType">date-time</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">second_trimester</property>
-                        <property name="dataType">decimal</property>
+                        <property name="name">observation_date</property>
+                        <property name="dataType">date-time</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">first_trimester</property>
+                        <property name="name">week_diff</property>
                         <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">third_trimester</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">second_trimester</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">first_trimester</property>
+                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
@@ -951,33 +993,27 @@ and
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">third_trimester</property>
-                    <property name="nativeName">third_trimester</property>
-                    <property name="dataType">decimal</property>
+                    <property name="name">expected_delivery_date</property>
+                    <property name="nativeName">expected_delivery_date</property>
+                    <property name="dataType">date-time</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
-                    <property name="name">second_trimester</property>
-                    <property name="nativeName">second_trimester</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">first_trimester</property>
-                    <property name="nativeName">first_trimester</property>
-                    <property name="dataType">decimal</property>
+                    <property name="name">observation_date</property>
+                    <property name="nativeName">observation_date</property>
+                    <property name="dataType">date-time</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
-    'Duration of Pregnancy',
-    coalesce(sum(if(weeks between 0 and 12,1,0)),0) as third_trimester,
-    coalesce(sum(if(weeks between 12 and 24,1,0)),0) as second_trimester,
-    coalesce(sum(if(weeks between 24 and 36,1,0)),0) as first_trimester
+   'Duration of Pregnancy',
+    expected_delivery_date,
+    observation_date
 from 
 (select
     distinct
     obs.person_id,
-    week(obs.value_datetime) - week(obs.obs_datetime)  as weeks
+    obs.value_datetime as expected_delivery_date,
+    obs.obs_datetime as observation_date
 from
     encounter encounter, 
     obs obs,
