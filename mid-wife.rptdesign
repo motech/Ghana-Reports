@@ -1118,7 +1118,7 @@ and
             <xml-property name="queryText"><![CDATA[select 
 	'Hemoglobin',
 	count(*) as checked_at_registration,
-    coalesce(sum(if(obs.value_numeric < 11,1,0)),0) as less_than_11,
+    coalesce(sum(if(obs.value_numeric >= 7 &amp;&amp; obs.value_numeric < 11,1,0)),0) as less_than_11,
     coalesce(sum(if(obs.value_numeric < 7,1,0)),0) as less_than_7
 from
     (
