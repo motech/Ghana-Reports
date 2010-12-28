@@ -24,6 +24,64 @@
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">96</property>
     <parameters>
+        <scalar-parameter name="Facility" id="61">
+            <text-property name="promptText">Facility?</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="dataSetName">Facilities</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="sortByColumn">dataSetRow["name"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">Navio CHPS</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Year" id="59">
+            <text-property name="promptText">Year?</text-property>
+            <property name="valueType">static</property>
+            <property name="sortBy">label</property>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">decimal</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">2010</property>
+                    <property name="label">2010</property>
+                </structure>
+                <structure>
+                    <property name="value">2011</property>
+                    <property name="label">2011</property>
+                </structure>
+                <structure>
+                    <property name="value">2012</property>
+                    <property name="label">2012</property>
+                </structure>
+                <structure>
+                    <property name="value">2013</property>
+                    <property name="label">2013</property>
+                </structure>
+                <structure>
+                    <property name="value">2014</property>
+                    <property name="label">2014</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
         <scalar-parameter name="Month" id="58">
             <text-property name="promptText">Month?</text-property>
             <property name="valueType">static</property>
@@ -81,64 +139,6 @@
                     <property name="label">December</property>
                 </structure>
             </list-property>
-            <property name="paramType">simple</property>
-            <property name="controlType">list-box</property>
-            <property name="mustMatch">false</property>
-            <property name="fixedOrder">false</property>
-            <structure name="format">
-                <property name="category">Unformatted</property>
-            </structure>
-        </scalar-parameter>
-        <scalar-parameter name="Year" id="59">
-            <text-property name="promptText">Year?</text-property>
-            <property name="valueType">static</property>
-            <property name="sortBy">label</property>
-            <property name="sortDirection">asc</property>
-            <property name="dataType">decimal</property>
-            <property name="distinct">true</property>
-            <list-property name="selectionList">
-                <structure>
-                    <property name="value">2010</property>
-                    <property name="label">2010</property>
-                </structure>
-                <structure>
-                    <property name="value">2011</property>
-                    <property name="label">2011</property>
-                </structure>
-                <structure>
-                    <property name="value">2012</property>
-                    <property name="label">2012</property>
-                </structure>
-                <structure>
-                    <property name="value">2013</property>
-                    <property name="label">2013</property>
-                </structure>
-                <structure>
-                    <property name="value">2014</property>
-                    <property name="label">2014</property>
-                </structure>
-            </list-property>
-            <property name="paramType">simple</property>
-            <property name="controlType">list-box</property>
-            <property name="mustMatch">false</property>
-            <property name="fixedOrder">false</property>
-            <structure name="format">
-                <property name="category">Unformatted</property>
-            </structure>
-        </scalar-parameter>
-        <scalar-parameter name="Facility" id="61">
-            <text-property name="promptText">Facility?</text-property>
-            <property name="valueType">dynamic</property>
-            <property name="dataSetName">Facilities</property>
-            <expression name="valueExpr" type="javascript">dataSetRow["name"]</expression>
-            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
-            <expression name="sortByColumn">dataSetRow["name"]</expression>
-            <property name="sortDirection">asc</property>
-            <property name="dataType">string</property>
-            <property name="distinct">true</property>
-            <simple-property-list name="defaultValue">
-                <value type="constant">Navio CHPS</value>
-            </simple-property-list>
             <property name="paramType">simple</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
@@ -895,7 +895,7 @@ and
                 <structure>
                     <property name="name">week_diff</property>
                     <expression name="expression">if(row["expected_delivery_date"] != null)&#13;
-BirtDateTime.diffWeek(row["expected_delivery_date"],row["observation_date"]);&#13;
+BirtDateTime.diffWeek(row["observation_date"],row["expected_delivery_date"]);&#13;
 else 0;</expression>
                     <property name="dataType">decimal</property>
                 </structure>
@@ -920,7 +920,7 @@ else 0;</expression>
             </list-property>
             <list-property name="parameters">
                 <structure>
-                    <property name="name">param_1</property>
+                    <property name="name">year</property>
                     <property name="paramName">Year</property>
                     <property name="dataType">decimal</property>
                     <property name="position">1</property>
@@ -928,7 +928,7 @@ else 0;</expression>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="name">param_2</property>
+                    <property name="name">month</property>
                     <property name="paramName">Month</property>
                     <property name="dataType">decimal</property>
                     <property name="position">2</property>
@@ -936,7 +936,7 @@ else 0;</expression>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="name">param_3</property>
+                    <property name="name">facility</property>
                     <property name="paramName">Facility</property>
                     <property name="dataType">string</property>
                     <property name="position">3</property>
@@ -1034,7 +1034,7 @@ and
 and
 	encounter.location_id= location.location_id
 and
-	location.name=?
+	location.name= ?
 ) as weeks_to_delivery]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Haemoglobin at registration" id="377">
@@ -6859,7 +6859,8 @@ at 36Weeks</text-property>
                                                                 <structure>
                                                                     <property name="name">first_trimester</property>
                                                                     <text-property name="displayName">first_trimester</text-property>
-                                                                    <expression name="expression" type="javascript">dataSetRow["first_trimester"]</expression>
+                                                                    <expression name="expression" type="javascript">if(null != dataSetRow["first_trimester"])dataSetRow["first_trimester"];&#13;
+else 0;</expression>
                                                                     <property name="dataType">decimal</property>
                                                                 </structure>
                                                             </list-property>
@@ -6885,7 +6886,7 @@ at 36Weeks</text-property>
                                                                 <structure>
                                                                     <property name="name">second_trimester</property>
                                                                     <text-property name="displayName">second_trimester</text-property>
-                                                                    <expression name="expression" type="javascript">dataSetRow["second_trimester"]</expression>
+                                                                    <expression name="expression" type="javascript">if(null != dataSetRow["second_trimester"])dataSetRow["second_trimester"];else 0;</expression>
                                                                     <property name="dataType">decimal</property>
                                                                 </structure>
                                                             </list-property>
@@ -6911,7 +6912,7 @@ at 36Weeks</text-property>
                                                                 <structure>
                                                                     <property name="name">third_trimester</property>
                                                                     <text-property name="displayName">third_trimester</text-property>
-                                                                    <expression name="expression" type="javascript">dataSetRow["third_trimester"]</expression>
+                                                                    <expression name="expression" type="javascript">if(null != dataSetRow["third_trimester"])dataSetRow["third_trimester"];else 0;</expression>
                                                                     <property name="dataType">decimal</property>
                                                                 </structure>
                                                             </list-property>
