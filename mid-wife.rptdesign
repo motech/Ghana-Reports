@@ -903,7 +903,7 @@ else 0;</expression>
                     <property name="name">third_trimester</property>
                     <property name="dataType">integer</property>
                     <property name="aggregateFunction">COUNT</property>
-                    <expression name="filterExpr">row["week_diff"] > 24 &amp;&amp; row["week_diff"] &lt;= 36</expression>
+                    <expression name="filterExpr">row["week_diff"] > 24</expression>
                 </structure>
                 <structure>
                     <property name="name">second_trimester</property>
