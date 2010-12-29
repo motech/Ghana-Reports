@@ -269,24 +269,24 @@ where
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OPDCasesForGeneralPatients" id="999">
             <list-property name="parameters">
                 <structure>
-                    <property name="name">param_1</property>
-                    <property name="paramName">Facility</property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">Year</property>
                     <property name="dataType">decimal</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="name">param_2</property>
-                    <property name="paramName">Year</property>
+                    <property name="name">param_3</property>
+                    <property name="paramName">Month</property>
                     <property name="dataType">decimal</property>
                     <property name="position">2</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="name">param_3</property>
-                    <property name="paramName">Month</property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">Facility</property>
                     <property name="dataType">decimal</property>
                     <property name="position">3</property>
                     <property name="isInput">true</property>
@@ -313,17 +313,19 @@ where
             </list-property>
             <xml-property name="queryText"><![CDATA[select count(*) as total_opd_gp
 from 
-	motechmodule_generaloutpatientencounter,
-	motechmodule_facility,
-	location
+	motechmodule_generaloutpatientencounter
 where
-	location.location_id = motechmodule_facility.location_id
-and
-	motechmodule_facility.facility_id = ?
-and
 	YEAR(date) = ?
 and
-	MONTH(date) = ?]]></xml-property>
+	MONTH(date) = ?
+and
+  motechmodule_generaloutpatientencounter.facility_id = (
+  select
+  	facility_id
+  from
+  	motechmodule_facility
+  where
+  	location_id = ?);]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -403,8 +405,7 @@ and
             <xml-property name="queryText"><![CDATA[select
 	count(*) as clinical_and_confirmed_above5yrs
 from
-	motechmodule_generaloutpatientencounter,
-	motechmodule_facility
+	motechmodule_generaloutpatientencounter
 where
 	diagnosis = 10
 or
@@ -414,9 +415,13 @@ or
 or
 	secondary_diagnosis = 11
 and
-	motechmodule_generaloutpatientencounter.facility_id = motechmodule_facility.facility_id
-and
-	motechmodule_generaloutpatientencounter.facility_id = ?
+	motechmodule_generaloutpatientencounter.facility_id = (
+	select
+		location_id
+	from
+		motechmodule_facility
+	where
+		facility_id = ?)
 and
 	YEAR(date) = ?
 and
@@ -500,16 +505,19 @@ and
             <xml-property name="queryText"><![CDATA[select 
 	count(*) as conformed_malaria_above_5yrs
 from
-	motechmodule_generaloutpatientencounter,
-	motechmodule_facility
+	motechmodule_generaloutpatientencounter
 where
 	diagnosis = 10
 or
 	secondary_diagnosis = 10
 and
-	motechmodule_generaloutpatientencounter.facility_id = motechmodule_facility.facility_id
-and
-	motechmodule_generaloutpatientencounter.facility_id = ?
+	motechmodule_generaloutpatientencounter.facility_id = (
+	select
+		location_id
+	from
+		motechmodule_facility
+	where
+		facility_id = ?)
 and
 	YEAR(date) = ?
 and
