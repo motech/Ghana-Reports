@@ -9,20 +9,23 @@
         <scalar-parameter name="Facility" id="983">
             <text-property name="promptText">Facility?</text-property>
             <property name="valueType">dynamic</property>
+            <property name="isRequired">true</property>
             <property name="dataSetName">Facilities</property>
-            <expression name="valueExpr" type="javascript">dataSetRow["name"]</expression>
-            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="valueExpr">dataSetRow["location_id"]</expression>
+            <expression name="labelExpr">dataSetRow["name"]</expression>
             <expression name="sortByColumn">dataSetRow["name"]</expression>
             <property name="sortDirection">asc</property>
-            <property name="dataType">string</property>
+            <property name="dataType">decimal</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">Navio CHPS</value>
+                <value type="constant">2</value>
             </simple-property-list>
             <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
             <property name="fixedOrder">false</property>
+            <property name="autoSuggestThreshold">1</property>
             <structure name="format">
                 <property name="category">Unformatted</property>
             </structure>
@@ -143,6 +146,10 @@
                     <property name="columnName">name</property>
                     <text-property name="displayName">name</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">location_id</property>
+                    <text-property name="displayName">location_id</text-property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -150,6 +157,11 @@
                         <property name="position">1</property>
                         <property name="name">name</property>
                         <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">location_id</property>
+                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
@@ -162,9 +174,17 @@
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">location_id</property>
+                    <property name="nativeName">location_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
-	name
+	name,
+	location_id
 from 
 	location]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -247,10 +267,14 @@ where
 	]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OPDCasesForGeneralPatients" id="999">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">total_opd_gp</property>
-                    <text-property name="displayName">total_opd_gp</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -269,12 +293,15 @@ where
                     <property name="name">total_opd_gp</property>
                     <property name="nativeName">total_opd_gp</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select count(*) as total_opd_gp
 from 
-	motechmodule_generaloutpatientencounter;]]></xml-property>
+	motechmodule_generaloutpatientencounter,
+	motechmodule_facility
+where
+	motechmodule_facility.facility_id = ?
+	]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -307,10 +334,14 @@ from
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="clinical&amp;confirmed5yrsabove" id="1001">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">clinical_and_confirmed_above5yrs</property>
-                    <text-property name="displayName">clinical_and_confirmed_above5yrs</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -329,13 +360,13 @@ from
                     <property name="name">clinical_and_confirmed_above5yrs</property>
                     <property name="nativeName">clinical_and_confirmed_above5yrs</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
 	count(*) as clinical_and_confirmed_above5yrs
 from
-	motechmodule_generaloutpatientencounter
+	motechmodule_generaloutpatientencounter,
+	location
 where
 	diagnosis = 10
 or
@@ -343,7 +374,9 @@ or
 or
 	diagnosis = 11
 or
-	secondary_diagnosis = 11;]]></xml-property>
+	secondary_diagnosis = 11
+and
+	location.location_id = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -376,10 +409,14 @@ or
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ConfirmedMalaria5YrsAndAbove" id="1003">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">conformed_malaria_above_5yrs</property>
-                    <text-property name="displayName">conformed_malaria_above_5yrs</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -398,17 +435,19 @@ or
                     <property name="name">conformed_malaria_above_5yrs</property>
                     <property name="nativeName">conformed_malaria_above_5yrs</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
 	count(*) as conformed_malaria_above_5yrs
 from
-	motechmodule_generaloutpatientencounter
+	motechmodule_generaloutpatientencounter,
+	motechmodule_facility
 where
 	diagnosis = 10
 or
-	secondary_diagnosis = 10;]]></xml-property>
+	secondary_diagnosis = 10
+and
+	motechmodule_facility.facility_id = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -441,10 +480,14 @@ or
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AllOpdCasesChildrenUnder5" id="1005">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">count(enc.encounter_id)</property>
-                    <text-property name="displayName">count(enc.encounter_id)</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -463,7 +506,6 @@ or
                     <property name="name">count(enc.encounter_id)</property>
                     <property name="nativeName">count(enc.encounter_id)</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
@@ -472,12 +514,16 @@ from
 	encounter enc
 JOIN
 	person person
+JOIN
+	location location
 on
 	enc.patient_id = person.person_id 
 and
 	person.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
 and
-	enc.encounter_type = 9;]]></xml-property>
+	enc.encounter_type = 9
+and
+	location.location_id=?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -510,10 +556,14 @@ and
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AllOpdCasesPregnantWomen" id="1007">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">count(enc.encounter_id)</property>
-                    <text-property name="displayName">count(enc.encounter_id)</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -532,7 +582,6 @@ and
                     <property name="name">count(enc.encounter_id)</property>
                     <property name="nativeName">count(enc.encounter_id)</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
@@ -541,12 +590,16 @@ from
 	encounter enc
 JOIN
 	person person
+JOIN
+	location location
 on
 	enc.patient_id = person.person_id 
 and
 	person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
 and
-	enc.encounter_type = 9;]]></xml-property>
+	enc.encounter_type = 9
+and
+	location.location_id = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -617,10 +670,14 @@ and
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OpdCaseChildrenUnder5BothClinicalAndConfirmed" id="1009">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">count(*)</property>
-                    <text-property name="displayName">count(*)</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -639,13 +696,13 @@ and
                     <property name="name">count(*)</property>
                     <property name="nativeName">count(*)</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
 	count(*)
 from
-	obs
+	obs,
+	location
 where
 	(concept_id = 6117
 	or
@@ -654,6 +711,8 @@ and
 	(value_numeric = 10
 	or
 	value_numeric = 11)
+and 
+	location.location_id = ?
 and
 	encounter_id
 in
@@ -697,14 +756,17 @@ in
       <design:criteria/>
     </design:resultSetDefinitions>
   </design:ResultSets>
-</model:DesignValues>
-]]></xml-property>
+</model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OpdCasesChildrenUnder5ConfirmedMalariaCases" id="1011">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">count(*)</property>
-                    <text-property name="displayName">count(*)</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -723,19 +785,21 @@ in
                     <property name="name">count(*)</property>
                     <property name="nativeName">count(*)</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
 	count(*)
 from
-	obs
+	obs,
+	location
 where
 	(concept_id = 6117
 	or
 	concept_id = 6118)
 and
 	value_numeric = 10
+and 
+	location.location_id = ?
 and
 	encounter_id
 in
@@ -782,10 +846,14 @@ in
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OpdCasePregnantWomanBothClinicalAndConfirmed" id="1013">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">count(*)</property>
-                    <text-property name="displayName">count(*)</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -804,13 +872,13 @@ in
                     <property name="name">count(*)</property>
                     <property name="nativeName">count(*)</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
 	count(*)
 from
-	obs
+	obs,
+	location
 where
 	(concept_id = 6117
 	or
@@ -819,6 +887,8 @@ and
 	(value_numeric = 10
 	or
 	value_numeric = 11)
+and 
+	location.location_id = ?
 and
 	encounter_id
 in
@@ -865,10 +935,14 @@ in
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OpdCasesPregnantWomenConfirmedMalariaCases" id="1015">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">count(*)</property>
-                    <text-property name="displayName">count(*)</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -887,19 +961,21 @@ in
                     <property name="name">count(*)</property>
                     <property name="nativeName">count(*)</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
 	count(*)
 from
-	obs
+	obs,
+	location
 where
 	(concept_id = 6117
 	or
 	concept_id = 6118)
 and
 	value_numeric = 10
+and 
+	location.location_id = ?
 and
 	encounter_id
 in
@@ -943,8 +1019,7 @@ in
       <design:criteria/>
     </design:resultSetDefinitions>
   </design:ResultSets>
-</model:DesignValues>
-]]></xml-property>
+</model:DesignValues>]]></xml-property>
         </oda-data-set>
     </data-sets>
     <styles>
