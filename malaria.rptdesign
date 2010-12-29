@@ -276,6 +276,22 @@ where
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -298,10 +314,16 @@ where
             <xml-property name="queryText"><![CDATA[select count(*) as total_opd_gp
 from 
 	motechmodule_generaloutpatientencounter,
-	motechmodule_facility
+	motechmodule_facility,
+	location
 where
+	location.location_id = motechmodule_facility.location_id
+and
 	motechmodule_facility.facility_id = ?
-	]]></xml-property>
+and
+	YEAR(date) = ?
+and
+	MONTH(date) = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -343,6 +365,22 @@ where
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -376,7 +414,11 @@ or
 or
 	secondary_diagnosis = 11
 and
-	location.location_id = ?]]></xml-property>
+	location.location_id = ?
+and
+	YEAR(date) = ?
+and
+	MONTH(date) = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -418,6 +460,22 @@ and
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -447,7 +505,11 @@ where
 or
 	secondary_diagnosis = 10
 and
-	motechmodule_facility.facility_id = ?]]></xml-property>
+	motechmodule_facility.facility_id = ?
+and
+	YEAR(date) = ?
+and
+	MONTH(date) = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -489,6 +551,22 @@ and
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -511,19 +589,19 @@ and
             <xml-property name="queryText"><![CDATA[select
 	count(enc.encounter_id)
 from
-	encounter enc
-JOIN
-	person person
-JOIN
-	location location
-on
+	encounter enc,person person
+where
 	enc.patient_id = person.person_id 
 and
 	person.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
 and
 	enc.encounter_type = 9
 and
-	location.location_id=?]]></xml-property>
+    enc.location_id = ?
+and
+	YEAR(enc.encounter_datetime) = ?
+and
+	MONTH(enc.encounter_datetime) = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -565,6 +643,22 @@ and
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -587,19 +681,19 @@ and
             <xml-property name="queryText"><![CDATA[select
 	count(enc.encounter_id)
 from
-	encounter enc
-JOIN
-	person person
-JOIN
-	location location
-on
+	encounter enc, person person
+where
 	enc.patient_id = person.person_id 
 and
 	person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
 and
 	enc.encounter_type = 9
 and
-	location.location_id = ?]]></xml-property>
+	enc.location_id = ?
+and
+	YEAR(enc.encounter_datetime) = ?
+and
+	MONTH(enc.encounter_datetime) = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -679,6 +773,22 @@ and
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -713,6 +823,10 @@ and
 	value_numeric = 11)
 and 
 	location.location_id = ?
+and 
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
 and
 	encounter_id
 in
@@ -768,6 +882,22 @@ in
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -800,6 +930,10 @@ and
 	value_numeric = 10
 and 
 	location.location_id = ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
 and
 	encounter_id
 in
@@ -855,6 +989,22 @@ in
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -889,6 +1039,10 @@ and
 	value_numeric = 11)
 and 
 	location.location_id = ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
 and
 	encounter_id
 in
@@ -944,6 +1098,22 @@ in
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -976,6 +1146,10 @@ and
 	value_numeric = 10
 and 
 	location.location_id = ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
 and
 	encounter_id
 in
