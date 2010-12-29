@@ -404,7 +404,7 @@ and
 	count(*) as clinical_and_confirmed_above5yrs
 from
 	motechmodule_generaloutpatientencounter,
-	location
+	motechmodule_facility
 where
 	diagnosis = 10
 or
@@ -414,7 +414,9 @@ or
 or
 	secondary_diagnosis = 11
 and
-	location.location_id = ?
+	motechmodule_generaloutpatientencounter.facility_id = motechmodule_facility.facility_id
+and
+	motechmodule_generaloutpatientencounter.facility_id = ?
 and
 	YEAR(date) = ?
 and
@@ -505,7 +507,9 @@ where
 or
 	secondary_diagnosis = 10
 and
-	motechmodule_facility.facility_id = ?
+	motechmodule_generaloutpatientencounter.facility_id = motechmodule_facility.facility_id
+and
+	motechmodule_generaloutpatientencounter.facility_id = ?
 and
 	YEAR(date) = ?
 and
@@ -572,7 +576,7 @@ and
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">count(enc.encounter_id)</property>
+                        <property name="name">AllOpdCasesChildrenUnder5</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -581,13 +585,13 @@ and
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">count(enc.encounter_id)</property>
-                    <property name="nativeName">count(enc.encounter_id)</property>
+                    <property name="name">AllOpdCasesChildrenUnder5</property>
+                    <property name="nativeName">AllOpdCasesChildrenUnder5</property>
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
-	count(enc.encounter_id)
+	count(enc.encounter_id) as "AllOpdCasesChildrenUnder5"
 from
 	encounter enc,person person
 where
@@ -664,7 +668,7 @@ and
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">count(enc.encounter_id)</property>
+                        <property name="name">AllOPDCasesPregnantWoman</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -673,13 +677,13 @@ and
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">count(enc.encounter_id)</property>
-                    <property name="nativeName">count(enc.encounter_id)</property>
+                    <property name="name">AllOPDCasesPregnantWoman</property>
+                    <property name="nativeName">AllOPDCasesPregnantWoman</property>
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
-	count(enc.encounter_id)
+	count(enc.encounter_id) as "AllOPDCasesPregnantWoman"
 from
 	encounter enc, person person
 where
@@ -794,7 +798,7 @@ and
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">count(*)</property>
+                        <property name="name">ClinicalAndConfirmedChildUnder5</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -803,13 +807,13 @@ and
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">count(*)</property>
-                    <property name="nativeName">count(*)</property>
+                    <property name="name">ClinicalAndConfirmedChildUnder5</property>
+                    <property name="nativeName">ClinicalAndConfirmedChildUnder5</property>
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
-	count(*)
+	count(*) as "ClinicalAndConfirmedChildUnder5"
 from
 	obs,
 	location
@@ -903,7 +907,7 @@ in
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">count(*)</property>
+                        <property name="name">ConfirmedMalariaChildrenUnder5</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -912,13 +916,13 @@ in
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">count(*)</property>
-                    <property name="nativeName">count(*)</property>
+                    <property name="name">ConfirmedMalariaChildrenUnder5</property>
+                    <property name="nativeName">ConfirmedMalariaChildrenUnder5</property>
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
-	count(*)
+	count(*) as "ConfirmedMalariaChildrenUnder5"
 from
 	obs,
 	location
@@ -1010,7 +1014,7 @@ in
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">count(*)</property>
+                        <property name="name">ClinicalAndConfirmedPregnantWomen</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -1019,13 +1023,13 @@ in
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">count(*)</property>
-                    <property name="nativeName">count(*)</property>
+                    <property name="name">ClinicalAndConfirmedPregnantWomen</property>
+                    <property name="nativeName">ClinicalAndConfirmedPregnantWomen</property>
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
-	count(*)
+	count(*) as "ClinicalAndConfirmedPregnantWomen"
 from
 	obs,
 	location
@@ -1119,7 +1123,7 @@ in
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">count(*)</property>
+                        <property name="name">ConfirmedMalariaCasesPregnantWomen</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -1128,13 +1132,13 @@ in
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">count(*)</property>
-                    <property name="nativeName">count(*)</property>
+                    <property name="name">ConfirmedMalariaCasesPregnantWomen</property>
+                    <property name="nativeName">ConfirmedMalariaCasesPregnantWomen</property>
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
-	count(*)
+	count(*) as "ConfirmedMalariaCasesPregnantWomen"
 from
 	obs,
 	location
@@ -2052,17 +2056,17 @@ in
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
-                    <data id="1006">
+                    <data id="1017">
                         <property name="dataSet">AllOpdCasesChildrenUnder5</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">count(enc.encounter_id)</property>
-                                <text-property name="displayName">count(enc.encounter_id)</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count(enc.encounter_id)"]</expression>
+                                <property name="name">AllOpdCasesChildrenUnder5</property>
+                                <text-property name="displayName">AllOpdCasesChildrenUnder5</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["AllOpdCasesChildrenUnder5"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">count(enc.encounter_id)</property>
+                        <property name="resultSetColumn">AllOpdCasesChildrenUnder5</property>
                     </data>
                 </cell>
                 <cell id="452">
@@ -2078,17 +2082,17 @@ in
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
-                    <data id="1010">
+                    <data id="1018">
                         <property name="dataSet">OpdCaseChildrenUnder5BothClinicalAndConfirmed</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">count(*)</property>
-                                <text-property name="displayName">count(*)</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count(*)"]</expression>
+                                <property name="name">ClinicalAndConfirmedChildUnder5</property>
+                                <text-property name="displayName">ClinicalAndConfirmedChildUnder5</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ClinicalAndConfirmedChildUnder5"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">count(*)</property>
+                        <property name="resultSetColumn">ClinicalAndConfirmedChildUnder5</property>
                     </data>
                 </cell>
                 <cell id="453">
@@ -2104,17 +2108,17 @@ in
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
-                    <data id="1012">
+                    <data id="1019">
                         <property name="dataSet">OpdCasesChildrenUnder5ConfirmedMalariaCases</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">count(*)</property>
-                                <text-property name="displayName">count(*)</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count(*)"]</expression>
+                                <property name="name">ConfirmedMalariaChildrenUnder5</property>
+                                <text-property name="displayName">ConfirmedMalariaChildrenUnder5</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ConfirmedMalariaChildrenUnder5"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">count(*)</property>
+                        <property name="resultSetColumn">ConfirmedMalariaChildrenUnder5</property>
                     </data>
                 </cell>
                 <cell id="454">
@@ -2130,7 +2134,7 @@ in
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
-                    <data id="1000">
+                    <data id="1023">
                         <property name="dataSet">OPDCasesForGeneralPatients</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2156,7 +2160,7 @@ in
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
-                    <data id="1002">
+                    <data id="1024">
                         <property name="dataSet">clinical&amp;confirmed5yrsabove</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2182,7 +2186,7 @@ in
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
-                    <data id="1004">
+                    <data id="1026">
                         <property name="dataSet">ConfirmedMalaria5YrsAndAbove</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2208,17 +2212,17 @@ in
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
-                    <data id="1008">
+                    <data id="1020">
                         <property name="dataSet">AllOpdCasesPregnantWomen</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">count(enc.encounter_id)</property>
-                                <text-property name="displayName">count(enc.encounter_id)</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count(enc.encounter_id)"]</expression>
+                                <property name="name">AllOPDCasesPregnantWoman</property>
+                                <text-property name="displayName">AllOPDCasesPregnantWoman</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["AllOPDCasesPregnantWoman"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">count(enc.encounter_id)</property>
+                        <property name="resultSetColumn">AllOPDCasesPregnantWoman</property>
                     </data>
                 </cell>
                 <cell id="458">
@@ -2234,17 +2238,17 @@ in
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
-                    <data id="1014">
+                    <data id="1021">
                         <property name="dataSet">OpdCasePregnantWomanBothClinicalAndConfirmed</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">count(*)</property>
-                                <text-property name="displayName">count(*)</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count(*)"]</expression>
+                                <property name="name">ClinicalAndConfirmedPregnantWomen</property>
+                                <text-property name="displayName">ClinicalAndConfirmedPregnantWomen</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ClinicalAndConfirmedPregnantWomen"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">count(*)</property>
+                        <property name="resultSetColumn">ClinicalAndConfirmedPregnantWomen</property>
                     </data>
                 </cell>
                 <cell id="459">
@@ -2260,17 +2264,17 @@ in
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">medium</property>
-                    <data id="1016">
+                    <data id="1022">
                         <property name="dataSet">OpdCasesPregnantWomenConfirmedMalariaCases</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">count(*)</property>
-                                <text-property name="displayName">count(*)</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count(*)"]</expression>
+                                <property name="name">ConfirmedMalariaCasesPregnantWomen</property>
+                                <text-property name="displayName">ConfirmedMalariaCasesPregnantWomen</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ConfirmedMalariaCasesPregnantWomen"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">count(*)</property>
+                        <property name="resultSetColumn">ConfirmedMalariaCasesPregnantWomen</property>
                     </data>
                 </cell>
             </row>
