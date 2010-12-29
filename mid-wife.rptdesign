@@ -1120,37 +1120,37 @@ and
 	count(*) as checked_at_registration,
     coalesce(sum(if(obs.value_numeric >= 7 &amp;&amp; obs.value_numeric < 11,1,0)),0) as less_than_11,
     coalesce(sum(if(obs.value_numeric < 7,1,0)),0) as less_than_7
-from
-    (
-	select
-        obs.encounter_id,
-        obs.obs_datetime as date 
-    from 
-        obs, 
-        encounter,
-        location,
-        concept_name,
-        encounter_type
-    where obs.encounter_id=encounter.encounter_id 
-    and encounter.encounter_type = encounter_type.encounter_type_id
-    and encounter_type.name='ANCVISIT'
-    and obs.concept_id = concept_name.concept_id
-	and concept_name.name='VISIT NUMBER'
-    and obs.value_numeric=1
-	and	encounter.location_id=location.location_id
-	and location.name=?
-	order by obs.obs_datetime asc limit 1
-	) as ANCVISIT,
-    		 obs obs,
-    		 concept_name
+from 
+   obs obs,
+   concept_name
 where
-    obs.encounter_id = ANCVISIT.encounter_id
-and concept_name.concept_id = obs.concept_id
-and concept_name.name = 'HEMOGLOBIN'
+     obs.encounter_id in 
+     (
+	    select
+            obs.encounter_id
+        from 
+            obs, 
+            encounter,
+            location,
+            concept_name,
+            encounter_type
+        where obs.encounter_id=encounter.encounter_id 
+        and encounter.encounter_type = encounter_type.encounter_type_id
+        and encounter_type.name='ANCVISIT'
+        and obs.concept_id = concept_name.concept_id
+	    and concept_name.name='VISIT NUMBER'
+        and obs.value_numeric=1
+	    and	encounter.location_id=location.location_id
+	    and location.name = ?
+	 )
+and 
+     obs.concept_id = concept_name.concept_id 
+and 
+     concept_name.name = 'HEMOGLOBIN'
 and
-	YEAR(obs.obs_datetime) = ?
+	 YEAR(obs.obs_datetime) = ?
 and
-	MONTH(obs.obs_datetime) = ?]]></xml-property>
+	 MONTH(obs.obs_datetime) = ?]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ITN" id="446">
             <list-property name="parameters">
