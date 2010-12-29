@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
     <property name="units">in</property>
     <list-property name="propertyBindings">
         <structure>
@@ -24,6 +24,64 @@
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">96</property>
     <parameters>
+        <scalar-parameter name="Facility" id="61">
+            <text-property name="promptText">Facility?</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="dataSetName">Facilities</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="sortByColumn">dataSetRow["name"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">Navio CHPS</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Year" id="59">
+            <text-property name="promptText">Year?</text-property>
+            <property name="valueType">static</property>
+            <property name="sortBy">label</property>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">decimal</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">2010</property>
+                    <property name="label">2010</property>
+                </structure>
+                <structure>
+                    <property name="value">2011</property>
+                    <property name="label">2011</property>
+                </structure>
+                <structure>
+                    <property name="value">2012</property>
+                    <property name="label">2012</property>
+                </structure>
+                <structure>
+                    <property name="value">2013</property>
+                    <property name="label">2013</property>
+                </structure>
+                <structure>
+                    <property name="value">2014</property>
+                    <property name="label">2014</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
         <scalar-parameter name="Month" id="58">
             <text-property name="promptText">Month?</text-property>
             <property name="valueType">static</property>
@@ -89,64 +147,6 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
-        <scalar-parameter name="Year" id="59">
-            <text-property name="promptText">Year?</text-property>
-            <property name="valueType">static</property>
-            <property name="sortBy">label</property>
-            <property name="sortDirection">asc</property>
-            <property name="dataType">decimal</property>
-            <property name="distinct">true</property>
-            <list-property name="selectionList">
-                <structure>
-                    <property name="value">2010</property>
-                    <property name="label">2010</property>
-                </structure>
-                <structure>
-                    <property name="value">2011</property>
-                    <property name="label">2011</property>
-                </structure>
-                <structure>
-                    <property name="value">2012</property>
-                    <property name="label">2012</property>
-                </structure>
-                <structure>
-                    <property name="value">2013</property>
-                    <property name="label">2013</property>
-                </structure>
-                <structure>
-                    <property name="value">2014</property>
-                    <property name="label">2014</property>
-                </structure>
-            </list-property>
-            <property name="paramType">simple</property>
-            <property name="controlType">list-box</property>
-            <property name="mustMatch">false</property>
-            <property name="fixedOrder">false</property>
-            <structure name="format">
-                <property name="category">Unformatted</property>
-            </structure>
-        </scalar-parameter>
-        <scalar-parameter name="Facility" id="61">
-            <text-property name="promptText">Facility?</text-property>
-            <property name="valueType">dynamic</property>
-            <property name="dataSetName">Facilities</property>
-            <expression name="valueExpr" type="javascript">dataSetRow["name"]</expression>
-            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
-            <expression name="sortByColumn">dataSetRow["name"]</expression>
-            <property name="sortDirection">asc</property>
-            <property name="dataType">string</property>
-            <property name="distinct">true</property>
-            <simple-property-list name="defaultValue">
-                <value type="constant">Navio CHPS</value>
-            </simple-property-list>
-            <property name="paramType">simple</property>
-            <property name="controlType">list-box</property>
-            <property name="mustMatch">false</property>
-            <property name="fixedOrder">false</property>
-            <structure name="format">
-                <property name="category">Unformatted</property>
-            </structure>
-        </scalar-parameter>
     </parameters>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="openmrs" id="57">
@@ -162,8 +162,8 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
-            <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">b3Blbm1ycw==</encrypted-property>
+            <property name="odaUser">openmrs</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -891,9 +891,36 @@ and
 	location.name=?]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Duration of Pregnancy" id="365">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">week_diff</property>
+                    <expression name="expression">if(row["expected_delivery_date"] != null)&#13;
+BirtDateTime.diffWeek(row["observation_date"],row["expected_delivery_date"]);&#13;
+else 0;</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">third_trimester</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <expression name="filterExpr">row["week_diff"] > 24</expression>
+                </structure>
+                <structure>
+                    <property name="name">second_trimester</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <expression name="filterExpr">row["week_diff"] > 12 &amp;&amp; row["week_diff"] &lt;= 24</expression>
+                </structure>
+                <structure>
+                    <property name="name">first_trimester</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <expression name="filterExpr">row["week_diff"] >= 0  &amp;&amp; row["week_diff"] &lt;= 12</expression>
+                </structure>
+            </list-property>
             <list-property name="parameters">
                 <structure>
-                    <property name="name">param_1</property>
+                    <property name="name">year</property>
                     <property name="paramName">Year</property>
                     <property name="dataType">decimal</property>
                     <property name="position">1</property>
@@ -901,7 +928,7 @@ and
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="name">param_2</property>
+                    <property name="name">month</property>
                     <property name="paramName">Month</property>
                     <property name="dataType">decimal</property>
                     <property name="position">2</property>
@@ -909,7 +936,7 @@ and
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="name">param_3</property>
+                    <property name="name">facility</property>
                     <property name="paramName">Facility</property>
                     <property name="dataType">string</property>
                     <property name="position">3</property>
@@ -926,18 +953,33 @@ and
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">third_trimester</property>
-                        <property name="dataType">decimal</property>
+                        <property name="name">expected_delivery_date</property>
+                        <property name="dataType">date-time</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">second_trimester</property>
-                        <property name="dataType">decimal</property>
+                        <property name="name">observation_date</property>
+                        <property name="dataType">date-time</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">first_trimester</property>
+                        <property name="name">week_diff</property>
                         <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">third_trimester</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">second_trimester</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">first_trimester</property>
+                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
@@ -951,33 +993,27 @@ and
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">third_trimester</property>
-                    <property name="nativeName">third_trimester</property>
-                    <property name="dataType">decimal</property>
+                    <property name="name">expected_delivery_date</property>
+                    <property name="nativeName">expected_delivery_date</property>
+                    <property name="dataType">date-time</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
-                    <property name="name">second_trimester</property>
-                    <property name="nativeName">second_trimester</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">first_trimester</property>
-                    <property name="nativeName">first_trimester</property>
-                    <property name="dataType">decimal</property>
+                    <property name="name">observation_date</property>
+                    <property name="nativeName">observation_date</property>
+                    <property name="dataType">date-time</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
-    'Duration of Pregnancy',
-    coalesce(sum(if(weeks between 0 and 12,1,0)),0) as third_trimester,
-    coalesce(sum(if(weeks between 12 and 24,1,0)),0) as second_trimester,
-    coalesce(sum(if(weeks between 24 and 36,1,0)),0) as first_trimester
+   'Duration of Pregnancy',
+    expected_delivery_date,
+    observation_date
 from 
 (select
     distinct
     obs.person_id,
-    week(obs.value_datetime) - week(obs.obs_datetime)  as weeks
+    obs.value_datetime as expected_delivery_date,
+    obs.obs_datetime as observation_date
 from
     encounter encounter, 
     obs obs,
@@ -998,7 +1034,7 @@ and
 and
 	encounter.location_id= location.location_id
 and
-	location.name=?
+	location.name= ?
 ) as weeks_to_delivery]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Haemoglobin at registration" id="377">
@@ -1082,39 +1118,39 @@ and
             <xml-property name="queryText"><![CDATA[select 
 	'Hemoglobin',
 	count(*) as checked_at_registration,
-    coalesce(sum(if(obs.value_numeric < 11,1,0)),0) as less_than_11,
+    coalesce(sum(if(obs.value_numeric >= 7 &amp;&amp; obs.value_numeric < 11,1,0)),0) as less_than_11,
     coalesce(sum(if(obs.value_numeric < 7,1,0)),0) as less_than_7
-from
-    (
-	select
-        obs.encounter_id,
-        obs.obs_datetime as date 
-    from 
-        obs, 
-        encounter,
-        location,
-        concept_name,
-        encounter_type
-    where obs.encounter_id=encounter.encounter_id 
-    and encounter.encounter_type = encounter_type.encounter_type_id
-    and encounter_type.name='ANCVISIT'
-    and obs.concept_id = concept_name.concept_id
-	and concept_name.name='VISIT NUMBER'
-    and obs.value_numeric=1
-	and	encounter.location_id=location.location_id
-	and location.name=?
-	order by obs.obs_datetime asc limit 1
-	) as ANCVISIT,
-    		 obs obs,
-    		 concept_name
+from 
+   obs obs,
+   concept_name
 where
-    obs.encounter_id = ANCVISIT.encounter_id
-and concept_name.concept_id = obs.concept_id
-and concept_name.name = 'HEMOGLOBIN'
+     obs.encounter_id in 
+     (
+	    select
+            obs.encounter_id
+        from 
+            obs, 
+            encounter,
+            location,
+            concept_name,
+            encounter_type
+        where obs.encounter_id=encounter.encounter_id 
+        and encounter.encounter_type = encounter_type.encounter_type_id
+        and encounter_type.name='ANCVISIT'
+        and obs.concept_id = concept_name.concept_id
+	    and concept_name.name='VISIT NUMBER'
+        and obs.value_numeric=1
+	    and	encounter.location_id=location.location_id
+	    and location.name = ?
+	 )
+and 
+     obs.concept_id = concept_name.concept_id 
+and 
+     concept_name.name = 'HEMOGLOBIN'
 and
-	YEAR(obs.obs_datetime) = ?
+	 YEAR(obs.obs_datetime) = ?
 and
-	MONTH(obs.obs_datetime) = ?]]></xml-property>
+	 MONTH(obs.obs_datetime) = ?]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ITN" id="446">
             <list-property name="parameters">
@@ -6823,7 +6859,8 @@ at 36Weeks</text-property>
                                                                 <structure>
                                                                     <property name="name">first_trimester</property>
                                                                     <text-property name="displayName">first_trimester</text-property>
-                                                                    <expression name="expression" type="javascript">dataSetRow["first_trimester"]</expression>
+                                                                    <expression name="expression" type="javascript">if(null != dataSetRow["first_trimester"])dataSetRow["first_trimester"];&#13;
+else 0;</expression>
                                                                     <property name="dataType">decimal</property>
                                                                 </structure>
                                                             </list-property>
@@ -6849,7 +6886,7 @@ at 36Weeks</text-property>
                                                                 <structure>
                                                                     <property name="name">second_trimester</property>
                                                                     <text-property name="displayName">second_trimester</text-property>
-                                                                    <expression name="expression" type="javascript">dataSetRow["second_trimester"]</expression>
+                                                                    <expression name="expression" type="javascript">if(null != dataSetRow["second_trimester"])dataSetRow["second_trimester"];else 0;</expression>
                                                                     <property name="dataType">decimal</property>
                                                                 </structure>
                                                             </list-property>
@@ -6875,7 +6912,7 @@ at 36Weeks</text-property>
                                                                 <structure>
                                                                     <property name="name">third_trimester</property>
                                                                     <text-property name="displayName">third_trimester</text-property>
-                                                                    <expression name="expression" type="javascript">dataSetRow["third_trimester"]</expression>
+                                                                    <expression name="expression" type="javascript">if(null != dataSetRow["third_trimester"])dataSetRow["third_trimester"];else 0;</expression>
                                                                     <property name="dataType">decimal</property>
                                                                 </structure>
                                                             </list-property>
