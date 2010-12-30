@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
     <property name="units">mm</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -11,8 +11,8 @@
             <property name="valueType">dynamic</property>
             <property name="isRequired">true</property>
             <property name="dataSetName">Facilities</property>
-            <expression name="valueExpr">dataSetRow["location_id"]</expression>
-            <expression name="labelExpr">dataSetRow["name"]</expression>
+            <expression name="valueExpr" type="javascript">dataSetRow["location_id"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
             <expression name="sortByColumn">dataSetRow["name"]</expression>
             <property name="sortDirection">asc</property>
             <property name="dataType">decimal</property>
@@ -21,7 +21,6 @@
                 <value type="constant">2</value>
             </simple-property-list>
             <property name="paramType">simple</property>
-            <property name="concealValue">false</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
             <property name="fixedOrder">false</property>
@@ -135,8 +134,8 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
-            <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">b3Blbm1ycw==</encrypted-property>
+            <property name="odaUser">openmrs</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -1301,6 +1300,7 @@ join encounter_type enc_type
 join obs obs
   on enc.encounter_id = obs.encounter_id
   and obs.value_numeric > 0
+  and obs.concept_id in (6117,6118)
 union all
 select 
   ge.id,
