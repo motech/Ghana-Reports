@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
     <property name="units">mm</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -135,8 +135,8 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
-            <property name="odaUser">openmrs</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
+            <property name="odaUser">root</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">b3Blbm1ycw==</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -407,29 +407,18 @@ and
 from
 	motechmodule_generaloutpatientencounter
 where
-	diagnosis = 10
+	(diagnosis in (10,11,12,13)
 or
-	secondary_diagnosis = 10
-or
-	diagnosis = 11
-or
-	secondary_diagnosis = 11
-or
-	diagnosis = 12
-or
-	secondary_diagnosis = 12
-or
-	diagnosis = 13
-or
-	secondary_diagnosis = 13
+	secondary_diagnosis in (10,11,12,13))
 and
-	motechmodule_generaloutpatientencounter.facility_id = (
-	select
-		location_id
+  facility_id = (
+select
+		facility_id
 	from
 		motechmodule_facility
 	where
-		facility_id = ?)
+		location_id = ?
+  )
 and
 	YEAR(date) = ?
 and
@@ -515,21 +504,17 @@ and
 from
 	motechmodule_generaloutpatientencounter
 where
-	diagnosis = 10
+	(diagnosis in (10, 13)
 or
-	secondary_diagnosis = 10
-or
-	diagnosis = 13
-or
-	secondary_diagnosis = 13
+	secondary_diagnosis in (10,13))
 and
-	motechmodule_generaloutpatientencounter.facility_id = (
+	facility_id = (
 	select
-		location_id
+		facility_id
 	from
 		motechmodule_facility
 	where
-		facility_id = ?)
+		location_id = ?)
 and
 	YEAR(date) = ?
 and
@@ -835,22 +820,13 @@ and
             <xml-property name="queryText"><![CDATA[select
 	count(*) as "ClinicalAndConfirmedChildUnder5"
 from
-	obs,
-	location
+	obs
 where
-	(concept_id = 6117
-	or
-	concept_id = 6118)
+	concept_id in (6117, 6118)
 and
-	(value_numeric = 10
-	or
-	value_numeric = 11
-	or
-	value_numeric = 12
-	or
-	value_numeric = 13)
+	value_numeric in (10,11,12,13)
 and 
-	location.location_id = ?
+	obs.location_id = ?
 and 
 	YEAR(obs.obs_datetime) = ?
 and
@@ -948,18 +924,13 @@ in
             <xml-property name="queryText"><![CDATA[select
 	count(*) as "ConfirmedMalariaChildrenUnder5"
 from
-	obs,
-	location
+	obs
 where
-	(concept_id = 6117
-	or
-	concept_id = 6118)
+	concept_id in (6117, 6118)
 and
-	(value_numeric = 10
-	or
-	value_numeric = 13)
+	value_numeric in (10,13)
 and 
-	location.location_id = ?
+	obs.location_id = ?
 and
 	YEAR(obs.obs_datetime) = ?
 and
@@ -1057,18 +1028,13 @@ in
             <xml-property name="queryText"><![CDATA[select
 	count(*) as "ClinicalAndConfirmedPregnantWomen"
 from
-	obs,
-	location
+	obs
 where
-	(concept_id = 6117
-	or
-	concept_id = 6118)
+	concept_id in (6117, 6118)
 and
-	(value_numeric = 63
-	or
-	value_numeric = 64)
+	value_numeric in (63,64)
 and 
-	location.location_id = ?
+	obs.location_id = ?
 and
 	YEAR(obs.obs_datetime) = ?
 and
