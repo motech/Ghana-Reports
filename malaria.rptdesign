@@ -1228,7 +1228,7 @@ in
                     <structure>
                         <property name="position">1</property>
                         <property name="name">id</property>
-                        <property name="dataType">decimal</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
@@ -1258,7 +1258,7 @@ in
                     <property name="position">1</property>
                     <property name="name">id</property>
                     <property name="nativeName">id</property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
@@ -1294,7 +1294,7 @@ opdvisit.location_id as location_id
 from  
 (
 select 
-  enc.encounter_id as id ,
+  concat('Patient',cast(enc.encounter_id as CHAR)) as id ,
   obs.value_numeric as diagnosis,
   YEAR(obs.obs_datetime) as year,
   MONTH(obs.obs_datetime)as month,
@@ -1309,7 +1309,7 @@ join obs obs
   and obs.concept_id in (6117,6118)
 union all
 select 
-  ge.id,
+  concat('General',cast(ge.id as CHAR)),
   ge.diagnosis,
   YEAR(ge.date) as year,
   MONTH(ge.date) as month,
@@ -1319,7 +1319,7 @@ join motechmodule_facility fac
    on ge.facility_id = fac.facility_id
 union all
 select
-  ge2.id,
+  concat('General',cast(ge2.id as CHAR)),
   ge2.secondary_diagnosis as diagnosis,
   YEAR(ge2.date) as year,
   MONTH(ge2.date) as month,
@@ -1337,7 +1337,7 @@ and
 and 
   month = ?
 union all
-select 0,0,0,0,0 from dual]]></xml-property>
+select '0',0,0,0,0 from dual]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -1430,7 +1430,6 @@ select 0,0,0,0,0 from dual]]></xml-property>
             </list-property>
             <xml-property name="queryText"><![CDATA[select county_district , state_province
 from location where location_id = ?]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[]]></xml-property>
         </oda-data-set>
     </data-sets>
     <styles>
@@ -4515,7 +4514,7 @@ from location where location_id = ?]]></xml-property>
                 <structure>
                     <property name="name">id</property>
                     <expression name="expression" type="javascript">dataSetRow["id"]</expression>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="name">diagnosis</property>
@@ -4538,7 +4537,7 @@ from location where location_id = ?]]></xml-property>
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
-                    <property name="name">total_opd</property>
+                    <property name="name">opd_total</property>
                     <property name="dataType">integer</property>
                     <property name="aggregateFunction">COUNTDISTINCT</property>
                     <list-property name="arguments">
@@ -4547,7 +4546,7 @@ from location where location_id = ?]]></xml-property>
                             <expression name="value" type="javascript">row["id"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["id"] > 0</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["diagnosis"] > 0</expression>
                 </structure>
             </list-property>
             <property name="pushDown">true</property>
@@ -4607,8 +4606,8 @@ from location where location_id = ?]]></xml-property>
                     </label>
                 </cell>
                 <cell id="891">
-                    <data id="1028">
-                        <property name="resultSetColumn">total_opd</property>
+                    <data id="1033">
+                        <property name="resultSetColumn">opd_total</property>
                     </data>
                 </cell>
                 <cell id="892">
@@ -4684,11 +4683,24 @@ from location where location_id = ?]]></xml-property>
                 <structure>
                     <property name="name">Aggregation</property>
                     <property name="dataType">integer</property>
-                    <property name="aggregateFunction">COUNT</property>
+                    <property name="aggregateFunction">COUNTDISTINCT</property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
                             <expression name="value" type="javascript">row["id"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">(dataSetRow["diagnosis"] >= 10 &amp;&amp; dataSetRow["diagnosis"] &lt;= 13 )&#13;
+|| &#13;
+(dataSetRow["diagnosis"] >= 63 &amp;&amp; dataSetRow["diagnosis"] &lt;=  64 )</expression>
+                </structure>
+                <structure>
+                    <property name="name">opd_malaria</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">(dataSetRow["diagnosis"] >= 10 &amp;&amp; dataSetRow["diagnosis"] &lt;= 13 )&#13;
@@ -4738,8 +4750,8 @@ from location where location_id = ?]]></xml-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="1029">
-                        <property name="resultSetColumn">Aggregation</property>
+                    <data id="1034">
+                        <property name="resultSetColumn">opd_malaria</property>
                     </data>
                 </cell>
                 <cell id="906">
