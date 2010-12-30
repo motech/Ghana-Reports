@@ -36,6 +36,9 @@
             <property name="sortDirection">asc</property>
             <property name="dataType">decimal</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2010</value>
+            </simple-property-list>
             <list-property name="selectionList">
                 <structure>
                     <property name="value">2010</property>
