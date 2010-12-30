@@ -11,8 +11,8 @@
             <property name="valueType">dynamic</property>
             <property name="isRequired">true</property>
             <property name="dataSetName">Facilities</property>
-            <expression name="valueExpr" type="javascript">dataSetRow["location_id"]</expression>
-            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="valueExpr">dataSetRow["location_id"]</expression>
+            <expression name="labelExpr">dataSetRow["name"]</expression>
             <expression name="sortByColumn">dataSetRow["name"]</expression>
             <property name="sortDirection">asc</property>
             <property name="dataType">decimal</property>
@@ -21,6 +21,7 @@
                 <value type="constant">2</value>
             </simple-property-list>
             <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
             <property name="fixedOrder">false</property>
@@ -1143,7 +1144,9 @@ where
 and
 	value_numeric = 63
 and 
-	location.location_id = ?
+	obs.location_id = location.location_id
+and
+  	location.location_id = ?
 and
 	YEAR(obs.obs_datetime) = ?
 and
@@ -1385,6 +1388,50 @@ select 0,0,0,0,0 from dual]]></xml-property>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Locations" id="1030">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">county_district</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">state_province</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">openmrs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">county_district</property>
+                    <property name="nativeName">county_district</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">state_province</property>
+                    <property name="nativeName">state_province</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select county_district , state_province
+from location where location_id = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="report" id="4">
@@ -1518,17 +1565,17 @@ select 0,0,0,0,0 from dual]]></xml-property>
                     </label>
                 </cell>
                 <cell id="348">
-                    <data id="986">
-                        <property name="dataSet">Districts</property>
+                    <data id="1031">
+                        <property name="dataSet">Locations</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">state_province</property>
-                                <text-property name="displayName">state_province</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["state_province"]</expression>
+                                <property name="name">county_district</property>
+                                <text-property name="displayName">county_district</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["county_district"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">state_province</property>
+                        <property name="resultSetColumn">county_district</property>
                     </data>
                 </cell>
                 <cell id="349">
@@ -1548,17 +1595,17 @@ select 0,0,0,0,0 from dual]]></xml-property>
                     </label>
                 </cell>
                 <cell id="350">
-                    <data id="987">
-                        <property name="dataSet">Districts</property>
+                    <data id="1032">
+                        <property name="dataSet">Locations</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">county_district</property>
-                                <text-property name="displayName">county_district</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["county_district"]</expression>
+                                <property name="name">state_province</property>
+                                <text-property name="displayName">state_province</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["state_province"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">county_district</property>
+                        <property name="resultSetColumn">state_province</property>
                     </data>
                 </cell>
                 <cell id="351">
