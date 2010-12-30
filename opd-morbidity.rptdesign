@@ -64,6 +64,27 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="Year" id="182">
+            <text-property name="promptText">Year?</text-property>
+            <property name="valueType">static</property>
+            <property name="sortBy">label</property>
+            <property name="sortDirection">desc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">2010</property>
+                    <property name="label">2010</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
         <scalar-parameter name="Month" id="183">
             <text-property name="promptText">Month?</text-property>
             <property name="valueType">static</property>
@@ -119,27 +140,6 @@
                 <structure>
                     <property name="value">12</property>
                     <property name="label">December</property>
-                </structure>
-            </list-property>
-            <property name="paramType">simple</property>
-            <property name="controlType">list-box</property>
-            <property name="mustMatch">false</property>
-            <property name="fixedOrder">false</property>
-            <structure name="format">
-                <property name="category">Unformatted</property>
-            </structure>
-        </scalar-parameter>
-        <scalar-parameter name="Year" id="182">
-            <text-property name="promptText">Year?</text-property>
-            <property name="valueType">static</property>
-            <property name="sortBy">label</property>
-            <property name="sortDirection">desc</property>
-            <property name="dataType">integer</property>
-            <property name="distinct">true</property>
-            <list-property name="selectionList">
-                <structure>
-                    <property name="value">2010</property>
-                    <property name="label">2010</property>
                 </structure>
             </list-property>
             <property name="paramType">simple</property>
