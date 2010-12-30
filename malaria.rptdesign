@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
     <property name="units">mm</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -135,8 +135,8 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
-            <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">b3Blbm1ycw==</encrypted-property>
+            <property name="odaUser">openmrs</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -1216,6 +1216,197 @@ in
             <design:label>count(*)</design:label>
             <design:formattingHints>
               <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AllOPDCases" id="1027">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">facility</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">diagnosis</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">year</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">month</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">location_id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">openmrs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">diagnosis</property>
+                    <property name="nativeName">diagnosis</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">year</property>
+                    <property name="nativeName">year</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">month</property>
+                    <property name="nativeName">month</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">location_id</property>
+                    <property name="nativeName">location_id</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+opdvisit.id as id ,
+opdvisit.diagnosis as diagnosis,
+opdvisit.year as year,
+opdvisit.month as month,
+opdvisit.location_id as location_id
+from  
+(
+select 
+  enc.encounter_id as id ,
+  obs.value_numeric as diagnosis,
+  YEAR(obs.obs_datetime) as year,
+  MONTH(obs.obs_datetime)as month,
+  enc.location_id as location_id  
+from encounter enc
+join encounter_type enc_type
+  on enc.encounter_type = enc_type.encounter_type_id
+  and enc_type.name = 'OUTPATIENTVISIT'
+join obs obs
+  on enc.encounter_id = obs.encounter_id
+  and obs.value_numeric > 0
+union all
+select 
+  ge.id,
+  ge.diagnosis,
+  YEAR(ge.date) as year,
+  MONTH(ge.date) as month,
+  fac.location_id as location_id 
+from motechmodule_generaloutpatientencounter ge 
+join motechmodule_facility fac 
+   on ge.facility_id = fac.facility_id
+union all
+select
+  ge2.id,
+  ge2.secondary_diagnosis as diagnosis,
+  YEAR(ge2.date) as year,
+  MONTH(ge2.date) as month,
+  fac2.location_id as location_id
+from motechmodule_generaloutpatientencounter ge2
+join motechmodule_facility fac2 
+   on ge2.facility_id = fac2.facility_id
+   and ge2.secondary_diagnosis > 0
+) 
+as opdvisit
+where 
+  location_id = ?
+and 
+  year = ? 
+and 
+  month = ?
+union all
+select 0,0,0,0,0 from dual]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>id</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>20</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>diagnosis</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>22</design:precision>
+            <design:scale>31</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>diagnosis</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>diagnosis</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
             </design:formattingHints>
           </design:usageHints>
         </design:resultColumnDefinitions>
@@ -4303,6 +4494,46 @@ in
             <property name="borderTopStyle">solid</property>
             <property name="borderTopWidth">medium</property>
             <property name="width">168.48666666666668mm</property>
+            <property name="dataSet">AllOPDCases</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">id</property>
+                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">diagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["diagnosis"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <expression name="expression" type="javascript">dataSetRow["year"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <expression name="expression" type="javascript">dataSetRow["month"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <expression name="expression" type="javascript">dataSetRow["location_id"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">total_opd</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNTDISTINCT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["id"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["id"] > 0</expression>
+                </structure>
+            </list-property>
             <property name="pushDown">true</property>
             <column id="882">
                 <property name="width">50.165000000000006mm</property>
@@ -4359,7 +4590,11 @@ in
                         <text-property name="text">Total OPD Attendance</text-property>
                     </label>
                 </cell>
-                <cell id="891"/>
+                <cell id="891">
+                    <data id="1028">
+                        <property name="resultSetColumn">total_opd</property>
+                    </data>
+                </cell>
                 <cell id="892">
                     <property name="borderBottomColor">#000000</property>
                     <property name="borderBottomStyle">solid</property>
@@ -4403,6 +4638,48 @@ in
             <property name="borderTopStyle">solid</property>
             <property name="borderTopWidth">medium</property>
             <property name="width">168.48666666666668mm</property>
+            <property name="dataSet">AllOPDCases</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">id</property>
+                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">diagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["diagnosis"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <expression name="expression" type="javascript">dataSetRow["year"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <expression name="expression" type="javascript">dataSetRow["month"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <expression name="expression" type="javascript">dataSetRow["location_id"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["id"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">(dataSetRow["diagnosis"] >= 10 &amp;&amp; dataSetRow["diagnosis"] &lt;= 13 )&#13;
+|| &#13;
+(dataSetRow["diagnosis"] >= 63 &amp;&amp; dataSetRow["diagnosis"] &lt;=  64 )</expression>
+                </structure>
+            </list-property>
             <column id="897">
                 <property name="width">49.95333333333333mm</property>
             </column>
@@ -4445,6 +4722,9 @@ in
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="1029">
+                        <property name="resultSetColumn">Aggregation</property>
+                    </data>
                 </cell>
                 <cell id="906">
                     <property name="borderBottomColor">#000000</property>
