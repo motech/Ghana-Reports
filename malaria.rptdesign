@@ -414,6 +414,14 @@ or
 	diagnosis = 11
 or
 	secondary_diagnosis = 11
+or
+	diagnosis = 12
+or
+	secondary_diagnosis = 12
+or
+	diagnosis = 13
+or
+	secondary_diagnosis = 13
 and
 	motechmodule_generaloutpatientencounter.facility_id = (
 	select
@@ -510,6 +518,10 @@ where
 	diagnosis = 10
 or
 	secondary_diagnosis = 10
+or
+	diagnosis = 13
+or
+	secondary_diagnosis = 13
 and
 	motechmodule_generaloutpatientencounter.facility_id = (
 	select
@@ -832,7 +844,11 @@ where
 and
 	(value_numeric = 10
 	or
-	value_numeric = 11)
+	value_numeric = 11
+	or
+	value_numeric = 12
+	or
+	value_numeric = 13)
 and 
 	location.location_id = ?
 and 
@@ -939,7 +955,9 @@ where
 	or
 	concept_id = 6118)
 and
-	value_numeric = 10
+	(value_numeric = 10
+	or
+	value_numeric = 13)
 and 
 	location.location_id = ?
 and
@@ -1046,9 +1064,9 @@ where
 	or
 	concept_id = 6118)
 and
-	(value_numeric = 10
+	(value_numeric = 63
 	or
-	value_numeric = 11)
+	value_numeric = 64)
 and 
 	location.location_id = ?
 and
@@ -1155,7 +1173,7 @@ where
 	or
 	concept_id = 6118)
 and
-	value_numeric = 10
+	value_numeric = 63
 and 
 	location.location_id = ?
 and
