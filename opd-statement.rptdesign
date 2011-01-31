@@ -63,6 +63,22 @@
                     <property name="value">2010</property>
                     <property name="label">2010</property>
                 </structure>
+                <structure>
+                    <property name="value">2011</property>
+                    <property name="label">2011</property>
+                </structure>
+                <structure>
+                    <property name="value">2012</property>
+                    <property name="label">2012</property>
+                </structure>
+                <structure>
+                    <property name="value">2013</property>
+                    <property name="label">2013</property>
+                </structure>
+                <structure>
+                    <property name="value">2014</property>
+                    <property name="label">2014</property>
+                </structure>
             </list-property>
             <property name="paramType">simple</property>
             <property name="controlType">list-box</property>
