@@ -19,6 +19,14 @@
             <property name="name">queryTimeOut</property>
             <property name="id">4325</property>
         </structure>
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">4353</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">4353</property>
+        </structure>
     </list-property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -26,23 +34,27 @@
     <parameters>
         <scalar-parameter name="Facility" id="4322">
             <property name="valueType">dynamic</property>
+            <property name="isRequired">true</property>
             <property name="dataSetName">Facilities</property>
-            <expression name="valueExpr" type="javascript">dataSetRow["location_id"]</expression>
-            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="valueExpr">dataSetRow["location_id"]</expression>
+            <expression name="labelExpr">dataSetRow["name"]</expression>
             <expression name="sortByColumn">dataSetRow["name"]</expression>
             <property name="sortDirection">asc</property>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
             <property name="fixedOrder">false</property>
+            <property name="autoSuggestThreshold">1</property>
             <structure name="format">
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
         <scalar-parameter name="Year" id="4323">
             <property name="valueType">static</property>
+            <property name="isRequired">true</property>
             <property name="sortBy">value</property>
             <property name="sortDirection">asc</property>
             <property name="dataType">integer</property>
@@ -77,15 +89,18 @@
                 </structure>
             </list-property>
             <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
             <property name="fixedOrder">false</property>
+            <property name="autoSuggestThreshold">1</property>
             <structure name="format">
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
         <scalar-parameter name="Month" id="4324">
             <property name="valueType">static</property>
+            <property name="isRequired">true</property>
             <property name="sortBy">value</property>
             <property name="sortDirection">asc</property>
             <property name="dataType">integer</property>
@@ -141,9 +156,11 @@
                 </structure>
             </list-property>
             <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
             <property name="fixedOrder">false</property>
+            <property name="autoSuggestThreshold">1</property>
             <structure name="format">
                 <property name="category">Unformatted</property>
             </structure>
@@ -1489,8 +1506,24 @@ and
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Number</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
             <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Number</property>
+                    <property name="nativeName">Number</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
             <xml-property name="queryText"><![CDATA[select coalesce(sum(if(obs.value_numeric < 2.5,1,0)),0) as Number
         from 
             obs, 
@@ -1638,6 +1671,14 @@ and
             </list-property>
             <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Number</property>
+                    <property name="nativeName">Number</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
             <xml-property name="queryText"><![CDATA[select coalesce(sum(if(obs.value_numeric < 2.5,1,0)),0) as Number
         from 
             obs, 
@@ -1797,6 +1838,62 @@ and
             </list-property>
             <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">DELIVERED AT</property>
+                    <property name="nativeName">DELIVERED AT</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">GovtHCOrHP</property>
+                    <property name="nativeName">GovtHCOrHP</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">TeachingHospital</property>
+                    <property name="nativeName">TeachingHospital</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">GovtHospital</property>
+                    <property name="nativeName">GovtHospital</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">PrivateHospital</property>
+                    <property name="nativeName">PrivateHospital</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">CHAG</property>
+                    <property name="nativeName">CHAG</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">QuasiGovtInstitute</property>
+                    <property name="nativeName">QuasiGovtInstitute</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">Mines</property>
+                    <property name="nativeName">Mines</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">Home</property>
+                    <property name="nativeName">Home</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
             <xml-property name="queryText"><![CDATA[select 
     'DELIVERED AT',
     coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as GovtHCOrHP,
@@ -1855,62 +1952,6 @@ and
             </list-property>
             <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">DELIVERED BY</property>
-                    <property name="nativeName">DELIVERED BY</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">Doctor</property>
-                    <property name="nativeName">Doctor</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">MedicalAssistant</property>
-                    <property name="nativeName">MedicalAssistant</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">Midwife_Private</property>
-                    <property name="nativeName">Midwife_Private</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">Midwife_Govt</property>
-                    <property name="nativeName">Midwife_Govt</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">CHOorCHN</property>
-                    <property name="nativeName">CHOorCHN</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">TrainedTBA</property>
-                    <property name="nativeName">TrainedTBA</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">UntrainedTBA</property>
-                    <property name="nativeName">UntrainedTBA</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
-                    <property name="name">FriendOrRelative</property>
-                    <property name="nativeName">FriendOrRelative</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-            </list-property>
             <xml-property name="queryText"><![CDATA[select 
     'DELIVERED BY',
     coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as Doctor,
@@ -1924,8 +1965,7 @@ and
 from 
    obs obs, 
    concept_name name, 
-   encounter encounter,
-   location location
+   encounter encounter
 where 
    obs.concept_id=name.concept_id 
 and 
@@ -1938,7 +1978,6 @@ and
    YEAR(obs.obs_datetime) = ?
 and
    MONTH(obs.obs_datetime) = ?]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DurationOfPregnancy" id="4345">
             <list-property name="computedColumns">
@@ -2110,8 +2149,57 @@ and
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Hemoglobin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">checked_at_registration</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">less_than_11</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">less_than_7</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
             <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Hemoglobin</property>
+                    <property name="nativeName">Hemoglobin</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">checked_at_registration</property>
+                    <property name="nativeName">checked_at_registration</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">less_than_11</property>
+                    <property name="nativeName">less_than_11</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">less_than_7</property>
+                    <property name="nativeName">less_than_7</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
             <xml-property name="queryText"><![CDATA[select 
 	'Hemoglobin',
 	count(*) as checked_at_registration,
@@ -2128,7 +2216,6 @@ where
         from 
             obs, 
             encounter,
-            location,
             concept_name,
             encounter_type
         where obs.encounter_id=encounter.encounter_id 
@@ -2147,7 +2234,6 @@ and
 	 YEAR(obs.obs_datetime) = ?
 and
 	 MONTH(obs.obs_datetime) = ?]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="HeightLessThan150" id="4347">
             <list-property name="parameters">
@@ -2178,6 +2264,20 @@ and
             </list-property>
             <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">height</property>
+                    <property name="nativeName">height</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">lesser_than_150cms</property>
+                    <property name="nativeName">lesser_than_150cms</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
     'height',
     coalesce(SUM(if(obs.value_numeric < 150,1,0)),0) as lesser_than_150cms
@@ -2228,8 +2328,57 @@ and
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">IPT1</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">IPT2</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">IPT3</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
             <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">IPT1</property>
+                    <property name="nativeName">IPT1</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">IPT2</property>
+                    <property name="nativeName">IPT2</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">IPT3</property>
+                    <property name="nativeName">IPT3</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
             <xml-property name="queryText"><![CDATA[select distinct 
     name.name, 
     coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as IPT1,
@@ -2239,7 +2388,6 @@ from
     obs obs, 
     concept_name name,
     encounter encounter,
-    location location,
     concept_name concept_name 
 where 
     obs.concept_id=name.concept_id 
@@ -2255,7 +2403,2007 @@ and
 	YEAR(obs.obs_datetime) = ?
 and
 	MONTH(obs.obs_datetime) = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="IPTIAtLeast2Doses" id="4349">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Total</property>
+                    <property name="nativeName">Total</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+    count(*) as Total
+from 
+    obs, 
+    concept_name,
+    encounter
+where 
+    obs.concept_id=concept_name.concept_id 
+and
+    obs.encounter_id = encounter.encounter_id
+and
+   encounter.location_id = ?
+and 
+    concept_name.name = 'INTERMITTENT PREVENTATIVE TREATMENT DOSE'
+and
+	obs.value_numeric >=2 
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="IPTIWithReaction" id="4350">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">REACTIVE</property>
+                    <property name="nativeName">REACTIVE</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+    name.name, 
+    coalesce(SUM(if(obs.value_coded = 1229,1,0)),0) as REACTIVE
+from 
+    obs obs, 
+    concept_name name,
+    encounter encounter,
+    concept_name concept_name 
+where 
+    obs.concept_id=name.concept_id 
+and 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='IPT REACTION'
+and
+	obs.encounter_id=encounter.encounter_id
+and
+	encounter.location_id= ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ITN" id="4351">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select  
+		'ITN',
+        coalesce(SUM(if(obs.value_numeric = 1 and visit.visit_number=1,1,0)),0) as 1stVisit, 
+        coalesce(SUM(if(obs.value_numeric = 1 and visit.visit_number=2,1,0)),0) as 2ndVisit
+    from obs obs, 
+    (select 
+        obs.encounter_id,
+        obs.value_numeric as visit_number
+    from 
+        obs obs,
+        encounter encounter,
+        concept_name concept_name
+    where
+    	obs.concept_id = concept_name.concept_id
+	and
+		concept_name.name='VISIT NUMBER'
+    and
+        obs.value_numeric in (1,2)
+    and
+		obs.encounter_id = encounter.encounter_id
+	and
+		encounter.location_id= ?
+	and
+		YEAR(obs.obs_datetime) = ?
+	and
+		MONTH(obs.obs_datetime) = ?
+	
+	) as visit
+where obs.concept_id=6107
+and
+	obs.encounter_id = visit.encounter_id]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="MaleInvolvement" id="1292">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select 
+    name.name, 
+    coalesce(SUM(if(encounter_type.name= 'ANCVISIT' and obs.value_numeric = 1,1,0)),0) As ANCVISIT,
+    coalesce(SUM(if(encounter_type.name= 'PREGDELVISIT' and obs.value_numeric = 1,1,0)),0) As PREGDELVISIT,
+    coalesce(SUM(if(encounter_type.name= 'PNCMOTHERVISIT' and obs.value_numeric = 1,1,0)),0) As PNCVISIT,
+    coalesce(SUM(if(encounter_type.name= 'CWCVISIT' and obs.value_numeric = 1,1,0)),0) As CWCVISIT
+from 
+    obs obs, 
+    concept_name name, 
+    encounter, encounter_type
+where 
+    obs.concept_id=name.concept_id 
+and
+    name.name = 'MALE INVOLVEMENT'
+and
+    obs.encounter_id=encounter.encounter_id
+and
+    encounter.encounter_type = encounter_type.encounter_type_id
+and 
+    obs.encounter_id = encounter.encounter_id
+and 
+	encounter.location_id= ?
+and 
+	YEAR(obs.obs_datetime) = ? 
+and 
+    MONTH(obs.obs_datetime) = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OutcomeOfDeliveryChildren" id="525">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["Singleton"] + row["Twins"] + row["Triplets"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Outcome of Delivery (Children)</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Singleton</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Twins</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Triplets</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Outcome of Delivery (Children)</property>
+                    <property name="nativeName">Outcome of Delivery (Children)</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Singleton</property>
+                    <property name="nativeName">Singleton</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">Twins</property>
+                    <property name="nativeName">Twins</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Triplets</property>
+                    <property name="nativeName">Triplets</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	'Outcome of Delivery (Children)', 
+    coalesce(sum(if(obs.value_numeric =1,1,0)),0) as Singleton,
+    coalesce(sum(if(obs.value_numeric =2,2,0)),0) as Twins,
+    coalesce(sum(if(obs.value_numeric =3,3,0)),0) as Triplets
+from
+    obs obs,
+    encounter encounter,
+    concept_name concept_name
+where
+    obs.encounter_id = encounter.encounter_id
+and
+    encounter.location_id = ?
+and 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='DELIVERY OUTCOME'
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OutcomeOfDeliveryMother" id="4352">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["Singleton"] + row["Twins"] +row["Triplets"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Outcome of Delivery (Mother)</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Singleton</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Twins</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Triplets</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Outcome of Delivery (Mother)</property>
+                    <property name="nativeName">Outcome of Delivery (Mother)</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Singleton</property>
+                    <property name="nativeName">Singleton</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">Twins</property>
+                    <property name="nativeName">Twins</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Triplets</property>
+                    <property name="nativeName">Triplets</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	'Outcome of Delivery (Mother)', 
+    coalesce(sum(if(obs.value_numeric =1,1,0)),0) as Singleton,
+    coalesce(sum(if(obs.value_numeric =2,1,0)),0) as Twins,
+    coalesce(sum(if(obs.value_numeric =3,1,0)),0) as Triplets
+from
+    obs obs,
+    encounter encounter,
+    concept_name concept_name
+where
+    obs.encounter_id = encounter.encounter_id
+and
+    encounter.location_id = ?
+and 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='DELIVERY OUTCOME'
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Parity" id="297">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">parity</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">zero</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">1_to_2</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">3_to_4</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">greater_than_5</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">parity</property>
+                    <property name="nativeName">parity</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">zero</property>
+                    <property name="nativeName">zero</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">1_to_2</property>
+                    <property name="nativeName">1_to_2</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">3_to_4</property>
+                    <property name="nativeName">3_to_4</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">greater_than_5</property>
+                    <property name="nativeName">greater_than_5</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+    'parity',
+    coalesce(SUM(if(obs.value_numeric =0,1,0)),0) as zero,
+    coalesce(SUM(if(obs.value_numeric between 1 and 2,1,0)),0) as 1_to_2,
+    coalesce(SUM(if(obs.value_numeric between 3 and 4,1,0)),0) as 3_to_4,
+    coalesce(SUM(if(obs.value_numeric > 5,1,0)),0) as greater_than_5
+    FROM 
+    	obs obs,
+    	encounter encounter,
+    	concept_name concept_name
+where 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='PARITY'
+and
+	obs.encounter_id = encounter.encounter_id
+and
+	encounter.location_id= ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="PMTCT" id="455">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">PMTCT</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Counselled</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Positive</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Tested</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">PMTCT</property>
+                    <property name="nativeName">PMTCT</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Counselled</property>
+                    <property name="nativeName">Counselled</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">Positive</property>
+                    <property name="nativeName">Positive</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Tested</property>
+                    <property name="nativeName">Tested</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+    'PMTCT',
+    coalesce(SUM(if(name.name='HIV PRE-TEST COUNSELING' and obs.value_numeric =1,1,0)),0) as Counselled,
+    coalesce(SUM(if(name.name='PMTCT' and obs.value_numeric =1,1,0)),0) as Positive,
+    coalesce(SUM(if(name.name='PMTCT TREATMENT' and obs.value_numeric =1,1,0)),0) as Tested
+from 
+    obs obs, 
+    concept_name name, 
+    encounter encounter
+where 
+    obs.concept_id=name.concept_id
+and 
+    name.name in ('HIV PRE-TEST COUNSELING', 'PMTCT TREATMENT', 'PMTCT')
+and 
+    obs.encounter_id = encounter.encounter_id
+and 
+    encounter.location_id= ? 
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
+
+]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="PostAbortionAccepting" id="1090">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">PAC-FP Accepting</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">total</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">PAC-FP Accepting</property>
+                    <property name="nativeName">PAC-FP Accepting</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">total</property>
+                    <property name="nativeName">total</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+   'PAC-FP Accepting',
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as total
+    FROM 
+    	obs obs,
+    	encounter encounter,
+    	concept_name
+where 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='POST-ABORTION FP ACCEPTED'
+and
+	obs.encounter_id = encounter.encounter_id
+and
+	encounter.location_id= ?
+and
+	YEAR(obs.obs_datetime) = ? 
+and 
+    MONTH(obs.obs_datetime) = ?
+
+]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="PostAbortionComplication" id="1033">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Termination Complication</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">bleeding</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Sepsis</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Perforations</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Termination Complication</property>
+                    <property name="nativeName">Termination Complication</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">bleeding</property>
+                    <property name="nativeName">bleeding</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">Sepsis</property>
+                    <property name="nativeName">Sepsis</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Perforations</property>
+                    <property name="nativeName">Perforations</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+    'Termination Complication',
+    coalesce(SUM(if(obs.value_numeric = 1,1,0)),0) as bleeding,
+    coalesce(SUM(if(obs.value_numeric = 2 ,1,0)),0) as Sepsis,
+ 	coalesce(SUM(if(obs.value_numeric = 3 ,1,0)),0) as Perforations
+    FROM 
+    	obs obs,
+    	encounter encounter,
+    	location location,
+    	concept_name concept_name
+where 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='TERMINATION COMPLICATION'
+and
+	obs.encounter_id = encounter.encounter_id
+and
+	encounter.location_id= ?
+and
+	YEAR(obs.obs_datetime)  = ? 
+and 
+    MONTH(obs.obs_datetime) = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="PostAbortionCounselled" id="1089">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">PAC-FP Counselled</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">total</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">PAC-FP Counselled</property>
+                    <property name="nativeName">PAC-FP Counselled</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">total</property>
+                    <property name="nativeName">total</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+    'PAC-FP Counselled',
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as total
+    FROM 
+    	obs obs,
+    	encounter encounter,
+    	concept_name concept_name
+where 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='POST-ABORTION FP COUNSELING'
+and
+	obs.encounter_id = encounter.encounter_id
+and
+	encounter.location_id= ?
+and
+	YEAR(obs.obs_datetime) = ? 
+and 
+    MONTH(obs.obs_datetime) = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="PostPartumComplications" id="992">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Delivery or post partum complication</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Eclampsia</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Puerperal_Infection</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">PPH</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Ruptured_Uterus</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">Cardiac_Arrest</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">VVF</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Drop_Foot</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Puerperal_Psychosis</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">other</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Delivery or post partum complication</property>
+                    <property name="nativeName">Delivery or post partum complication</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Eclampsia</property>
+                    <property name="nativeName">Eclampsia</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">Puerperal_Infection</property>
+                    <property name="nativeName">Puerperal_Infection</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">PPH</property>
+                    <property name="nativeName">PPH</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">Ruptured_Uterus</property>
+                    <property name="nativeName">Ruptured_Uterus</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">Cardiac_Arrest</property>
+                    <property name="nativeName">Cardiac_Arrest</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">VVF</property>
+                    <property name="nativeName">VVF</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">Drop_Foot</property>
+                    <property name="nativeName">Drop_Foot</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">Puerperal_Psychosis</property>
+                    <property name="nativeName">Puerperal_Psychosis</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">other</property>
+                    <property name="nativeName">other</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	'Delivery or post partum complication', 
+    coalesce(sum(if(obs.value_numeric =1,1,0)),0) as Eclampsia,
+    coalesce(sum(if(obs.value_numeric =2,1,0)),0) as Puerperal_Infection,
+    coalesce(sum(if(obs.value_numeric =3,1,0)),0) as PPH,
+    coalesce(sum(if(obs.value_numeric =4,1,0)),0) as Ruptured_Uterus,
+    coalesce(sum(if(obs.value_numeric =5,1,0)),0) as Cardiac_Arrest,
+    coalesce(sum(if(obs.value_numeric =6,1,0)),0) as VVF,
+    coalesce(sum(if(obs.value_numeric =7,1,0)),0) as Drop_Foot,
+    coalesce(sum(if(obs.value_numeric =8,1,0)),0) as Puerperal_Psychosis,
+    coalesce(sum(if(obs.value_numeric =9,1,0)),0) as other
+from
+    obs obs,
+    encounter encounter,
+    concept_name concept_name
+where
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='DELIVERY COMPLICATION'
+and
+    obs.encounter_id=encounter.encounter_id
+and
+    encounter.location_id=?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Post Partum Vit A" id="4353">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Post Partum Vit.A for Mother</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">total</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Post Partum Vit.A for Mother</property>
+                    <property name="nativeName">Post Partum Vit.A for Mother</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">total</property>
+                    <property name="nativeName">total</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 'Post Partum Vit.A for Mother', 
+        count(patients.person_id) 
+as total from (
+    select distinct person_id from 
+        obs, 
+        encounter, 
+        encounter_type,
+        concept_name
+    where
+        obs.encounter_id=encounter.encounter_id
+    and
+    	obs.location_id=?
+    and
+        concept_name.concept_id=obs.value_coded
+    and
+        encounter.encounter_type=encounter_type.encounter_type_id
+    and
+        encounter_type.name='PNCMOTHERVISIT'
+    and 
+        concept_name.name='VITAMIN A'
+    and
+    	YEAR(obs.obs_datetime) = ?
+    and
+    	MONTH(obs.obs_datetime) = ?
+ ) as patients
+]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Referrals Antenatal" id="1357">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Referrals</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">total</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Referrals</property>
+                    <property name="nativeName">Referrals</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">total</property>
+                    <property name="nativeName">total</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+    'Referrals',
+    coalesce(sum(if(obs.value_numeric= 1,1,0)),0) as total
+ from 
+    obs, 
+    encounter, 
+    concept_name,
+    encounter_type
+where 
+    concept_name.concept_id=obs.concept_id
+and
+    concept_name.name='REFERRED'
+and
+   obs.encounter_id=encounter.encounter_id
+and 
+   encounter.location_id= ?
+and
+    encounter.encounter_type=encounter_type.encounter_type_id
+and
+    encounter_type.name='ANCVISIT'
+and 
+   YEAR(obs.obs_datetime) = ?
+and 
+   MONTH(obs.obs_datetime) = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Referrals post natal" id="4354">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Referrals</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">total</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Referrals</property>
+                    <property name="nativeName">Referrals</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">total</property>
+                    <property name="nativeName">total</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+    'Referrals',
+    coalesce(sum(if(obs.value_numeric= 1,1,0)),0) as total
+ from 
+    obs, 
+    encounter, 
+    concept_name,
+    encounter_type
+where
+    obs.concept_id = concept_name.concept_id
+and
+    concept_name.name='REFERRED'
+and 
+    obs.encounter_id=encounter.encounter_id
+and 
+   encounter.location_id= ?
+and
+    encounter.encounter_type=encounter_type.encounter_type_id
+and
+    encounter_type.name='PNCMOTHERVISIT'
+and 
+   YEAR(obs.obs_datetime) = ?
+and 
+    MONTH(obs.obs_datetime) = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Registrants1" id="262">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">registrants</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">registrants</property>
+                    <property name="nativeName">registrants</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select count(*) as registrants
+from  
+    encounter encounter
+where 
+    encounter.encounter_type=15
+and
+	encounter.location_id= ?
+and
+	YEAR(encounter.encounter_datetime) = ?
+and
+	MONTH(encounter.encounter_datetime) = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Registrants_postnatal" id="1558">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Registrants</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Registrants</property>
+                    <property name="nativeName">Registrants</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+    count(distinct
+    obs.person_id) as Registrants
+from 
+    obs,
+    person,
+    encounter,
+    encounter_type,
+    location,
+    concept_name
+where
+    obs.concept_id=concept_name.concept_id
+and 
+	concept_name.name = 'VISIT NUMBER'
+and
+    obs.value_numeric=1
+and
+	obs.encounter_id=encounter.encounter_id
+and
+	encounter.location_id= ?	
+and
+	encounter.encounter_type=encounter_type.encounter_type_id
+and 
+	encounter_type.name="PNCMOTHERVISIT"
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+   obs.person_id=person.person_id
+]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Termination procedure" id="1808">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Termination Procedure</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">d</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">MVA</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Other</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Termination Procedure</property>
+                    <property name="nativeName">Termination Procedure</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">d</property>
+                    <property name="nativeName">d</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">MVA</property>
+                    <property name="nativeName">MVA</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Other</property>
+                    <property name="nativeName">Other</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+    'Termination Procedure',
+    coalesce(SUM(if(obs.value_numeric = 1,1,0)),0) as d,
+    coalesce(SUM(if(obs.value_numeric = 2 ,1,0)),0) as MVA,
+	coalesce(SUM(if(obs.value_numeric = 3 ,1,0)),0) as Other    
+    FROM 
+    	obs obs,
+    	encounter encounter,
+    	concept_name concept_name
+where 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='PREGNANCY, TERMINATION PROCEDURE'
+and
+	YEAR(obs.obs_datetime) = ?
+and
+    MONTH(obs.obs_datetime) = ?
+and
+	obs.encounter_id = encounter.encounter_id
+and
+	encounter.location_id = ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="TerminationType" id="1809">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Termination Type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">elective</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">spontaneous</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">induced</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Termination Type</property>
+                    <property name="nativeName">Termination Type</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">elective</property>
+                    <property name="nativeName">elective</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">spontaneous</property>
+                    <property name="nativeName">spontaneous</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">induced</property>
+                    <property name="nativeName">induced</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+    'Termination Type',
+    coalesce(SUM(if(obs.value_numeric = 1,1,0)),0) as elective,
+    coalesce(SUM(if(obs.value_numeric = 2,1,0)),0) as spontaneous,
+    coalesce(SUM(if(obs.value_numeric = 3,1,0)),0) as induced
+FROM 
+    obs obs,
+    encounter encounter,
+    concept_name concept_name
+where 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='TERMINATION TYPE'
+and
+	YEAR(obs.obs_datetime) =  ? 
+and
+    MONTH(obs.obs_datetime) = ?
+and
+	obs.encounter_id = encounter.encounter_id
+and
+	encounter.location_id= ?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Toxide 2+" id="268">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">string</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">total</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">total</property>
+                    <property name="nativeName">total</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+    count(obs.person_id) as total
+from 
+    obs obs,
+    person_attribute attribute,
+    encounter encounter,
+    concept_name concept_name
+where 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='TETANUS TOXOID DOSE'
+and
+    obs.value_numeric > 2
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
+and
+	obs.encounter_id = encounter.encounter_id
+and
+	encounter.location_id= ?
+and
+    obs.person_id = attribute.person_id]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="TypeOfDelivery" id="566">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["Normal"] + row["CSection"] + row["Vacuum"] + row["Forceps"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Type of Delivery</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Normal</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">CSection</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Vacuum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Forceps</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Type of Delivery</property>
+                    <property name="nativeName">Type of Delivery</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Normal</property>
+                    <property name="nativeName">Normal</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">CSection</property>
+                    <property name="nativeName">CSection</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Vacuum</property>
+                    <property name="nativeName">Vacuum</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">Forceps</property>
+                    <property name="nativeName">Forceps</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	'Type of Delivery', 
+    coalesce(sum(if(obs.value_numeric =1,1,0)),0) as Normal,
+    coalesce(sum(if(obs.value_numeric =2,1,0)),0) as CSection,
+    coalesce(sum(if(obs.value_numeric =3,1,0)),0) as Vacuum,
+    coalesce(sum(if(obs.value_numeric =4,1,0)),0) as Forceps
+from
+    obs obs,
+    encounter encounter,
+    location location,
+    concept_name concept_name
+where 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='DELIVERY MODE'
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
+and
+    obs.encounter_id = encounter.encounter_id
+and
+    encounter.location_id = ?
+]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="VVF" id="988">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">VVF Repair</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Seen</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Repaired</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Referred</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">VVF Repair</property>
+                    <property name="nativeName">VVF Repair</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Seen</property>
+                    <property name="nativeName">Seen</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">Repaired</property>
+                    <property name="nativeName">Repaired</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Referred</property>
+                    <property name="nativeName">Referred</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+	'VVF Repair', 
+    coalesce(sum(if(obs.value_numeric =1,1,0)),0) as Seen,
+    coalesce(sum(if(obs.value_numeric =2,1,0)),0) as Repaired,
+    coalesce(sum(if(obs.value_numeric =3,1,0)),0) as Referred
+from
+    obs obs,
+    encounter encounter,
+    concept_name concept_name
+where 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='VVF REPAIR'
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
+and
+    obs.encounter_id = encounter.encounter_id
+and
+    encounter.location_id = ?
+]]></xml-property>
         </oda-data-set>
     </data-sets>
     <styles>
