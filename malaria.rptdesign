@@ -138,7 +138,7 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
-            <property name="odaUser">openmrs</property>
+            <property name="odaUser">root</property>
             <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
     </data-sources>
@@ -318,9 +318,9 @@ where
 from 
 	motechmodule_generaloutpatientencounter
 where
-	YEAR(date) = ?
+	YEAR(visit_date) = ?
 and
-	MONTH(date) = ?
+	MONTH(visit_date) = ?
 and
   motechmodule_generaloutpatientencounter.facility_id = (
   select
@@ -423,9 +423,9 @@ select
 		location_id = ?
   )
 and
-	YEAR(date) = ?
+	YEAR(visit_date) = ?
 and
-	MONTH(date) = ?]]></xml-property>
+	MONTH(visit_date) = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -519,9 +519,9 @@ and
 	where
 		location_id = ?)
 and
-	YEAR(date) = ?
+	YEAR(visit_date) = ?
 and
-	MONTH(date) = ?]]></xml-property>
+	MONTH(visit_date) = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -1223,68 +1223,8 @@ in
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">id</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">diagnosis</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">year</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">month</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">location_id</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                </list-property>
-            </structure>
+            <structure name="cachedMetaData"/>
             <property name="dataSource">openmrs</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">id</property>
-                    <property name="nativeName">id</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">diagnosis</property>
-                    <property name="nativeName">diagnosis</property>
-                    <property name="dataType">float</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">year</property>
-                    <property name="nativeName">year</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">month</property>
-                    <property name="nativeName">month</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">location_id</property>
-                    <property name="nativeName">location_id</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-            </list-property>
             <xml-property name="queryText"><![CDATA[select 
 opdvisit.id as id ,
 opdvisit.diagnosis as diagnosis,
@@ -1311,8 +1251,8 @@ union all
 select 
   concat('General',cast(ge.id as CHAR)),
   ge.diagnosis,
-  YEAR(ge.date) as year,
-  MONTH(ge.date) as month,
+  YEAR(ge.visit_date) as year,
+  MONTH(ge.visit_date) as month,
   fac.location_id as location_id 
 from motechmodule_generaloutpatientencounter ge 
 join motechmodule_facility fac 
@@ -1321,8 +1261,8 @@ union all
 select
   concat('General',cast(ge2.id as CHAR)),
   ge2.secondary_diagnosis as diagnosis,
-  YEAR(ge2.date) as year,
-  MONTH(ge2.date) as month,
+  YEAR(ge2.visit_date) as year,
+  MONTH(ge2.visit_date) as month,
   fac2.location_id as location_id
 from motechmodule_generaloutpatientencounter ge2
 join motechmodule_facility fac2 

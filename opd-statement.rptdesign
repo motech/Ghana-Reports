@@ -167,7 +167,7 @@
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">b3Blbm1ycw==</encrypted-property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
         <script-data-source name="Scripted Data" id="920"/>
     </data-sources>
@@ -206,60 +206,6 @@ else if (row["age"] >=70)&#13;
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">id</property>
-                    <text-property name="displayName">id</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">date</property>
-                    <text-property name="displayName">date</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">staff_id</property>
-                    <text-property name="displayName">staff_id</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">facility_id</property>
-                    <text-property name="displayName">facility_id</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">region</property>
-                    <text-property name="displayName">region</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">district</property>
-                    <text-property name="displayName">district</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">subdistrict</property>
-                    <text-property name="displayName">subdistrict</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">facility</property>
-                    <text-property name="displayName">facility</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">sex</property>
-                    <text-property name="displayName">sex</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">birthdate</property>
-                    <text-property name="displayName">birthdate</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">diagnosis</property>
-                    <text-property name="displayName">diagnosis</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">newpatient</property>
-                    <text-property name="displayName">newpatient</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">insured</property>
-                    <text-property name="displayName">insured</text-property>
-                </structure>
-            </list-property>
             <list-property name="filter">
                 <structure>
                     <property name="operator">eq</property>
@@ -283,182 +229,11 @@ else if (row["age"] >=70)&#13;
                     </simple-property-list>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">id</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">date</property>
-                        <property name="dataType">date-time</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">staff_id</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">facility_id</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">region</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">district</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">subdistrict</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">facility</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
-                        <property name="name">sex</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">10</property>
-                        <property name="name">birthdate</property>
-                        <property name="dataType">date</property>
-                    </structure>
-                    <structure>
-                        <property name="position">11</property>
-                        <property name="name">diagnosis</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">12</property>
-                        <property name="name">newpatient</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">13</property>
-                        <property name="name">insured</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">14</property>
-                        <property name="name">age</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">15</property>
-                        <property name="name">agegroup</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                </list-property>
-            </structure>
+            <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">id</property>
-                    <property name="nativeName">id</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">date</property>
-                    <property name="nativeName">date</property>
-                    <property name="dataType">date-time</property>
-                    <property name="nativeDataType">93</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">staff_id</property>
-                    <property name="nativeName">staff_id</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">facility_id</property>
-                    <property name="nativeName">facility_id</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">region</property>
-                    <property name="nativeName">region</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">district</property>
-                    <property name="nativeName">district</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">subdistrict</property>
-                    <property name="nativeName">subdistrict</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">facility</property>
-                    <property name="nativeName">facility</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
-                    <property name="name">sex</property>
-                    <property name="nativeName">sex</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">10</property>
-                    <property name="name">birthdate</property>
-                    <property name="nativeName">birthdate</property>
-                    <property name="dataType">date</property>
-                    <property name="nativeDataType">91</property>
-                </structure>
-                <structure>
-                    <property name="position">11</property>
-                    <property name="name">diagnosis</property>
-                    <property name="nativeName">diagnosis</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
-                </structure>
-                <structure>
-                    <property name="position">12</property>
-                    <property name="name">newpatient</property>
-                    <property name="nativeName">newpatient</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
-                </structure>
-                <structure>
-                    <property name="position">13</property>
-                    <property name="name">insured</property>
-                    <property name="nativeName">insured</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
-                </structure>
-            </list-property>
             <xml-property name="queryText"><![CDATA[select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
-ge1.date,
+ge1.visit_date as date,
 CAST(ge1.staff_id AS CHAR) as staff_id,
 ge1.facility_id as facility_id,
 loc1.region as region,
@@ -476,7 +251,7 @@ join location loc1 on loc1.location_id = fa1.location_id
 union all
 select
 CONCAT('General',CAST(ge2.id AS CHAR)) as id,
-ge2.date,
+ge2.visit_date as date,
 CAST(ge2.staff_id AS CHAR),
 ge2.facility_id as facility_id,
 loc2.region as region,
@@ -1072,192 +847,7 @@ else 0;</expression>
                     <property name="dataType">integer</property>
                 </structure>
             </list-property>
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">Data Set::region</property>
-                    <property name="alias">region</property>
-                    <text-property name="displayName">Data Set::region</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::sex</property>
-                    <property name="alias">sex</property>
-                    <text-property name="displayName">Data Set::sex</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::agegroup</property>
-                    <property name="alias">agegroup</property>
-                    <text-property name="displayName">Data Set::agegroup</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::diagnosis</property>
-                    <property name="alias">diagnosis</property>
-                    <text-property name="displayName">Data Set::diagnosis</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::staff_id</property>
-                    <property name="alias">staff_id</property>
-                    <text-property name="displayName">Data Set::staff_id</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">AgeGroup::age_group_code</property>
-                    <property name="alias">code</property>
-                    <text-property name="displayName">AgeGroup::age_group_code</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::date</property>
-                    <property name="alias">date</property>
-                    <text-property name="displayName">Data Set::date</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::facility_id</property>
-                    <property name="alias">facility_id</property>
-                    <text-property name="displayName">Data Set::facility_id</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::id</property>
-                    <property name="alias">id</property>
-                    <text-property name="displayName">Data Set::id</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::newpatient</property>
-                    <property name="alias">newpatient</property>
-                    <text-property name="displayName">Data Set::newpatient</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::insured</property>
-                    <property name="alias">insured</property>
-                    <text-property name="displayName">Data Set::insured</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::facility</property>
-                    <property name="alias">facility</property>
-                    <text-property name="displayName">Data Set::facility</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::age</property>
-                    <property name="alias">age</property>
-                    <text-property name="displayName">Data Set::age</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::birthdate</property>
-                    <property name="alias">birthdate</property>
-                    <text-property name="displayName">Data Set::birthdate</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">AgeGroup::age_group</property>
-                    <property name="alias">group</property>
-                    <text-property name="displayName">AgeGroup::age_group</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::district</property>
-                    <property name="alias">district</property>
-                    <text-property name="displayName">Data Set::district</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::subdistrict</property>
-                    <property name="alias">subdistrict</property>
-                    <text-property name="displayName">Data Set::subdistrict</text-property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">id</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">date</property>
-                        <property name="dataType">date-time</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">staff_id</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">facility_id</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">region</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">district</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">subdistrict</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">facility</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
-                        <property name="name">sex</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">10</property>
-                        <property name="name">birthdate</property>
-                        <property name="dataType">date</property>
-                    </structure>
-                    <structure>
-                        <property name="position">11</property>
-                        <property name="name">diagnosis</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">12</property>
-                        <property name="name">newpatient</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">13</property>
-                        <property name="name">insured</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">14</property>
-                        <property name="name">age</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">15</property>
-                        <property name="name">agegroup</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">16</property>
-                        <property name="name">code</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">17</property>
-                        <property name="name">group</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">18</property>
-                        <property name="name">c_diagnosis</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">19</property>
-                        <property name="name">malaria</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                </list-property>
-            </structure>
+            <structure name="cachedMetaData"/>
             <simple-property-list name="dataSets">
                 <value>Data Set</value>
                 <value>AgeGroup</value>
@@ -1268,7 +858,7 @@ else 0;</expression>
                     <property name="joinOperator">eq</property>
                     <property name="leftDataSet">Data Set</property>
                     <property name="rightDataSet">AgeGroup</property>
-                    <expression name="leftExpression">dataSetRow["agegroup"]</expression>
+                    <expression name="leftExpression">dataSetRow[""]</expression>
                     <expression name="rightExpression">dataSetRow["code"]</expression>
                 </structure>
             </list-property>

@@ -4,20 +4,20 @@
     <property name="units">in</property>
     <list-property name="propertyBindings">
         <structure>
-            <property name="name">queryText</property>
-            <property name="id">766</property>
-        </structure>
-        <structure>
-            <property name="name">queryTimeOut</property>
-            <property name="id">766</property>
-        </structure>
-        <structure>
             <property name="name">rowFetchSize</property>
             <property name="id">766</property>
         </structure>
         <structure>
             <property name="name">rowFetchSize</property>
             <property name="id">974</property>
+        </structure>
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">766</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">766</property>
         </structure>
     </list-property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -165,8 +165,8 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
-            <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">b3Blbm1ycw==</encrypted-property>
+            <property name="odaUser">openmrs</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>

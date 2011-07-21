@@ -2,6 +2,16 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
     <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
     <property name="units">mm</property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">981</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">981</property>
+        </structure>
+    </list-property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">120</property>
@@ -147,7 +157,7 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
-            <property name="odaUser">openmrsuser</property>
+            <property name="odaUser">root</property>
             <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
     </data-sources>
@@ -267,7 +277,7 @@
             <xml-property name="queryText"><![CDATA[select id , date , birthdate , sex , location_id , diagnosis from (
 select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
-ge1.date as date,
+ge1.visit_date as date,
 ge1.birthdate as birthdate,
 ge1.sex as sex,
 loc1.location_id as location_id,
@@ -278,7 +288,7 @@ join location loc1 on loc1.location_id = fa1.location_id
 union all
 select
 CONCAT('General',CAST(ge2.id AS CHAR)) as id,
-ge2.date as date,
+ge2.visit_date as date,
 ge2.birthdate as birthdate,
 ge2.sex as sex,
 loc2.location_id as location_id,
@@ -1096,7 +1106,7 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                 </structure>
                 <structure>
                     <property name="name">year</property>
-                    <expression name="expression" type="javascript">params["Year"].value</expression>
+                    <expression name="expression" type="javascript">params["Year"].displayText</expression>
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>

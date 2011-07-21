@@ -42,6 +42,16 @@
     <property name="CWC Data Cube.CWC Data.x">135</property>
     <property name="CWC Data Cube.CWC Data.y">80</property>
     <property name="units">in</property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">2206</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">2206</property>
+        </structure>
+    </list-property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="layoutPreference">auto layout</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -192,7 +202,7 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
-            <property name="odaUser">openmrsuser</property>
+            <property name="odaUser">root</property>
             <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
     </data-sources>
@@ -462,14 +472,14 @@ and loc.state_province = ?]]></xml-property>
             <list-property name="filter">
                 <structure>
                     <property name="operator">eq</property>
-                    <expression name="expr">BirtDateTime.year(row["date"])</expression>
+                    <expression name="expr" type="javascript">BirtDateTime.year(row["date"])</expression>
                     <simple-property-list name="value1">
                         <value>params["Year"].value</value>
                     </simple-property-list>
                 </structure>
                 <structure>
                     <property name="operator">eq</property>
-                    <expression name="expr">BirtDateTime.month(row["date"],1)</expression>
+                    <expression name="expr" type="javascript">BirtDateTime.month(row["date"],1)</expression>
                     <simple-property-list name="value1">
                         <value>params["Month"].value</value>
                     </simple-property-list>
@@ -539,25 +549,25 @@ and loc.state_province = ?]]></xml-property>
             </list-property>
             <xml-property name="queryText"><![CDATA[select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
-ge1.date,
+ge1.visit_date as date,
 loc1.location_id,
 ge1.diagnosis
 from motechmodule_generaloutpatientencounter ge1
 join motechmodule_facility fa1 on fa1.facility_id = ge1.facility_id
 join location loc1 on loc1.location_id = fa1.location_id
 where ge1.referred = 1
-and ge1.birthdate > DATE_SUB(ge1.date, INTERVAL 5 YEAR)
+and ge1.birthdate > DATE_SUB(ge1.visit_date, INTERVAL 5 YEAR)
 union all
 select
 CONCAT('General',CAST(ge2.id AS CHAR)) as id,
-ge2.date,
+ge2.visit_date as date,
 loc2.location_id,
 ge2.secondary_diagnosis as diagnosis
 from motechmodule_generaloutpatientencounter ge2
 join motechmodule_facility fa2 on fa2.facility_id = ge2.facility_id
 join location loc2 on loc2.location_id = fa2.location_id
 where ge2.referred = 1 and ge2.secondary_diagnosis is not null
-and ge2.birthdate > DATE_SUB(ge2.date, INTERVAL 5 YEAR)
+and ge2.birthdate > DATE_SUB(ge2.visit_date, INTERVAL 5 YEAR)
 union all
 select
   CONCAT('Patient',CAST(enc.encounter_id AS CHAR)) as id,

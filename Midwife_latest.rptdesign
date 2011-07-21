@@ -2,9 +2,2262 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
     <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
     <property name="units">in</property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">4320</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">4320</property>
+        </structure>
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">4325</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">4325</property>
+        </structure>
+    </list-property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="Facility" id="4322">
+            <property name="valueType">dynamic</property>
+            <property name="dataSetName">Facilities</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["location_id"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="sortByColumn">dataSetRow["name"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Year" id="4323">
+            <property name="valueType">static</property>
+            <property name="sortBy">value</property>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2011</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">2010</property>
+                    <property name="label">2010</property>
+                </structure>
+                <structure>
+                    <property name="value">2011</property>
+                    <property name="label">2011</property>
+                </structure>
+                <structure>
+                    <property name="value">2012</property>
+                    <property name="label">2012</property>
+                </structure>
+                <structure>
+                    <property name="value">2013</property>
+                    <property name="label">2013</property>
+                </structure>
+                <structure>
+                    <property name="value">2014</property>
+                    <property name="label">2014</property>
+                </structure>
+                <structure>
+                    <property name="value">2015</property>
+                    <property name="label">2015</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Month" id="4324">
+            <property name="valueType">static</property>
+            <property name="sortBy">value</property>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">1</property>
+                    <property name="label">January</property>
+                </structure>
+                <structure>
+                    <property name="value">2</property>
+                    <property name="label">February</property>
+                </structure>
+                <structure>
+                    <property name="value">3</property>
+                    <property name="label">March</property>
+                </structure>
+                <structure>
+                    <property name="value">4</property>
+                    <property name="label">April</property>
+                </structure>
+                <structure>
+                    <property name="value">5</property>
+                    <property name="label">May</property>
+                </structure>
+                <structure>
+                    <property name="value">6</property>
+                    <property name="label">June</property>
+                </structure>
+                <structure>
+                    <property name="value">7</property>
+                    <property name="label">July</property>
+                </structure>
+                <structure>
+                    <property name="value">8</property>
+                    <property name="label">August</property>
+                </structure>
+                <structure>
+                    <property name="value">9</property>
+                    <property name="label">September</property>
+                </structure>
+                <structure>
+                    <property name="value">10</property>
+                    <property name="label">October</property>
+                </structure>
+                <structure>
+                    <property name="value">11</property>
+                    <property name="label">November</property>
+                </structure>
+                <structure>
+                    <property name="value">12</property>
+                    <property name="label">December</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="4319">
+            <text-property name="displayName"></text-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.gjt.mm.mysql.Driver</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/openmrs</property>
+            <property name="odaUser">root</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AgeGroupOfNewMaternalDeaths" id="4320">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">AGE GROUP OF MATERNAL DEATHS (YEARS)</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">10_to_14_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">15_to_19_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">20_to_24_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">25_to_29_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">30_to_35_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">greater_than_35_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">AGE GROUP OF MATERNAL DEATHS (YEARS)</property>
+                    <property name="nativeName">AGE GROUP OF MATERNAL DEATHS (YEARS)</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">10_to_14_years</property>
+                    <property name="nativeName">10_to_14_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">15_to_19_years</property>
+                    <property name="nativeName">15_to_19_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">20_to_24_years</property>
+                    <property name="nativeName">20_to_24_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">25_to_29_years</property>
+                    <property name="nativeName">25_to_29_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">30_to_35_years</property>
+                    <property name="nativeName">30_to_35_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">greater_than_35_years</property>
+                    <property name="nativeName">greater_than_35_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+	'AGE GROUP OF MATERNAL DEATHS (YEARS)',
+    coalesce(SUM(if(ages.age between 10 and 14,1,0)),0) as 10_to_14_years,
+    coalesce(SUM(if(ages.age between 15 and 19,1,0)),0) as 15_to_19_years,
+    coalesce(SUM(if(ages.age between 20 and 24,1,0)),0) as 20_to_24_years,
+    coalesce(SUM(if(ages.age between 25 and 29,1,0)),0) as 25_to_29_years,
+    coalesce(SUM(if(ages.age between 30 and 34,1,0)),0) as 30_to_35_years,
+    coalesce(SUM(if(ages.age > 35,1,0)),0) as greater_than_35_years
+from
+(select
+    distinct
+    obs.person_id,
+    YEAR(obs.obs_datetime) - YEAR(person.birthdate) - IF(DATE_FORMAT(person.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0) as age
+from 
+    obs obs,
+    person person,
+    encounter encounter,
+    concept_name concept_name
+where
+	obs.encounter_id=encounter.encounter_id
+and
+	encounter.location_id=?	
+and
+    obs.person_id=person.person_id
+and
+    obs.concept_id=concept_name.concept_id
+and
+	concept_name.name='MATERNAL DEATH'
+and
+    obs.value_numeric=1
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) =?
+) as ages; ]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Facilities" id="4321">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">name</property>
+                    <text-property name="displayName">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">location_id</property>
+                    <text-property name="displayName">location_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">facility_id</property>
+                    <text-property name="displayName">facility_id</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">location_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">facility_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">location_id</property>
+                    <property name="nativeName">location_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">facility_id</property>
+                    <property name="nativeName">facility_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+l.name,
+l.location_id,
+f.facility_id
+from motechmodule_facility f 
+join location l
+on f.location_id = l.location_id]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>name</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>facility_id</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>facility_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>facility_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AgeGroupOfMothersAtDelivery" id="4325">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">AGE GROUP OF MOTHER AT DELIVERY (YEARS)</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">10_to_14_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">15_to_19_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">20_to_24_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">25_to_29_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">30_to_35_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">greater_than_35_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">AGE GROUP OF MOTHER AT DELIVERY (YEARS)</property>
+                    <property name="nativeName">AGE GROUP OF MOTHER AT DELIVERY (YEARS)</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">10_to_14_years</property>
+                    <property name="nativeName">10_to_14_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">15_to_19_years</property>
+                    <property name="nativeName">15_to_19_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">20_to_24_years</property>
+                    <property name="nativeName">20_to_24_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">25_to_29_years</property>
+                    <property name="nativeName">25_to_29_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">30_to_35_years</property>
+                    <property name="nativeName">30_to_35_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">greater_than_35_years</property>
+                    <property name="nativeName">greater_than_35_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+	'AGE GROUP OF MOTHER AT DELIVERY (YEARS)',
+    coalesce(SUM(if(ages.age between 10 and 14,1,0)),0) as 10_to_14_years,
+    coalesce(SUM(if(ages.age between 15 and 19,1,0)),0) as 15_to_19_years,
+    coalesce(SUM(if(ages.age between 20 and 24,1,0)),0) as 20_to_24_years,
+    coalesce(SUM(if(ages.age between 25 and 29,1,0)),0) as 25_to_29_years,
+    coalesce(SUM(if(ages.age between 30 and 34,1,0)),0) as 30_to_35_years,
+    coalesce(SUM(if(ages.age > 35,1,0)),0) as greater_than_35_years
+from
+(select
+    distinct
+    obs.person_id,
+    YEAR(obs.obs_datetime) - YEAR(person.birthdate) - IF(DATE_FORMAT(person.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0) as age
+from 
+    obs,
+    person,
+    encounter,
+    encounter_type,
+    concept_name
+where
+	obs.encounter_id=encounter.encounter_id
+and
+	encounter.location_id=?	
+and
+	encounter.encounter_type=encounter_type.encounter_type_id
+and 
+	encounter_type.name="PREGDELVISIT"
+and
+    obs.person_id=person.person_id
+and
+    obs.concept_id=concept_name.concept_id
+and
+	YEAR(obs.obs_datetime) = ?
+and 
+	MONTH(obs.obs_datetime) = ?
+) as ages;
+]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AgeGroupOfPNCRegistrants" id="4326">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">AGE GROUP OF MOTHER AT DELIVERY (YEARS)</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">10_to_14_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">15_to_19_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">20_to_24_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">25_to_29_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">30_to_35_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">greater_than_35_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">AGE GROUP OF MOTHER AT DELIVERY (YEARS)</property>
+                    <property name="nativeName">AGE GROUP OF MOTHER AT DELIVERY (YEARS)</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">10_to_14_years</property>
+                    <property name="nativeName">10_to_14_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">15_to_19_years</property>
+                    <property name="nativeName">15_to_19_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">20_to_24_years</property>
+                    <property name="nativeName">20_to_24_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">25_to_29_years</property>
+                    <property name="nativeName">25_to_29_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">30_to_35_years</property>
+                    <property name="nativeName">30_to_35_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">greater_than_35_years</property>
+                    <property name="nativeName">greater_than_35_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+	'AGE GROUP OF MOTHER AT DELIVERY (YEARS)',
+    coalesce(SUM(if(ages.age between 10 and 14,1,0)),0) as 10_to_14_years,
+    coalesce(SUM(if(ages.age between 15 and 19,1,0)),0) as 15_to_19_years,
+    coalesce(SUM(if(ages.age between 20 and 24,1,0)),0) as 20_to_24_years,
+    coalesce(SUM(if(ages.age between 25 and 29,1,0)),0) as 25_to_29_years,
+    coalesce(SUM(if(ages.age between 30 and 34,1,0)),0) as 30_to_35_years,
+    coalesce(SUM(if(ages.age > 35,1,0)),0) as greater_than_35_years
+from
+(select
+    distinct
+    obs.person_id,
+    YEAR(obs.obs_datetime) - YEAR(person.birthdate) - IF(DATE_FORMAT(person.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0) as age
+from 
+    obs,
+    person,
+    encounter,
+    encounter_type,
+    concept_name
+where
+	obs.encounter_id=encounter.encounter_id
+and
+	encounter.location_id=?	
+and
+	encounter.encounter_type=encounter_type.encounter_type_id
+and 
+	encounter_type.name="PNCMOTHERVISIT"
+and 
+	concept_name.name = 'VISIT NUMBER'
+and
+	obs.value_numeric=1
+and
+    obs.person_id=person.person_id
+and
+    obs.concept_id=concept_name.concept_id
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime)= ?
+union
+	select 0,0
+from
+	dual
+) as ages;
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AgeGroupOfRegistrants" id="4327">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Registrants</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">10_to_14_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">15_to_19_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">20_to_24_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">25_to_29_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">30_to_35_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">greater_than_35_years</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Registrants</property>
+                    <property name="nativeName">Registrants</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">10_to_14_years</property>
+                    <property name="nativeName">10_to_14_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">15_to_19_years</property>
+                    <property name="nativeName">15_to_19_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">20_to_24_years</property>
+                    <property name="nativeName">20_to_24_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">25_to_29_years</property>
+                    <property name="nativeName">25_to_29_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">30_to_35_years</property>
+                    <property name="nativeName">30_to_35_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">greater_than_35_years</property>
+                    <property name="nativeName">greater_than_35_years</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+	'Registrants',
+    coalesce(SUM(if(ages.age between 10 and 14,1,0)),0) as 10_to_14_years,
+    coalesce(SUM(if(ages.age between 15 and 19,1,0)),0) as 15_to_19_years,
+    coalesce(SUM(if(ages.age between 20 and 24,1,0)),0) as 20_to_24_years,
+    coalesce(SUM(if(ages.age between 25 and 29,1,0)),0) as 25_to_29_years,
+    coalesce(SUM(if(ages.age between 30 and 35,1,0)),0) as 30_to_35_years,
+    coalesce(SUM(if(ages.age > 35,1,0)),0) as greater_than_35_years
+from
+(select
+    distinct
+    obs.person_id,
+    YEAR(obs.obs_datetime) - YEAR(person.birthdate) - IF(DATE_FORMAT(person.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0) as age
+from 
+    obs,
+    person,
+    encounter,
+    concept_name
+where
+	obs.encounter_id=encounter.encounter_id
+and
+	encounter.location_id=?	
+and
+	concept_name.name='POST-ABORTION FP ACCEPTED'
+and
+	obs.value_numeric=1
+and
+    obs.person_id=person.person_id
+and
+    obs.concept_id=concept_name.concept_id
+and
+	YEAR(obs.obs_datetime) = ? 
+and 
+    MONTH(obs.obs_datetime) = ?
+union
+	select 0,0
+from
+	dual
+) as ages;
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AgeOfMothersAtRegistration" id="4328">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select 
+	'Age of mother at registration',
+    coalesce(SUM(if(ages.age between 10 and 14,1,0)),0) as 10_to_14_years,
+    coalesce(SUM(if(ages.age between 15 and 19,1,0)),0) as 15_to_19_years,
+    coalesce(SUM(if(ages.age between 20 and 24,1,0)),0) as 20_to_24_years,
+    coalesce(SUM(if(ages.age between 25 and 29,1,0)),0) as 25_to_29_years,
+    coalesce(SUM(if(ages.age between 30 and 34,1,0)),0) as 30_to_34_years,
+    coalesce(SUM(if(ages.age > 34,1,0)),0) as greater_than_34_years
+from
+(select
+    distinct
+    person.person_id,
+    YEAR(encounter.encounter_datetime) - YEAR(person.birthdate) - IF(DATE_FORMAT(person.birthdate, '%c%d') > DATE_FORMAT(encounter.encounter_datetime, '%c%d'), 1, 0) as age
+from 
+    patient patient,
+    encounter encounter,
+    obs obs,
+    person person, 
+    person_attribute attribute,
+where
+    obs.encounter_id=encounter.encounter_id
+and
+    obs.person_id = person.person_id
+and
+    encounter.encounter_type = 15
+and
+    person.person_id=patient.patient_id
+and
+    person.person_id=attribute.person_id
+and
+   encounter.location_id= ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
+) as ages]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ANC4Visit" id="4329">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select count(*) as total from 
+    obs obs, 
+    encounter enc, 
+    concept_name concept_name
+where 
+    enc.encounter_type=5
+and
+    obs.encounter_id=enc.encounter_id
+and
+    enc.location_id= ?
+and
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='VISIT NUMBER'
+and
+	  obs.value_numeric = 4  
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Attendances" id="4330">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select 
+    count(distinct obs.person_id, 
+    obs.obs_datetime) as attendences
+from 
+    obs obs, 
+    encounter encounter
+where 
+    obs.encounter_id=encounter.encounter_id 
+and 
+    encounter_type=5
+and
+	encounter.location_id= ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
+	]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="BirthOutcomeLive" id="4331">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Male</property>
+                    <property name="nativeName">Male</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Female</property>
+                    <property name="nativeName">Female</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+    coalesce(sum(if(gender = 'M', 1,0)),0) as Male,
+    coalesce(sum(if(gender = 'F', 1,0)),0) as Female
+from 
+    (
+    select gender from person where person_id in(
+        select person_b from relationship where person_a in (
+            select
+                distinct obs.person_id
+            from
+                obs obs,
+                encounter encounter,
+                concept_name concept_name
+            where
+                obs.encounter_id=encounter.encounter_id
+            and
+                encounter.location_id=?
+            and 
+                obs.concept_id = concept_name.concept_id
+            and
+                concept_name.name='BIRTH OUTCOME'
+            and
+                obs.value_text='A'
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) =?
+            ) 
+        ) 
+    ) as genders
+   ]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Registrants" id="4332">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">registrants</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">registrants</property>
+                    <property name="nativeName">registrants</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select count(*) as registrants
+from  
+    encounter encounter
+where 
+    encounter.encounter_type=15
+and
+	encounter.location_id= ?
+and
+	YEAR(encounter.encounter_datetime) = ?
+and
+	MONTH(encounter.encounter_datetime) = ?
+
+	]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="BirthOutcomeStill" id="4336">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["Fresh_Still_Birth"]+row["Macerated_Still_Birth"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Fresh_Still_Birth</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Macerated_Still_Birth</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Fresh_Still_Birth</property>
+                    <property name="nativeName">Fresh_Still_Birth</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Macerated_Still_Birth</property>
+                    <property name="nativeName">Macerated_Still_Birth</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[
+select
+    coalesce(sum(if(obs.value_text='FSB',1,0)),0) as Fresh_Still_Birth,
+    coalesce(sum(if(obs.value_text='MSB',1,0)),0) as Macerated_Still_Birth
+from
+    obs obs,
+    encounter encounter,
+    concept_name concept_name
+where
+    obs.encounter_id=encounter.encounter_id
+and
+    encounter.location_id=?
+and 
+    obs.concept_id = concept_name.concept_id
+and
+    concept_name.name='BIRTH OUTCOME'
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
+
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="BirthWeight" id="4337">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Weight</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">lesser_than_2_and_a_half_kgs</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">greater_than_2_and_a_half_kgs</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Weight</property>
+                    <property name="nativeName">Weight</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">lesser_than_2_and_a_half_kgs</property>
+                    <property name="nativeName">lesser_than_2_and_a_half_kgs</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">greater_than_2_and_a_half_kgs</property>
+                    <property name="nativeName">greater_than_2_and_a_half_kgs</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+    'Weight',
+    coalesce(sum(if(obs.value_numeric < 2.5,1,0)),0) as lesser_than_2_and_a_half_kgs,
+    coalesce(sum(if(obs.value_numeric > 2.5,1,0)),0) as greater_than_2_and_a_half_kgs
+from 
+    obs, 
+    encounter, 
+    concept_name,
+    encounter_type
+where 
+    obs.encounter_id=encounter.encounter_id
+and
+    concept_name.concept_id=obs.concept_id
+and
+    encounter.encounter_type=encounter_type.encounter_type_id
+and
+    encounter_type.name='BIRTHVISIT'
+and
+    concept_name.name='WEIGHT (KG)'
+and 
+    obs.encounter_id = encounter.encounter_id
+and 
+    encounter.location_id = ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="BirthDateGreaterThan2_5" id="4338">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select coalesce(sum(if(obs.value_numeric >= 2.5,1,0)),0) as Number
+        from 
+            obs, 
+            concept_name,
+            encounter,
+            encounter_type,
+            location
+        where obs.concept_id=concept_name.concept_id 
+        and obs.encounter_id=encounter.encounter_id
+        and encounter.encounter_type=encounter_type.encounter_type_id
+        and encounter_type.name='BIRTHVISIT'
+        and  concept_name.name='WEIGHT (KG)'
+        and obs.location_id=location.location_id
+        and obs.person_id in(
+            select person_b from relationship where person_a in (
+                select person_id from (
+                    select
+                        obs.person_id,
+                        max(obs.obs_datetime)
+                    from
+                        obs obs,
+                        encounter encounter,
+                        location location,
+                        concept_name concept_name
+                    where
+                        obs.encounter_id=encounter.encounter_id
+                    and
+                        encounter.location_id=location.location_id
+                    and 
+                        obs.concept_id = concept_name.concept_id
+                    and
+                        concept_name.name='PARITY'
+                    group by obs.obs_datetime
+                    ) as mothers) 
+            )
+			and
+				YEAR(obs.obs_datetime) = ?
+			and
+				MONTH(obs.obs_datetime) =?
+			and
+				location.location_id = ? 
+				]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="BirthWeightMultiPara" id="4339">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select coalesce(sum(if(obs.value_numeric < 2.5,1,0)),0) as Number
+        from 
+            obs, 
+            concept_name,
+            encounter,
+            encounter_type,
+            location
+        where obs.concept_id=concept_name.concept_id 
+        and obs.encounter_id=encounter.encounter_id
+        and encounter.encounter_type=encounter_type.encounter_type_id
+        and encounter_type.name='BIRTHVISIT'
+        and  concept_name.name='WEIGHT (KG)'
+        and obs.location_id=location.location_id
+        and obs.person_id in(
+            select person_b from relationship where person_a in (
+                select person_id from (
+                    select
+                        obs.person_id,
+                        max(obs.obs_datetime)
+                    from
+                        obs obs,
+                        encounter encounter,
+                        location location,
+                        concept_name concept_name
+                    where
+                        obs.encounter_id=encounter.encounter_id
+                    and
+                        encounter.location_id=location.location_id
+                    and 
+                        obs.concept_id = concept_name.concept_id
+                    and
+                        concept_name.name='PARITY'
+                    and
+                        obs.value_numeric > 0
+                    group by obs.obs_datetime
+                    ) as mothers) 
+            )
+			and
+				YEAR(obs.obs_datetime) = ?
+			and
+				MONTH(obs.obs_datetime) = ?
+			and
+				location.location_id = ? ]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="BirthWeightMultiTotal" id="4340">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select coalesce(sum(if(obs.value_numeric < 2.5,1,0)),0) as Number
+        from 
+            obs, 
+            concept_name,
+            encounter,
+            encounter_type,
+            location
+        where obs.concept_id=concept_name.concept_id 
+        and obs.encounter_id=encounter.encounter_id
+        and encounter.encounter_type=encounter_type.encounter_type_id
+        and encounter_type.name='BIRTHVISIT'
+        and  concept_name.name='WEIGHT (KG)'
+        and obs.location_id=location.location_id
+        and obs.person_id in(
+            select person_b from relationship where person_a in (
+                select person_id from (
+                    select
+                        obs.person_id,
+                        max(obs.obs_datetime)
+                    from
+                        obs obs,
+                        encounter encounter,
+                        location location,
+                        concept_name concept_name
+                    where
+                        obs.encounter_id=encounter.encounter_id
+                    and
+                        encounter.location_id=location.location_id
+                    and 
+                        obs.concept_id = concept_name.concept_id
+                    and
+                        concept_name.name='PARITY'
+                    group by obs.obs_datetime
+                    ) as mothers) 
+            )
+			and
+				YEAR(obs.obs_datetime) = ?
+			and
+				MONTH(obs.obs_datetime) =?
+			and
+				location.location_id = ? 
+				]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="BirthWeightPrimiPara" id="4341">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select coalesce(sum(if(obs.value_numeric < 2.5,1,0)),0) as Number
+        from 
+            obs, 
+            concept_name,
+            encounter,
+            encounter_type,
+            location
+        where obs.concept_id=concept_name.concept_id 
+        and obs.encounter_id=encounter.encounter_id
+        and encounter.encounter_type=encounter_type.encounter_type_id
+        and encounter_type.name='BIRTHVISIT'
+        and  concept_name.name='WEIGHT (KG)'
+        and obs.location_id=location.location_id
+        and obs.person_id in(
+            select person_b from relationship where person_a in (
+                select person_id from (
+                    select
+                        obs.person_id,
+                        max(obs.obs_datetime)
+                    from
+                        obs obs,
+                        encounter encounter,
+                        location location,
+                        concept_name concept_name
+                    where
+                        obs.encounter_id=encounter.encounter_id
+                    and
+                        encounter.location_id=location.location_id
+                    and 
+                        obs.concept_id = concept_name.concept_id
+                    and
+                        concept_name.name='PARITY'
+                    and
+                        obs.value_numeric = 0               
+                    group by obs.obs_datetime
+                    ) as mothers) 
+            ) 
+			and
+				YEAR(obs.obs_datetime) = ?
+			and
+				MONTH(obs.obs_datetime) = ?
+			and
+				location.location_id = ? 
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DeathsFromAbortion" id="4342">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Deaths from abotion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">total</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Deaths from abotion</property>
+                    <property name="nativeName">Deaths from abotion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">total</property>
+                    <property name="nativeName">total</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+    'Deaths from abotion',
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as total
+    FROM 
+    	obs obs,
+    	encounter encounter,
+    	encounter_type encounter_type,
+    	concept_name concept
+where 
+    obs.concept_id=concept.concept_id
+and
+   concept.name = 'MATERNAL DEATH'
+and
+	obs.encounter_id = encounter.encounter_id   
+and
+    encounter.encounter_type = encounter_type.encounter_type_id
+and
+    encounter_type.name = 'PREGTERMVISIT'
+and
+	encounter.location_id= ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+   MONTH(obs.obs_datetime) = ?
+
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DeliveredAt" id="4343">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select 
+    'DELIVERED AT',
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as GovtHCOrHP,
+    coalesce(SUM(if(obs.value_numeric =2,1,0)),0) as TeachingHospital,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as GovtHospital,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as PrivateHospital,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as CHAG,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as QuasiGovtInstitute,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as Mines,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as Home
+from 
+    obs obs, 
+    concept_name name, 
+    encounter encounter
+where 
+    obs.concept_id=name.concept_id 
+and 
+    name.name = 'DELIVERY LOCATION'
+and
+	obs.encounter_id = encounter.encounter_id
+and
+    encounter.location_id = ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DeliveredBy" id="4344">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">DELIVERED BY</property>
+                    <property name="nativeName">DELIVERED BY</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Doctor</property>
+                    <property name="nativeName">Doctor</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">MedicalAssistant</property>
+                    <property name="nativeName">MedicalAssistant</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Midwife_Private</property>
+                    <property name="nativeName">Midwife_Private</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">Midwife_Govt</property>
+                    <property name="nativeName">Midwife_Govt</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">CHOorCHN</property>
+                    <property name="nativeName">CHOorCHN</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">TrainedTBA</property>
+                    <property name="nativeName">TrainedTBA</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">UntrainedTBA</property>
+                    <property name="nativeName">UntrainedTBA</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">FriendOrRelative</property>
+                    <property name="nativeName">FriendOrRelative</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+    'DELIVERED BY',
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as Doctor,
+    coalesce(SUM(if(obs.value_numeric =2,1,0)),0) as MedicalAssistant,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as Midwife_Private,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as Midwife_Govt,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as CHOorCHN,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as TrainedTBA,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as UntrainedTBA,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as FriendOrRelative
+from 
+   obs obs, 
+   concept_name name, 
+   encounter encounter,
+   location location
+where 
+   obs.concept_id=name.concept_id 
+and 
+   name.name = 'DELIVERED BY'
+and
+   obs.encounter_id = encounter.encounter_id
+and
+   encounter.location_id= ?
+and
+   YEAR(obs.obs_datetime) = ?
+and
+   MONTH(obs.obs_datetime) = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DurationOfPregnancy" id="4345">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">week_diff</property>
+                    <expression name="expression">if(row["expected_delivery_date"] != null)&#13;
+BirtDateTime.diffWeek(row["observation_date"],row["expected_delivery_date"]);&#13;
+else 0;</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">second_trimester</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <expression name="filterExpr">row["week_diff"] > 12 &amp;&amp; row["week_diff"] &lt;= 24</expression>
+                </structure>
+                <structure>
+                    <property name="name">first_trimester</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <expression name="filterExpr">row["week_diff"] > 24</expression>
+                </structure>
+                <structure>
+                    <property name="name">third_trimester</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <expression name="filterExpr">row["week_diff"] >= 0 &amp;&amp; row["week_diff"] &lt;=12</expression>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Duration of Pregnancy</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">expected_delivery_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">observation_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">week_diff</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">second_trimester</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">first_trimester</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">third_trimester</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Duration of Pregnancy</property>
+                    <property name="nativeName">Duration of Pregnancy</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">expected_delivery_date</property>
+                    <property name="nativeName">expected_delivery_date</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">observation_date</property>
+                    <property name="nativeName">observation_date</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+   'Duration of Pregnancy',
+    expected_delivery_date,
+    observation_date
+from 
+(select
+    distinct
+    obs.person_id,
+    obs.value_datetime as expected_delivery_date,
+    obs.obs_datetime as observation_date
+from
+    encounter encounter, 
+    obs obs,
+    concept_name concept_name
+where 
+    obs.encounter_id=encounter.encounter_id 
+and
+    obs.concept_id = concept_name.concept_id
+and
+	encounter.location_id= ?
+and
+	concept_name.name in ('ESTIMATED DATE OF CONFINEMENT','EDC','ESTIMATED DATE OF DELIVERY','ESTIMATED DELIVERY DATE')
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?
+) as weeks_to_delivery]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="HaemoglobinAtRegistration" id="4346">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select 
+	'Hemoglobin',
+	count(*) as checked_at_registration,
+    coalesce(sum(if(obs.value_numeric >= 7 &amp;&amp; obs.value_numeric < 11,1,0)),0) as less_than_11,
+    coalesce(sum(if(obs.value_numeric < 7,1,0)),0) as less_than_7
+from 
+   obs obs,
+   concept_name
+where
+     obs.encounter_id in 
+     (
+	    select
+            obs.encounter_id
+        from 
+            obs, 
+            encounter,
+            location,
+            concept_name,
+            encounter_type
+        where obs.encounter_id=encounter.encounter_id 
+        and encounter.encounter_type = encounter_type.encounter_type_id
+        and encounter_type.name='ANCVISIT'
+        and obs.concept_id = concept_name.concept_id
+	    and concept_name.name='VISIT NUMBER'
+        and obs.value_numeric=1
+	    and	encounter.location_id=?
+	  )
+and 
+     obs.concept_id = concept_name.concept_id 
+and 
+     concept_name.name = 'HEMOGLOBIN'
+and
+	 YEAR(obs.obs_datetime) = ?
+and
+	 MONTH(obs.obs_datetime) = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="HeightLessThan150" id="4347">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[SELECT
+    'height',
+    coalesce(SUM(if(obs.value_numeric < 150,1,0)),0) as lesser_than_150cms
+    FROM obs obs, 
+    person_attribute attr,
+    encounter encounter,
+    concept_name concept_name
+where 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name in ('HEIGHT (CM)','HT')
+and
+ 	attr.person_id = obs.person_id
+and
+	obs.encounter_id = encounter.encounter_id
+and
+	encounter.location_id = ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="IPTi" id="4348">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[select distinct 
+    name.name, 
+    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as IPT1,
+    coalesce(SUM(if(obs.value_numeric =2,1,0)),0) as IPT2,
+    coalesce(SUM(if(obs.value_numeric =3,1,0)),0) as IPT3   
+from 
+    obs obs, 
+    concept_name name,
+    encounter encounter,
+    location location,
+    concept_name concept_name 
+where 
+    obs.concept_id=name.concept_id 
+and 
+    obs.concept_id = concept_name.concept_id
+and
+	concept_name.name='INTERMITTENT PREVENTATIVE TREATMENT DOSE'
+and
+	obs.encounter_id = encounter.encounter_id
+and
+	encounter.location_id = ?
+and
+	YEAR(obs.obs_datetime) = ?
+and
+	MONTH(obs.obs_datetime) = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+    </data-sets>
     <styles>
         <style name="report" id="4">
             <property name="fontFamily">"tahoma"</property>
@@ -67,6 +2320,19 @@
             <property name="borderTopColor">#000000</property>
             <property name="borderTopStyle">solid</property>
             <property name="borderTopWidth">thin</property>
+            <property name="dataSet">Registrants</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">registrants</property>
+                    <expression name="expression" type="javascript">dataSetRow["registrants"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">registrants_val</property>
+                    <expression name="expression" type="javascript">dataSetRow["registrants"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
             <column id="3816">
                 <property name="width">2.57mm</property>
             </column>
@@ -864,6 +3130,9 @@
                         <property name="borderTopColor">#000000</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
+                        <data id="4335">
+                            <property name="resultSetColumn">registrants_val</property>
+                        </data>
                     </cell>
                     <cell id="491">
                         <property name="colSpan">6</property>
@@ -3606,7 +5875,7 @@ with ACT</text-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="4073">
-                            <text-property name="text">Reffered</text-property>
+                            <text-property name="text">Referred</text-property>
                         </label>
                     </cell>
                 </row>

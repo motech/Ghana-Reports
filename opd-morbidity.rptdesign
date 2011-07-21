@@ -194,8 +194,8 @@
                     <text-property name="displayName">id</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">date</property>
-                    <text-property name="displayName">date</text-property>
+                    <property name="columnName">visit_date</property>
+                    <text-property name="displayName">visit_date</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">location_id</property>
@@ -240,14 +240,14 @@
                 </structure>
                 <structure>
                     <property name="operator">eq</property>
-                    <expression name="expr" type="javascript">BirtDateTime.year(row["date"])</expression>
+                    <expression name="expr" type="javascript">BirtDateTime.year(row["visit_date"])</expression>
                     <simple-property-list name="value1">
                         <value>params["Year"].value</value>
                     </simple-property-list>
                 </structure>
                 <structure>
                     <property name="operator">eq</property>
-                    <expression name="expr" type="javascript">BirtDateTime.month(row["date"],1)</expression>
+                    <expression name="expr" type="javascript">BirtDateTime.month(row["visit_date"],1)</expression>
                     <simple-property-list name="value1">
                         <value>params["Month"].value</value>
                     </simple-property-list>
@@ -262,7 +262,7 @@
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">date</property>
+                        <property name="name">visit_date</property>
                         <property name="dataType">date-time</property>
                     </structure>
                     <structure>
@@ -318,8 +318,8 @@
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">date</property>
-                    <property name="nativeName">date</property>
+                    <property name="name">visit_date</property>
+                    <property name="nativeName">visit_date</property>
                     <property name="dataType">date-time</property>
                     <property name="nativeDataType">93</property>
                 </structure>
@@ -382,11 +382,11 @@
             </list-property>
             <xml-property name="queryText"><![CDATA[select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
-ge1.date,
+ge1.visit_date as visit_date,
 loc1.location_id,
 ge1.sex as sex,
 ge1.birthdate,
-coalesce(YEAR(ge1.date) - YEAR(ge1.birthdate) - IF(DATE_FORMAT(ge1.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+coalesce(YEAR(ge1.visit_date) - YEAR(ge1.birthdate) - IF(DATE_FORMAT(ge1.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
 ge1.diagnosis as diagnosis,
 ge1.referred as referred,
 ge1.newcase as newcase,
@@ -397,11 +397,11 @@ join location loc1 on loc1.location_id = fa1.location_id
 union all
 select 
 CONCAT('General',CAST(ge2.id AS CHAR)) as id,
-ge2.date,
+ge2.visit_date as visit_date,
 loc2.location_id,
 ge2.sex as sex,
 ge2.birthdate,
-coalesce(YEAR(ge2.date) - YEAR(ge2.birthdate) - IF(DATE_FORMAT(ge2.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+coalesce(YEAR(ge2.visit_date) - YEAR(ge2.birthdate) - IF(DATE_FORMAT(ge2.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
 ge2.secondary_diagnosis as diagnosis,
 ge2.referred as referred,
 ge2.newcase as newcase,
@@ -413,7 +413,7 @@ where ge2.secondary_diagnosis is not null
 union all
 select
   CONCAT('MotherChild',CAST(enc.encounter_id AS CHAR)) as id,
-  enc.encounter_datetime as date,
+  enc.encounter_datetime as visit_date,
   enc.location_id,
   IF(STRCMP(pers.gender,'M'),IF(STRCMP(pers.gender,'F'),'UNKNOWN','FEMALE'),'MALE') as sex,
   pers.birthdate,
@@ -981,12 +981,12 @@ from location]]></xml-property>
         <script-data-set name="Diseases" id="226">
             <list-property name="resultSetHints">
                 <structure>
-                    <property name="position">0</property>
+                    <property name="position">1</property>
                     <property name="name">code</property>
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
-                    <property name="position">1</property>
+                    <property name="position">2</property>
                     <property name="name">disease_name</property>
                     <property name="dataType">string</property>
                 </structure>
@@ -1141,39 +1141,9 @@ else 0;</expression>
             </list-property>
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">Data Set::region</property>
-                    <property name="alias">region</property>
-                    <text-property name="displayName">Data Set::region</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::sex</property>
-                    <property name="alias">sex</property>
-                    <text-property name="displayName">Data Set::sex</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::diag_num</property>
-                    <property name="alias">diag_num</property>
-                    <text-property name="displayName">Data Set::diag_num</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::diagnosis</property>
-                    <property name="alias">diagnosis</property>
-                    <text-property name="displayName">Data Set::diagnosis</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Diseases::code</property>
-                    <property name="alias">code</property>
-                    <text-property name="displayName">Diseases::code</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::date</property>
-                    <property name="alias">date</property>
-                    <text-property name="displayName">Data Set::date</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::location_id</property>
-                    <property name="alias">location_id</property>
-                    <text-property name="displayName">Data Set::location_id</text-property>
+                    <property name="columnName">Data Set::newcase</property>
+                    <property name="alias">newcase</property>
+                    <text-property name="displayName">Data Set::newcase</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Data Set::id</property>
@@ -1181,9 +1151,19 @@ else 0;</expression>
                     <text-property name="displayName">Data Set::id</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">Data Set::newcase</property>
-                    <property name="alias">newcase</property>
-                    <text-property name="displayName">Data Set::newcase</text-property>
+                    <property name="columnName">Data Set::diag_num</property>
+                    <property name="alias">diag_num</property>
+                    <text-property name="displayName">Data Set::diag_num</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::sex</property>
+                    <property name="alias">sex</property>
+                    <text-property name="displayName">Data Set::sex</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::visit_date</property>
+                    <property name="alias">visit_date</property>
+                    <text-property name="displayName">Data Set::visit_date</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Diseases::disease_name</property>
@@ -1196,19 +1176,53 @@ else 0;</expression>
                     <text-property name="displayName">Data Set::age</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">Data Set::diagnosis</property>
+                    <property name="alias">diagnosis</property>
+                    <text-property name="displayName">Data Set::diagnosis</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">Data Set::birthdate</property>
                     <property name="alias">birthdate</property>
                     <text-property name="displayName">Data Set::birthdate</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">Data Set::district</property>
-                    <property name="alias">district</property>
-                    <text-property name="displayName">Data Set::district</text-property>
+                    <property name="columnName">Diseases::code</property>
+                    <property name="alias">code</property>
+                    <text-property name="displayName">Diseases::code</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Data Set::referred</property>
                     <property name="alias">referred</property>
                     <text-property name="displayName">Data Set::referred</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::location_id</property>
+                    <property name="alias">location_id</property>
+                    <text-property name="displayName">Data Set::location_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">c_sex</property>
+                    <property name="alias">c_sex</property>
+                </structure>
+                <structure>
+                    <property name="columnName">c_age</property>
+                    <property name="alias">c_age</property>
+                </structure>
+                <structure>
+                    <property name="columnName">c_diagnosis</property>
+                    <property name="alias">c_diagnosis</property>
+                </structure>
+                <structure>
+                    <property name="columnName">c_referred</property>
+                    <property name="alias">c_referred</property>
+                </structure>
+                <structure>
+                    <property name="columnName">c_newcase</property>
+                    <property name="alias">c_newcase</property>
+                </structure>
+                <structure>
+                    <property name="columnName">reattendance</property>
+                    <property name="alias">reattendance</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -1220,7 +1234,7 @@ else 0;</expression>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">date</property>
+                        <property name="name">visit_date</property>
                         <property name="dataType">date-time</property>
                     </structure>
                     <structure>
@@ -1230,86 +1244,76 @@ else 0;</expression>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">region</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">district</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
                         <property name="name">sex</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">5</property>
                         <property name="name">birthdate</property>
                         <property name="dataType">date</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">6</property>
                         <property name="name">age</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">9</property>
+                        <property name="position">7</property>
                         <property name="name">diagnosis</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">10</property>
+                        <property name="position">8</property>
                         <property name="name">referred</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">9</property>
                         <property name="name">newcase</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">10</property>
                         <property name="name">diag_num</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">11</property>
                         <property name="name">code</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">12</property>
                         <property name="name">disease_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
+                        <property name="position">13</property>
                         <property name="name">c_sex</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">16</property>
+                        <property name="position">14</property>
                         <property name="name">c_age</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">17</property>
+                        <property name="position">15</property>
                         <property name="name">c_diagnosis</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">18</property>
+                        <property name="position">16</property>
                         <property name="name">c_referred</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">19</property>
+                        <property name="position">17</property>
                         <property name="name">c_newcase</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">20</property>
+                        <property name="position">18</property>
                         <property name="name">reattendance</property>
                         <property name="dataType">integer</property>
                     </structure>
@@ -1441,7 +1445,7 @@ else 0;</expression>
                 </structure>
                 <structure>
                     <property name="name">date</property>
-                    <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                    <expression name="expression" type="javascript">dataSetRow["visit_date"]</expression>
                     <property name="dataType">date-time</property>
                 </structure>
                 <structure>
@@ -3738,7 +3742,7 @@ else 0;</expression>
                 </structure>
                 <structure>
                     <property name="name">date</property>
-                    <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                    <expression name="expression" type="javascript">dataSetRow["visit_date"]</expression>
                     <property name="dataType">date-time</property>
                 </structure>
                 <structure>
