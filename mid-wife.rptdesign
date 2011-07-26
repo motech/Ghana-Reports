@@ -27,9 +27,10 @@
         <scalar-parameter name="Facility" id="61">
             <text-property name="promptText">Facility?</text-property>
             <property name="valueType">dynamic</property>
+            <property name="isRequired">true</property>
             <property name="dataSetName">Facilities</property>
-            <expression name="valueExpr" type="javascript">dataSetRow["name"]</expression>
-            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="valueExpr">dataSetRow["name"]</expression>
+            <expression name="labelExpr">dataSetRow["name"]</expression>
             <expression name="sortByColumn">dataSetRow["name"]</expression>
             <property name="sortDirection">asc</property>
             <property name="dataType">string</property>
@@ -38,9 +39,11 @@
                 <value type="constant">Navio CHPS</value>
             </simple-property-list>
             <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
             <property name="fixedOrder">false</property>
+            <property name="autoSuggestThreshold">1</property>
             <structure name="format">
                 <property name="category">Unformatted</property>
             </structure>
@@ -1420,7 +1423,7 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     name.name, 
-    coalesce(SUM(if(obs.value_coded = 1229,1,0)),0) as REACTIVE
+    coalesce(SUM(if(obs.value_coded = 1228,1,0)),0) as REACTIVE
 from 
     obs obs, 
     concept_name name,
@@ -1463,7 +1466,7 @@ and
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="name">param_3</property>
+                    <property name="name">location_name</property>
                     <property name="paramName">Facility</property>
                     <property name="dataType">string</property>
                     <property name="position">3</property>
@@ -1522,21 +1525,30 @@ and
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select 
-    'PMTCT',
-    coalesce(SUM(if(name.name='HIV PRE-TEST COUNSELING' and obs.value_numeric =1,1,0)),0) as Counselled,
-    coalesce(SUM(if(name.name='PMTCT' and obs.value_numeric =1,1,0)),0) as Positive,
-    coalesce(SUM(if(name.name='PMTCT TREATMENT' and obs.value_numeric =1,1,0)),0) as Tested
-from obs obs, concept_name name, encounter encounter,location location
-where obs.concept_id=name.concept_id 
+            <xml-property name="queryText"><![CDATA[select
+   'PMTCT',
+   coalesce(SUM(if(name.name='HIV PRE-TEST COUNSELING' and obs.value_numeric = 1,1,0)),0) as Counselled,
+   coalesce(SUM(if(name.name='HIV TEST RESULT' and obs.value_text = 'POSITIVE',1,0)),0) as Positive,
+   coalesce(SUM(if(name.name='HIV TEST RESULT' and obs.value_text != 'NO_TEST',1,0)),0) as Tested
+from 
+   obs obs, 
+   concept_name name, 
+   encounter encounter,
+   location location
+where 
+    obs.concept_id=name.concept_id
 and
-	YEAR(obs.obs_datetime) = ?
+    YEAR(obs.obs_datetime) = ?
 and
-	MONTH(obs.obs_datetime) = ?
-and obs.encounter_id = encounter.encounter_id
-and encounter.location_id= location.location_id
-and location.name=?
-and name.name in ('HIV PRE-TEST COUNSELING', 'PMTCT TREATMENT', 'PMTCT')
+    MONTH(obs.obs_datetime) = ?
+and 
+    obs.encounter_id = encounter.encounter_id
+and 
+    encounter.location_id= location.location_id
+and
+   location.name = ?
+and 
+  name.name in ('HIV PRE-TEST COUNSELING', 'PMTCT TREATMENT', 'PMTCT','HIV TEST RESULT')
 ]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="OutcomeOfDeliveryChildren" id="525">
@@ -2682,7 +2694,7 @@ and
 and
 	MONTH(obs.obs_datetime) =?
 and
-	location.name=?
+	location.name =?
 ) as ages;
 ]]></xml-property>
         </oda-data-set>

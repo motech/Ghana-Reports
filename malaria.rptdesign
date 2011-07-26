@@ -11,17 +11,16 @@
             <property name="valueType">dynamic</property>
             <property name="isRequired">true</property>
             <property name="dataSetName">Facilities</property>
-            <expression name="valueExpr">dataSetRow["location_id"]</expression>
-            <expression name="labelExpr">dataSetRow["name"]</expression>
+            <expression name="valueExpr" type="javascript">dataSetRow["location_id"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
             <expression name="sortByColumn">dataSetRow["name"]</expression>
             <property name="sortDirection">asc</property>
-            <property name="dataType">decimal</property>
+            <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
                 <value type="constant">2</value>
             </simple-property-list>
             <property name="paramType">simple</property>
-            <property name="concealValue">false</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
             <property name="fixedOrder">false</property>
@@ -226,7 +225,7 @@ from
                 <structure>
                     <property name="name">param_1</property>
                     <property name="paramName">Facility</property>
-                    <property name="dataType">string</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -274,7 +273,7 @@ where
                 <structure>
                     <property name="name">param_2</property>
                     <property name="paramName">Year</property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -365,7 +364,7 @@ and
                 <structure>
                     <property name="name">param_1</property>
                     <property name="paramName">Facility</property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -462,7 +461,7 @@ and
                 <structure>
                     <property name="name">param_1</property>
                     <property name="paramName">Facility</property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -558,7 +557,7 @@ and
                 <structure>
                     <property name="name">param_1</property>
                     <property name="paramName">Facility</property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -650,7 +649,7 @@ and
                 <structure>
                     <property name="name">param_1</property>
                     <property name="paramName">Facility</property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -780,7 +779,7 @@ and
                 <structure>
                     <property name="name">param_1</property>
                     <property name="paramName">Facility</property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -884,7 +883,7 @@ in
                 <structure>
                     <property name="name">param_1</property>
                     <property name="paramName">Facility</property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -988,7 +987,7 @@ in
                 <structure>
                     <property name="name">param_1</property>
                     <property name="paramName">Facility</property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -1092,7 +1091,7 @@ in
                 <structure>
                     <property name="name">param_1</property>
                     <property name="paramName">Facility</property>
-                    <property name="dataType">string</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -1201,7 +1200,7 @@ in
                 <structure>
                     <property name="name">facility</property>
                     <property name="paramName">Facility</property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -1223,8 +1222,68 @@ in
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">diagnosis</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">year</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">month</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">location_id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
             <property name="dataSource">openmrs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">diagnosis</property>
+                    <property name="nativeName">diagnosis</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">year</property>
+                    <property name="nativeName">year</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">month</property>
+                    <property name="nativeName">month</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">location_id</property>
+                    <property name="nativeName">location_id</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
             <xml-property name="queryText"><![CDATA[select 
 opdvisit.id as id ,
 opdvisit.diagnosis as diagnosis,
@@ -1333,7 +1392,7 @@ select '0',0,0,0,0 from dual]]></xml-property>
                 <structure>
                     <property name="name">location</property>
                     <property name="paramName">Facility</property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">integer</property>
                     <property name="position">1</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
