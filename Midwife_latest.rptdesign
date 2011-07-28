@@ -27,6 +27,14 @@
             <property name="name">queryTimeOut</property>
             <property name="id">4353</property>
         </structure>
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">4468</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">4468</property>
+        </structure>
     </list-property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -178,10 +186,10 @@
                     <value>ILYNN</value>
                 </ex-property>
             </list-property>
-            <property name="odaDriverClass">org.gjt.mm.mysql.Driver</property>
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost:3306/openmrs</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">b3Blbm1ycw==</encrypted-property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -905,7 +913,7 @@ from
 ) as ages;
 ]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AgeOfMothersAtRegistration" id="4328">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AgeOfMotherAtRegistration" id="4328">
             <list-property name="parameters">
                 <structure>
                     <property name="name">location_id</property>
@@ -1147,8 +1155,24 @@ and
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">attendences</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
             <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">attendences</property>
+                    <property name="nativeName">attendences</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
             <xml-property name="queryText"><![CDATA[select 
     count(distinct obs.person_id, 
     obs.obs_datetime) as attendences
@@ -2524,7 +2548,15 @@ and
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Total</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
             <property name="dataSource">Data Source</property>
             <list-property name="resultSet">
                 <structure>
@@ -2582,7 +2614,20 @@ and
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">REACTIVE</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
             <property name="dataSource">Data Source</property>
             <list-property name="resultSet">
                 <structure>
@@ -2648,8 +2693,46 @@ and
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ITN</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">1stVisit</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">2ndVisit</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
             <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ITN</property>
+                    <property name="nativeName">ITN</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">1stVisit</property>
+                    <property name="nativeName">1stVisit</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">2ndVisit</property>
+                    <property name="nativeName">2ndVisit</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
             <xml-property name="queryText"><![CDATA[select  
 		'ITN',
         coalesce(SUM(if(obs.value_numeric = 1 and visit.visit_number=1,1,0)),0) as 1stVisit, 
@@ -4496,6 +4579,64 @@ and
     encounter.location_id = ?
 ]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Locations" id="4468">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">location_id</property>
+                    <property name="paramName">Facility</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">region</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">county_district</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">state_province</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">region</property>
+                    <property name="nativeName">region</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">county_district</property>
+                    <property name="nativeName">county_district</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">state_province</property>
+                    <property name="nativeName">state_province</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+ region,
+ county_district,
+ state_province
+ from location
+ where location_id = ? ]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="report" id="4">
@@ -4559,60 +4700,6 @@ and
             <property name="borderTopColor">#000000</property>
             <property name="borderTopStyle">solid</property>
             <property name="borderTopWidth">thin</property>
-            <property name="dataSet">DurationOfPregnancy</property>
-            <list-property name="boundDataColumns">
-                <structure>
-                    <property name="name">Duration of Pregnancy</property>
-                    <expression name="expression" type="javascript">dataSetRow["Duration of Pregnancy"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">expected_delivery_date</property>
-                    <expression name="expression" type="javascript">dataSetRow["expected_delivery_date"]</expression>
-                    <property name="dataType">date-time</property>
-                </structure>
-                <structure>
-                    <property name="name">observation_date</property>
-                    <expression name="expression" type="javascript">dataSetRow["observation_date"]</expression>
-                    <property name="dataType">date-time</property>
-                </structure>
-                <structure>
-                    <property name="name">week_diff</property>
-                    <expression name="expression" type="javascript">dataSetRow["week_diff"]</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="name">second_trimester</property>
-                    <expression name="expression" type="javascript">dataSetRow["second_trimester"]</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="name">first_trimester</property>
-                    <expression name="expression" type="javascript">dataSetRow["first_trimester"]</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="name">third_trimester</property>
-                    <expression name="expression" type="javascript">dataSetRow["third_trimester"]</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="name">trimester_1</property>
-                    <expression name="expression" type="javascript">if(null != dataSetRow["first_trimester"])dataSetRow["first_trimester"];&#13;
-else 0;</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="name">trimester_2</property>
-                    <expression name="expression" type="javascript">if(null != dataSetRow["second_trimester"])dataSetRow["second_trimester"];else 0;</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="name">trimester_3</property>
-                    <expression name="expression" type="javascript">if(null != dataSetRow["third_trimester"])dataSetRow["third_trimester"];else 0;</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-            </list-property>
             <column id="3816">
                 <property name="width">2.57mm</property>
             </column>
@@ -4858,6 +4945,16 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4479">
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Month</property>
+                                <expression name="expression" type="javascript">params["Month"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Month</property>
+                    </data>
                 </cell>
                 <cell id="87">
                     <property name="colSpan">4</property>
@@ -4893,6 +4990,16 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4480">
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Year</property>
+                                <expression name="expression" type="javascript">params["Year"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Year</property>
+                    </data>
                 </cell>
                 <cell id="96">
                     <property name="colSpan">7</property>
@@ -4928,6 +5035,16 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4481">
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Facility</property>
+                                <expression name="expression" type="javascript">params["Facility"].displayText</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Facility</property>
+                    </data>
                 </cell>
                 <cell id="119">
                     <property name="colSpan">4</property>
@@ -4963,6 +5080,18 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4483">
+                        <property name="dataSet">Locations</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">county_district</property>
+                                <text-property name="displayName">county_district</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["county_district"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">county_district</property>
+                    </data>
                 </cell>
                 <cell id="133">
                     <property name="colSpan">4</property>
@@ -4998,6 +5127,18 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4482">
+                        <property name="dataSet">Locations</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">region</property>
+                                <text-property name="displayName">region</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["region"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">region</property>
+                    </data>
                 </cell>
             </row>
             <row id="144">
@@ -5391,8 +5532,17 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4335">
-                        <property name="resultSetColumn">registrants_val</property>
+                    <data id="4484">
+                        <property name="dataSet">Registrants</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">registrants</property>
+                                <text-property name="displayName">registrants</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["registrants"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">registrants</property>
                     </data>
                 </cell>
                 <cell id="491">
@@ -5410,20 +5560,8 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="265">
-                        <property name="borderBottomColor">#000000</property>
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">thin</property>
-                        <property name="borderLeftColor">#000000</property>
-                        <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">thin</property>
-                        <property name="borderRightColor">#000000</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">thin</property>
-                        <property name="borderTopColor">#000000</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">thin</property>
-                        <property name="dataSet">Attendences</property>
+                    <data id="4485">
+                        <property name="dataSet">Attendances</property>
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">attendences</property>
@@ -5450,8 +5588,17 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4355">
-                        <property name="resultSetColumn">anc4_total</property>
+                    <data id="4486">
+                        <property name="dataSet">ANC4Visit</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">total</property>
+                                <text-property name="displayName">total</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["total"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">total</property>
                     </data>
                 </cell>
                 <cell id="503">
@@ -5509,8 +5656,29 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4356">
-                        <property name="resultSetColumn">m_age_10_14</property>
+                    <data id="271">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">AgeOfMotherAtRegistration</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">10_to_14_years</property>
+                                <text-property name="displayName">10_to_14_years</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["10_to_14_years"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">10_to_14_years</property>
                     </data>
                 </cell>
                 <cell id="514">
@@ -5528,8 +5696,29 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4357">
-                        <property name="resultSetColumn">m_age_15_19</property>
+                    <data id="272">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">AgeOfMotherAtRegistration</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">15_to_19_years</property>
+                                <text-property name="displayName">15_to_19_years</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["15_to_19_years"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">15_to_19_years</property>
                     </data>
                 </cell>
                 <cell id="519">
@@ -5547,8 +5736,29 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4358">
-                        <property name="resultSetColumn">m_age_20_24</property>
+                    <data id="273">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">AgeOfMotherAtRegistration</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">20_to_24_years</property>
+                                <text-property name="displayName">20_to_24_years</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["20_to_24_years"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">20_to_24_years</property>
                     </data>
                 </cell>
                 <cell id="524">
@@ -5566,8 +5776,29 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4359">
-                        <property name="resultSetColumn">m_age_25_29</property>
+                    <data id="274">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">AgeOfMotherAtRegistration</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">25_to_29_years</property>
+                                <text-property name="displayName">25_to_29_years</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["25_to_29_years"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">25_to_29_years</property>
                     </data>
                 </cell>
                 <cell id="529">
@@ -5585,8 +5816,29 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4360">
-                        <property name="resultSetColumn">m_age_30_34</property>
+                    <data id="4487">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">AgeOfMotherAtRegistration</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">30_to_34_years</property>
+                                <text-property name="displayName">30_to_34_years</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["30_to_34_years"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">30_to_34_years</property>
                     </data>
                 </cell>
                 <cell id="534">
@@ -5604,8 +5856,29 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4361">
-                        <property name="resultSetColumn">m_age_abv_34</property>
+                    <data id="276">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">AgeOfMotherAtRegistration</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">greater_than_34_years</property>
+                                <text-property name="displayName">greater_than_34_years</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["greater_than_34_years"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">greater_than_34_years</property>
                     </data>
                 </cell>
                 <cell id="539">
@@ -5623,8 +5896,29 @@ else 0;</expression>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4362">
-                        <property name="resultSetColumn">m_height_less_than_150</property>
+                    <data id="4488">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">HeightLessThan150</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">lesser_than_150cms</property>
+                                <text-property name="displayName">lesser_than_150cms</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["lesser_than_150cms"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">lesser_than_150cms</property>
                     </data>
                 </cell>
             </row>
@@ -5928,8 +6222,29 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4363">
-                        <property name="resultSetColumn">p_0</property>
+                    <data id="311">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">Parity</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">zero</property>
+                                <text-property name="displayName">zero</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["zero"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">zero</property>
                     </data>
                 </cell>
                 <cell id="762">
@@ -5947,8 +6262,29 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4364">
-                        <property name="resultSetColumn">p_1_2</property>
+                    <data id="312">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">Parity</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">1_to_2</property>
+                                <text-property name="displayName">1_to_2</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["1_to_2"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">1_to_2</property>
                     </data>
                 </cell>
                 <cell id="767">
@@ -5966,8 +6302,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4367">
-                        <property name="resultSetColumn">trimester_1</property>
+                    <data id="4490">
+                        <property name="dataSet">DurationOfPregnancy</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">first_trimester</property>
+                                <text-property name="displayName">first_trimester</text-property>
+                                <expression name="expression" type="javascript">if(null != dataSetRow["first_trimester"])dataSetRow["first_trimester"];&#13;
+else 0;</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">first_trimester</property>
                     </data>
                 </cell>
                 <cell id="772">
@@ -5985,8 +6331,17 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4368">
-                        <property name="resultSetColumn">trimester_2</property>
+                    <data id="4492">
+                        <property name="dataSet">DurationOfPregnancy</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">second_trimester</property>
+                                <text-property name="displayName">second_trimester</text-property>
+                                <expression name="expression" type="javascript">if(null != dataSetRow["second_trimester"])dataSetRow["second_trimester"];else 0;</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">second_trimester</property>
                     </data>
                 </cell>
                 <cell id="777">
@@ -6004,8 +6359,17 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4370">
-                        <property name="resultSetColumn">trimester_3</property>
+                    <data id="4491">
+                        <property name="dataSet">DurationOfPregnancy</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">third_trimester</property>
+                                <text-property name="displayName">third_trimester</text-property>
+                                <expression name="expression" type="javascript">if(null != dataSetRow["third_trimester"])dataSetRow["third_trimester"];else 0;</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">third_trimester</property>
                     </data>
                 </cell>
                 <cell id="782">
@@ -6023,6 +6387,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4493">
+                        <property name="dataSet">HaemoglobinAtRegistration</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">checked_at_registration</property>
+                                <text-property name="displayName">checked_at_registration</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["checked_at_registration"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">checked_at_registration</property>
+                    </data>
                 </cell>
                 <cell id="789">
                     <property name="colSpan">7</property>
@@ -6039,6 +6415,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4494">
+                        <property name="dataSet">HaemoglobinAtRegistration</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">less_than_11</property>
+                                <text-property name="displayName">less_than_11</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["less_than_11"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">less_than_11</property>
+                    </data>
                 </cell>
                 <cell id="796">
                     <property name="colSpan">7</property>
@@ -6055,6 +6443,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4495">
+                        <property name="dataSet">HaemoglobinAtRegistration</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">less_than_7</property>
+                                <text-property name="displayName">less_than_7</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["less_than_7"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">less_than_7</property>
+                    </data>
                 </cell>
                 <cell id="803">
                     <property name="colSpan">7</property>
@@ -6471,8 +6871,29 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4365">
-                        <property name="resultSetColumn">p_3_4</property>
+                    <data id="313">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">Parity</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">3_to_4</property>
+                                <text-property name="displayName">3_to_4</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["3_to_4"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">3_to_4</property>
                     </data>
                 </cell>
                 <cell id="966">
@@ -6490,8 +6911,29 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="4366">
-                        <property name="resultSetColumn">p_5_plus</property>
+                    <data id="314">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">Parity</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">greater_than_5</property>
+                                <text-property name="displayName">greater_than_5</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["greater_than_5"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">greater_than_5</property>
                     </data>
                 </cell>
                 <cell id="971">
@@ -6509,6 +6951,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4496">
+                        <property name="dataSet">IPTi</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">IPT1</property>
+                                <text-property name="displayName">IPT1</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["IPT1"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">IPT1</property>
+                    </data>
                 </cell>
                 <cell id="975">
                     <property name="colSpan">4</property>
@@ -6525,6 +6979,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4497">
+                        <property name="dataSet">IPTi</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">IPT2</property>
+                                <text-property name="displayName">IPT2</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["IPT2"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">IPT2</property>
+                    </data>
                 </cell>
                 <cell id="979">
                     <property name="colSpan">4</property>
@@ -6541,6 +7007,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4498">
+                        <property name="dataSet">IPTi</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">IPT3</property>
+                                <text-property name="displayName">IPT3</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["IPT3"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">IPT3</property>
+                    </data>
                 </cell>
                 <cell id="983">
                     <property name="colSpan">7</property>
@@ -6557,6 +7035,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4500">
+                        <property name="dataSet">IPTIAtLeast2Doses</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Total</property>
+                                <text-property name="displayName">Total</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Total"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Total</property>
+                    </data>
                 </cell>
                 <cell id="990">
                     <property name="colSpan">7</property>
@@ -6573,6 +7063,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4499">
+                        <property name="dataSet">IPTIWithReaction</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">REACTIVE</property>
+                                <text-property name="displayName">REACTIVE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["REACTIVE"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">REACTIVE</property>
+                    </data>
                 </cell>
                 <cell id="997">
                     <property name="colSpan">4</property>
@@ -6589,6 +7091,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4501">
+                        <property name="dataSet">ITN</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">1stVisit</property>
+                                <text-property name="displayName">1stVisit</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["1stVisit"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">1stVisit</property>
+                    </data>
                 </cell>
                 <cell id="1001">
                     <property name="colSpan">4</property>
@@ -6605,6 +7119,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4502">
+                        <property name="dataSet">ITN</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">2ndVisit</property>
+                                <text-property name="displayName">2ndVisit</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["2ndVisit"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">2ndVisit</property>
+                    </data>
                 </cell>
                 <cell id="1005">
                     <property name="colSpan">5</property>
@@ -6621,6 +7147,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4503">
+                        <property name="dataSet">PMTCT</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Counselled</property>
+                                <text-property name="displayName">Counselled</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Counselled"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Counselled</property>
+                    </data>
                 </cell>
                 <cell id="1010">
                     <property name="colSpan">5</property>
@@ -6637,6 +7175,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4504">
+                        <property name="dataSet">PMTCT</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Tested</property>
+                                <text-property name="displayName">Tested</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Tested"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Tested</property>
+                    </data>
                 </cell>
                 <cell id="1015">
                     <property name="colSpan">5</property>
@@ -6653,6 +7203,18 @@ at 36Weeks</text-property>
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <data id="4505">
+                        <property name="dataSet">PMTCT</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Positive</property>
+                                <text-property name="displayName">Positive</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Positive"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Positive</property>
+                    </data>
                 </cell>
                 <cell id="1020">
                     <property name="colSpan">4</property>
