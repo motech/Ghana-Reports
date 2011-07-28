@@ -43,6 +43,9 @@
             <property name="sortDirection">asc</property>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2011</value>
+            </simple-property-list>
             <list-property name="selectionList">
                 <structure>
                     <property name="value">2010</property>
@@ -84,6 +87,9 @@
             <property name="sortDirection">asc</property>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">7</value>
+            </simple-property-list>
             <list-property name="selectionList">
                 <structure>
                     <property name="value">1</property>
@@ -624,6 +630,101 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
             <design:label>name</design:label>
             <design:formattingHints>
               <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Months" id="2541">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">month</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">month</property>
+                    <property name="nativeName">month</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select months.month
+from 
+(
+select 1 as code ,'January' as month from dual 
+union all select 2,'February' from dual
+union all select 3,'March' from dual
+union all select 4,'April' from dual
+union all select 5,'May' from dual
+union all select 6,'June' from dual
+union all select 7,'July' from dual
+union all select 8,'August' from dual
+union all select 9,'September' from dual
+union all select 10,'October' from dual
+union all select 11,'November' from dual
+union all select 12,'Deccember' from dual
+) as months where months.code = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>code</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>20</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>code</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>code</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>month</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>9</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>month</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>month</design:label>
+            <design:formattingHints>
+              <design:displaySize>9</design:displaySize>
             </design:formattingHints>
           </design:usageHints>
         </design:resultColumnDefinitions>
@@ -1469,8 +1570,21 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                     <property name="borderRightColor">#000000</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
-                    <data id="1969">
-                        <property name="resultSetColumn">month</property>
+                    <data id="2542">
+                        <property name="dataSet">Months</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">month</property>
+                                <expression name="expression" type="javascript">dataSetRow["month"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">month_selected</property>
+                                <expression name="expression" type="javascript">dataSetRow["month"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">month_selected</property>
                     </data>
                 </cell>
                 <cell id="1110"/>
@@ -1544,8 +1658,36 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                                 </label>
                             </cell>
                             <cell id="1768">
-                                <data id="1970">
-                                    <property name="resultSetColumn">facility</property>
+                                <data id="2543">
+                                    <property name="dataSet">Locations</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">location_id</property>
+                                            <expression name="expression" type="javascript">dataSetRow["location_id"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">name</property>
+                                            <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">region</property>
+                                            <expression name="expression" type="javascript">dataSetRow["region"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">county_district</property>
+                                            <expression name="expression" type="javascript">dataSetRow["county_district"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">location</property>
+                                            <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">location</property>
                                 </data>
                             </cell>
                             <cell id="1769">

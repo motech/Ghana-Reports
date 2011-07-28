@@ -23,9 +23,6 @@
             <property name="sortDirection">asc</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
-            <simple-property-list name="defaultValue">
-                <value type="constant">Ghana</value>
-            </simple-property-list>
             <property name="paramType">simple</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
@@ -44,7 +41,7 @@
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2010</value>
+                <value type="constant">2011</value>
             </simple-property-list>
             <list-property name="selectionList">
                 <structure>
@@ -61,7 +58,6 @@
                 </structure>
             </list-property>
             <property name="paramType">simple</property>
-            <property name="concealValue">false</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
             <property name="fixedOrder">false</property>
@@ -80,7 +76,7 @@
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">11</value>
+                <value type="constant">7</value>
             </simple-property-list>
             <list-property name="selectionList">
                 <structure>
@@ -133,7 +129,6 @@
                 </structure>
             </list-property>
             <property name="paramType">simple</property>
-            <property name="concealValue">false</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
             <property name="fixedOrder">false</property>
@@ -335,7 +330,12 @@ and
                     <property name="nativeDataType">12</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select name from location]]></xml-property>
+            <xml-property name="queryText"><![CDATA[select 
+l.name as name
+from location l
+join motechmodule_facility f
+on l.location_id = f.location_id
+]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -511,7 +511,7 @@ and
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">county_district</property>
+                        <property name="name">district</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -543,11 +543,13 @@ and
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
-name as name,
-county_district as district,
-region as region
-from location 
-where name = ?]]></xml-property>
+l.name as name,
+l.county_district as district,
+l.region as region
+from location l
+join motechmodule_facility f
+on l.location_id = f.location_id
+and l.name = ?]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Deworming" id="1692">
             <list-property name="parameters">
@@ -1706,6 +1708,101 @@ and
     MONTH(observation.obs_datetime) = ?
 ]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Months" id="3089">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">month</property>
+                    <property name="paramName">Month</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">month</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">month</property>
+                    <property name="nativeName">month</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select months.month
+from 
+(
+select 1 as code ,'January' as month from dual 
+union all select 2,'February' from dual
+union all select 3,'March' from dual
+union all select 4,'April' from dual
+union all select 5,'May' from dual
+union all select 6,'June' from dual
+union all select 7,'July' from dual
+union all select 8,'August' from dual
+union all select 9,'September' from dual
+union all select 10,'October' from dual
+union all select 11,'November' from dual
+union all select 12,'Deccember' from dual
+) as months where months.code = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>code</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>20</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>code</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>code</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>month</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>9</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>month</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>month</design:label>
+            <design:formattingHints>
+              <design:displaySize>9</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="report" id="4">
@@ -1936,10 +2033,22 @@ and
                     <cell id="2239">
                         <property name="colSpan">2</property>
                         <property name="rowSpan">1</property>
-                        <text-data id="3004">
-                            <expression name="valueExpr">params["Month"].displayText+ "/" + params["Year"]</expression>
-                            <property name="contentType">html</property>
-                        </text-data>
+                        <data id="3095">
+                            <property name="dataSet">Months</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">month</property>
+                                    <expression name="expression" type="javascript">dataSetRow["month"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">month_selected</property>
+                                    <expression name="expression" type="javascript">dataSetRow["month"] + " / " + params["Year"].value</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">month_selected</property>
+                        </data>
                     </cell>
                 </row>
                 <row id="2241">
