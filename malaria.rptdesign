@@ -3794,17 +3794,17 @@ union all select 12,'Deccember' from dual
                     </label>
                 </cell>
                 <cell id="760">
-                    <data id="992">
-                        <property name="dataSet">Districts</property>
+                    <data id="2547">
+                        <property name="dataSet">Locations</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">state_province</property>
-                                <text-property name="displayName">state_province</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["state_province"]</expression>
+                                <property name="name">county_district</property>
+                                <text-property name="displayName">county_district</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["county_district"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">state_province</property>
+                        <property name="resultSetColumn">county_district</property>
                     </data>
                 </cell>
                 <cell id="761">
@@ -3824,17 +3824,17 @@ union all select 12,'Deccember' from dual
                     </label>
                 </cell>
                 <cell id="763">
-                    <data id="993">
-                        <property name="dataSet">Districts</property>
+                    <data id="2546">
+                        <property name="dataSet">Locations</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">county_district</property>
-                                <text-property name="displayName">county_district</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["county_district"]</expression>
+                                <property name="name">state_province</property>
+                                <text-property name="displayName">state_province</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["state_province"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">county_district</property>
+                        <property name="resultSetColumn">state_province</property>
                     </data>
                 </cell>
                 <cell id="764">
@@ -3856,10 +3856,18 @@ union all select 12,'Deccember' from dual
                     <property name="borderRightColor">#000000</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
-                    <text-data id="994">
-                        <expression name="valueExpr">params["Facility"].displayText</expression>
-                        <property name="contentType">html</property>
-                    </text-data>
+                    <data id="2545">
+                        <property name="dataSet">Locations</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">name</property>
+                                <text-property name="displayName">name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">name</property>
+                    </data>
                 </cell>
             </row>
             <row id="767">
@@ -3915,10 +3923,18 @@ union all select 12,'Deccember' from dual
                     </label>
                 </cell>
                 <cell id="777">
-                    <text-data id="995">
-                        <expression name="valueExpr">params["Month"].displayText</expression>
-                        <property name="contentType">html</property>
-                    </text-data>
+                    <data id="2544">
+                        <property name="dataSet">Months</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">month</property>
+                                <text-property name="displayName">month</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["month"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">month</property>
+                    </data>
                 </cell>
                 <cell id="778">
                     <label id="779">
@@ -3974,7 +3990,7 @@ union all select 12,'Deccember' from dual
                 </cell>
                 <cell id="780">
                     <text-data id="996">
-                        <expression name="valueExpr">params["Year"].displayText</expression>
+                        <expression name="valueExpr">params["Year"].value</expression>
                         <property name="contentType">html</property>
                     </text-data>
                 </cell>

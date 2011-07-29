@@ -1207,7 +1207,7 @@ union all select 12,'Deccember' from dual
                 </structure>
                 <structure>
                     <property name="name">year</property>
-                    <expression name="expression" type="javascript">params["Year"].displayText</expression>
+                    <expression name="expression" type="javascript">params["Year"].value</expression>
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
