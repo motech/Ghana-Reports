@@ -164,7 +164,6 @@
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -202,88 +201,12 @@
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">id</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">date</property>
-                        <property name="dataType">date-time</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">birthdate</property>
-                        <property name="dataType">date-time</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">sex</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">location_id</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">diagnosis</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">age</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                </list-property>
-            </structure>
+            <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">id</property>
-                    <property name="nativeName">id</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">date</property>
-                    <property name="nativeName">date</property>
-                    <property name="dataType">date-time</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">birthdate</property>
-                    <property name="nativeName">birthdate</property>
-                    <property name="dataType">date-time</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">sex</property>
-                    <property name="nativeName">sex</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">location_id</property>
-                    <property name="nativeName">location_id</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">diagnosis</property>
-                    <property name="nativeName">diagnosis</property>
-                    <property name="dataType">float</property>
-                </structure>
-            </list-property>
             <xml-property name="queryText"><![CDATA[select id , date , birthdate , sex , location_id , diagnosis from (
 select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
-ge1.visit_date as date,
+ge1.date as date,
 ge1.birthdate as birthdate,
 ge1.sex as sex,
 loc1.location_id as location_id,
@@ -294,7 +217,7 @@ join location loc1 on loc1.location_id = fa1.location_id
 union all
 select
 CONCAT('General',CAST(ge2.id AS CHAR)) as id,
-ge2.visit_date as date,
+ge2.date as date,
 ge2.birthdate as birthdate,
 ge2.sex as sex,
 loc2.location_id as location_id,

@@ -187,55 +187,12 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
-            <property name="odaUser">openmrsuser</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
+            <property name="odaUser">root</property>
         </oda-data-source>
         <script-data-source name="Scripted Data" id="225"/>
     </data-sources>
     <data-sets>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Data Set" id="11">
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">id</property>
-                    <text-property name="displayName">id</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">visit_date</property>
-                    <text-property name="displayName">visit_date</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">location_id</property>
-                    <text-property name="displayName">location_id</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">sex</property>
-                    <text-property name="displayName">sex</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">birthdate</property>
-                    <text-property name="displayName">birthdate</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">age</property>
-                    <text-property name="displayName">age</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">diagnosis</property>
-                    <text-property name="displayName">diagnosis</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">referred</property>
-                    <text-property name="displayName">referred</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">newcase</property>
-                    <text-property name="displayName">newcase</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">diag_num</property>
-                    <text-property name="displayName">diag_num</text-property>
-                </structure>
-            </list-property>
             <list-property name="filter">
                 <structure>
                     <property name="operator">eq</property>
@@ -259,140 +216,15 @@
                     </simple-property-list>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">id</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">visit_date</property>
-                        <property name="dataType">date-time</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">location_id</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">sex</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">birthdate</property>
-                        <property name="dataType">date</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">age</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">diagnosis</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">referred</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
-                        <property name="name">newcase</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">10</property>
-                        <property name="name">diag_num</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                </list-property>
-            </structure>
+            <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">id</property>
-                    <property name="nativeName">id</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">visit_date</property>
-                    <property name="nativeName">visit_date</property>
-                    <property name="dataType">date-time</property>
-                    <property name="nativeDataType">93</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">location_id</property>
-                    <property name="nativeName">location_id</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">sex</property>
-                    <property name="nativeName">sex</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">birthdate</property>
-                    <property name="nativeName">birthdate</property>
-                    <property name="dataType">date</property>
-                    <property name="nativeDataType">91</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">age</property>
-                    <property name="nativeName">age</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">diagnosis</property>
-                    <property name="nativeName">diagnosis</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">referred</property>
-                    <property name="nativeName">referred</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
-                    <property name="name">newcase</property>
-                    <property name="nativeName">newcase</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
-                </structure>
-                <structure>
-                    <property name="position">10</property>
-                    <property name="name">diag_num</property>
-                    <property name="nativeName">diag_num</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                </structure>
-            </list-property>
             <xml-property name="queryText"><![CDATA[select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
-ge1.visit_date as visit_date,
+ge1.date as visit_date,
 loc1.location_id,
 ge1.sex as sex,
 ge1.birthdate,
-coalesce(YEAR(ge1.visit_date) - YEAR(ge1.birthdate) - IF(DATE_FORMAT(ge1.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+coalesce(YEAR(ge1.date) - YEAR(ge1.birthdate) - IF(DATE_FORMAT(ge1.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
 ge1.diagnosis as diagnosis,
 ge1.referred as referred,
 ge1.newcase as newcase,
@@ -403,11 +235,11 @@ join location loc1 on loc1.location_id = fa1.location_id
 union all
 select 
 CONCAT('General',CAST(ge2.id AS CHAR)) as id,
-ge2.visit_date as visit_date,
+ge2.date as visit_date,
 loc2.location_id,
 ge2.sex as sex,
 ge2.birthdate,
-coalesce(YEAR(ge2.visit_date) - YEAR(ge2.birthdate) - IF(DATE_FORMAT(ge2.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+coalesce(YEAR(ge2.date) - YEAR(ge2.birthdate) - IF(DATE_FORMAT(ge2.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
 ge2.secondary_diagnosis as diagnosis,
 ge2.referred as referred,
 ge2.newcase as newcase,

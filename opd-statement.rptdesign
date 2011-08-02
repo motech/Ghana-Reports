@@ -30,6 +30,16 @@
     <property name="OPD Cube.Data Set.width">150</property>
     <property name="OPD Cube.Data Set.height">200</property>
     <property name="units">mm</property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">1040</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">1040</property>
+        </structure>
+    </list-property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="layoutPreference">auto layout</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -56,6 +66,8 @@
         <scalar-parameter name="Year" id="533">
             <text-property name="promptText">Year?</text-property>
             <property name="valueType">static</property>
+            <property name="sortBy">label</property>
+            <property name="sortDirection">asc</property>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
@@ -86,7 +98,7 @@
             <property name="paramType">simple</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
-            <property name="fixedOrder">true</property>
+            <property name="fixedOrder">false</property>
             <structure name="format">
                 <property name="category">Unformatted</property>
             </structure>
@@ -94,6 +106,8 @@
         <scalar-parameter name="Month" id="532">
             <text-property name="promptText">Month?</text-property>
             <property name="valueType">static</property>
+            <property name="sortBy">value</property>
+            <property name="sortDirection">asc</property>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
@@ -152,7 +166,7 @@
             <property name="paramType">simple</property>
             <property name="controlType">list-box</property>
             <property name="mustMatch">false</property>
-            <property name="fixedOrder">true</property>
+            <property name="fixedOrder">false</property>
             <structure name="format">
                 <property name="category">Unformatted</property>
             </structure>
@@ -173,7 +187,6 @@
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
         <script-data-source name="Scripted Data" id="920"/>
     </data-sources>
@@ -237,89 +250,9 @@ else if (row["age"] >=70)&#13;
             </list-property>
             <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">id</property>
-                    <property name="nativeName">id</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">date</property>
-                    <property name="nativeName">date</property>
-                    <property name="dataType">date-time</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">staff_id</property>
-                    <property name="nativeName">staff_id</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">facility_id</property>
-                    <property name="nativeName">facility_id</property>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">region</property>
-                    <property name="nativeName">region</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">district</property>
-                    <property name="nativeName">district</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">subdistrict</property>
-                    <property name="nativeName">subdistrict</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">facility</property>
-                    <property name="nativeName">facility</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
-                    <property name="name">sex</property>
-                    <property name="nativeName">sex</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">10</property>
-                    <property name="name">birthdate</property>
-                    <property name="nativeName">birthdate</property>
-                    <property name="dataType">date</property>
-                </structure>
-                <structure>
-                    <property name="position">11</property>
-                    <property name="name">diagnosis</property>
-                    <property name="nativeName">diagnosis</property>
-                    <property name="dataType">float</property>
-                </structure>
-                <structure>
-                    <property name="position">12</property>
-                    <property name="name">newpatient</property>
-                    <property name="nativeName">newpatient</property>
-                    <property name="dataType">float</property>
-                </structure>
-                <structure>
-                    <property name="position">13</property>
-                    <property name="name">insured</property>
-                    <property name="nativeName">insured</property>
-                    <property name="dataType">float</property>
-                </structure>
-            </list-property>
             <xml-property name="queryText"><![CDATA[select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
-ge1.visit_date as date,
+ge1.date as date,
 CAST(ge1.staff_id AS CHAR) as staff_id,
 ge1.facility_id as facility_id,
 loc1.region as region,
@@ -337,7 +270,7 @@ join location loc1 on loc1.location_id = fa1.location_id
 union all
 select
 CONCAT('General',CAST(ge2.id AS CHAR)) as id,
-ge2.visit_date as date,
+ge2.date as date,
 CAST(ge2.staff_id AS CHAR),
 ge2.facility_id as facility_id,
 loc2.region as region,
@@ -980,6 +913,11 @@ else 0;</expression>
                     <text-property name="displayName">Data Set::id</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">Data Set::newpatient</property>
+                    <property name="alias">newpatient</property>
+                    <text-property name="displayName">Data Set::newpatient</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">Data Set::insured</property>
                     <property name="alias">insured</property>
                     <text-property name="displayName">Data Set::insured</text-property>
@@ -993,11 +931,6 @@ else 0;</expression>
                     <property name="columnName">Data Set::age</property>
                     <property name="alias">age</property>
                     <text-property name="displayName">Data Set::age</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">Data Set::newpatient</property>
-                    <property name="alias">newpatient</property>
-                    <text-property name="displayName">Data Set::newpatient</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Data Set::birthdate</property>
@@ -1129,7 +1062,7 @@ else 0;</expression>
                     <property name="joinOperator">eq</property>
                     <property name="leftDataSet">Data Set</property>
                     <property name="rightDataSet">AgeGroup</property>
-                    <expression name="leftExpression">dataSetRow[""]</expression>
+                    <expression name="leftExpression">dataSetRow["agegroup"]</expression>
                     <expression name="rightExpression">dataSetRow["code"]</expression>
                 </structure>
             </list-property>
@@ -1234,23 +1167,37 @@ on
 and
 	fac.facility_id = ?]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Months" id="2541">
-            <list-property name="parameters">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Months" id="1040">
+            <list-property name="columnHints">
                 <structure>
-                    <property name="name">month</property>
-                    <property name="paramName">Month</property>
-                    <property name="dataType">integer</property>
-                    <property name="position">1</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
+                    <property name="columnName">name</property>
+                    <text-property name="displayName">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">code</property>
+                    <text-property name="displayName">code</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["code"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Month"].value</value>
+                    </simple-property-list>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">month</property>
+                        <property name="name">name</property>
                         <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">code</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
             </structure>
@@ -1258,76 +1205,47 @@ and
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">month</property>
-                    <property name="nativeName">month</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">code</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select months.month
-from 
-(
-select 1 as code ,'January' as month from dual 
-union all select 2,'February' from dual
-union all select 3,'March' from dual
-union all select 4,'April' from dual
-union all select 5,'May' from dual
-union all select 6,'June' from dual
-union all select 7,'July' from dual
-union all select 8,'August' from dual
-union all select 9,'September' from dual
-union all select 10,'October' from dual
-union all select 11,'November' from dual
-union all select 12,'Deccember' from dual
-) as months where months.code = ?]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
-  <Version>1.0</Version>
-  <design:ResultSets derivedMetaData="true">
-    <design:resultSetDefinitions>
-      <design:resultSetColumns>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:name>code</design:name>
-            <design:position>1</design:position>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>20</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>code</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>code</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:name>month</design:name>
-            <design:position>2</design:position>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>9</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>month</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>month</design:label>
-            <design:formattingHints>
-              <design:displaySize>9</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-      </design:resultSetColumns>
-      <design:criteria/>
-    </design:resultSetDefinitions>
-  </design:ResultSets>
-</model:DesignValues>]]></xml-property>
+            <xml-property name="queryText"><![CDATA[select 
+name,code
+from (
+select 1 as code,'January' as name
+union all
+select 2 as code,'February' as name
+union all
+select 3 as code,'March' as name
+union all
+select 4 as code,'April' as name
+union all
+select 5 as code,'May' as name
+union all
+select 6 as code,'June' as name
+union all
+select 7 as code,'July' as name
+union all
+select 8 as code,'August' as name
+union all
+select 9 as code,'September' as name
+union all
+select 10 as code,'October' as name
+union all
+select 11 as code,'November' as name
+union all
+select 12 as code,'Decemebr' as name
+) as months ;
+]]></xml-property>
         </oda-data-set>
     </data-sets>
     <cubes>
@@ -1760,7 +1678,7 @@ MoTeCH Statement of Out-Patients
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="2543">
+                    <data id="1042">
                         <property name="dataSet">Location</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -1805,17 +1723,17 @@ MoTeCH Statement of Out-Patients
                     <property name="borderTopColor">#000000</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
-                    <data id="2542">
+                    <data id="1041">
                         <property name="dataSet">Months</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">month</property>
-                                <text-property name="displayName">month</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["month"] + " / " + params["Year"].value</expression>
+                                <property name="name">name</property>
+                                <text-property name="displayName">name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"] + " / " + params["Year"].value</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">month</property>
+                        <property name="resultSetColumn">name</property>
                     </data>
                 </cell>
             </row>
