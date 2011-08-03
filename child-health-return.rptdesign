@@ -203,6 +203,7 @@
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
             <property name="odaUser">root</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -470,6 +471,24 @@ where location_id = ?]]></xml-property>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Child Referred OPD Data" id="1158">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">id</property>
+                    <text-property name="displayName">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">date</property>
+                    <text-property name="displayName">date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">location_id</property>
+                    <text-property name="displayName">location_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">diagnosis</property>
+                    <text-property name="displayName">diagnosis</text-property>
+                </structure>
+            </list-property>
             <list-property name="filter">
                 <structure>
                     <property name="operator">eq</property>
@@ -493,29 +512,82 @@ where location_id = ?]]></xml-property>
                     </simple-property-list>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">location_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">diagnosis</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
             <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">date</property>
+                    <property name="nativeName">date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">location_id</property>
+                    <property name="nativeName">location_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">diagnosis</property>
+                    <property name="nativeName">diagnosis</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+            </list-property>
             <xml-property name="queryText"><![CDATA[select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
-ge1.date as date,
+ge1.visit_date as date,
 loc1.location_id,
 ge1.diagnosis
 from motechmodule_generaloutpatientencounter ge1
 join motechmodule_facility fa1 on fa1.facility_id = ge1.facility_id
 join location loc1 on loc1.location_id = fa1.location_id
 where ge1.referred = 1
-and ge1.birthdate > DATE_SUB(ge1.date, INTERVAL 5 YEAR)
+and ge1.birthdate > DATE_SUB(ge1.visit_date, INTERVAL 5 YEAR)
 union all
 select
 CONCAT('General',CAST(ge2.id AS CHAR)) as id,
-ge2.date as date,
+ge2.visit_date as date,
 loc2.location_id,
 ge2.secondary_diagnosis as diagnosis
 from motechmodule_generaloutpatientencounter ge2
 join motechmodule_facility fa2 on fa2.facility_id = ge2.facility_id
 join location loc2 on loc2.location_id = fa2.location_id
 where ge2.referred = 1 and ge2.secondary_diagnosis is not null
-and ge2.birthdate > DATE_SUB(ge2.date, INTERVAL 5 YEAR)
+and ge2.birthdate > DATE_SUB(ge2.visit_date, INTERVAL 5 YEAR)
 union all
 select
   CONCAT('Patient',CAST(enc.encounter_id AS CHAR)) as id,

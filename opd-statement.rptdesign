@@ -187,6 +187,7 @@
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
             <property name="odaUser">root</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
         <script-data-source name="Scripted Data" id="920"/>
     </data-sources>
@@ -252,7 +253,7 @@ else if (row["age"] >=70)&#13;
             <property name="dataSource">Data Source</property>
             <xml-property name="queryText"><![CDATA[select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
-ge1.date as date,
+ge1.visit_date as date,
 CAST(ge1.staff_id AS CHAR) as staff_id,
 ge1.facility_id as facility_id,
 loc1.region as region,
@@ -270,7 +271,7 @@ join location loc1 on loc1.location_id = fa1.location_id
 union all
 select
 CONCAT('General',CAST(ge2.id AS CHAR)) as id,
-ge2.date as date,
+ge2.visit_date as date,
 CAST(ge2.staff_id AS CHAR),
 ge2.facility_id as facility_id,
 loc2.region as region,

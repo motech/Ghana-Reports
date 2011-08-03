@@ -188,6 +188,7 @@
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
             <property name="odaUser">root</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
         <script-data-source name="Scripted Data" id="225"/>
     </data-sources>
@@ -220,11 +221,11 @@
             <property name="dataSource">Data Source</property>
             <xml-property name="queryText"><![CDATA[select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
-ge1.date as visit_date,
+ge1.visit_date as visit_date,
 loc1.location_id,
 ge1.sex as sex,
 ge1.birthdate,
-coalesce(YEAR(ge1.date) - YEAR(ge1.birthdate) - IF(DATE_FORMAT(ge1.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+coalesce(YEAR(ge1.visit_date) - YEAR(ge1.birthdate) - IF(DATE_FORMAT(ge1.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
 ge1.diagnosis as diagnosis,
 ge1.referred as referred,
 ge1.newcase as newcase,
@@ -235,11 +236,11 @@ join location loc1 on loc1.location_id = fa1.location_id
 union all
 select 
 CONCAT('General',CAST(ge2.id AS CHAR)) as id,
-ge2.date as visit_date,
+ge2.visit_date as visit_date,
 loc2.location_id,
 ge2.sex as sex,
 ge2.birthdate,
-coalesce(YEAR(ge2.date) - YEAR(ge2.birthdate) - IF(DATE_FORMAT(ge2.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+coalesce(YEAR(ge2.visit_date) - YEAR(ge2.birthdate) - IF(DATE_FORMAT(ge2.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
 ge2.secondary_diagnosis as diagnosis,
 ge2.referred as referred,
 ge2.newcase as newcase,
