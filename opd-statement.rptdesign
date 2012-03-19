@@ -185,7 +185,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
+            <property name="odaURL">jdbc:mysql://localhost/openmrs_test</property>
             <property name="odaUser">root</property>
             <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
@@ -256,7 +256,7 @@ CONCAT('General',CAST(ge1.id AS CHAR)) as id,
 ge1.visit_date as date,
 CAST(ge1.staff_id AS CHAR) as staff_id,
 ge1.facility_id as facility_id,
-loc1.region as region,
+loc1.address6 as address6,
 loc1.county_district as district,
 loc1.state_province as subdistrict,
 loc1.name as facility,
@@ -274,7 +274,7 @@ CONCAT('General',CAST(ge2.id AS CHAR)) as id,
 ge2.visit_date as date,
 CAST(ge2.staff_id AS CHAR),
 ge2.facility_id as facility_id,
-loc2.region as region,
+loc2.address6 as address6,
 loc2.county_district as district,
 loc2.state_province as subdistrict,
 loc2.name as facility,
@@ -293,7 +293,7 @@ select
   enc.encounter_datetime as date,
   us.system_id as staff_id,
   fac.facility_id as facility_id,
-  loc.region as region,
+  loc.address6 as address6,
   loc.county_district as district,
   loc.state_province as subdistrict,
   loc.name as facility,
@@ -869,9 +869,9 @@ else 0;</expression>
             </list-property>
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">Data Set::region</property>
-                    <property name="alias">region</property>
-                    <text-property name="displayName">Data Set::region</text-property>
+                    <property name="columnName">Data Set::address6</property>
+                    <property name="alias">address6</property>
+                    <text-property name="displayName">Data Set::address6</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Data Set::sex</property>
@@ -978,7 +978,7 @@ else 0;</expression>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">region</property>
+                        <property name="name">address6</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -1098,7 +1098,7 @@ else 0;</expression>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">region</property>
+                        <property name="name">address6</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -1135,8 +1135,8 @@ else 0;</expression>
                 </structure>
                 <structure>
                     <property name="position">4</property>
-                    <property name="name">region</property>
-                    <property name="nativeName">region</property>
+                    <property name="name">address6</property>
+                    <property name="nativeName">address6</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -1156,7 +1156,7 @@ else 0;</expression>
 	fac.facility_id,
 	fac.location_id, 
 	loc.name,
-	loc.region,
+	loc.address6,
 	loc.county_district,
 	loc.state_province 
 from
@@ -1638,13 +1638,13 @@ MoTeCH Statement of Out-Patients
                         <property name="dataSet">Location</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">region</property>
-                                <text-property name="displayName">region</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["region"]</expression>
+                                <property name="name">address6</property>
+                                <text-property name="displayName">address6</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["address6"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">region</property>
+                        <property name="resultSetColumn">address6</property>
                     </data>
                 </cell>
             </row>
@@ -1763,8 +1763,8 @@ MoTeCH Statement of Out-Patients
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
-                    <property name="name">region</property>
-                    <expression name="expression" type="javascript">dataSetRow["region"]</expression>
+                    <property name="name">address6</property>
+                    <expression name="expression" type="javascript">dataSetRow["address6"]</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -2432,8 +2432,8 @@ MoTeCH Statement of Out-Patients
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
-                    <property name="name">region</property>
-                    <expression name="expression" type="javascript">dataSetRow["region"]</expression>
+                    <property name="name">address6</property>
+                    <expression name="expression" type="javascript">dataSetRow["address6"]</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>

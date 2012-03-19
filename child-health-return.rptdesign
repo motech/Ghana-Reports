@@ -201,7 +201,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
+            <property name="odaURL">jdbc:mysql://localhost/openmrs_test</property>
             <property name="odaUser">root</property>
             <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
@@ -226,8 +226,8 @@
                     <text-property name="displayName">name</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">region</property>
-                    <text-property name="displayName">region</text-property>
+                    <property name="columnName">address6</property>
+                    <text-property name="displayName">address6</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">county_district</property>
@@ -258,7 +258,7 @@
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">region</property>
+                        <property name="name">address6</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -300,8 +300,8 @@
                 </structure>
                 <structure>
                     <property name="position">5</property>
-                    <property name="name">region</property>
-                    <property name="nativeName">region</property>
+                    <property name="name">address6</property>
+                    <property name="nativeName">address6</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
@@ -313,7 +313,7 @@
                     <property name="nativeDataType">12</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select fac.id, fac.facility_id, loc.location_id, loc.name , loc.region , loc.county_district
+            <xml-property name="queryText"><![CDATA[select fac.id, fac.facility_id, loc.location_id, loc.name , loc.address6 , loc.county_district
 from motechmodule_facility fac
 join location loc on fac.location_id = loc.location_id]]></xml-property>
         </oda-data-set>
@@ -337,7 +337,7 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">region</property>
+                        <property name="name">address6</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -362,8 +362,8 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">region</property>
-                    <property name="nativeName">region</property>
+                    <property name="name">address6</property>
+                    <property name="nativeName">address6</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -380,7 +380,7 @@ join location loc on fac.location_id = loc.location_id]]></xml-property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
-name,region,county_district,state_province
+name,address6,county_district,state_province
 from location
 where location_id = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -410,18 +410,18 @@ where location_id = ?]]></xml-property>
         </design:resultColumnDefinitions>
         <design:resultColumnDefinitions>
           <design:attributes>
-            <design:name>region</design:name>
+            <design:name>address6</design:name>
             <design:position>2</design:position>
             <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
             <design:precision>50</design:precision>
             <design:scale>0</design:scale>
             <design:nullability>Nullable</design:nullability>
             <design:uiHints>
-              <design:displayName>region</design:displayName>
+              <design:displayName>address6</design:displayName>
             </design:uiHints>
           </design:attributes>
           <design:usageHints>
-            <design:label>region</design:label>
+            <design:label>address6</design:label>
             <design:formattingHints>
               <design:displaySize>50</design:displaySize>
             </design:formattingHints>
@@ -621,7 +621,7 @@ and enc.voided = 0;]]></xml-property>
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">region</property>
+                        <property name="name">address6</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -630,12 +630,12 @@ and enc.voided = 0;]]></xml-property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">region</property>
-                    <property name="nativeName">region</property>
+                    <property name="name">address6</property>
+                    <property name="nativeName">address6</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select distinct region from location where location_id = ?]]></xml-property>
+            <xml-property name="queryText"><![CDATA[select distinct address6 from location where location_id = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -644,18 +644,18 @@ and enc.voided = 0;]]></xml-property>
       <design:resultSetColumns>
         <design:resultColumnDefinitions>
           <design:attributes>
-            <design:name>region</design:name>
+            <design:name>address6</design:name>
             <design:position>1</design:position>
             <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
             <design:precision>50</design:precision>
             <design:scale>0</design:scale>
             <design:nullability>Nullable</design:nullability>
             <design:uiHints>
-              <design:displayName>region</design:displayName>
+              <design:displayName>address6</design:displayName>
             </design:uiHints>
           </design:attributes>
           <design:usageHints>
-            <design:label>region</design:label>
+            <design:label>address6</design:label>
             <design:formattingHints>
               <design:displaySize>50</design:displaySize>
             </design:formattingHints>
@@ -1959,13 +1959,13 @@ MoTeCH Monthly Child Health Returns
                                     <property name="dataSet">Locations</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
-                                            <property name="name">region</property>
-                                            <text-property name="displayName">region</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["region"]</expression>
+                                            <property name="name">address6</property>
+                                            <text-property name="displayName">address6</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["address6"]</expression>
                                             <property name="dataType">string</property>
                                         </structure>
                                     </list-property>
-                                    <property name="resultSetColumn">region</property>
+                                    <property name="resultSetColumn">address6</property>
                                 </data>
                             </cell>
                             <cell id="1339">
