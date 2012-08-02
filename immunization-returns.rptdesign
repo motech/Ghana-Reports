@@ -151,9 +151,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost/openmrs_test</property>
+            <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
+            <encrypted-property name="odaPassword" encryptionID="base64">aGFiNmN6aW0=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>

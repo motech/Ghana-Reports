@@ -2,7 +2,7 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
     <property name="author">Brent Atkinson</property>
     <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
-    <text-property name="title">MoTeCH OPD Morbidity Report</text-property>
+    <text-property name="title">GHS MoTeCH OPD Morbidity Report</text-property>
     <list-property name="userProperties">
         <structure>
             <property name="name">OPD Cube.Data Set.x</property>
@@ -186,9 +186,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost/openmrs_test</property>
+            <property name="odaURL">jdbc:mysql://localhost/openmrs</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
+            <encrypted-property name="odaPassword" encryptionID="base64">aGFiNmN6aW0=</encrypted-property>
         </oda-data-source>
         <script-data-source name="Scripted Data" id="225"/>
     </data-sources>
@@ -258,8 +258,8 @@ select
   pers.birthdate,
   coalesce(YEAR(enc.encounter_datetime) - YEAR(pers.birthdate) - IF(DATE_FORMAT(pers.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
   obs1.value_numeric as diagnosis,
-  obs2.value_numeric as referred,
-  obs3.value_numeric as newcase ,
+  IF(obs3.value_coded=1065,1,0) as referred,
+  IF(obs2.value_coded=1065,1,0) as newcase ,
   IF(STRCMP(cn1.name,'PRIMARY DIAGNOSIS'),IF(STRCMP(cn1.name,'SECONDARY DIAGNOSIS'),0,2),1) as diag_num
 from encounter enc
 join encounter_type enctyp on enc.encounter_type = enctyp.encounter_type_id and enctyp.name = 'OUTPATIENTVISIT'
@@ -2166,7 +2166,7 @@ union all select 12,'Deccember' from dual
                         <label id="1918">
                             <property name="fontWeight">bold</property>
                             <property name="textAlign">left</property>
-                            <text-property name="text">OPD Morbidity</text-property>
+                            <text-property name="text">GHS MoTeCH OPD Morbidity</text-property>
                         </label>
                     </cell>
                     <cell id="1893">

@@ -2,7 +2,7 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
     <property name="author">Matthew Blanchette</property>
     <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
-    <text-property name="title">MoTeCH Monthly Child Health Returns</text-property>
+    <text-property name="title">GHS MoTeCH Monthly Child Health Returns</text-property>
     <list-property name="userProperties">
         <structure>
             <property name="name">OPD Cube.Data Set.x</property>
@@ -201,9 +201,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost/openmrs_test</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/openmrs?autoReconnect=true&amp;sessionVariables=storage_engine=InnoDB&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
+            <encrypted-property name="odaPassword" encryptionID="base64">aGFiNmN6aW0=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -602,7 +602,7 @@ and (cn1.name = 'PRIMARY DIAGNOSIS' or cn1.name = 'SECONDARY DIAGNOSIS') and obs
 on enc.encounter_id = obs1.encounter_id
 left outer join (obs obs2 join concept_name cn2 on obs2.concept_id = cn2.concept_id
 and cn2.name = 'REFERRED' and obs2.voided = 0) on enc.encounter_id = obs2.encounter_id
-where obs2.value_numeric = 1
+where obs2.value_coded= 1065
 and pers.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
 and enc.voided = 0;]]></xml-property>
         </oda-data-set>
@@ -1688,7 +1688,7 @@ union all select 12,'Deccember' from dual
                     <property name="contentType">html</property>
                     <text-property name="content"><![CDATA[<CENTER>
 <FONT size="6" color="black" >
-MoTeCH Monthly Child Health Returns
+GHS MoTeCH Monthly Child Health Returns
 </FONT>
 </CENTER>]]></text-property>
                 </text>

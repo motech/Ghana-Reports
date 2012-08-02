@@ -159,9 +159,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost/openmrs_test</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/openmrs?autoReconnect=true&amp;sessionVariables=storage_engine=InnoDB&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
+            <encrypted-property name="odaPassword" encryptionID="base64">aGFiNmN6aW0=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>

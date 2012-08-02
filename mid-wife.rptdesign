@@ -187,9 +187,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost:3306/openmrs_test</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/openmrs</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
+            <encrypted-property name="odaPassword" encryptionID="base64">aGFiNmN6aW0=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -336,7 +336,7 @@ and
 and
 	concept_name.name='MATERNAL DEATH'
 and
-    obs.value_numeric=1
+    obs.value_coded=1065
 and
 	YEAR(obs.obs_datetime) = ?
 and
@@ -871,7 +871,7 @@ and
 and
 	concept_name.name='POST-ABORTION FP ACCEPTED'
 and
-	obs.value_numeric=1
+	obs.value_coded=1065
 and
     obs.person_id=person.person_id
 and
@@ -1894,7 +1894,7 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
     'Deaths from abotion',
-    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as total
+    coalesce(SUM(if(obs.value_coded =1065,1,0)),0) as total
     FROM 
     	obs obs,
     	encounter encounter,
@@ -2916,8 +2916,8 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select  
 		'ITN',
-        coalesce(SUM(if(obs.value_numeric = 1 and visit.visit_number=1,1,0)),0) as 1stVisit, 
-        coalesce(SUM(if(obs.value_numeric = 1 and visit.visit_number=2,1,0)),0) as 2ndVisit
+        coalesce(SUM(if(obs.value_coded = 1065 and visit.visit_number=1,1,0)),0) as 1stVisit, 
+        coalesce(SUM(if(obs.value_coded = 1065 and visit.visit_number=2,1,0)),0) as 2ndVisit
     from obs obs, 
     (select 
         obs.encounter_id,
@@ -3040,10 +3040,10 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     name.name, 
-    coalesce(SUM(if(encounter_type.name= 'ANCVISIT' and obs.value_numeric = 1,1,0)),0) As ANCVISIT,
-    coalesce(SUM(if(encounter_type.name= 'PREGDELVISIT' and obs.value_numeric = 1,1,0)),0) As PREGDELVISIT,
-    coalesce(SUM(if(encounter_type.name= 'PNCMOTHERVISIT' and obs.value_numeric = 1,1,0)),0) As PNCVISIT,
-    coalesce(SUM(if(encounter_type.name= 'CWCVISIT' and obs.value_numeric = 1,1,0)),0) As CWCVISIT
+    coalesce(SUM(if(encounter_type.name= 'ANCVISIT' and obs.value_coded = 1065,1,0)),0) As ANCVISIT,
+    coalesce(SUM(if(encounter_type.name= 'PREGDELVISIT' and obs.value_coded = 1065,1,0)),0) As PREGDELVISIT,
+    coalesce(SUM(if(encounter_type.name= 'PNCMOTHERVISIT' and obs.value_coded = 1065,1,0)),0) As PNCVISIT,
+    coalesce(SUM(if(encounter_type.name= 'CWCVISIT' and obs.value_coded = 1065,1,0)),0) As CWCVISIT
 from 
     obs obs, 
     concept_name name, 
@@ -3505,9 +3505,9 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     'PMTCT',
-    coalesce(SUM(if(name.name='HIV PRE-TEST COUNSELING' and obs.value_numeric =1,1,0)),0) as Counselled,
-    coalesce(SUM(if(name.name='PMTCT' and obs.value_numeric =1,1,0)),0) as Positive,
-    coalesce(SUM(if(name.name='PMTCT TREATMENT' and obs.value_numeric =1,1,0)),0) as Tested
+    coalesce(SUM(if(name.name='HIV PRE-TEST COUNSELING' and obs.value_coded =1065,1,0)),0) as Counselled,
+    coalesce(SUM(if(name.name='PMTCT TREATMENT' and obs.value_coded =1065,1,0)),0) as Positive,
+    coalesce(SUM(if(name.name='PMTCT' and obs.value_coded =1065,1,0)),0) as Tested
 from 
     obs obs, 
     concept_name name, 
@@ -3588,7 +3588,7 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
    'PAC-FP Accepting',
-    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as total
+    coalesce(SUM(if(obs.value_coded =1065,1,0)),0) as total
     FROM 
     	obs obs,
     	encounter encounter,
@@ -3772,7 +3772,7 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
     'PAC-FP Counselled',
-    coalesce(SUM(if(obs.value_numeric =1,1,0)),0) as total
+    coalesce(SUM(if(obs.value_coded =1065,1,0)),0) as total
     FROM 
     	obs obs,
     	encounter encounter,
@@ -4112,7 +4112,7 @@ as total from (
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     'Referrals',
-    coalesce(sum(if(obs.value_numeric= 1,1,0)),0) as total
+    coalesce(sum(if(obs.value_coded= 1065,1,0)),0) as total
  from 
     obs, 
     encounter, 
@@ -4196,7 +4196,7 @@ and
             </list-property>
             <xml-property name="queryText"><![CDATA[select 
     'Referrals',
-    coalesce(sum(if(obs.value_numeric= 1,1,0)),0) as total
+    coalesce(sum(if(obs.value_coded= 1065,1,0)),0) as total
  from 
     obs, 
     encounter, 
@@ -5269,7 +5269,7 @@ union all select 12,'Deccember' from dual
                     <property name="colSpan">67</property>
                     <property name="rowSpan">1</property>
                     <label id="4439">
-                        <text-property name="text">MONTHLY MIDWIFE REPORT</text-property>
+							<text-property name="text">GHS MoTeCH MONTHLY MIDWIFE REPORT</text-property>
                     </label>
                 </cell>
             </row>

@@ -2,7 +2,7 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
     <property name="author">Matthew Blanchette</property>
     <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100211 Build &lt;2.5.2.v20100210-0630></property>
-    <text-property name="title">MoTeCH Statement of Out-Patients</text-property>
+    <text-property name="title">GHS MoTeCH Statement of Out-Patients</text-property>
     <list-property name="userProperties">
         <structure>
             <property name="name">OPD Cube.Data Set.x</property>
@@ -185,8 +185,8 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost/openmrs_test</property>
-            <property name="odaUser">root</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/openmrs?autoReconnect=true&amp;sessionVariables=storage_engine=InnoDB&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
+            <property name="odaUser">openmrs</property>
             <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
         </oda-data-source>
         <script-data-source name="Scripted Data" id="920"/>
@@ -223,7 +223,7 @@ else if (row["age"] >=60 &amp;&amp; row["age"] &lt;=69)&#13;
 	10;&#13;
 else if (row["age"] >=70)&#13;
 	11;</expression>
-                    <property name="dataType">string</property>
+                    <property name="dataType">integer</property>
                 </structure>
             </list-property>
             <list-property name="filter">
@@ -300,8 +300,8 @@ select
   IF(STRCMP(pers.gender,'M'),IF(STRCMP(pers.gender,'F'),'UNKNOWN','FEMALE'),'MALE') as sex,
   pers.birthdate as birthdate,
   obs1.value_numeric as diagnosis,
-  obs2.value_numeric as newpatient,
-  obs3.value_numeric as insured
+  IF(obs2.value_coded=1065,1,0) as newpatient,
+  IF(obs3.value_coded=1065,1,0) as insured
 from encounter enc
 join encounter_type enctyp on enc.encounter_type = enctyp.encounter_type_id and enctyp.name = 'OUTPATIENTVISIT'
 join motechmodule_facility fac on enc.location_id = fac.location_id
@@ -1029,7 +1029,7 @@ else 0;</expression>
                     <structure>
                         <property name="position">15</property>
                         <property name="name">agegroup</property>
-                        <property name="dataType">string</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">16</property>
@@ -1486,7 +1486,7 @@ else
                     <property name="contentType">html</property>
                     <text-property name="content"><![CDATA[<CENTER>
 <FONT size="6" color="black" >
-MoTeCH Statement of Out-Patients
+GHS MoTeCH Statement of Out-Patients
 </FONT>
 </CENTER>]]></text-property>
                 </text>
