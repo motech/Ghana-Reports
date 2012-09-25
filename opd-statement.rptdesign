@@ -51,7 +51,7 @@
             <property name="dataSetName">Facilities</property>
             <expression name="valueExpr" type="javascript">dataSetRow["facility_id"]</expression>
             <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
-            <expression name="sortByColumn">dataSetRow["name"]</expression>
+			<expression name="sortByColumn">dataSetRow["name"]</expression>
             <property name="sortDirection">asc</property>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
@@ -251,7 +251,7 @@ else if (row["age"] >=70)&#13;
             </list-property>
             <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
-            <xml-property name="queryText"><![CDATA[select
+			<xml-property name="queryText"><![CDATA[select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
 ge1.visit_date as date,
 CAST(ge1.staff_id AS CHAR) as staff_id,
@@ -263,31 +263,15 @@ loc1.name as facility,
 ge1.sex,
 ge1.birthdate,
 ge1.diagnosis,
+ge1.secondary_diagnosis,
 ge1.newpatient,
 ge1.insured
 from motechmodule_generaloutpatientencounter ge1
 join motechmodule_facility fa1 on fa1.facility_id = ge1.facility_id
 join location loc1 on loc1.location_id = fa1.location_id
+
 union all
-select
-CONCAT('General',CAST(ge2.id AS CHAR)) as id,
-ge2.visit_date as date,
-CAST(ge2.staff_id AS CHAR),
-ge2.facility_id as facility_id,
-loc2.address6 as address6,
-loc2.county_district as district,
-loc2.state_province as subdistrict,
-loc2.name as facility,
-ge2.sex,
-ge2.birthdate,
-ge2.secondary_diagnosis as diagnosis,
-ge2.newpatient,
-ge2.insured
-from motechmodule_generaloutpatientencounter ge2
-join motechmodule_facility fa2 on fa2.facility_id = ge2.facility_id
-join location loc2 on loc2.location_id = fa2.location_id
-where ge2.secondary_diagnosis is not null
-union all
+
 select
   CONCAT('MotherChild',CAST(enc.encounter_id AS CHAR)) as id,
   enc.encounter_datetime as date,
@@ -300,25 +284,33 @@ select
   IF(STRCMP(pers.gender,'M'),IF(STRCMP(pers.gender,'F'),'UNKNOWN','FEMALE'),'MALE') as sex,
   pers.birthdate as birthdate,
   obs1.value_numeric as diagnosis,
+  obs4.value_numeric as secondary_diagnosis,
   IF(obs2.value_coded=1065,1,0) as newpatient,
   IF(obs3.value_coded=1065,1,0) as insured
 from encounter enc
 join encounter_type enctyp on enc.encounter_type = enctyp.encounter_type_id and enctyp.name = 'OUTPATIENTVISIT'
 join motechmodule_facility fac on enc.location_id = fac.location_id
-join location loc on loc.location_id = enc.location_id
+join location loc on loc.location_id = enc.location_id 
 join users us on enc.provider_id = us.user_id
 join patient pat on enc.patient_id = pat.patient_id and pat.voided = 0
 join person pers on pat.patient_id = pers.person_id and pers.voided = 0
 left outer join (obs obs1 join concept_name cn1 
-on obs1.concept_id = cn1.concept_id and (cn1.name = 'PRIMARY DIAGNOSIS' or cn1.name = 'SECONDARY DIAGNOSIS') and obs1.voided = 0)
+on obs1.concept_id = cn1.concept_id and cn1.name = 'PRIMARY DIAGNOSIS' and obs1.voided = 0)
 on enc.encounter_id = obs1.encounter_id
+
+left outer join (obs obs4 join concept_name cn4 
+on obs4.concept_id = cn4.concept_id and cn4.name = 'SECONDARY DIAGNOSIS' and obs4.voided = 0)
+on enc.encounter_id = obs4.encounter_id
+
 left outer join (obs obs2 join concept_name cn2 
 on obs2.concept_id = cn2.concept_id and cn2.name = 'NEW PATIENT' and obs2.voided = 0)
 on enc.encounter_id = obs2.encounter_id
+
 left outer join (obs obs3 join concept_name cn3 
 on obs3.concept_id = cn3.concept_id and cn3.name = 'INSURED' and obs3.voided = 0)
 on enc.encounter_id = obs3.encounter_id
-where enc.voided = 0;
+
+where enc.voided = 0 ;
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -854,15 +846,20 @@ return true;]]></method>
                     <property name="name">c_diagnosis</property>
                     <expression name="expression">if(row["diagnosis"] == null)0;else row["diagnosis"];</expression>
                     <property name="dataType">integer</property>
+			    </structure>
+			    <structure>
+                    <property name="name">c_sdiagnosis</property>
+                    <expression name="expression">if(row["secondary_diagnosis"] == null)0;else row["secondary_diagnosis"];</expression>
+                    <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="name">malaria</property>
-                    <expression name="expression">if(row["c_diagnosis"] == 10.0)1;&#13;
-else if(row["c_diagnosis"] == 11.0)1;&#13;
-else if(row["c_diagnosis"] == 12.0)1;&#13;
-else if(row["c_diagnosis"] == 13.0)1;&#13;
-else if(row["c_diagnosis"] == 63.0)1;&#13;
-else if(row["c_diagnosis"] == 64.0)1;&#13;
+                    <expression name="expression">if(row["c_diagnosis"] == 10.0 || row["c_sdiagnosis"]==10.0)1;&#13;
+else if(row["c_diagnosis"] == 11.0 || row["c_sdiagnosis"]==11.0)1;&#13;
+else if(row["c_diagnosis"] == 12.0 || row["c_sdiagnosis"]==12.0)1;&#13;
+else if(row["c_diagnosis"] == 13.0 || row["c_sdiagnosis"]==13.0)1;&#13;
+else if(row["c_diagnosis"] == 63.0 || row["c_sdiagnosis"]==63.0)1;&#13;
+else if(row["c_diagnosis"] == 64.0 || row["c_sdiagnosis"]==64.0)1;&#13;
 else 0;</expression>
                     <property name="dataType">integer</property>
                 </structure>
@@ -887,6 +884,11 @@ else 0;</expression>
                     <property name="columnName">Data Set::diagnosis</property>
                     <property name="alias">diagnosis</property>
                     <text-property name="displayName">Data Set::diagnosis</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Data Set::secondary_diagnosis</property>
+                    <property name="alias">secondary_diagnosis</property>
+                    <text-property name="displayName">Data Set::secondary_diagnosis</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Data Set::staff_id</property>
@@ -1013,41 +1015,51 @@ else 0;</expression>
                     </structure>
                     <structure>
                         <property name="position">12</property>
-                        <property name="name">newpatient</property>
+                        <property name="name">secondary_diagnosis</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">13</property>
-                        <property name="name">insured</property>
+                        <property name="name">newpatient</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">14</property>
+                        <property name="name">insured</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
                         <property name="name">age</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
+                        <property name="position">16</property>
                         <property name="name">agegroup</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">16</property>
+                        <property name="position">17</property>
                         <property name="name">code</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">17</property>
+                        <property name="position">18</property>
                         <property name="name">group</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">18</property>
+                        <property name="position">19</property>
                         <property name="name">c_diagnosis</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">19</property>
+                        <property name="position">20</property>
+                        <property name="name">c_sdiagnosis</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
                         <property name="name">malaria</property>
                         <property name="dataType">integer</property>
                     </structure>
@@ -1798,6 +1810,11 @@ GHS MoTeCH Statement of Out-Patients
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
+                    <property name="name">secondary_diagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["secondary_diagnosis"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
                     <property name="name">newpatient</property>
                     <expression name="expression" type="javascript">dataSetRow["newpatient"]</expression>
                     <property name="dataType">float</property>
@@ -1830,6 +1847,11 @@ GHS MoTeCH Statement of Out-Patients
                 <structure>
                     <property name="name">c_diagnosis</property>
                     <expression name="expression" type="javascript">dataSetRow["c_diagnosis"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_sdiagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_sdiagnosis"]</expression>
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
@@ -2467,6 +2489,11 @@ GHS MoTeCH Statement of Out-Patients
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
+                    <property name="name">secondary_diagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["secondary_diagnosis"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
                     <property name="name">newpatient</property>
                     <expression name="expression" type="javascript">dataSetRow["newpatient"]</expression>
                     <property name="dataType">float</property>
@@ -2499,6 +2526,11 @@ GHS MoTeCH Statement of Out-Patients
                 <structure>
                     <property name="name">c_diagnosis</property>
                     <expression name="expression" type="javascript">dataSetRow["c_diagnosis"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">c_sdiagnosis</property>
+                    <expression name="expression" type="javascript">dataSetRow["c_sdiagnosis"]</expression>
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
