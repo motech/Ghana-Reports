@@ -219,13 +219,14 @@
             </list-property>
             <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
-            <xml-property name="queryText"><![CDATA[select
+			<xml-property name="queryText"><![CDATA[select
 CONCAT('General',CAST(ge1.id AS CHAR)) as id,
 ge1.visit_date as visit_date,
 loc1.location_id,
 ge1.sex as sex,
 ge1.birthdate,
-coalesce(YEAR(ge1.visit_date) - YEAR(ge1.birthdate) - IF(DATE_FORMAT(ge1.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+IF(coalesce(YEAR(ge1.visit_date) - YEAR(ge1.birthdate) - IF(DATE_FORMAT(ge1.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),0)<0,0,
+   coalesce(YEAR(ge1.visit_date) - YEAR(ge1.birthdate) - IF(DATE_FORMAT(ge1.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),0)) as age,
 ge1.diagnosis as diagnosis,
 ge1.referred as referred,
 ge1.newcase as newcase,
@@ -233,14 +234,17 @@ ge1.newcase as newcase,
 from motechmodule_generaloutpatientencounter ge1
 join motechmodule_facility fa1 on fa1.facility_id = ge1.facility_id
 join location loc1 on loc1.location_id = fa1.location_id
+   
 union all
+
 select 
 CONCAT('General',CAST(ge2.id AS CHAR)) as id,
 ge2.visit_date as visit_date,
 loc2.location_id,
 ge2.sex as sex,
 ge2.birthdate,
-coalesce(YEAR(ge2.visit_date) - YEAR(ge2.birthdate) - IF(DATE_FORMAT(ge2.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+IF(coalesce(YEAR(ge2.visit_date) - YEAR(ge2.birthdate) - IF(DATE_FORMAT(ge2.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),0)<0,0,
+   coalesce(YEAR(ge2.visit_date) - YEAR(ge2.birthdate) - IF(DATE_FORMAT(ge2.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),0)) as age,
 ge2.secondary_diagnosis as diagnosis,
 ge2.referred as referred,
 ge2.newcase as newcase,
@@ -248,21 +252,26 @@ ge2.newcase as newcase,
 from motechmodule_generaloutpatientencounter ge2
 join motechmodule_facility fa2 on fa2.facility_id = ge2.facility_id
 join location loc2 on loc2.location_id = fa2.location_id
-where ge2.secondary_diagnosis is not null
+where ge2.secondary_diagnosis is not null 
+
+
 union all
+
 select
   CONCAT('MotherChild',CAST(enc.encounter_id AS CHAR)) as id,
   enc.encounter_datetime as visit_date,
   enc.location_id,
   IF(STRCMP(pers.gender,'M'),IF(STRCMP(pers.gender,'F'),'UNKNOWN','FEMALE'),'MALE') as sex,
   pers.birthdate,
-  coalesce(YEAR(enc.encounter_datetime) - YEAR(pers.birthdate) - IF(DATE_FORMAT(pers.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),-1) as age,
+  IF(coalesce(YEAR(enc.encounter_datetime) - YEAR(pers.birthdate) - IF(DATE_FORMAT(pers.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),0)<0,0,
+     coalesce(YEAR(enc.encounter_datetime) - YEAR(pers.birthdate) - IF(DATE_FORMAT(pers.birthdate, '%c%d') > DATE_FORMAT(NOW(), '%c%d'), 1, 0),0)) as age,
   obs1.value_numeric as diagnosis,
   IF(obs3.value_coded=1065,1,0) as referred,
   IF(obs2.value_coded=1065,1,0) as newcase ,
   IF(STRCMP(cn1.name,'PRIMARY DIAGNOSIS'),IF(STRCMP(cn1.name,'SECONDARY DIAGNOSIS'),0,2),1) as diag_num
 from encounter enc
 join encounter_type enctyp on enc.encounter_type = enctyp.encounter_type_id and enctyp.name = 'OUTPATIENTVISIT'
+join location loc on loc.location_id = enc.location_id
 join person pers on enc.patient_id = pers.person_id and pers.voided = 0
 left outer join (obs obs1 join concept_name cn1 on obs1.concept_id = cn1.concept_id
 and (cn1.name = 'PRIMARY DIAGNOSIS' or cn1.name = 'SECONDARY DIAGNOSIS') and obs1.voided = 0)
@@ -271,7 +280,8 @@ left outer join (obs obs2 join concept_name cn2 on obs2.concept_id = cn2.concept
 and cn2.name = 'NEW CASE'  and obs2.voided = 0) on enc.encounter_id = obs2.encounter_id
 left outer join (obs obs3 join concept_name cn3 on obs3.concept_id = cn3.concept_id 
 and cn3.name = 'REFERRED' and obs3.voided = 0) on enc.encounter_id = obs3.encounter_id
-where enc.voided = 0]]></xml-property>
+where enc.voided = 0
+]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>

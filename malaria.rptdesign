@@ -336,21 +336,24 @@ where
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select count(*) as total_opd_gp
-from 
-	motechmodule_generaloutpatientencounter
-where
-	YEAR(visit_date) = ?
-and
-	MONTH(visit_date) = ?
-and
-  motechmodule_generaloutpatientencounter.facility_id = (
-  select
-  	facility_id
-  from
-  	motechmodule_facility
-  where
-  	location_id = ?);]]></xml-property>
+			<xml-property name="queryText"><![CDATA[select count(*) as total_opd_gp
+from (
+select  CONCAT('MotherChild',CAST(enc.encounter_id AS CHAR)) as id, YEAR(enc.encounter_datetime) as y, MONTH(enc.encounter_datetime) as m, enc.location_id as location_id
+  from encounter enc, person person
+ where enc.patient_id = person.person_id 
+   and person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+   and enc.voided = 0 and person.voided= 0 and enc.encounter_type = 9
+   and enc.patient_id not in (select patient_id from encounter where encounter_type=6 and voided=0)
+   
+   union all
+   
+select CONCAT('General',CAST(en.id AS CHAR)) as id, year(visit_date) as y, month(visit_date) as m, f.location_id as location_id
+  from motechmodule_generaloutpatientencounter en
+  join motechmodule_facility f on f.facility_id = en.facility_id
+ where birthdate < DATE_SUB(visit_date, INTERVAL 5 YEAR)
+   and en.id not in (select id from motechmodule_generaloutpatientencounter where sex = 'FEMALE' and (diagnosis in (63,64,32,53) or secondary_diagnosis in (63,64,32,53)))
+) tt
+where tt.y=? and tt.m=? and tt.location_id=?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -427,27 +430,27 @@ and
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select
-	count(*) as clinical_and_confirmed_above5yrs
-from
-	motechmodule_generaloutpatientencounter
-where
-	(diagnosis in (10,11,12,13)
-or
-	secondary_diagnosis in (10,11,12,13))
-and
-  facility_id = (
-select
-		facility_id
-	from
-		motechmodule_facility
-	where
-		location_id = ?
-  )
-and
-	YEAR(visit_date) = ?
-and
-	MONTH(visit_date) = ?]]></xml-property>
+			<xml-property name="queryText"><![CDATA[select count(*) as clinical_and_confirmed_above5yrs
+from (
+select YEAR(enc.encounter_datetime) as y, MONTH(enc.encounter_datetime) as m, enc.location_id as location_id
+  from encounter enc
+  join person person on person.person_id = enc.patient_id
+  join (obs obs1 join concept_name cn1 on obs1.concept_id = cn1.concept_id and 
+       (cn1.name = 'PRIMARY DIAGNOSIS' or cn1.name = 'SECONDARY DIAGNOSIS') and obs1.voided = 0) on
+        obs1.encounter_id = enc.encounter_id and obs1.value_numeric in (10,11,12,13)
+ where person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+   and enc.voided = 0
+   and enc.encounter_type = 9
+
+   union all
+   
+select year(visit_date) as y, month(visit_date) as m, f.location_id as location_id
+from motechmodule_generaloutpatientencounter en
+  join motechmodule_facility f on f.facility_id = en.facility_id
+ where birthdate < DATE_SUB(visit_date, INTERVAL 5 YEAR)
+   and (diagnosis in (10,11,12,13) or secondary_diagnosis in (10,11,12,13))
+) tt
+where tt.location_id=? and tt.y=? and tt.m=?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -524,29 +527,30 @@ and
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select 
-	count(*) as conformed_malaria_above_5yrs
-from
-	motechmodule_generaloutpatientencounter
-where
-	(diagnosis in (10, 13)
-or
-	secondary_diagnosis in (10,13))
-and
-	facility_id = (
-	select
-		facility_id
-	from
-		motechmodule_facility
-	where
-		location_id = ?)
-and
-	YEAR(visit_date) = ?
-and
-	MONTH(visit_date) = ?]]></xml-property>
+			<xml-property name="queryText"><![CDATA[select count(*) as conformed_malaria_above_5yrs
+from (
+select YEAR(enc.encounter_datetime) as y, MONTH(enc.encounter_datetime) as m, enc.location_id as location_id
+  from encounter enc
+  join person person on person.person_id = enc.patient_id
+  join (obs obs1 join concept_name cn1 on obs1.concept_id = cn1.concept_id and 
+       (cn1.name = 'PRIMARY DIAGNOSIS' or cn1.name = 'SECONDARY DIAGNOSIS') and obs1.voided = 0) on
+        obs1.encounter_id = enc.encounter_id and obs1.value_numeric in (10,13)
+ where person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+   and enc.voided = 0
+   and enc.encounter_type = 9
+
+   union all
+   
+select year(visit_date) as y, month(visit_date) as m, f.location_id as location_id
+  from motechmodule_generaloutpatientencounter en
+  join motechmodule_facility f on f.facility_id = en.facility_id
+ where birthdate < DATE_SUB(visit_date, INTERVAL 5 YEAR)
+   and (diagnosis in (10,13) or secondary_diagnosis in (10,13))
+) tt
+where tt.location_id=? and tt.y=? and tt.m=?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
-  <Version>1.0</Version>
+		<Version>1.0</Version>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
       <design:resultSetColumns>
@@ -620,22 +624,22 @@ and
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select
-	count(enc.encounter_id) as "AllOpdCasesChildrenUnder5"
-from
-	encounter enc,person person
-where
-	enc.patient_id = person.person_id 
-and
-	person.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
-and
-	enc.encounter_type = 9
-and
-    enc.location_id = ?
-and
-	YEAR(enc.encounter_datetime) = ?
-and
-	MONTH(enc.encounter_datetime) = ?]]></xml-property>
+            <xml-property name="queryText"><![CDATA[select count(*) as "AllOpdCasesChildrenUnder5"
+from (
+select YEAR(enc.encounter_datetime) as y, MONTH(enc.encounter_datetime) as m, enc.location_id as location_id
+  from encounter enc, person person
+ where enc.patient_id = person.person_id 
+   and person.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+   and enc.voided=0 and enc.encounter_type = 9
+   
+   union all
+   
+select year(visit_date) as y, month(visit_date) as m, f.location_id as location_id
+  from motechmodule_generaloutpatientencounter en
+  join motechmodule_facility f on f.facility_id = en.facility_id
+ where birthdate > DATE_SUB(visit_date, INTERVAL 5 YEAR)
+) tt
+where tt.location_id=? and tt.y=? and tt.m=?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -712,22 +716,29 @@ and
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select
-	count(enc.encounter_id) as "AllOPDCasesPregnantWoman"
-from
-	encounter enc, person person
-where
-	enc.patient_id = person.person_id 
-and
-	person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
-and
-	enc.encounter_type = 9
-and
-	enc.location_id = ?
-and
-	YEAR(enc.encounter_datetime) = ?
-and
-	MONTH(enc.encounter_datetime) = ?]]></xml-property>
+			<xml-property name="queryText"><![CDATA[select count(*) as "AllOPDCasesPregnantWoman"
+from (
+select YEAR(enc.encounter_datetime) as y, MONTH(enc.encounter_datetime) as m, enc.location_id as location_id
+  from encounter enc
+  join person person on person.person_id = enc.patient_id
+  join (obs obs1 join concept_name cn1 on obs1.concept_id = cn1.concept_id and 
+       (cn1.name = 'PRIMARY DIAGNOSIS' or cn1.name = 'SECONDARY DIAGNOSIS') and obs1.voided = 0) on
+        obs1.encounter_id = enc.encounter_id
+ where person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+   and enc.voided = 0
+   and enc.patient_id in (select patient_id from encounter where encounter_type = 6 and voided=0)
+   and enc.encounter_type = 9
+
+   union all
+   
+select year(visit_date) as y, month(visit_date) as m, f.location_id as location_id
+  from motechmodule_generaloutpatientencounter en
+  join motechmodule_facility f on f.facility_id = en.facility_id
+  where birthdate < DATE_SUB(visit_date, INTERVAL 5 YEAR)
+   and sex = 'FEMALE'
+   and (diagnosis in (63,64,32,53) or secondary_diagnosis in (63,64,32,53))
+) tt
+where tt.location_id=? and tt.y=? and tt.m=?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -842,34 +853,27 @@ and
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select
-	count(*) as "ClinicalAndConfirmedChildUnder5"
-from
-	obs
-where
-	concept_id in (6117, 6118)
-and
-	value_numeric in (10,11,12,13)
-and 
-	obs.location_id = ?
-and 
-	YEAR(obs.obs_datetime) = ?
-and
-	MONTH(obs.obs_datetime) = ?
-and
-	encounter_id
-in
-	(select enc.encounter_id
-	from
-		encounter enc
-	JOIN
-		person person
-	on
-		enc.patient_id = person.person_id 
-	and
-		person.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
-	and
-	enc.encounter_type=9);]]></xml-property>
+			<xml-property name="queryText"><![CDATA[select count(*) as "ClinicalAndConfirmedChildUnder5"
+from (
+select YEAR(enc.encounter_datetime) as y, MONTH(enc.encounter_datetime) as m, enc.location_id as location_id
+  from encounter enc
+  join person person on person.person_id = enc.patient_id
+  join (obs obs1 join concept_name cn1 on obs1.concept_id = cn1.concept_id and 
+       (cn1.name = 'PRIMARY DIAGNOSIS' or cn1.name = 'SECONDARY DIAGNOSIS') and obs1.voided = 0) on
+        obs1.encounter_id = enc.encounter_id and obs1.value_numeric in (10,11,12,13)
+ where person.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+   and enc.voided = 0
+   and enc.encounter_type = 9
+
+   union all
+   
+select year(visit_date) as y, month(visit_date) as m, f.location_id as location_id
+  from motechmodule_generaloutpatientencounter en
+  join motechmodule_facility f on f.facility_id = en.facility_id
+ where birthdate > DATE_SUB(visit_date, INTERVAL 5 YEAR)
+   and (diagnosis in (10,11,12,13) or secondary_diagnosis in (10,11,12,13))
+) tt
+where tt.location_id=? and tt.y=? and tt.m=?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -946,34 +950,27 @@ in
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select
-	count(*) as "ConfirmedMalariaChildrenUnder5"
-from
-	obs
-where
-	concept_id in (6117, 6118)
-and
-	value_numeric in (10,13)
-and 
-	obs.location_id = ?
-and
-	YEAR(obs.obs_datetime) = ?
-and
-	MONTH(obs.obs_datetime) = ?
-and
-	encounter_id
-in
-	(select enc.encounter_id
-	from
-		encounter enc
-	JOIN
-		person person
-	on
-		enc.patient_id = person.person_id 
-	and
-		person.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
-	and
-	enc.encounter_type=9);]]></xml-property>
+			<xml-property name="queryText"><![CDATA[select count(*) as "ConfirmedMalariaChildrenUnder5"
+from (
+select YEAR(enc.encounter_datetime) as y, MONTH(enc.encounter_datetime) as m, enc.location_id as location_id
+  from encounter enc
+  join person person on person.person_id = enc.patient_id
+  join (obs obs1 join concept_name cn1 on obs1.concept_id = cn1.concept_id and
+       (cn1.name = 'PRIMARY DIAGNOSIS' or cn1.name = 'SECONDARY DIAGNOSIS') and obs1.voided = 0) on
+        obs1.encounter_id = enc.encounter_id and obs1.value_numeric in (10,13)
+ where person.birthdate > DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+   and enc.voided = 0
+   and enc.encounter_type = 9
+
+   union all
+
+select year(visit_date) as y, month(visit_date) as m, f.location_id as location_id
+  from motechmodule_generaloutpatientencounter en
+  join motechmodule_facility f on f.facility_id = en.facility_id
+ where birthdate > DATE_SUB(visit_date, INTERVAL 5 YEAR)
+   and (diagnosis in (10,13) or secondary_diagnosis in (10,13))
+) tt
+where tt.location_id=? and tt.y=? and tt.m=?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -1050,34 +1047,28 @@ in
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select
-	count(*) as "ClinicalAndConfirmedPregnantWomen"
-from
-	obs
-where
-	concept_id in (6117, 6118)
-and
-	value_numeric in (63,64)
-and 
-	obs.location_id = ?
-and
-	YEAR(obs.obs_datetime) = ?
-and
-	MONTH(obs.obs_datetime) = ?
-and
-	encounter_id
-in
-	(select enc.encounter_id
-	from
-		encounter enc
-	JOIN
-		person person
-	on
-		enc.patient_id = person.person_id 
-	and
-		person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
-	and
-	enc.encounter_type=9);]]></xml-property>
+			<xml-property name="queryText"><![CDATA[select count(*) as "ClinicalAndConfirmedPregnantWomen"
+from (
+select YEAR(enc.encounter_datetime) as y, MONTH(enc.encounter_datetime) as m, enc.location_id as location_id
+  from encounter enc
+  join person person on person.person_id = enc.patient_id
+  join (obs obs1 join concept_name cn1 on obs1.concept_id = cn1.concept_id and 
+       (cn1.name = 'PRIMARY DIAGNOSIS' or cn1.name = 'SECONDARY DIAGNOSIS') and obs1.voided = 0) on
+        obs1.encounter_id = enc.encounter_id and obs1.value_numeric in (63,64)
+ where person.birthdate < DATE_SUB(enc.encounter_datetime, INTERVAL 5 YEAR)
+   and enc.voided = 0
+   and enc.patient_id in (select patient_id from encounter where encounter_type = 6 and voided=0)
+   and enc.encounter_type = 9
+
+   union all
+   
+select year(visit_date) as y, month(visit_date) as m, f.location_id as location_id
+  from motechmodule_generaloutpatientencounter en
+  join motechmodule_facility f on f.facility_id = en.facility_id
+ where birthdate < DATE_SUB(visit_date, INTERVAL 5 YEAR)
+   and (diagnosis in (63,64) or secondary_diagnosis in (63,64))
+) tt
+where tt.location_id=? and tt.y=? and tt.m=?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>1.0</Version>
@@ -1329,6 +1320,7 @@ join obs obs
   on enc.encounter_id = obs.encounter_id
   and obs.value_numeric > 0
   and obs.concept_id in (6117,6118)
+where enc.voided=0
 union all
 select 
   concat('General',cast(ge.id as CHAR)),
