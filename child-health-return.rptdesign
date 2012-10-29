@@ -1243,7 +1243,7 @@ and cn2.name = 'WEIGHT (KG)' and obs2.voided = 0) on enc.encounter_id = obs2.enc
 left outer join (obs obs3 join concept_name cn3 on obs3.concept_id = cn3.concept_id
 and cn3.name = 'HEIGHT (CM)' and obs3.voided = 0) on enc.encounter_id = obs3.encounter_id
 left outer join (obs obs4 join concept_name cn4 on obs4.value_coded = cn4.concept_id
-and cn4.name = 'VITAMIN A' and obs4.voided = 0) on enc.encounter_id = obs4.encounter_id
+and cn4.name IN ('VITAMIN A','VITAMIN A BLUE', 'VITAMIN A RED') and obs4.voided = 0) on enc.encounter_id = obs4.encounter_id
 left outer join (obs obs5 join concept_name cn5 on obs5.value_coded = cn5.concept_id
 and cn5.name = 'BACILLE CAMILE-GUERIN VACCINATION' and obs5.voided = 0) on enc.encounter_id = obs5.encounter_id
 left outer join (obs obs6 join concept_name cn6 on obs6.concept_id = cn6.concept_id
@@ -1251,7 +1251,7 @@ and cn6.name = 'ORAL POLIO VACCINATION DOSE' and obs6.voided = 0) on enc.encount
 left outer join (obs obs7 join concept_name cn7 on obs7.concept_id = cn7.concept_id
 and cn7.name = 'PENTA VACCINATION DOSE' and obs7.voided = 0) on enc.encounter_id = obs7.encounter_id
 left outer join (obs obs8 join concept_name cn8 on obs8.value_coded = cn8.concept_id
-and cn8.name = 'MEASLES VACCINATION' and obs8.voided = 0) on enc.encounter_id = obs8.encounter_id
+and cn8.name LIKE 'MEASLES VACCINATION %' and obs8.voided = 0) on enc.encounter_id = obs8.encounter_id
 left outer join (obs obs9 join concept_name cn9 on obs9.value_coded = cn9.concept_id
 and cn9.name = 'YELLOW FEVER VACCINATION' and obs9.voided = 0) on enc.encounter_id = obs9.encounter_id
 where enc.voided = 0;]]></xml-property>

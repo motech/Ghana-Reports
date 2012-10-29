@@ -472,7 +472,7 @@ from
 where
     observation.value_coded = concept_coded_name.concept_id
 and
-    concept_coded_name.name = 'MEASLES VACCINATION'
+    concept_coded_name.name LIKE 'MEASLES VACCINATION %'
 and
     observation.concept_id = concept_obs_name.concept_id
 and 
@@ -831,7 +831,7 @@ and
 and
     observation.value_coded = concept_coded_name.concept_id
 and
-    concept_coded_name.name = 'VITAMIN A'
+    concept_coded_name.name LIKE 'VITAMIN A %'
 and
     observation.person_id=person.person_id
 and
@@ -1058,7 +1058,7 @@ and
 and
     observation.value_coded = concept_coded_name.concept_id
 and
-    concept_coded_name.name = 'VITAMIN A'
+    concept_coded_name.name LIKE 'VITAMIN A %'
 and
     observation.person_id=person.person_id
 and
