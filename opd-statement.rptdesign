@@ -291,7 +291,7 @@ from encounter enc
 join encounter_type enctyp on enc.encounter_type = enctyp.encounter_type_id and enctyp.name = 'OUTPATIENTVISIT'
 join motechmodule_facility fac on enc.location_id = fac.location_id
 join location loc on loc.location_id = enc.location_id 
-join users us on enc.provider_id = us.user_id
+join users us on enc.provider_id = us.person_id
 join patient pat on enc.patient_id = pat.patient_id and pat.voided = 0
 join person pers on pat.patient_id = pers.person_id and pers.voided = 0
 left outer join (obs obs1 join concept_name cn1 
